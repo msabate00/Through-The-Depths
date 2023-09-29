@@ -43,7 +43,12 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
+	b2Vec2 vel = b2Vec2(0, accelerationY);
+
+	accelerationY += -GRAVITY_Y;
+	if (abs(accelerationY) > accelerationY_max) {
+		 (accelerationY < 0) ? accelerationY = -accelerationY_max : accelerationY = accelerationY_max;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		//
@@ -53,12 +58,24 @@ bool Player::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		vel = b2Vec2(-speed*dt, -GRAVITY_Y);
+		vel = b2Vec2(-speed*dt, accelerationY);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		vel = b2Vec2(speed*dt, -GRAVITY_Y);
+		vel = b2Vec2(speed*dt, accelerationY);
 	}
+
+
+	//NUEVO
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		jumpStep = 12;
+	}
+
+	if (jumpStep > 0) {
+		vel.y -= 20;
+		jumpStep--;
+	}
+
 
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);

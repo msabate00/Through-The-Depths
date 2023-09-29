@@ -28,7 +28,9 @@ public:
 public:
 	float speed = 0.2f;
 	float accelerationY = 0;
-	float accelerationY_max = 2;
+	float accelerationY_max = 10;
+	int jumpStep = 0;
+
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
