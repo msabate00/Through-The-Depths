@@ -1,6 +1,9 @@
 #ifndef __MAP_H__
 #define __MAP_H__
 
+
+
+
 #include "Module.h"
 #include "List.h"
 #include "Point.h"
@@ -129,6 +132,7 @@ private:
 	bool LoadAllLayers(pugi::xml_node mapNode);
 	TileSet* GetTilesetFromTileId(int gid) const;
 	bool LoadProperties(pugi::xml_node& node, Properties& properties);
+	bool LoadCollisions(std::string layerName);
 
 public: 
 

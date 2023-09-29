@@ -1,4 +1,7 @@
 
+#include <string>
+#include <iostream>
+
 #include "App.h"
 #include "Render.h"
 #include "Textures.h"
@@ -178,14 +181,23 @@ bool Map::Load()
     
     // NOTE: Later you have to create a function here to load and create the colliders from the map
 
-    PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
+
+
+
+
+    //NUEVO
+    LoadCollisions("Colisions");
+
+
+  /*  PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
     c1->ctype = ColliderType::PLATFORM;
+    
 
     PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
     c2->ctype = ColliderType::PLATFORM;
 
     PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
-    c3->ctype = ColliderType::PLATFORM;
+    c3->ctype = ColliderType::PLATFORM;*/
     
     if(ret == true)
     {
@@ -330,6 +342,52 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
     }
 
     return ret;
+}
+
+//NUEVO
+bool Map::LoadCollisions(std::string layerName) {
+
+
+    ListItem<MapLayer*>* mapLayerItem;
+    mapLayerItem = mapData.maplayers.start;
+    bool ret = false;
+
+    while (mapLayerItem != NULL) {
+
+        if (mapLayerItem->data->name.GetString() == layerName) {
+            
+
+            for (int x = 0; x < mapLayerItem->data->width; x++)
+            {
+                for (int y = 0; y < mapLayerItem->data->height; y++)
+                {
+                    int gid = mapLayerItem->data->Get(x, y);
+                    TileSet* tileset = GetTilesetFromTileId(gid);
+                    SDL_Rect r = tileset->GetTileRect(gid);
+                    iPoint pos = MapToWorld(x, y);
+
+                    /*app->render->DrawTexture(tileset->texture,
+                        pos.x,
+                        pos.y,
+                        &r);*/
+                    if (gid == 49) {
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16, 32, 32, STATIC);
+                        c1->ctype = ColliderType::PLATFORM;
+                        ret = true;
+                    }
+
+                }
+            }
+        }
+        mapLayerItem = mapLayerItem->next;
+
+    }
+
+    return ret;
+
+
+
+
 }
 
 Properties::Property* Properties::GetProperty(const char* name)
