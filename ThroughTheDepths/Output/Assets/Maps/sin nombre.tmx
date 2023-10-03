@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="1" nextlayerid="11" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="16" tileheight="16" infinite="1" nextlayerid="12" nextobjectid="1">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="198" columns="18">
   <image source="Downloads/stringstar fields/tileset.png" width="288" height="176"/>
  </tileset>
@@ -11,6 +11,9 @@
  </tileset>
  <tileset firstgid="595" name="background_2" tilewidth="16" tileheight="16" tilecount="198" columns="18">
   <image source="Downloads/stringstar fields/background_2.png" width="288" height="180"/>
+ </tileset>
+ <tileset firstgid="793" name="Colisions" tilewidth="32" tileheight="32" spacing="1" margin="1" tilecount="2" columns="2">
+  <image source="MapMetadata.png" width="67" height="34"/>
  </tileset>
  <group id="6" name="Fondo" locked="1">
   <layer id="1" name="Fondo 1" width="30" height="20">
@@ -531,6 +534,9 @@
   </layer>
  </group>
  <layer id="7" name="Base" width="30" height="20" offsetx="48" offsety="-48">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data encoding="csv">
    <chunk x="-32" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -679,6 +685,9 @@
   </data>
  </layer>
  <layer id="10" name="Post Base" width="30" height="20">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data encoding="csv">
    <chunk x="0" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -719,6 +728,9 @@
   </data>
  </layer>
  <layer id="4" name="Principal" width="30" height="20" offsetx="48" offsety="-48">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data encoding="csv">
    <chunk x="-32" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,12,13,14,15,16,
@@ -885,6 +897,9 @@
   </data>
  </layer>
  <layer id="5" name="Detalles" width="30" height="20" offsetx="16" offsety="-48">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data encoding="csv">
    <chunk x="-32" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -925,6 +940,9 @@
   </data>
  </layer>
  <layer id="8" name="Capa de patrones 7" width="30" height="20" offsetx="16" offsety="-48">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data encoding="csv">
    <chunk x="-32" y="0" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -963,5 +981,11 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
   </data>
+ </layer>
+ <layer id="11" name="Colisions" width="30" height="20">
+  <properties>
+   <property name="Draw" type="bool" value="false"/>
+  </properties>
+  <data encoding="csv"/>
  </layer>
 </map>
