@@ -370,8 +370,9 @@ bool Map::LoadCollisions(std::string layerName) {
                         pos.x,
                         pos.y,
                         &r);*/
-                    if (gid == 49) {
-                        PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16, 32, 32, STATIC);
+                    LOG("NUMERO: %i", gid);
+                    if (gid == 793) {
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x+8 -32, pos.y+8 , 16, 16, STATIC);
                         c1->ctype = ColliderType::PLATFORM;
                         ret = true;
                     }
