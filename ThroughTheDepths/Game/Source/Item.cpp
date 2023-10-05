@@ -41,6 +41,12 @@ bool Item::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+	
+
+	return true;
+}
+
+bool Item::PostUpdate() {
 	app->render->DrawTexture(texture, position.x, position.y);
 
 	return true;
