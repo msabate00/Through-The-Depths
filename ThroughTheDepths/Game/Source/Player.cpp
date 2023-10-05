@@ -43,12 +43,12 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	b2Vec2 vel = b2Vec2(0, accelerationY);
+	b2Vec2 vel = b2Vec2(0,  pbody->body->GetLinearVelocity().y);
 
-	accelerationY += -GRAVITY_Y;
-	if (abs(accelerationY) > accelerationY_max) {
-		 (accelerationY < 0) ? accelerationY = -accelerationY_max : accelerationY = accelerationY_max;
-	}
+	
+
+	
+
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		//
@@ -58,27 +58,26 @@ bool Player::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		vel = b2Vec2(-speed*dt, accelerationY);
+		vel = b2Vec2(-speed*dt, pbody->body->GetLinearVelocity().y);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		vel = b2Vec2(speed*dt, accelerationY);
+		vel = b2Vec2(speed*dt, pbody->body->GetLinearVelocity().y);
 	}
 
+	vel.y -= GRAVITY_Y;
 
+	pbody->body->SetLinearVelocity(vel);
 	//NUEVO
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-		jumpStep = 12;
-	}
-
-	if (jumpStep > 0) {
-		vel.y -= 20;
-		jumpStep--;
+		vel.y = 0;
+		pbody->body->SetLinearVelocity(vel);
+		pbody->body->ApplyLinearImpulse(b2Vec2(0, GRAVITY_Y * jumpForce), pbody->body->GetWorldCenter(), true);
 	}
 
 
 	//Set the velocity of the pbody of the player
-	pbody->body->SetLinearVelocity(vel);
+	
 
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
