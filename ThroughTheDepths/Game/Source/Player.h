@@ -43,6 +43,8 @@ public:
 	/*NEW JUMPING SYSTEM*/
 	float jumpForce = 5;
 
+	bool isFacingLeft = false;
+
 
 };
 

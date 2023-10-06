@@ -59,7 +59,7 @@ bool Map::Update(float dt)
 
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
-                        pos.y,
+                        pos.y, SDL_FLIP_NONE,
                         &r);
                 }
             }

@@ -32,9 +32,11 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x, position.y, 30,30,  bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
+	pbody->body->SetFixedRotation(true);
+	
 
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
 
@@ -43,10 +45,17 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+
+
+
 	b2Vec2 vel = b2Vec2(0,  pbody->body->GetLinearVelocity().y);
 
-	
+	//float* a;
+	//float* b;
 
+	//int valor = pbody->RayCast(position.x, position.y, position.x, position.y + 10, &a, &b);
+	//
+	//LOG("DEBAJO HAY: %d", );
 	
 
 
@@ -59,20 +68,23 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		vel = b2Vec2(-speed*dt, pbody->body->GetLinearVelocity().y);
+		isFacingLeft = true;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		vel = b2Vec2(speed*dt, pbody->body->GetLinearVelocity().y);
+		isFacingLeft = false;
 	}
 
+	
 	vel.y -= GRAVITY_Y;
-
 	pbody->body->SetLinearVelocity(vel);
 	//NUEVO
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		vel.y = 0;
 		pbody->body->SetLinearVelocity(vel);
 		pbody->body->ApplyLinearImpulse(b2Vec2(0, GRAVITY_Y * jumpForce), pbody->body->GetWorldCenter(), true);
+		
 	}
 
 
@@ -90,7 +102,13 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate() {
 
-	app->render->DrawTexture(texture, position.x, position.y);
+	if (isFacingLeft) {
+		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_HORIZONTAL);
+	}
+	else {
+		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_NONE);
+	}
+	
 	return true;
 }
 
