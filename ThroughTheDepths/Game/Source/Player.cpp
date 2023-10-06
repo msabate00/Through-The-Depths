@@ -3,6 +3,7 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Input.h"
+#include "Window.h"
 #include "Render.h"
 #include "Scene.h"
 #include "Log.h"
@@ -32,7 +33,7 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateRectangle(position.x, position.y, 30,30,  bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16,  bodyType::DYNAMIC);
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 	pbody->body->SetFixedRotation(true);
@@ -50,12 +51,7 @@ bool Player::Update(float dt)
 
 	b2Vec2 vel = b2Vec2(0,  pbody->body->GetLinearVelocity().y);
 
-	//float* a;
-	//float* b;
 
-	//int valor = pbody->RayCast(position.x, position.y, position.x, position.y + 10, &a, &b);
-	//
-	//LOG("DEBAJO HAY: %d", );
 	
 
 
@@ -95,7 +91,14 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	
+
+	if (!app->debug) {
+		uint windowH;
+		uint windowW;
+		app->win->GetWindowSize(windowW, windowH);
+
+		app->render->camera.x = -position.x + windowW / 2;
+	}
 
 	return true;
 }
@@ -108,6 +111,9 @@ bool Player::PostUpdate() {
 	else {
 		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_NONE);
 	}
+
+
+
 	
 	return true;
 }

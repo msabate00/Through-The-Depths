@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Particles.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -33,7 +34,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new Scene();
 	map = new Map();
 	entityManager = new EntityManager();
-
+	particles = new Particles();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -44,6 +45,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(scene);
 	AddModule(map);
+	AddModule(particles);
 	AddModule(entityManager);
 
 	// Render last to swap buffer
@@ -76,6 +78,7 @@ void App::AddModule(Module* module)
 // Called before render is available
 bool App::Awake()
 {
+	debug = true;
 	Timer timer = Timer();
 
 	bool ret = LoadConfig();

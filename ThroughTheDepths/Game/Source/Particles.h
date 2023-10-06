@@ -12,15 +12,15 @@
 struct SDL_Texture;
 struct Collider;
 
-class ModuleParticles : public Module
+class Particles : public Module
 {
 public:
 	// Constructor
 	// Initializes all the particles in the array to nullptr
-	ModuleParticles(bool startEnabled);
+	Particles();
 
 	//Destructor
-	~ModuleParticles();
+	~Particles();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node& conf);
@@ -75,4 +75,4 @@ public:
 
 };
 
-#endif // !__MODULEPARTICLES_H__
+#endif // !__Particles_H__

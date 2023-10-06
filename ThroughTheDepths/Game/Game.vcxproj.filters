@@ -22,7 +22,7 @@
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
-    <ClCompile Include="Source\ModuleParticles.cpp" />
+    <ClCompile Include="Source\Particles.cpp" />
     <ClCompile Include="Source\Particle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +70,7 @@
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Physics.h" />
     <ClInclude Include="Source\Animation.h" />
-    <ClInclude Include="Source\ModuleParticles.h" />
+    <ClInclude Include="Source\Particles.h" />
     <ClInclude Include="Source\Particle.h" />
   </ItemGroup>
   <ItemGroup>

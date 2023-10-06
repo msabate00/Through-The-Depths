@@ -19,6 +19,7 @@ class Scene;
 class EntityManager;
 class Map;
 class Physics;
+class Particles;
 
 class App
 {
@@ -73,6 +74,9 @@ private:
 
 public:
 
+	// Debug mode
+	bool debug;
+
 	// Modules
 	Window* win;
 	Input* input;
@@ -83,6 +87,7 @@ public:
 	EntityManager* entityManager;
 	Map* map;
 	Physics* physics;
+	Particles* particles;
 
 private:
 

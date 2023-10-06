@@ -1,4 +1,4 @@
-#include "ModuleParticles.h"
+#include "Particles.h"
 
 #include "App.h"
 
@@ -14,19 +14,19 @@
 
 using namespace std;
 
-ModuleParticles::ModuleParticles(bool startEnabled) : Module()
+Particles::Particles() : Module()
 {
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		particles[i] = nullptr;
 }
 
-ModuleParticles::~ModuleParticles()
+Particles::~Particles()
 {
 
 }
 
 
-bool ModuleParticles::Awake(pugi::xml_node& config){
+bool Particles::Awake(pugi::xml_node& config){
 
 	bool ret = true;
 	//LOG("Loading particles");
@@ -50,12 +50,12 @@ bool ModuleParticles::Awake(pugi::xml_node& config){
 }
 
 
-bool ModuleParticles::Start()
+bool Particles::Start()
 {
 	return true;
 }
 
-bool ModuleParticles::CleanUp()
+bool Particles::CleanUp()
 {
 	LOG("Unloading particles");
 
@@ -73,7 +73,7 @@ bool ModuleParticles::CleanUp()
 }
 
 
-/*void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
+/*void Particles::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -117,7 +117,7 @@ bool ModuleParticles::CleanUp()
 }*/
 
 
-bool ModuleParticles::Update(float dt)
+bool Particles::Update(float dt)
 {
 	bool ret = true;
 	
@@ -172,7 +172,7 @@ bool ModuleParticles::Update(float dt)
 	return ret;
 }
 
-bool ModuleParticles::PostUpdate()
+bool Particles::PostUpdate()
 {
 	bool ret = true;
 
@@ -190,7 +190,7 @@ bool ModuleParticles::PostUpdate()
 	return ret;
 }
 
-int ModuleParticles::AddParticle(const Particle& particle, int x, int y,  uint delay)
+int Particles::AddParticle(const Particle& particle, int x, int y,  uint delay)
 {
 	Particle* p = new Particle(particle);
 
@@ -210,7 +210,7 @@ int ModuleParticles::AddParticle(const Particle& particle, int x, int y,  uint d
 }
 
 
-//int ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType, uint delay)
+//int Particles::AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType, uint delay)
 //{
 //	Particle* p = new Particle(particle);
 //	
@@ -230,7 +230,7 @@ int ModuleParticles::AddParticle(const Particle& particle, int x, int y,  uint d
 //}
 
 
-int ModuleParticles::AddParticle(const Particle& particle, int x, int y, fPoint initial_speed, uint delay)
+int Particles::AddParticle(const Particle& particle, int x, int y, fPoint initial_speed, uint delay)
 {
 	Particle* p = new Particle(particle);
 
@@ -249,7 +249,7 @@ int ModuleParticles::AddParticle(const Particle& particle, int x, int y, fPoint 
 	return aux;
 
 }
-//int ModuleParticles::AddParticle(const Particle& particle, int x, int y, fPoint initial_speed, Collider::Type colliderType, uint delay)
+//int Particles::AddParticle(const Particle& particle, int x, int y, fPoint initial_speed, Collider::Type colliderType, uint delay)
 //{
 //	Particle* p = new Particle(particle);
 //
@@ -270,14 +270,14 @@ int ModuleParticles::AddParticle(const Particle& particle, int x, int y, fPoint 
 //}
 
 
-void ModuleParticles::SetSpeedParticle(int position, fPoint speed) {
+void Particles::SetSpeedParticle(int position, fPoint speed) {
 	Particle* particle = particles[position];
 	if (particle != nullptr && particle->isAlive) {
 		particle->speed = speed;
 	}
 }
 
-fPoint ModuleParticles::GetPositionParticle(int position) {
+fPoint Particles::GetPositionParticle(int position) {
 
 	Particle* particle = particles[position];
 	if (particle != nullptr && particle->isAlive) {
@@ -288,7 +288,7 @@ fPoint ModuleParticles::GetPositionParticle(int position) {
 	}
 }
 
-fPoint ModuleParticles::GetPositionSpeed(int position) {
+fPoint Particles::GetPositionSpeed(int position) {
 
 	Particle* particle = particles[position];
 	if (particle != nullptr && particle->isAlive) {
@@ -300,7 +300,7 @@ fPoint ModuleParticles::GetPositionSpeed(int position) {
 }
 
 
-void ModuleParticles::DestroyCollision(int position) {
+void Particles::DestroyCollision(int position) {
 	Particle* particle = particles[position];
 	if (particle != nullptr && particle->isAlive) {
 		//particle->collider->pendingToDelete = true;
