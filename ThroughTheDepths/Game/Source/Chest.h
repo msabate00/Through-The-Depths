@@ -10,6 +10,12 @@ class Chest : public Entity
 {
 public:
 
+	enum class CHEST_STATE {
+		CLOSED,
+		OPENING,
+		OPENED
+	};
+
 	Chest();
 	virtual ~Chest();
 
@@ -23,17 +29,17 @@ public:
 
 	bool CleanUp();
 
-	enum class CHEST_STATE {
-		CLOSED,
-		OPENING,
-		OPENED
-	};
+	void ChangeState(CHEST_STATE state);
+
+
 
 
 public:
 
 	bool isOpened = false;
 	int item = 0;
+
+	
 
 private:
 

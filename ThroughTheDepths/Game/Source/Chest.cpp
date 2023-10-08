@@ -25,7 +25,21 @@ bool Chest::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-
+	switch (parameters.attribute("state").as_int())
+	{
+		case 1:
+			state = CHEST_STATE::CLOSED;
+			break;
+		case 2:
+			state = CHEST_STATE::OPENING;
+			break;
+		case 3:
+			state = CHEST_STATE::OPENED;
+			break;
+		default:
+			state = CHEST_STATE::CLOSED;
+			break;
+	}
 
 
 	closedAnim.PushBack({0, 4, 34, 28});
@@ -53,7 +67,8 @@ bool Chest::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateRectangle(position.x + 16, position.y + 16, 30, 27, bodyType::STATIC);
-	pbody->ctype = ColliderType::ITEM;
+	pbody->ctype = ColliderType::CHEST;
+	pbody->listener = this;
 
 	return true;
 }
@@ -107,4 +122,10 @@ bool Chest::PostUpdate() {
 bool Chest::CleanUp()
 {
 	return true;
+}
+
+void Chest::ChangeState(CHEST_STATE new_state) {
+
+	state = new_state;
+
 }

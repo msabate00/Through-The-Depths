@@ -9,6 +9,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Chest.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -131,6 +132,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
 		app->audio->PlayFx(pickCoinFxId);
+		break;
+	case ColliderType::CHEST:
+		LOG("Collision CHEST");
+		app->audio->PlayFx(pickCoinFxId);
+		((Chest*)physB->listener)->ChangeState(Chest::CHEST_STATE::OPENING);
 		break;
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
