@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Chest.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -31,6 +32,12 @@ bool Scene::Awake(pugi::xml_node& config)
 	{
 		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
 		item->parameters = itemNode;
+	}
+
+	for (pugi::xml_node chestNode = config.child("chest"); chestNode; chestNode = chestNode.next_sibling("chest"))
+	{
+		Chest* chest = (Chest*)app->entityManager->CreateEntity(EntityType::CHEST);
+		chest->parameters = chestNode;
 	}
 
 	if (config.child("player")) {
