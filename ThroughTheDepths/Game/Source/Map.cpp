@@ -315,7 +315,7 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 bool Map::LoadAllLayers(pugi::xml_node mapNode) {
     bool ret = true;
 
-    for (pugi::xml_node layerNode = mapNode.child("MainTiles"); layerNode && ret; layerNode = layerNode.next_sibling("MainTiles"))
+    for (pugi::xml_node layerNode = mapNode.child("layer"); layerNode && ret; layerNode = layerNode.next_sibling("layer"))
     {
         //Load the layer
         MapLayer* mapLayer = new MapLayer();

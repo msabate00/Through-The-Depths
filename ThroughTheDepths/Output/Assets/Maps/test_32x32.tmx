@@ -16,7 +16,13 @@
   <image source="tilesets/background_2_32x32.png" width="576" height="360"/>
  </tileset>
  <group id="8" name="Fondo" locked="1">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <layer id="7" name="Fondo 0" width="120" height="40">
+   <properties>
+    <property name="Draw" type="bool" value="true"/>
+   </properties>
    <data>
     <tile/>
     <tile/>
@@ -4821,6 +4827,9 @@
    </data>
   </layer>
   <layer id="6" name="Fondo 1" width="120" height="40">
+   <properties>
+    <property name="Draw" type="bool" value="true"/>
+   </properties>
    <data>
     <tile/>
     <tile/>
@@ -9625,6 +9634,9 @@
    </data>
   </layer>
   <layer id="5" name="Fondo 2" width="120" height="40">
+   <properties>
+    <property name="Draw" type="bool" value="true"/>
+   </properties>
    <data>
     <tile/>
     <tile/>
@@ -14430,6 +14442,9 @@
   </layer>
  </group>
  <layer id="3" name="Base" width="120" height="40">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -19234,6 +19249,9 @@
   </data>
  </layer>
  <layer id="4" name="Detalles (Suelo +Hierbas)" width="120" height="40">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -20078,11 +20096,11 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1073741880"/>
+   <tile gid="1073741880"/>
+   <tile gid="1073741880"/>
+   <tile gid="1073741880"/>
+   <tile gid="1073741880"/>
    <tile/>
    <tile/>
    <tile/>
@@ -20198,11 +20216,11 @@
    <tile gid="1073741880"/>
    <tile gid="1073741880"/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="56"/>
+   <tile gid="56"/>
+   <tile gid="56"/>
+   <tile gid="56"/>
+   <tile gid="56"/>
    <tile/>
    <tile/>
    <tile/>
@@ -24038,6 +24056,9 @@
   </data>
  </layer>
  <layer id="9" name="Detalles (Árboles)" width="120" height="40">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -28842,6 +28863,9 @@
   </data>
  </layer>
  <layer id="11" name="Detalles (Arbustos y Rocas)" width="120" height="40">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -33646,6 +33670,9 @@
   </data>
  </layer>
  <layer id="10" name="Detalles (Luces)" width="120" height="40">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -38450,6 +38477,9 @@
   </data>
  </layer>
  <layer id="12" name="Pinchos" width="120" height="40">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -46979,18 +47009,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
    <tile/>
    <tile/>
    <tile/>
@@ -47099,18 +47117,30 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
-   <tile gid="199"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
