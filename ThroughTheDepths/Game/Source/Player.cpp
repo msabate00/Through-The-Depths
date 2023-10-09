@@ -42,6 +42,19 @@ bool Player::Start() {
 
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
 
+
+
+
+
+
+
+	uint windowH;
+	uint windowW;
+	app->win->GetWindowSize(windowW, windowH);
+
+	app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
+	app->render->camera.y = (-position.y * app->win->GetScale() + (windowH / 2));
+
 	return true;
 }
 
@@ -98,7 +111,17 @@ bool Player::Update(float dt)
 		uint windowW;
 		app->win->GetWindowSize(windowW, windowH);
 
-		app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
+		//app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
+		int targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
+		int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10);
+
+		
+		
+		targetPosX += (isFacingLeft) ? 75 : -50;
+
+		app->render->camera.x = lerp(app->render->camera.x,targetPosX, dt * 0.01f);
+		app->render->camera.y = lerp(app->render->camera.y,targetPosY, dt * 0.002f);
+		//app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
 	}
 
 	return true;
