@@ -98,7 +98,7 @@ bool Player::Update(float dt)
 		uint windowW;
 		app->win->GetWindowSize(windowW, windowH);
 
-		app->render->camera.x = -position.x + windowW / 2;
+		app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
 	}
 
 	return true;

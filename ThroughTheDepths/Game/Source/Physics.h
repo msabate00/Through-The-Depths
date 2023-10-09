@@ -28,6 +28,7 @@ enum class ColliderType {
 	ITEM,
 	CHEST,
 	PLATFORM, 
+	PLATFORM_TRASPASS, 
 	UNKNOWN
 	// ..
 };

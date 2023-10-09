@@ -13,6 +13,7 @@
 
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
+#include <bitset>
 
 Map::Map() : Module(), mapLoaded(false)
 {
@@ -22,6 +23,13 @@ Map::Map() : Module(), mapLoaded(false)
 // Destructor
 Map::~Map()
 {}
+
+std::string toBinary(int n)
+{
+    std::string r;
+    while (n != 0) { r = (n % 2 == 0 ? "0" : "1") + r; n /= 2; }
+    return r;
+}
 
 // Called before render is available
 bool Map::Awake(pugi::xml_node& config)
@@ -56,6 +64,14 @@ bool Map::Update(float dt)
 
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
+
+
+                    if (gid >= 10000) {
+                        std::string binary = std::bitset<32>(gid).to_string();
+                    }
+
+                    
+                    //LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %s ", s);
 
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
@@ -370,10 +386,15 @@ bool Map::LoadCollisions(std::string layerName) {
                         pos.x,
                         pos.y,
                         &r);*/
-                    LOG("NUMERO: %i", gid);
-                    if (gid == 199) {
+                   
+                    if (gid == tileset->firstgid) {
                         PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16 , 32, 32, STATIC);
                         c1->ctype = ColliderType::PLATFORM;
+                        ret = true;
+                    }
+                    if (gid == tileset->firstgid + 1) {
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        c1->ctype = ColliderType::PLATFORM_TRASPASS;
                         ret = true;
                     }
 
@@ -407,5 +428,7 @@ Properties::Property* Properties::GetProperty(const char* name)
 
     return p;
 }
+
+
 
 
