@@ -59,30 +59,43 @@ bool Map::Update(float dt)
             {
                 for (int y = 0; y < mapLayerItem->data->height; y++)
                 {
-                    int gid = mapLayerItem->data->Get(x, y);
+                    unsigned int gid = mapLayerItem->data->Get(x, y);
                     TileSet* tileset = GetTilesetFromTileId(gid);
-
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
+                    int bits = 0;
+                    SDL_RendererFlip flip = SDL_FLIP_NONE;
+                    int angle = 0;
 
+                    if (gid >= 100000) {
+                        uint tiledID = static_cast<uint>(gid & ~0xE0000000);
+                        bits = gid >> 29;
+                        tileset = GetTilesetFromTileId(tiledID);
+                        r = tileset->GetTileRect(tiledID);
 
-                    if (gid >= 10000) {
-                        std::string binary = std::bitset<32>(gid).to_string();
                     }
 
-                    
-                    //LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %s ", s);
-
+                    //1 = hoz_flip -> True || 1 = vert_flip -> True  || 0 = anti-diag flip -> False
+                    switch (bits) {                                           
+                        case 0b101: flip = SDL_FLIP_NONE;           angle = 90;         break;
+                        case 0b110: flip = SDL_FLIP_NONE;           angle += 180;       break;
+                        case 0b011: flip = SDL_FLIP_NONE;           angle += 270;       break;
+                        case 0b100: flip = SDL_FLIP_HORIZONTAL;     angle = 0;          break;
+                        case 0b111: flip = SDL_FLIP_HORIZONTAL;     angle += 90;        break;
+                        case 0b010: flip = SDL_FLIP_HORIZONTAL;     angle += 180;       break;
+                        case 0b001: flip = SDL_FLIP_HORIZONTAL;     angle += 270;       break;
+                    }
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
-                        pos.y, SDL_FLIP_NONE,
-                        &r);
+                        pos.y, flip,
+                        &r, 1, angle);
                 }
             }
         }
         mapLayerItem = mapLayerItem->next;
 
     }
+
 
     return true;
 }
@@ -321,7 +334,7 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     int i = 0;
     for (tile = node.child("data").child("tile"); tile && ret; tile = tile.next_sibling("tile"))
     {
-        layer->data[i] = tile.attribute("gid").as_int();
+        layer->data[i] = tile.attribute("gid").as_uint();
         i++;
     }
 
