@@ -365,14 +365,21 @@ bool Map::LoadCollisions(std::string layerName) {
                     TileSet* tileset = GetTilesetFromTileId(gid);
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
-
+                    
                     /*app->render->DrawTexture(tileset->texture,
                         pos.x,
                         pos.y,
                         &r);*/
-                    LOG("NUMERO: %i", gid);
-                    if (gid == 199) {
+                    LOG("NUMERO: %i", x);
+
+                    if (gid == tileset->firstgid) { //COLISION 0
                         PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16 , 32, 32, STATIC);
+                        c1->ctype = ColliderType::PLATFORM;
+                        ret = true;
+                    }
+
+                    if (gid == tileset->firstgid + 1) { //COLISION 1
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
                         c1->ctype = ColliderType::PLATFORM;
                         ret = true;
                     }
