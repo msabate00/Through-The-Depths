@@ -372,20 +372,20 @@ bool Map::LoadCollisions(std::string layerName) {
                         &r);*/
                    
 
-                    if (mapLayerItem->data->name == "Colisions") {
+                   
 
-                        if (gid == tileset->firstgid) { //COLISION 0
-                            PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
-                            c1->ctype = ColliderType::PLATFORM;
-                            ret = true;
-                        }
-
-                        if (gid == tileset->firstgid + 1) { //COLISION 1
-                            PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
-                            c1->ctype = ColliderType::PLATFORM_TRASPASS;
-                            ret = true;
-                        }
+                    if (gid == tileset->firstgid) { //COLISION 0
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        c1->ctype = ColliderType::PLATFORM;
+                        ret = true;
                     }
+
+                    if (gid == tileset->firstgid + 1) { //COLISION 1
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        c1->ctype = ColliderType::PLATFORM_TRASPASS;
+                        ret = true;
+                    }
+                    
 
 
                 }
