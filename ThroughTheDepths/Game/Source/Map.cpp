@@ -101,11 +101,16 @@ bool Map::Update(float dt)
         for (int i = 0; i < traspasedPlatformList.Count(); i++) {
             traspasedPlatformList.At(i)->data->body->SetActive(false);
         }
+       
+        
     }
     else {
         if (!app->scene->getPlayer()->traspassingColision) {
             for (int i = 0; i < traspasedPlatformList.Count(); i++) {
-                traspasedPlatformList.At(i)->data->body->SetActive(true);
+                if (traspasedPlatformList.At(i)->data->body->GetPosition().y > app->scene->getPlayer()->pbody->body->GetPosition().y) {
+                    traspasedPlatformList.At(i)->data->body->SetActive(true);
+                }
+                    
             }
         }
     }
@@ -420,7 +425,8 @@ bool Map::LoadCollisions(std::string layerName) {
                         ret = true;
                     }
                     if (gid == tileset->firstgid + 1) {
-                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+8, 32, 16, STATIC);
+                        //PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+8, 32, 16, STATIC);
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+1, 32, 2, STATIC);
                         c1->ctype = ColliderType::PLATFORM_TRASPASS;
                         traspasedPlatformList.Add(c1);
                         ret = true;

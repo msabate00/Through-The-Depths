@@ -144,6 +144,7 @@ private:
 	SString mapFolder;
     bool mapLoaded;
 	List<PhysBody*> traspasedPlatformList;
+	
 
 
 };

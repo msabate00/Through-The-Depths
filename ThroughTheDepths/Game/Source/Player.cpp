@@ -68,7 +68,7 @@ bool Player::Update(float dt)
 
 	LOG("TraspasingCol %d, tiempo: %d, cantidad: %d", traspassingColision, traspassingTimer.ReadSec(), colisionTraspassing.Count());
 
-	if (traspassingColision && traspassingTimer.ReadMSec() > 200) {
+	if (traspassingColision && traspassingTimer.ReadMSec() > 100) {
 		while (colisionTraspassing.Count() != 0) {
 			colisionTraspassing[0]->body->SetActive(true);
 			colisionTraspassing.Del(colisionTraspassing.At(0));
