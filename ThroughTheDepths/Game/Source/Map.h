@@ -143,6 +143,9 @@ private:
     SString mapFileName;
 	SString mapFolder;
     bool mapLoaded;
+	List<PhysBody*> traspasedPlatformList;
+
+
 };
 
 #endif // __MAP_H__

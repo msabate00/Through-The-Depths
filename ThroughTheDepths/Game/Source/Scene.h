@@ -34,6 +34,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	Player* getPlayer();
+
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;

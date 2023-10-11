@@ -7,6 +7,7 @@
 #include "Textures.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Scene.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -93,6 +94,20 @@ bool Map::Update(float dt)
         }
         mapLayerItem = mapLayerItem->next;
 
+    }
+
+
+    if (app->scene->getPlayer()->pbody->body->GetLinearVelocity().y < 0) {
+        for (int i = 0; i < traspasedPlatformList.Count(); i++) {
+            traspasedPlatformList.At(i)->data->body->SetActive(false);
+        }
+    }
+    else {
+        if (!app->scene->getPlayer()->traspassingColision) {
+            for (int i = 0; i < traspasedPlatformList.Count(); i++) {
+                traspasedPlatformList.At(i)->data->body->SetActive(true);
+            }
+        }
     }
 
 
@@ -405,8 +420,9 @@ bool Map::LoadCollisions(std::string layerName) {
                         ret = true;
                     }
                     if (gid == tileset->firstgid + 1) {
-                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+8, 32, 16, STATIC);
                         c1->ctype = ColliderType::PLATFORM_TRASPASS;
+                        traspasedPlatformList.Add(c1);
                         ret = true;
                     }
 

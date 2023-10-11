@@ -47,9 +47,10 @@ public:
 	float jumpForce = 5;
 
 	bool isFacingLeft = false;
+	bool traspassingColision = false;
 
 private:
-	bool traspassingColision = false;
+	
 	List<PhysBody*> colisionTraspassing;
 	Timer traspassingTimer;
 	

@@ -125,3 +125,8 @@ bool Scene::CleanUp()
 
 	return true;
 }
+
+Player* Scene::getPlayer()
+{
+	return player;
+}
