@@ -74,7 +74,6 @@ bool Map::Update(float dt)
                         r = tileset->GetTileRect(tiledID);
 
                     }
-
                     //1 = hoz_flip -> True || 1 = vert_flip -> True  || 0 = anti-diag flip -> False
                     switch (bits) {                                           
                         case 0b101: flip = SDL_FLIP_NONE;           angle = 90;         break;

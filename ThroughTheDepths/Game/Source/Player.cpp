@@ -64,8 +64,18 @@ bool Player::Update(float dt)
 
 
 	b2Vec2 vel = b2Vec2(0,  pbody->body->GetLinearVelocity().y);
+	
 
+	LOG("TraspasingCol %d, tiempo: %d, cantidad: %d", traspassingColision, traspassingTimer.ReadSec(), colisionTraspassing.Count());
 
+	if (traspassingColision && traspassingTimer.ReadMSec() > 200) {
+		while (colisionTraspassing.Count() != 0) {
+			colisionTraspassing[0]->body->SetActive(true);
+			colisionTraspassing.Del(colisionTraspassing.At(0));
+		}
+		
+		traspassingColision = false;
+	}
 	
 
 
@@ -86,11 +96,23 @@ bool Player::Update(float dt)
 		isFacingLeft = false;
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
+		
+		traspassingColision = true;
+		traspassingTimer.Start();
+
+		for (int i = 0; i < colisionTraspassing.Count(); i++) {
+			colisionTraspassing[i]->body->SetActive(false);
+		}
+
+	}
+
+
 	
 	vel.y -= GRAVITY_Y;
 	pbody->body->SetLinearVelocity(vel);
 	//NUEVO
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT) {
 		vel.y = 0;
 		pbody->body->SetLinearVelocity(vel);
 		pbody->body->ApplyLinearImpulse(b2Vec2(0, GRAVITY_Y * jumpForce), pbody->body->GetWorldCenter(), true);
@@ -166,6 +188,17 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::PLATFORM_TRASPASS:
+		
+		colisionTraspassing.Add(physB);
+		if (colisionTraspassing.Count() > 10) {
+			colisionTraspassing.Del(colisionTraspassing.At(0));
+		}
+		LOG("Collision traspass count: %d", colisionTraspassing.Count());
+	
+
+
 		break;
 	}
 }

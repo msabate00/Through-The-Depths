@@ -3,7 +3,10 @@
 
 #include "Entity.h"
 #include "Point.h"
+#include "Physics.h"
 #include "SDL/include/SDL.h"
+#include "List.h"
+#include "Timer.h"
 
 struct SDL_Texture;
 
@@ -45,6 +48,11 @@ public:
 
 	bool isFacingLeft = false;
 
+private:
+	bool traspassingColision = false;
+	List<PhysBody*> colisionTraspassing;
+	Timer traspassingTimer;
+	
 
 };
 
