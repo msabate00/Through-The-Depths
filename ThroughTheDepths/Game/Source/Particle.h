@@ -6,7 +6,7 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "SDL/include/SDL_render.h"
-
+#include "Physics.h"
 
 //struct Collider;
 
@@ -51,6 +51,9 @@ public:
 
 	bool flip = false;
 
+	PhysBody* pbody;
+
+	
 
 };
 

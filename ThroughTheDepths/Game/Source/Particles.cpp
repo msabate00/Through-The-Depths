@@ -153,7 +153,17 @@ bool Particles::Update(float dt)
 		Particle* particle = particles[i];
 
 		if(particle == nullptr)	continue;
+		b2Vec2 position;
 
+		if (particle->flip) {
+			position.x = PIXEL_TO_METERS(particle->position.x );
+		}
+		else {
+			position.x = PIXEL_TO_METERS(particle->position.x + 0.4);
+		}
+	
+		position.y = PIXEL_TO_METERS(particle->position.y + 0.3);
+		particle->pbody->body->SetTransform(position, particle->pbody->body->GetAngle());
 
 		/*if (particle->collider != nullptr) {
 			if (particle->collider->type == Collider::Type::PLAYER_SWORD_ULTI) {
@@ -189,6 +199,7 @@ bool Particles::Update(float dt)
 			/*if (particle->collider != nullptr) {
 				particle->collider->pendingToDelete = true;
 			}*/
+			particle->pbody->body->GetWorld()->DestroyBody(particle->pbody->body);
 			
 			delete particle;
 			particles[i] = nullptr;
@@ -231,7 +242,8 @@ int Particles::AddParticle(const Particle& particle, int x, int y,  uint delay)
 	p->position.x = x;						// so when frameCount reaches 0 the particle will be activated
 	p->position.y = y;
 	p->flip = particle.flip;
-
+	p->pbody = app->physics->CreateRectangleSensor(p->position.x + 16, p->position.y + 16, 16,32, bodyType::KINEMATIC);
+	p->pbody->ctype = ColliderType::PLAYER_PROYECTILE;
 	//Adding the particle's collider
 	/*if (colliderType != Collider::Type::NONE)
 		p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), colliderType, this);*/
