@@ -17,40 +17,40 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Correr
 
-	runAnim.PushBack({ 97, 1, 32, 32 });
-	runAnim.PushBack({ 97, 33, 32, 32 });
-	runAnim.PushBack({ 97, 65, 32, 32 });
+	runAnim.PushBack({ 1, 97,  32, 32 });
+	runAnim.PushBack({ 33,97,  32, 32 });
+	runAnim.PushBack({ 65, 97, 32, 32 });
 	runAnim.PushBack({ 97, 97, 32, 32 });
-	runAnim.PushBack({ 97, 129, 32, 32 });
-	runAnim.PushBack({ 97, 161, 32, 32 });
-	runAnim.PushBack({ 97, 193, 32, 32 });
-	runAnim.PushBack({ 97, 225, 32, 32 });
+	runAnim.PushBack({ 129, 97, 32, 32 });
+	runAnim.PushBack({ 161, 97, 32, 32 });
+	runAnim.PushBack({ 193, 97, 32, 32 });
+	runAnim.PushBack({ 225, 97, 32, 32 });
 	runAnim.speed = 0.17f;
 
 	//Caminar
 
-	walkAnim.PushBack({ 65, 1, 32, 32 });
-	walkAnim.PushBack({ 65, 33, 32, 32 });
+	walkAnim.PushBack({ 1, 65, 32, 32 });
+	walkAnim.PushBack({ 33, 65, 32, 32 });
 	walkAnim.PushBack({ 65, 65, 32, 32 });
-	walkAnim.PushBack({ 65, 97, 32, 32 });
+	walkAnim.PushBack({ 97, 65, 32, 32 });
 	walkAnim.speed = 0.17f;
 
 	//Estar relajao
 
 	idleAnim.PushBack({ 1, 1, 32, 32 });
-	idleAnim.PushBack({ 1, 33, 32, 32 });
-	idleAnim.speed = 0.17f;
+	idleAnim.PushBack({ 33, 1, 32, 32 });
+	idleAnim.speed = 0.1f;
 
 	//Saltar
 
-	jumpAnim.PushBack({ 161, 1, 32, 32 });
-	jumpAnim.PushBack({ 161, 33, 32, 32 });
-	jumpAnim.PushBack({ 161, 65, 32, 32 });
-	jumpAnim.PushBack({ 161, 97, 32, 32 });
-	jumpAnim.PushBack({ 161, 129, 32, 32 });
+	jumpAnim.PushBack({ 1, 161, 32, 32 });
+	jumpAnim.PushBack({ 33, 161, 32, 32 });
+	jumpAnim.PushBack({ 65, 161, 32, 32 });
+	jumpAnim.PushBack({ 97, 161, 32, 32 });
+	jumpAnim.PushBack({ 129, 161, 32, 32 });
 	jumpAnim.PushBack({ 161, 161, 32, 32 });
-	jumpAnim.PushBack({ 161, 193, 32, 32 });
-	jumpAnim.PushBack({ 161, 225, 32, 32 });
+	jumpAnim.PushBack({ 193, 161, 32, 32 });
+	jumpAnim.PushBack({ 225, 161, 32, 32 });
 	jumpAnim.speed = 0.17f;
 
 	//CAMBIAR jumpAnim, y dividirlo en jumpUpAnim y jumpDownAnim; La de up va con loop = false; la de bajar va con loop= true;
@@ -60,33 +60,33 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Morir Desvanecido
 
-	ghostAnim.PushBack({ 193, 1, 32, 32 });
-	ghostAnim.PushBack({ 193, 33, 32, 32 });
-	ghostAnim.PushBack({ 193, 65, 32, 32 });
+	ghostAnim.PushBack({ 1, 193, 32, 32 });
+	ghostAnim.PushBack({ 33, 193, 32, 32 });
+	ghostAnim.PushBack({ 65, 193, 32, 32 });
 	ghostAnim.speed = 0.17f;
 
 	//Morir
 
-	dieAnim.PushBack({ 225, 1, 32, 32 });
-	dieAnim.PushBack({ 225, 33, 32, 32 });
-	dieAnim.PushBack({ 225, 65, 32, 32 });
-	dieAnim.PushBack({ 225, 97, 32, 32 });
-	dieAnim.PushBack({ 225, 129, 32, 32 });
-	dieAnim.PushBack({ 225, 161, 32, 32 });
-	dieAnim.PushBack({ 225, 193, 32, 32 });
+	dieAnim.PushBack({ 1, 225, 32, 32 });
+	dieAnim.PushBack({ 33, 225, 32, 32 });
+	dieAnim.PushBack({ 65, 225, 32, 32 });
+	dieAnim.PushBack({ 97, 225, 32, 32 });
+	dieAnim.PushBack({ 129, 225, 32, 32 });
+	dieAnim.PushBack({ 161, 225, 32, 32 });
+	dieAnim.PushBack({ 193, 225, 32, 32 });
 	dieAnim.PushBack({ 225, 225, 32, 32 });
 	dieAnim.speed = 0.17f;
 
 	//Atacar
 	
-	attackAnim.PushBack({ 257, 1, 32, 32 });
-	attackAnim.PushBack({ 257, 33, 32, 32 });
-	attackAnim.PushBack({ 257, 65, 32, 32 });
-	attackAnim.PushBack({ 257, 97, 32, 32 });
-	attackAnim.PushBack({ 257, 129, 32, 32 });
-	attackAnim.PushBack({ 257, 161, 32, 32 });
-	attackAnim.PushBack({ 257, 193, 32, 32 });
-	attackAnim.PushBack({ 257, 225, 32, 32 });
+	attackAnim.PushBack({ 1, 257, 32, 32 });
+	attackAnim.PushBack({ 33, 257, 32, 32 });
+	attackAnim.PushBack({ 65, 257, 32, 32 });
+	attackAnim.PushBack({ 97, 257, 32, 32 });
+	attackAnim.PushBack({ 129, 257, 32, 32 });
+	attackAnim.PushBack({ 161, 257, 32, 32 });
+	attackAnim.PushBack({ 193, 257, 32, 32 });
+	attackAnim.PushBack({ 225, 257, 32, 32 });
 	attackAnim.speed = 0.17f;
 	attackAnim.loop = false;
 }
