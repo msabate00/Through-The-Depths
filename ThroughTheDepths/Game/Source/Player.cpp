@@ -88,7 +88,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	attackAnim.PushBack({ 161, 257, 32, 32 });
 	attackAnim.PushBack({ 193, 257, 32, 32 });
 	attackAnim.PushBack({ 225, 257, 32, 32 });
-	attackAnim.speed = 0.17f;
+	attackAnim.speed = 0.35f;
 	attackAnim.loop = false;
 }
 
