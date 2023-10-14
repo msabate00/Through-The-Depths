@@ -57,7 +57,7 @@ public:
 	fPoint GetPositionSpeed(int position);
 	void DestroyCollision(int position);
 
-	const pugi::char_t* texturePath;
+
 
 
 private:
@@ -71,6 +71,8 @@ private:
 	uint lastParticle = 0;
 
 public:
+
+	const pugi::char_t* texturePath;
 
 	Particle basicAttackR;
 	Particle basicAttackL;
