@@ -14,6 +14,82 @@
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
+
+	//Correr
+
+	RunAnim.PushBack({ 97, 1, 32, 32 });
+	RunAnim.PushBack({ 97, 33, 32, 32 });
+	RunAnim.PushBack({ 97, 65, 32, 32 });
+	RunAnim.PushBack({ 97, 97, 32, 32 });
+	RunAnim.PushBack({ 97, 129, 32, 32 });
+	RunAnim.PushBack({ 97, 161, 32, 32 });
+	RunAnim.PushBack({ 97, 193, 32, 32 });
+	RunAnim.PushBack({ 97, 225, 32, 32 });
+
+	RunAnim.speed = 0.17f;
+
+	//Caminar
+
+	WalkAnim.PushBack({ 65, 1, 32, 32 });
+	WalkAnim.PushBack({ 65, 33, 32, 32 });
+	WalkAnim.PushBack({ 65, 65, 32, 32 });
+	RunAnim.PushBack({ 65, 97, 32, 32 });
+
+	WalkAnim.speed = 0.17f;
+
+	//Estar relajao
+
+	IdleAnim.PushBack({ 1, 1, 32, 32 });
+	IdleAnim.PushBack({ 1, 33, 32, 32 });
+
+	IdleAnim.speed = 0.17f;
+
+	//Saltar
+
+	JumpAnim.PushBack({ 161, 1, 32, 32 });
+	JumpAnim.PushBack({ 161, 33, 32, 32 });
+	JumpAnim.PushBack({ 161, 65, 32, 32 });
+	JumpAnim.PushBack({ 161, 97, 32, 32 });
+	JumpAnim.PushBack({ 161, 129, 32, 32 });
+	JumpAnim.PushBack({ 161, 161, 32, 32 });
+	JumpAnim.PushBack({ 161, 193, 32, 32 });
+	JumpAnim.PushBack({ 161, 225, 32, 32 });
+
+	JumpAnim.speed = 0.17f;
+
+	//Morir Desvanecido
+
+	GhostAnim.PushBack({ 193, 1, 32, 32 });
+	GhostAnim.PushBack({ 193, 33, 32, 32 });
+	GhostAnim.PushBack({ 193, 65, 32, 32 });
+
+	GhostAnim.speed = 0.17f;
+
+	//Morir
+
+	DieAnim.PushBack({ 225, 1, 32, 32 });
+	DieAnim.PushBack({ 225, 33, 32, 32 });
+	DieAnim.PushBack({ 225, 65, 32, 32 });
+	DieAnim.PushBack({ 225, 97, 32, 32 });
+	DieAnim.PushBack({ 225, 129, 32, 32 });
+	DieAnim.PushBack({ 225, 161, 32, 32 });
+	DieAnim.PushBack({ 225, 193, 32, 32 });
+	DieAnim.PushBack({ 225, 225, 32, 32 });
+
+	DieAnim.speed = 0.17f;
+
+	//Atacar
+	
+	AttackAnim.PushBack({ 257, 1, 32, 32 });
+	AttackAnim.PushBack({ 257, 33, 32, 32 });
+	AttackAnim.PushBack({ 257, 65, 32, 32 });
+	AttackAnim.PushBack({ 257, 97, 32, 32 });
+	AttackAnim.PushBack({ 257, 129, 32, 32 });
+	AttackAnim.PushBack({ 257, 161, 32, 32 });
+	AttackAnim.PushBack({ 257, 193, 32, 32 });
+	AttackAnim.PushBack({ 257, 225, 32, 32 });
+
+	AttackAnim.speed = 0.17f;
 }
 
 Player::~Player() {

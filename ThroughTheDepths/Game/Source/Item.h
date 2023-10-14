@@ -28,6 +28,7 @@ public:
 
 	bool isPicked = false;
 
+	
 private:
 
 	SDL_Texture* texture;
