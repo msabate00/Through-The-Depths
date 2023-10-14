@@ -4,6 +4,9 @@
 #include "Animation.h"
 //#include "p2Point.h"
 #include "Point.h"
+#include "SDL/include/SDL.h"
+#include "SDL/include/SDL_render.h"
+
 
 //struct Collider;
 
@@ -20,6 +23,7 @@ public:
 	// Handles the logic of the particle
 	// Returns false when the particle reaches its lifetime
 	bool Update();
+
 
 public:
 	// Defines the position in the screen
@@ -44,6 +48,8 @@ public:
 
 	// Defines the total amount of frames during which the particle will be active
 	uint lifetime = 0;
+
+	bool flip = false;
 
 
 };

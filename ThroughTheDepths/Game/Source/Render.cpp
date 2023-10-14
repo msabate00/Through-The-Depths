@@ -1,6 +1,7 @@
 #include "App.h"
 #include "Window.h"
 #include "Render.h"
+#include "Textures.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -135,6 +136,8 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, SDL_RendererFlip fl
 		pivot.y = pivotY;
 		p = &pivot;
 	}
+
+	
 
 	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
 	{

@@ -97,6 +97,7 @@ bool App::Awake()
 			// that can be used to read all variables for that module.
 			// Send nullptr if the node does not exist in config.xml
 			pugi::xml_node node = configNode.child(item->data->name.GetString());
+			
 			ret = item->data->Awake(node);
 			item = item->next;
 		}

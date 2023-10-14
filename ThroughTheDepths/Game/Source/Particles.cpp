@@ -16,8 +16,11 @@ using namespace std;
 
 Particles::Particles() : Module()
 {
-	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
-		particles[i] = nullptr;
+
+	name.Create("particles");
+
+
+	
 }
 
 Particles::~Particles()
@@ -28,22 +31,43 @@ Particles::~Particles()
 
 bool Particles::Awake(pugi::xml_node& config){
 
+
 	bool ret = true;
-	//LOG("Loading particles");
+
+
+	LOG("Loading particles");
+
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+		particles[i] = nullptr;
+
 	//texture = App->textures->Load("Assets/Sprites/Player/Player.png");
-	texture = app->tex->Load(config.child("mainParticleTexture").attribute("texturepath").as_string());
+	//texture = app->tex->Load(config.child("mainParticleTexture").attribute("texturepath").as_string());
+	texturePath = (config.child("mainParticleTexture").attribute("texturepath").as_string());
+
+
+
+	basicAttackR.anim.PushBack({ 0, 0, 32, 32 });
+	basicAttackR.anim.PushBack({ 32, 0, 32, 32 });
+	basicAttackR.anim.PushBack({ 64, 0, 32, 32 });
+	basicAttackR.anim.PushBack({ 96, 0, 32, 32 });
 	
+	basicAttackR.anim.loop = false;
+	basicAttackR.anim.speed = 0.3f;
+	basicAttackR.lifetime = 15;
+	basicAttackR.speed = fPoint(2, 0);
 
 
+	basicAttackL.anim.PushBack({ 0, 0, 32, 32 });
+	basicAttackL.anim.PushBack({ 32, 0, 32, 32 });
+	basicAttackL.anim.PushBack({ 64, 0, 32, 32 });
+	basicAttackL.anim.PushBack({ 96, 0, 32, 32 });
 
+	basicAttackL.anim.loop = false;
+	basicAttackL.anim.speed = 0.3f;
+	basicAttackL.lifetime = 15;
+	basicAttackL.speed = fPoint(-2, 0);
+	basicAttackL.flip = true;
 
-	shurikenL.anim.PushBack({ 103, 292, 13, 10 });
-	shurikenL.anim.PushBack({ 120, 292, 13, 10 });
-	shurikenL.anim.PushBack({ 137, 292, 13, 10 });
-	shurikenL.anim.loop = true;
-	shurikenL.anim.speed = 0.3f;
-	shurikenL.lifetime = 80;
-	shurikenL.speed = fPoint(-4, 0);
 
 	return ret;
 
@@ -52,6 +76,7 @@ bool Particles::Awake(pugi::xml_node& config){
 
 bool Particles::Start()
 {
+	texture = app->tex->Load(texturePath);
 	return true;
 }
 
@@ -119,6 +144,8 @@ bool Particles::CleanUp()
 
 bool Particles::Update(float dt)
 {
+
+	
 	bool ret = true;
 	
 	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
@@ -183,7 +210,13 @@ bool Particles::PostUpdate()
 
 		if (particle != nullptr && particle->isAlive){
 		
-			app->render->DrawTexture(texture, particle->position.x, particle->position.y, SDL_FLIP_NONE, &(particle->anim.GetCurrentFrame()));	
+			if (particle->flip) {
+				app->render->DrawTexture(texture, particle->position.x, particle->position.y, SDL_FLIP_HORIZONTAL, &(particle->anim.GetCurrentFrame()));
+			}
+			else {
+				app->render->DrawTexture(texture, particle->position.x, particle->position.y, SDL_FLIP_NONE, &(particle->anim.GetCurrentFrame()));
+			}
+			
 		}
 	}
 
@@ -197,6 +230,7 @@ int Particles::AddParticle(const Particle& particle, int x, int y,  uint delay)
 	p->frameCount = -(int)delay;			// We start the frameCount as the negative delay
 	p->position.x = x;						// so when frameCount reaches 0 the particle will be activated
 	p->position.y = y;
+	p->flip = particle.flip;
 
 	//Adding the particle's collider
 	/*if (colliderType != Collider::Type::NONE)

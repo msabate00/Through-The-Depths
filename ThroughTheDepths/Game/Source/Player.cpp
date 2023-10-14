@@ -9,6 +9,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Particles.h"
 #include "Chest.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
@@ -142,7 +143,7 @@ bool Player::Update(float dt)
 	b2Vec2 vel = b2Vec2(0,  pbody->body->GetLinearVelocity().y);
 	
 
-	LOG("TraspasingCol %d, tiempo: %d, cantidad: %d", traspassingColision, traspassingTimer.ReadSec(), colisionTraspassing.Count());
+	//LOG("TraspasingCol %d, tiempo: %d, cantidad: %d", traspassingColision, traspassingTimer.ReadSec(), colisionTraspassing.Count());
 
 	if (traspassingColision && traspassingTimer.ReadMSec() > 100) {
 		while (colisionTraspassing.Count() != 0) {
@@ -182,8 +183,17 @@ bool Player::Update(float dt)
 
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
+	//Ataque
+	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && !isAttacking) {
 		isAttacking = true;
+		if (isFacingLeft) {
+			app->particles->AddParticle(app->particles->basicAttackL, position.x - 16, position.y);
+		}
+		else {
+			app->particles->AddParticle(app->particles->basicAttackR, position.x + 16, position.y);
+		}
+		
+
 	}
 
 

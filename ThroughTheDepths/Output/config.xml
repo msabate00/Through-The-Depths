@@ -16,8 +16,8 @@
 		<fullscreen_window value="false"/>
 	</window>
 
-	<particles >
-		<mainParticleTexture texturepath="Assets/Textures/player1.png"/>
+	<particles>
+		<mainParticleTexture texturepath="Assets/Textures/particles.png"/>
 	</particles>
 
 

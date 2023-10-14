@@ -57,6 +57,8 @@ public:
 	fPoint GetPositionSpeed(int position);
 	void DestroyCollision(int position);
 
+	const pugi::char_t* texturePath;
+
 
 private:
 	// Particles spritesheet loaded into an SDL Texture
@@ -70,7 +72,8 @@ private:
 
 public:
 
-	Particle shurikenL;
+	Particle basicAttackR;
+	Particle basicAttackL;
 
 
 };
