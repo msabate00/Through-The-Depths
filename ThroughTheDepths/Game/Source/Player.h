@@ -7,6 +7,7 @@
 #include "SDL/include/SDL.h"
 #include "List.h"
 #include "Timer.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -49,10 +50,28 @@ public:
 	bool isFacingLeft = false;
 	bool traspassingColision = false;
 
+	Animation* currentAnimation = nullptr;
+
 private:
 	
 	List<PhysBody*> colisionTraspassing;
 	Timer traspassingTimer;
+
+
+	
+
+	Animation runAnim;
+	Animation walkAnim;
+	Animation idleAnim;
+	Animation jumpAnim; //Cambiarla por up/down;
+	Animation jumpUpAnim;
+	Animation jumpDownAnim;
+	Animation ghostAnim;
+	Animation dieAnim;
+	Animation attackAnim;
+
+
+	bool dying = false;
 	
 
 };

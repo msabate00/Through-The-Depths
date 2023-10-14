@@ -17,79 +17,77 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Correr
 
-	RunAnim.PushBack({ 97, 1, 32, 32 });
-	RunAnim.PushBack({ 97, 33, 32, 32 });
-	RunAnim.PushBack({ 97, 65, 32, 32 });
-	RunAnim.PushBack({ 97, 97, 32, 32 });
-	RunAnim.PushBack({ 97, 129, 32, 32 });
-	RunAnim.PushBack({ 97, 161, 32, 32 });
-	RunAnim.PushBack({ 97, 193, 32, 32 });
-	RunAnim.PushBack({ 97, 225, 32, 32 });
-
-	RunAnim.speed = 0.17f;
+	runAnim.PushBack({ 97, 1, 32, 32 });
+	runAnim.PushBack({ 97, 33, 32, 32 });
+	runAnim.PushBack({ 97, 65, 32, 32 });
+	runAnim.PushBack({ 97, 97, 32, 32 });
+	runAnim.PushBack({ 97, 129, 32, 32 });
+	runAnim.PushBack({ 97, 161, 32, 32 });
+	runAnim.PushBack({ 97, 193, 32, 32 });
+	runAnim.PushBack({ 97, 225, 32, 32 });
+	runAnim.speed = 0.17f;
 
 	//Caminar
 
-	WalkAnim.PushBack({ 65, 1, 32, 32 });
-	WalkAnim.PushBack({ 65, 33, 32, 32 });
-	WalkAnim.PushBack({ 65, 65, 32, 32 });
-	RunAnim.PushBack({ 65, 97, 32, 32 });
-
-	WalkAnim.speed = 0.17f;
+	walkAnim.PushBack({ 65, 1, 32, 32 });
+	walkAnim.PushBack({ 65, 33, 32, 32 });
+	walkAnim.PushBack({ 65, 65, 32, 32 });
+	walkAnim.PushBack({ 65, 97, 32, 32 });
+	walkAnim.speed = 0.17f;
 
 	//Estar relajao
 
-	IdleAnim.PushBack({ 1, 1, 32, 32 });
-	IdleAnim.PushBack({ 1, 33, 32, 32 });
-
-	IdleAnim.speed = 0.17f;
+	idleAnim.PushBack({ 1, 1, 32, 32 });
+	idleAnim.PushBack({ 1, 33, 32, 32 });
+	idleAnim.speed = 0.17f;
 
 	//Saltar
 
-	JumpAnim.PushBack({ 161, 1, 32, 32 });
-	JumpAnim.PushBack({ 161, 33, 32, 32 });
-	JumpAnim.PushBack({ 161, 65, 32, 32 });
-	JumpAnim.PushBack({ 161, 97, 32, 32 });
-	JumpAnim.PushBack({ 161, 129, 32, 32 });
-	JumpAnim.PushBack({ 161, 161, 32, 32 });
-	JumpAnim.PushBack({ 161, 193, 32, 32 });
-	JumpAnim.PushBack({ 161, 225, 32, 32 });
+	jumpAnim.PushBack({ 161, 1, 32, 32 });
+	jumpAnim.PushBack({ 161, 33, 32, 32 });
+	jumpAnim.PushBack({ 161, 65, 32, 32 });
+	jumpAnim.PushBack({ 161, 97, 32, 32 });
+	jumpAnim.PushBack({ 161, 129, 32, 32 });
+	jumpAnim.PushBack({ 161, 161, 32, 32 });
+	jumpAnim.PushBack({ 161, 193, 32, 32 });
+	jumpAnim.PushBack({ 161, 225, 32, 32 });
+	jumpAnim.speed = 0.17f;
 
-	JumpAnim.speed = 0.17f;
+	//CAMBIAR jumpAnim, y dividirlo en jumpUpAnim y jumpDownAnim;
+
+
+
 
 	//Morir Desvanecido
 
-	GhostAnim.PushBack({ 193, 1, 32, 32 });
-	GhostAnim.PushBack({ 193, 33, 32, 32 });
-	GhostAnim.PushBack({ 193, 65, 32, 32 });
-
-	GhostAnim.speed = 0.17f;
+	ghostAnim.PushBack({ 193, 1, 32, 32 });
+	ghostAnim.PushBack({ 193, 33, 32, 32 });
+	ghostAnim.PushBack({ 193, 65, 32, 32 });
+	ghostAnim.speed = 0.17f;
 
 	//Morir
 
-	DieAnim.PushBack({ 225, 1, 32, 32 });
-	DieAnim.PushBack({ 225, 33, 32, 32 });
-	DieAnim.PushBack({ 225, 65, 32, 32 });
-	DieAnim.PushBack({ 225, 97, 32, 32 });
-	DieAnim.PushBack({ 225, 129, 32, 32 });
-	DieAnim.PushBack({ 225, 161, 32, 32 });
-	DieAnim.PushBack({ 225, 193, 32, 32 });
-	DieAnim.PushBack({ 225, 225, 32, 32 });
-
-	DieAnim.speed = 0.17f;
+	dieAnim.PushBack({ 225, 1, 32, 32 });
+	dieAnim.PushBack({ 225, 33, 32, 32 });
+	dieAnim.PushBack({ 225, 65, 32, 32 });
+	dieAnim.PushBack({ 225, 97, 32, 32 });
+	dieAnim.PushBack({ 225, 129, 32, 32 });
+	dieAnim.PushBack({ 225, 161, 32, 32 });
+	dieAnim.PushBack({ 225, 193, 32, 32 });
+	dieAnim.PushBack({ 225, 225, 32, 32 });
+	dieAnim.speed = 0.17f;
 
 	//Atacar
 	
-	AttackAnim.PushBack({ 257, 1, 32, 32 });
-	AttackAnim.PushBack({ 257, 33, 32, 32 });
-	AttackAnim.PushBack({ 257, 65, 32, 32 });
-	AttackAnim.PushBack({ 257, 97, 32, 32 });
-	AttackAnim.PushBack({ 257, 129, 32, 32 });
-	AttackAnim.PushBack({ 257, 161, 32, 32 });
-	AttackAnim.PushBack({ 257, 193, 32, 32 });
-	AttackAnim.PushBack({ 257, 225, 32, 32 });
-
-	AttackAnim.speed = 0.17f;
+	attackAnim.PushBack({ 257, 1, 32, 32 });
+	attackAnim.PushBack({ 257, 33, 32, 32 });
+	attackAnim.PushBack({ 257, 65, 32, 32 });
+	attackAnim.PushBack({ 257, 97, 32, 32 });
+	attackAnim.PushBack({ 257, 129, 32, 32 });
+	attackAnim.PushBack({ 257, 161, 32, 32 });
+	attackAnim.PushBack({ 257, 193, 32, 32 });
+	attackAnim.PushBack({ 257, 225, 32, 32 });
+	attackAnim.speed = 0.17f;
 }
 
 Player::~Player() {
@@ -136,7 +134,7 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-
+	currentAnimation = &idleAnim;
 
 
 	b2Vec2 vel = b2Vec2(0,  pbody->body->GetLinearVelocity().y);
@@ -155,23 +153,22 @@ bool Player::Update(float dt)
 	
 
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		//
-	}
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		//
-	}
-
+	
+	//Moverse a la izquierda
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		vel = b2Vec2(-speed*dt, pbody->body->GetLinearVelocity().y);
 		isFacingLeft = true;
+		currentAnimation = &runAnim;
 	}
 
+	//Moverse a la derecha
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		vel = b2Vec2(speed*dt, pbody->body->GetLinearVelocity().y);
 		isFacingLeft = false;
+		currentAnimation = &runAnim;
 	}
 
+	//Atraves plataformas traspasables
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
 		
 		traspassingColision = true;
@@ -187,7 +184,8 @@ bool Player::Update(float dt)
 	
 	vel.y -= GRAVITY_Y;
 	pbody->body->SetLinearVelocity(vel);
-	//NUEVO
+	
+	//Sistema de salto
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT) {
 		vel.y = 0;
 		pbody->body->SetLinearVelocity(vel);
@@ -196,7 +194,7 @@ bool Player::Update(float dt)
 	}
 
 
-	//Set the velocity of the pbody of the player
+	
 	
 
 	//Update player position in pixels
@@ -204,6 +202,8 @@ bool Player::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 
+
+	//Movimiento de la camara
 	if (!app->debug) {
 		uint windowH;
 		uint windowW;
@@ -222,16 +222,35 @@ bool Player::Update(float dt)
 		//app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
 	}
 
+
+
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+		dying = !dying;
+	}
+
+
+	if (dying) {
+		currentAnimation = &dieAnim;
+	}
+
+
+
+	currentAnimation->Update();
+
 	return true;
 }
 
 bool Player::PostUpdate() {
 
+
+
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_HORIZONTAL);
+		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_NONE);
+		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_NONE, &rect);
 	}
 
 
