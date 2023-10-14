@@ -50,6 +50,7 @@ public:
 	bool isFacingLeft = false;
 	bool traspassingColision = false;
 
+
 	Animation* currentAnimation = nullptr;
 
 private:
@@ -71,7 +72,8 @@ private:
 	Animation attackAnim;
 
 
-	bool dying = false;
+	bool isDying = false;
+	bool isAttacking = false;
 	
 
 };

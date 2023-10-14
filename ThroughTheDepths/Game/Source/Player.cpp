@@ -53,7 +53,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	jumpAnim.PushBack({ 161, 225, 32, 32 });
 	jumpAnim.speed = 0.17f;
 
-	//CAMBIAR jumpAnim, y dividirlo en jumpUpAnim y jumpDownAnim;
+	//CAMBIAR jumpAnim, y dividirlo en jumpUpAnim y jumpDownAnim; La de up va con loop = false; la de bajar va con loop= true;
 
 
 
@@ -88,6 +88,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	attackAnim.PushBack({ 257, 193, 32, 32 });
 	attackAnim.PushBack({ 257, 225, 32, 32 });
 	attackAnim.speed = 0.17f;
+	attackAnim.loop = false;
 }
 
 Player::~Player() {
@@ -107,8 +108,9 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-
+	int points = 2;
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16,  bodyType::DYNAMIC);
+	
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 	pbody->body->SetFixedRotation(true);
@@ -180,6 +182,10 @@ bool Player::Update(float dt)
 
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) {
+		isAttacking = true;
+	}
+
 
 	
 	vel.y -= GRAVITY_Y;
@@ -224,12 +230,23 @@ bool Player::Update(float dt)
 
 
 
-	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
-		dying = !dying;
+	if (isAttacking) {
+		currentAnimation = &attackAnim;
+
+		if (attackAnim.HasFinished()) {
+			attackAnim.Reset();
+			isAttacking = false;
+		}
 	}
 
 
-	if (dying) {
+
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
+		isDying = !isDying;
+	}
+
+
+	if (isDying) {
 		currentAnimation = &dieAnim;
 	}
 
