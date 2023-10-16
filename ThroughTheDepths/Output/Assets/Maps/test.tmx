@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="159" height="57" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="159" height="57" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="1">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="198" columns="18">
   <image source="Downloads/stringstar fields/tileset.png" width="288" height="176"/>
  </tileset>
@@ -17,6 +17,9 @@
  </tileset>
  <tileset firstgid="809" name="TX Village Props" tilewidth="16" tileheight="16" tilecount="4096" columns="64">
   <image source="Downloads/utils/TX Village Props.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="4905" name="tileset_rotated" tilewidth="16" tileheight="16" tilecount="792" columns="36">
+  <image source="tilesets/tileset_rotated.png" width="576" height="352"/>
  </tileset>
  <layer id="12" name="borrar" width="159" height="57">
   <properties>

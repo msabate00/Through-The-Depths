@@ -69,7 +69,6 @@ private:
 	Animation runAnim;
 	Animation walkAnim;
 	Animation idleAnim;
-	Animation jumpAnim; //Cambiarla por up/down;
 	Animation jumpUpAnim;
 	Animation jumpDownAnim;
 	Animation ghostAnim;
