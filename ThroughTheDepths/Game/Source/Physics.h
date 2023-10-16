@@ -26,6 +26,7 @@ enum bodyType {
 enum class ColliderType {
 	PLAYER, 
 	PLAYER_PROYECTILE,
+	PLAYER_FOOT,
 	ITEM,
 	CHEST,
 	PLATFORM, 
@@ -78,6 +79,9 @@ public:
 	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
+	void EndContact(b2Contact* contact);
+
+
 
 private:
 

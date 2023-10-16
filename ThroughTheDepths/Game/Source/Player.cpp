@@ -115,6 +115,14 @@ bool Player::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 	pbody->body->SetFixedRotation(true);
+
+
+	pbodyFoot = app->physics->CreateRectangleSensor(position.x + 16, position.y + 16, 16, 3, bodyType::KINEMATIC);
+
+	pbodyFoot->listener = this;
+	pbodyFoot->ctype = ColliderType::PLAYER_FOOT;
+	pbodyFoot->body->SetFixedRotation(true);
+	
 	
 
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
@@ -138,6 +146,12 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 	currentAnimation = &idleAnim;
+
+	b2Vec2 positionFoot;
+	positionFoot.x = PIXEL_TO_METERS(position.x+0.3);
+	positionFoot.y = PIXEL_TO_METERS(position.y + 0.67);
+
+	pbodyFoot->body->SetTransform(positionFoot, pbodyFoot->body->GetAngle());
 
 
 	b2Vec2 vel = b2Vec2(0,  pbody->body->GetLinearVelocity().y);
@@ -196,13 +210,16 @@ bool Player::Update(float dt)
 
 	}
 
+	
+
 
 	
 	vel.y -= GRAVITY_Y;
 	pbody->body->SetLinearVelocity(vel);
 	
 	//Sistema de salto
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT) {
+	canJump = (numFootContacts > 1);
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT && canJump) {
 		vel.y = 0;
 		pbody->body->SetLinearVelocity(vel);
 		pbody->body->ApplyLinearImpulse(b2Vec2(0, GRAVITY_Y * jumpForce), pbody->body->GetWorldCenter(), true);
@@ -294,33 +311,86 @@ bool Player::CleanUp()
 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
-	switch (physB->ctype)
+
+
+	if (physA->ctype == ColliderType::PLAYER_FOOT) {
+		numFootContacts++;
+
+
+	}else{
+
+
+		switch (physB->ctype)
+		{
+		case ColliderType::ITEM:
+			LOG("Collision ITEM");
+			app->audio->PlayFx(pickCoinFxId);
+			break;
+		case ColliderType::CHEST:
+			LOG("Collision CHEST");
+			app->audio->PlayFx(pickCoinFxId);
+			((Chest*)physB->listener)->ChangeState(Chest::CHEST_STATE::OPENING);
+			break;
+		case ColliderType::PLATFORM:
+			LOG("Collision PLATFORM");
+			break;
+		case ColliderType::UNKNOWN:
+			LOG("Collision UNKNOWN");
+			break;
+		case ColliderType::PLATFORM_TRASPASS:
+
+			colisionTraspassing.Add(physB);
+			if (colisionTraspassing.Count() > 10) {
+				colisionTraspassing.Del(colisionTraspassing.At(0));
+			}
+			LOG("Collision traspass count: %d", colisionTraspassing.Count());
+
+
+
+			break;
+		}
+	}
+
+	
+}
+
+void Player::OnExitCollision(PhysBody* physA, PhysBody* physB)
+{
+
+	if (physA->ctype == ColliderType::PLAYER_FOOT) {
+		numFootContacts--;
+	}
+
+
+
+	/*switch (physB->ctype)
 	{
 	case ColliderType::ITEM:
-		LOG("Collision ITEM");
+		LOG("FUERDA DE Collision ITEM");
 		app->audio->PlayFx(pickCoinFxId);
 		break;
 	case ColliderType::CHEST:
-		LOG("Collision CHEST");
+		LOG("FUERDA DE Collision CHEST");
 		app->audio->PlayFx(pickCoinFxId);
 		((Chest*)physB->listener)->ChangeState(Chest::CHEST_STATE::OPENING);
 		break;
 	case ColliderType::PLATFORM:
-		LOG("Collision PLATFORM");
+		LOG("FUERDA DE Collision PLATFORM");
 		break;
 	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
+		LOG("FUERDA DE Collision UNKNOWN");
 		break;
 	case ColliderType::PLATFORM_TRASPASS:
-		
+
 		colisionTraspassing.Add(physB);
 		if (colisionTraspassing.Count() > 10) {
 			colisionTraspassing.Del(colisionTraspassing.At(0));
 		}
-		LOG("Collision traspass count: %d", colisionTraspassing.Count());
-	
+		LOG("FUERDA DE Collision traspass count: %d", colisionTraspassing.Count());
+
 
 
 		break;
-	}
+	}*/
+
 }

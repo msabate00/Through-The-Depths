@@ -325,11 +325,24 @@ void Physics::BeginContact(b2Contact* contact)
 	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
 	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
 
+
 	if (physA && physA->listener != NULL)
 		physA->listener->OnCollision(physA, physB);
 
 	if (physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
+}
+
+void Physics::EndContact(b2Contact* contact) {
+	// Call the OnCollision listener function to bodies A and B, passing as inputs our custom PhysBody classes
+	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
+	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+
+	if (physA && physA->listener != NULL)
+		physA->listener->OnExitCollision(physA, physB);
+
+	if (physB && physB->listener != NULL)
+		physB->listener->OnExitCollision(physB, physA);
 }
 
 //--------------- PhysBody
