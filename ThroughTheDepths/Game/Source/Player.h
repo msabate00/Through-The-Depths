@@ -30,6 +30,7 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
+	void OnExitCollision(PhysBody* physA, PhysBody* physB);
 
 public:
 	float speed = 0.3f;
@@ -40,12 +41,16 @@ public:
 	const char* texturePath;
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
+	PhysBody* pbodyFoot;
 	int pickCoinFxId;
 
 
 
 	/*NEW JUMPING SYSTEM*/
 	float jumpForce = 5;
+	bool canJump = true;
+	int numFootContacts = 0;
+
 
 	bool isFacingLeft = false;
 	bool traspassingColision = false;
