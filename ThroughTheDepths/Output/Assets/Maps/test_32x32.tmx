@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="120" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="120" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="19" nextobjectid="1">
  <tileset firstgid="1" name="MainTiles" tilewidth="32" tileheight="32" tilecount="198" columns="18">
   <image source="tilesets/tileset_32x32.png" width="576" height="352"/>
  </tileset>
@@ -30359,7 +30359,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="909"/>
+   <tile/>
    <tile gid="910"/>
    <tile gid="911"/>
    <tile gid="912"/>
@@ -43301,7 +43301,7 @@
  </layer>
  <layer id="12" name="Pinchos" width="120" height="40">
   <properties>
-   <property name="Draw" type="bool" value="true"/>
+   <property name="Draw" type="bool" value="false"/>
    <property name="Front" type="bool" value="false"/>
   </properties>
   <data>
@@ -44588,7 +44588,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="891"/>
    <tile/>
    <tile/>
    <tile/>
@@ -44605,7 +44604,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="891"/>
    <tile/>
    <tile/>
    <tile/>
@@ -44708,7 +44706,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="891"/>
    <tile/>
    <tile/>
    <tile/>
@@ -44725,7 +44722,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="891"/>
    <tile/>
    <tile/>
    <tile/>
@@ -44828,7 +44824,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="891"/>
    <tile/>
    <tile/>
    <tile/>
@@ -44845,7 +44840,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="891"/>
    <tile/>
    <tile/>
    <tile/>
@@ -44948,7 +44942,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="891"/>
    <tile/>
    <tile/>
    <tile/>
@@ -44965,7 +44958,14 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="891"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -48107,8 +48107,9 @@
    <tile/>
   </data>
  </layer>
- <layer id="13" name="Elementos" width="120" height="40">
+ <layer id="13" name="Entidades" width="120" height="40">
   <properties>
+   <property name="Draw" type="bool" value="false"/>
    <property name="Front" type="bool" value="false"/>
   </properties>
   <data>
@@ -49271,6 +49272,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1010"/>
    <tile/>
    <tile/>
    <tile/>
@@ -49390,10 +49392,12 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1010"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1009"/>
    <tile/>
    <tile/>
    <tile/>
@@ -49408,6 +49412,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1009"/>
    <tile/>
    <tile/>
    <tile/>
@@ -49500,16 +49505,19 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1010"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1010"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1009"/>
    <tile/>
    <tile/>
    <tile/>
@@ -49524,6 +49532,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1009"/>
    <tile/>
    <tile/>
    <tile/>
@@ -49616,16 +49625,19 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1010"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1010"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1009"/>
    <tile/>
    <tile/>
    <tile/>
@@ -49640,6 +49652,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1009"/>
    <tile/>
    <tile/>
    <tile/>
@@ -49732,16 +49745,19 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1010"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1010"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1009"/>
    <tile/>
    <tile/>
    <tile/>
@@ -49756,6 +49772,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1009"/>
    <tile/>
    <tile/>
    <tile/>
@@ -49848,23 +49865,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1010"/>
    <tile/>
    <tile/>
    <tile/>

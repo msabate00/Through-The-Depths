@@ -407,6 +407,7 @@ bool Map::LoadCollisions(std::string layerName) {
 
             for (int x = 0; x < mapLayerItem->data->width; x++)
             {
+
                 for (int y = 0; y < mapLayerItem->data->height; y++)
                 {
                     int gid = mapLayerItem->data->Get(x, y);
@@ -414,20 +415,79 @@ bool Map::LoadCollisions(std::string layerName) {
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
 
-                    /*app->render->DrawTexture(tileset->texture,
-                        pos.x,
-                        pos.y,
-                        &r);*/
-                   
+                    /*NO BORRAR, prototipo de un nuevo sistema de colisiones*/
+                   /* if (gid == tileset->firstgid) {
+
+                       
+                        
+                        if (colisionsPointsSize.x == -1 || colisionsPointsSize.y == -1) {
+                            startPointcolisions.x = pos.x;
+                            startPointcolisions.y = pos.y;
+                            colisionsPointsSize.x = 0;
+                            colisionsPointsSize.y = 0;
+                            
+                        }
+                        if (x != colisionsLastCords.x) {
+                            colisionsPointsSize.x += 32;
+                        }
+                        colisionsPointsSize.y += 32;
+                        
+                        colisionsLastCords.x = x;
+                        colisionsLastCords.y = y;
+
+                    }
+                    else {
+
+                        if (x != colisionsLastCords.x - 1 && x != colisionsLastCords.x) {
+                            if (colisionsPointsSize.x != -1 && colisionsPointsSize.y != -1) {
+                                PhysBody* c1 = app->physics->CreateRectangle(startPointcolisions.x + colisionsPointsSize.x / 2, startPointcolisions.y + colisionsPointsSize.y / 2, colisionsPointsSize.x, colisionsPointsSize.y, STATIC);
+                                c1->ctype = ColliderType::PLATFORM;
+                                colisionsPointsSize.x = -1;
+                                colisionsPointsSize.y = -1;
+                            }
+                        }
+                       
+                    }*/
+
+                    /*No borrar, original sistema de colisiones*/
                     if (gid == tileset->firstgid) {
+                       
+                       
+
                         PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16 , 32, 32, STATIC);
                         c1->ctype = ColliderType::PLATFORM;
+                        
                         ret = true;
+
+                        /*gid = mapLayerItem->data->Get(x, y-1);
+                        if (gid == tileset->firstgid) {
+                            PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y, 32, 32, STATIC);
+                            c1->ctype = ColliderType::PLATFORM;
+                        }
+
+                        gid = mapLayerItem->data->Get(x+1, y);
+                        if (gid == tileset->firstgid) {
+                            PhysBody* c1 = app->physics->CreateRectangle(pos.x + 32, pos.y + 16, 32, 32, STATIC);
+                            c1->ctype = ColliderType::PLATFORM;
+                        }*/
+
+
+
                     }
+                   
+
+
                     if (gid == tileset->firstgid + 1) {
                         //PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+8, 32, 16, STATIC);
                         PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+1, 32, 2, STATIC);
                         c1->ctype = ColliderType::PLATFORM_TRASPASS;
+                        traspasedPlatformList.Add(c1);
+                        ret = true;
+                    }
+                    if (gid == tileset->firstgid + 6) {
+                        //PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+8, 32, 16, STATIC);
+                        PhysBody* c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        c1->ctype = ColliderType::SPYKES;
                         traspasedPlatformList.Add(c1);
                         ret = true;
                     }

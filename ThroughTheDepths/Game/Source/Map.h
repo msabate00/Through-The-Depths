@@ -144,7 +144,11 @@ private:
 	SString mapFolder;
     bool mapLoaded;
 	List<PhysBody*> traspasedPlatformList;
+
 	
+	iPoint startPointcolisions = iPoint(-1, -1);
+	iPoint colisionsPointsSize = iPoint(-1, -1);
+	iPoint colisionsLastCords = iPoint(-1, -1);
 
 
 };

@@ -112,6 +112,7 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 	int points = 2;
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16,  bodyType::DYNAMIC);
+	//pbody = app->physics->CreateRectangle(position.x + 16, position.y + 16, 32, 32,  bodyType::DYNAMIC);
 	
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
@@ -351,7 +352,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (colisionTraspassing.Count() > 10) {
 				colisionTraspassing.Del(colisionTraspassing.At(0));
 			}
-			LOG("Collision traspass count: %d", colisionTraspassing.Count());
+			
 
 
 
