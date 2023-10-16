@@ -44,16 +44,17 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Saltar
 
-	jumpAnim.PushBack({ 1, 161, 32, 32 });
-	jumpAnim.PushBack({ 33, 161, 32, 32 });
-	jumpAnim.PushBack({ 65, 161, 32, 32 });
-	jumpAnim.PushBack({ 97, 161, 32, 32 });
-	jumpAnim.PushBack({ 129, 161, 32, 32 });
-	jumpAnim.PushBack({ 161, 161, 32, 32 });
-	jumpAnim.PushBack({ 193, 161, 32, 32 });
-	jumpAnim.PushBack({ 225, 161, 32, 32 });
-	jumpAnim.speed = 0.17f;
-
+	jumpUpAnim.PushBack({ 1, 161, 32, 32 });
+	jumpUpAnim.PushBack({ 33, 161, 32, 32 });
+	jumpUpAnim.PushBack({ 65, 161, 32, 32 });
+	jumpUpAnim.PushBack({ 97, 161, 32, 32 });
+	jumpDownAnim.PushBack({ 129, 161, 32, 32 });
+	jumpDownAnim.PushBack({ 161, 161, 32, 32 });
+	jumpDownAnim.PushBack({ 193, 161, 32, 32 });
+	jumpDownAnim.PushBack({ 225, 161, 32, 32 });
+	
+	jumpDownAnim.speed = 0.17f;
+	jumpUpAnim.speed = 0.17f;
 	//CAMBIAR jumpAnim, y dividirlo en jumpUpAnim y jumpDownAnim; La de up va con loop = false; la de bajar va con loop= true;
 
 
