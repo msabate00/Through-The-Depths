@@ -338,6 +338,10 @@ void Physics::EndContact(b2Contact* contact) {
 	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
 	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
 
+	/*if (physA->ctype == ColliderType::PLAYER_FOOT) {
+		LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	}*/
+
 	if (physA && physA->listener != NULL)
 		physA->listener->OnExitCollision(physA, physB);
 

@@ -118,11 +118,11 @@ bool Player::Start() {
 	pbody->body->SetFixedRotation(true);
 
 
-	pbodyFoot = app->physics->CreateRectangleSensor(position.x + 16, position.y + 16, 16, 3, bodyType::KINEMATIC);
+	/*pbodyFoot = app->physics->CreateRectangleSensor(position.x + 16, position.y + 16, 16, 3, bodyType::DYNAMIC);
 
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::PLAYER_FOOT;
-	pbodyFoot->body->SetFixedRotation(true);
+	pbodyFoot->body->SetFixedRotation(true);*/
 	
 	
 
@@ -150,9 +150,10 @@ bool Player::Update(float dt)
 
 	b2Vec2 positionFoot;
 	positionFoot.x = PIXEL_TO_METERS(position.x+0.3);
-	positionFoot.y = PIXEL_TO_METERS(position.y + 0.67);
+	//positionFoot.y = PIXEL_TO_METERS(position.y + 0.67);
+	positionFoot.y = PIXEL_TO_METERS(position.y + 1);
 
-	pbodyFoot->body->SetTransform(positionFoot, pbodyFoot->body->GetAngle());
+	//pbodyFoot->body->SetTransform(positionFoot, pbodyFoot->body->GetAngle());
 
 
 	b2Vec2 vel = b2Vec2(0,  pbody->body->GetLinearVelocity().y);
@@ -219,11 +220,17 @@ bool Player::Update(float dt)
 	pbody->body->SetLinearVelocity(vel);
 	
 	//Sistema de salto
-	canJump = (numFootContacts > 1);
+	if (!canJump) {
+		canJump = (abs(pbody->body->GetLinearVelocity().y) == 1.0f);
+	}
+	
+	
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT && canJump) {
 		vel.y = 0;
 		pbody->body->SetLinearVelocity(vel);
 		pbody->body->ApplyLinearImpulse(b2Vec2(0, GRAVITY_Y * jumpForce), pbody->body->GetWorldCenter(), true);
+		canJump = false;
+		
 		
 	}
 
@@ -316,9 +323,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	if (physA->ctype == ColliderType::PLAYER_FOOT) {
 		numFootContacts++;
-
-
-	}else{
+	}
+	
+	if(physA->ctype == ColliderType::PLAYER){
 
 
 		switch (physB->ctype)
@@ -360,9 +367,10 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB)
 
 	if (physA->ctype == ColliderType::PLAYER_FOOT) {
 		numFootContacts--;
+		//LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 	}
 
-
+	
 
 	/*switch (physB->ctype)
 	{
