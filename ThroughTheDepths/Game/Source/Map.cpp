@@ -226,7 +226,10 @@ bool Map::Load()
     {
         ret = LoadAllLayers(mapFileXML.child("map"));
     }
-    
+    if (ret == true)
+    {
+        ret = LoadAllObjectGroups(mapFileXML.child("map"));
+    }
     // NOTE: Later you have to create a function here to load and create the colliders from the map
 
 
@@ -236,6 +239,7 @@ bool Map::Load()
     //NUEVO
     LoadCollisions("Colisions");
     LoadEntities("Entidades");
+    LoadCollisionsObject();
 
 
   /*  PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
@@ -377,6 +381,65 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
     return ret;
 }
 
+
+
+bool Map::LoadObject(pugi::xml_node& node, MapObjects* mapObjects)
+{
+    bool ret = true;
+
+    //Load the attributes
+    mapObjects->id = node.attribute("id").as_int();
+    mapObjects->name = node.attribute("name").as_string();
+    mapObjects->width = node.attribute("width").as_int();
+    mapObjects->width = node.attribute("width").as_int();
+    mapObjects->x = node.attribute("x").as_int();
+    mapObjects->y = node.attribute("y").as_int();
+
+    LoadProperties(node, mapObjects->properties);
+
+    //Reserve the memory for the data 
+    //mapObjects->objects = new MapObject[mapObjects->width * mapObjects->height];
+    //memset(mapObjects->objects, 0, mapObjects->width * mapObjects->height);
+
+    //Iterate over all the tiles and assign the values
+    pugi::xml_node object;
+    int i = 0;
+    for (object = node.child("object"); object && ret; object = object.next_sibling("object"))
+    {
+        mapObjects->objects.Add(new MapObject{
+            object.attribute("id").as_uint(),
+            object.attribute("x").as_uint(),
+            object.attribute("y").as_uint(),
+            object.attribute("width").as_uint(),
+            object.attribute("height").as_uint(),
+
+            });
+        i++;
+    }
+
+    return ret;
+}
+
+
+
+bool Map::LoadAllObjectGroups(pugi::xml_node mapNode) {
+    bool ret = true;
+
+    for (pugi::xml_node objectNode = mapNode.child("objectgroup"); objectNode && ret; objectNode = objectNode.next_sibling("objectgroup"))
+    {
+        //Load the layer
+        MapObjects* mapObjects = new MapObjects();
+        ret = LoadObject(objectNode, mapObjects);
+
+        //add the layer to the map
+        mapData.mapObjects.Add(mapObjects);
+    }
+
+    return ret;
+}
+
+
+
 bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 {
     bool ret = false;
@@ -489,7 +552,7 @@ bool Map::LoadCollisions(std::string layerName) {
                         //PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+8, 32, 16, STATIC);
                         PhysBody* c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
                         c1->ctype = ColliderType::SPYKES;
-                        traspasedPlatformList.Add(c1);
+                        
                         ret = true;
                     }
 
@@ -505,6 +568,33 @@ bool Map::LoadCollisions(std::string layerName) {
 
 
 
+}
+
+bool Map::LoadCollisionsObject()
+{
+
+    ListItem<MapObjects*>* mapObjectsItem;
+    mapObjectsItem = mapData.mapObjects.start;
+    bool ret = false;
+
+
+    while (mapObjectsItem != NULL) {
+        for (int i = 0; i < mapObjectsItem->data->objects.Count(); i++) {
+
+            MapObject* object = mapObjectsItem->data->objects[i];
+           
+            
+            
+
+            PhysBody* c1 = app->physics->CreateRectangle(object->x + object->width/2, object->y + object->height/2, object->width, object->height, STATIC);
+            c1->ctype = ColliderType::PLATFORM;
+
+        }
+            mapObjectsItem = mapObjectsItem->next;
+    }
+
+
+    return false;
 }
 
 bool Map::LoadEntities(std::string layerName)
