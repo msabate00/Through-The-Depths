@@ -76,6 +76,7 @@ public:
 
 	// Debug mode
 	bool debug;
+	bool godMode;
 
 	// Modules
 	Window* win;

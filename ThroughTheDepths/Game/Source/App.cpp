@@ -183,6 +183,10 @@ void App::FinishUpdate()
 		maxFrameDuration = (maxFrameDuration == 16) ? 32 : 16;
 	
 	}
+	if (input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
+		godMode = !godMode;
+
+	}
 
 
 	double currentDt = frameTime.ReadMs();
