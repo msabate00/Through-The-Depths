@@ -657,6 +657,7 @@ bool Map::LoadEntities(std::string layerName)
 
                         app->scene->setPlayer((Player*)app->entityManager->CreateEntity(EntityType::PLAYER));
                         app->scene->getPlayer()->parameters = configNode.child("scene").child("player");
+                        app->scene->getPlayer()->position = iPoint(pos.x + 16, pos.y + 16);
                         
                     }
 
