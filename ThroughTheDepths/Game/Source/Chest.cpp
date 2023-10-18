@@ -78,7 +78,7 @@ bool Chest::Start() {
 
 bool Chest::Update(float dt)
 {
-	LOG("cofre: %d", closedAnim.GetCurrentFrame().y);
+	
 	switch (state)
 	{
 	case Chest::CHEST_STATE::CLOSED:

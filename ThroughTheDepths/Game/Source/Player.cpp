@@ -113,7 +113,7 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	int points = 2;
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16,  bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 15,  bodyType::DYNAMIC);
 	//pbody = app->physics->CreateRectangle(position.x + 16, position.y + 16, 32, 32,  bodyType::DYNAMIC);
 	
 	pbody->listener = this;
@@ -121,11 +121,13 @@ bool Player::Start() {
 	pbody->body->SetFixedRotation(true);
 
 
-	/*pbodyFoot = app->physics->CreateRectangleSensor(position.x + 16, position.y + 16, 16, 3, bodyType::DYNAMIC);
+	pbodyFoot = app->physics->CreateRectangle(position.x + 16, position.y + 16, 16, 3, bodyType::DYNAMIC);
 
 	pbodyFoot->listener = this;
 	pbodyFoot->ctype = ColliderType::PLAYER_FOOT;
-	pbodyFoot->body->SetFixedRotation(true);*/
+	pbodyFoot->body->SetFixedRotation(true);
+
+	
 	
 	
 
@@ -149,14 +151,17 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+
+	
+
 	currentAnimation = &idleAnim;
 
 	b2Vec2 positionFoot;
 	positionFoot.x = PIXEL_TO_METERS(position.x+0.3);
-	//positionFoot.y = PIXEL_TO_METERS(position.y + 0.67);
-	positionFoot.y = PIXEL_TO_METERS(position.y + 1);
+	positionFoot.y = PIXEL_TO_METERS(position.y + 0.67);
+	
 
-	//pbodyFoot->body->SetTransform(positionFoot, pbodyFoot->body->GetAngle());
+	pbodyFoot->body->SetTransform(positionFoot, pbodyFoot->body->GetAngle());
 
 	
 	b2Vec2 vel;
@@ -225,9 +230,20 @@ bool Player::Update(float dt)
 		pbody->body->SetLinearVelocity(vel);
 	
 		//Sistema de salto
+		
+		pbodyFoot->body->SetActive((abs(pbody->body->GetLinearVelocity().y) == 1.0f));
+		LOG("Numerito magico: %d", numFootContacts);
+
 		if (!canJump) {
-			canJump = (abs(pbody->body->GetLinearVelocity().y) == 1.0f);
+			//canJump = (abs(pbody->body->GetLinearVelocity().y) == 1.0f);
+			canJump = (numFootContacts != 0);
+			
+			
+			
+			
 		}
+		//b2ContactEdge* halp =  pbodyFoot->body->GetContactList();
+		
 	
 	
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT && canJump) {
@@ -394,12 +410,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 		case ColliderType::PLATFORM:
 			LOG("Collision PLATFORM");
+			//numFootContacts++;
 			break;
 		case ColliderType::UNKNOWN:
 			LOG("Collision UNKNOWN");
 			break;
 		case ColliderType::PLATFORM_TRASPASS:
-
+			//numFootContacts++;
 			colisionTraspassing.Add(physB);
 			if (colisionTraspassing.Count() > 10) {
 				colisionTraspassing.Del(colisionTraspassing.At(0));
@@ -425,34 +442,26 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB)
 
 	
 
-	/*switch (physB->ctype)
+	switch (physB->ctype)
 	{
 	case ColliderType::ITEM:
-		LOG("FUERDA DE Collision ITEM");
-		app->audio->PlayFx(pickCoinFxId);
 		break;
 	case ColliderType::CHEST:
-		LOG("FUERDA DE Collision CHEST");
-		app->audio->PlayFx(pickCoinFxId);
-		((Chest*)physB->listener)->ChangeState(Chest::CHEST_STATE::OPENING);
+		
 		break;
 	case ColliderType::PLATFORM:
-		LOG("FUERDA DE Collision PLATFORM");
+		//numFootContacts--;
 		break;
 	case ColliderType::UNKNOWN:
-		LOG("FUERDA DE Collision UNKNOWN");
+		
 		break;
 	case ColliderType::PLATFORM_TRASPASS:
-
-		colisionTraspassing.Add(physB);
-		if (colisionTraspassing.Count() > 10) {
-			colisionTraspassing.Del(colisionTraspassing.At(0));
-		}
-		LOG("FUERDA DE Collision traspass count: %d", colisionTraspassing.Count());
+		//numFootContacts--;
+		
 
 
 
 		break;
-	}*/
+	}
 
 }
