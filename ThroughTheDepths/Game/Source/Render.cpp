@@ -11,10 +11,10 @@
 Render::Render() : Module()
 {
 	name.Create("renderer");
-	background.r = 0;
-	background.g = 0;
-	background.b = 0;
-	background.a = 0;
+	background.r = 46;
+	background.g = 90;
+	background.b = 137;
+	background.a = 255;
 }
 
 // Destructor

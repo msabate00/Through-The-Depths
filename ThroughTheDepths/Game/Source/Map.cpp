@@ -235,6 +235,7 @@ bool Map::Load()
 
     //NUEVO
     LoadCollisions("Colisions");
+    LoadEntities("Entidades");
 
 
   /*  PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
@@ -504,6 +505,63 @@ bool Map::LoadCollisions(std::string layerName) {
 
 
 
+}
+
+bool Map::LoadEntities(std::string layerName)
+{
+
+    ListItem<MapLayer*>* mapLayerItem;
+    mapLayerItem = mapData.maplayers.start;
+    bool ret = false;
+
+    while (mapLayerItem != NULL) {
+
+        if (mapLayerItem->data->name.GetString() == layerName) {
+            for (int x = 0; x < mapLayerItem->data->width; x++)
+            {
+
+                for (int y = 0; y < mapLayerItem->data->height; y++)
+                {
+
+
+                    int gid = mapLayerItem->data->Get(x, y);
+                    TileSet* tileset = GetTilesetFromTileId(gid);
+                    SDL_Rect r = tileset->GetTileRect(gid);
+                    iPoint pos = MapToWorld(x, y);
+
+                    //Monedas
+                    if (gid == tileset->firstgid) {
+                       
+                    }
+
+                    //cofre con Monedas
+                    if (gid == tileset->firstgid + 1) {
+
+                    }
+
+                    //espina que se rompe
+                    if (gid == tileset->firstgid + 2) {
+
+                    }
+
+                    //barrera de espinas
+                    if (gid == tileset->firstgid + 3) {
+
+                    }
+
+
+                }
+            }
+
+        }
+        mapLayerItem = mapLayerItem->next;
+
+    }
+
+
+
+
+    return false;
 }
 
 Properties::Property* Properties::GetProperty(const char* name)
