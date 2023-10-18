@@ -156,8 +156,8 @@ bool Player::Update(float dt)
 
 	//pbodyFoot->body->SetTransform(positionFoot, pbodyFoot->body->GetAngle());
 
-
-	b2Vec2 vel = b2Vec2(0,  pbody->body->GetLinearVelocity().y);
+	
+	b2Vec2 vel;
 	
 
 	//LOG("TraspasingCol %d, tiempo: %d, cantidad: %d", traspassingColision, traspassingTimer.ReadSec(), colisionTraspassing.Count());
@@ -172,70 +172,110 @@ bool Player::Update(float dt)
 	}
 	
 
-
+	if (!app->godMode) {
+		pbody->body->GetFixtureList()[0].SetSensor(false);
+		vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 	
-	//Moverse a la izquierda
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
-		isFacingLeft = true;
-		currentAnimation = &runAnim;
-	}
+		//Moverse a la izquierda
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
+			isFacingLeft = true;
+			currentAnimation = &runAnim;
+		}
 
-	//Moverse a la derecha
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
-		isFacingLeft = false;
-		currentAnimation = &runAnim;
-	}
+		//Moverse a la derecha
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
+			isFacingLeft = false;
+			currentAnimation = &runAnim;
+		}
 
-	//Atraves plataformas traspasables
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
+		//Atraves plataformas traspasables
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
 		
-		traspassingColision = true;
-		traspassingTimer.Start();
+			traspassingColision = true;
+			traspassingTimer.Start();
 
-		for (int i = 0; i < colisionTraspassing.Count(); i++) {
-			colisionTraspassing[i]->body->SetActive(false);
+			for (int i = 0; i < colisionTraspassing.Count(); i++) {
+				colisionTraspassing[i]->body->SetActive(false);
+			}
+
 		}
 
-	}
-
-	//Ataque
-	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && !isAttacking) {
-		isAttacking = true;
-		if (isFacingLeft) {
-			app->particles->AddParticle(app->particles->basicAttackL, position.x - 16, position.y);
-		}
-		else {
-			app->particles->AddParticle(app->particles->basicAttackR, position.x + 16, position.y);
-		}
+		//Ataque
+		if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && !isAttacking) {
+			isAttacking = true;
+			if (isFacingLeft) {
+				app->particles->AddParticle(app->particles->basicAttackL, position.x - 16, position.y);
+			}
+			else {
+				app->particles->AddParticle(app->particles->basicAttackR, position.x + 16, position.y);
+			}
 		
 
-	}
+		}
 
 	
 
 
 	
-	vel.y -= GRAVITY_Y;
-	pbody->body->SetLinearVelocity(vel);
-	
-	//Sistema de salto
-	if (!canJump) {
-		canJump = (abs(pbody->body->GetLinearVelocity().y) == 1.0f);
-	}
-	
-	
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT && canJump) {
-		vel.y = 0;
+		vel.y -= GRAVITY_Y;
 		pbody->body->SetLinearVelocity(vel);
-		pbody->body->ApplyLinearImpulse(b2Vec2(0, GRAVITY_Y * jumpForce), pbody->body->GetWorldCenter(), true);
-		canJump = false;
+	
+		//Sistema de salto
+		if (!canJump) {
+			canJump = (abs(pbody->body->GetLinearVelocity().y) == 1.0f);
+		}
+	
+	
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT && canJump) {
+			vel.y = 0;
+			pbody->body->SetLinearVelocity(vel);
+			pbody->body->ApplyLinearImpulse(b2Vec2(0, GRAVITY_Y * jumpForce), pbody->body->GetWorldCenter(), true);
+			canJump = false;
 		
+		
+		}
+
+	}
+	else {
+
+
+		vel = b2Vec2(0, 0);
+		pbody->body->SetLinearVelocity(vel);
+		pbody->body->GetFixtureList()[0].SetSensor(true);
+		//Moverse a la izquierda
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
+			isFacingLeft = true;
+			currentAnimation = &runAnim;
+			pbody->body->SetLinearVelocity(vel);
+		}
+
+		//Moverse a la derecha
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
+			isFacingLeft = false;
+			currentAnimation = &runAnim;
+			pbody->body->SetLinearVelocity(vel);
+		}
+		//Moverse a la izquierda
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+			vel = b2Vec2(pbody->body->GetLinearVelocity().x, -speed);
+			isFacingLeft = true;
+			currentAnimation = &runAnim;
+			pbody->body->SetLinearVelocity(vel);
+		}
+
+		//Moverse a la derecha
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			vel = b2Vec2(pbody->body->GetLinearVelocity().x, speed);
+			isFacingLeft = false;
+			currentAnimation = &runAnim;
+			pbody->body->SetLinearVelocity(vel);
+		}
 		
 	}
-
-
 	
 	
 
@@ -252,7 +292,14 @@ bool Player::Update(float dt)
 		app->win->GetWindowSize(windowW, windowH);
 
 		//app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
-		int targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
+		int targetPosX;
+		if (isFacingLeft) {
+			targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
+		}
+		else {
+			targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 100);
+		}
+		
 		int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10);
 
 		targetPosY = MAX(targetPosY, -600);
@@ -260,10 +307,12 @@ bool Player::Update(float dt)
 		
 		targetPosX += (isFacingLeft) ? 75 : -50;
 
-		app->render->camera.x = lerp(app->render->camera.x,targetPosX, dt * 0.01f);
+		app->render->camera.x = lerp(app->render->camera.x,targetPosX, dt * 0.005f);
 		app->render->camera.y = lerp(app->render->camera.y,targetPosY, dt * 0.002f);
 		//app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
 	}
+
+	
 
 
 
