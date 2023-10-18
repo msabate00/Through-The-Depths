@@ -33,7 +33,7 @@ public:
 	void OnExitCollision(PhysBody* physA, PhysBody* physB);
 
 public:
-	float speed = 0.3f;
+	float speed = 4.5f;
 	//float accelerationY = 0;
 	//float accelerationY_max = 10;
 	//int jumpStep = 0;
