@@ -46,7 +46,35 @@ bool Map::Awake(pugi::xml_node& config)
 
 bool Map::Update(float dt)
 {
-    if(mapLoaded == false)
+    
+
+
+    if (app->scene->getPlayer()->pbody->body->GetLinearVelocity().y < 0) {
+        for (int i = 0; i < traspasedPlatformList.Count(); i++) {
+            traspasedPlatformList.At(i)->data->body->SetActive(false);
+        }
+       
+        
+    }
+    else {
+        if (!app->scene->getPlayer()->traspassingColision) {
+            for (int i = 0; i < traspasedPlatformList.Count(); i++) {
+                if (traspasedPlatformList.At(i)->data->body->GetPosition().y > app->scene->getPlayer()->pbody->body->GetPosition().y) {
+                    traspasedPlatformList.At(i)->data->body->SetActive(true);
+                }
+                    
+            }
+        }
+    }
+
+
+    return true;
+}
+
+bool Map::PostUpdate()
+{
+
+    if (mapLoaded == false)
         return false;
 
     ListItem<MapLayer*>* mapLayerItem;
@@ -54,7 +82,9 @@ bool Map::Update(float dt)
 
     while (mapLayerItem != NULL) {
 
-        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
+        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value &&
+            mapLayerItem->data->properties.GetProperty("Front") != NULL && !mapLayerItem->data->properties.GetProperty("Front")->value
+            ) {
 
             for (int x = 0; x < mapLayerItem->data->width; x++)
             {
@@ -76,14 +106,14 @@ bool Map::Update(float dt)
 
                     }
                     //1 = hoz_flip -> True || 1 = vert_flip -> True  || 0 = anti-diag flip -> False
-                    switch (bits) {                                           
-                        case 0b101: flip = SDL_FLIP_NONE;           angle = 90;         break;
-                        case 0b110: flip = SDL_FLIP_NONE;           angle += 180;       break;
-                        case 0b011: flip = SDL_FLIP_NONE;           angle += 270;       break;
-                        case 0b100: flip = SDL_FLIP_HORIZONTAL;     angle = 0;          break;
-                        case 0b111: flip = SDL_FLIP_HORIZONTAL;     angle += 90;        break;
-                        case 0b010: flip = SDL_FLIP_HORIZONTAL;     angle += 180;       break;
-                        case 0b001: flip = SDL_FLIP_HORIZONTAL;     angle += 270;       break;
+                    switch (bits) {
+                    case 0b101: flip = SDL_FLIP_NONE;           angle = 90;         break;
+                    case 0b110: flip = SDL_FLIP_NONE;           angle += 180;       break;
+                    case 0b011: flip = SDL_FLIP_NONE;           angle += 270;       break;
+                    case 0b100: flip = SDL_FLIP_HORIZONTAL;     angle = 0;          break;
+                    case 0b111: flip = SDL_FLIP_HORIZONTAL;     angle += 90;        break;
+                    case 0b010: flip = SDL_FLIP_HORIZONTAL;     angle += 180;       break;
+                    case 0b001: flip = SDL_FLIP_HORIZONTAL;     angle += 270;       break;
                     }
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
@@ -96,25 +126,63 @@ bool Map::Update(float dt)
 
     }
 
+    return true;
+}
 
-    if (app->scene->getPlayer()->pbody->body->GetLinearVelocity().y < 0) {
-        for (int i = 0; i < traspasedPlatformList.Count(); i++) {
-            traspasedPlatformList.At(i)->data->body->SetActive(false);
-        }
-       
-        
-    }
-    else {
-        if (!app->scene->getPlayer()->traspassingColision) {
-            for (int i = 0; i < traspasedPlatformList.Count(); i++) {
-                if (traspasedPlatformList.At(i)->data->body->GetPosition().y > app->scene->getPlayer()->pbody->body->GetPosition().y) {
-                    traspasedPlatformList.At(i)->data->body->SetActive(true);
+bool Map::UpdateFrontEntities()
+{
+
+    if (mapLoaded == false)
+        return false;
+
+    ListItem<MapLayer*>* mapLayerItem;
+    mapLayerItem = mapData.maplayers.start;
+
+    while (mapLayerItem != NULL) {
+
+        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value &&
+            mapLayerItem->data->properties.GetProperty("Front") != NULL && mapLayerItem->data->properties.GetProperty("Front")->value
+            ) {
+
+            for (int x = 0; x < mapLayerItem->data->width; x++)
+            {
+                for (int y = 0; y < mapLayerItem->data->height; y++)
+                {
+                    unsigned int gid = mapLayerItem->data->Get(x, y);
+                    TileSet* tileset = GetTilesetFromTileId(gid);
+                    SDL_Rect r = tileset->GetTileRect(gid);
+                    iPoint pos = MapToWorld(x, y);
+                    int bits = 0;
+                    SDL_RendererFlip flip = SDL_FLIP_NONE;
+                    int angle = 0;
+
+                    if (gid >= 100000) {
+                        uint tiledID = static_cast<uint>(gid & ~0xE0000000);
+                        bits = gid >> 29;
+                        tileset = GetTilesetFromTileId(tiledID);
+                        r = tileset->GetTileRect(tiledID);
+
+                    }
+                    //1 = hoz_flip -> True || 1 = vert_flip -> True  || 0 = anti-diag flip -> False
+                    switch (bits) {
+                    case 0b101: flip = SDL_FLIP_NONE;           angle = 90;         break;
+                    case 0b110: flip = SDL_FLIP_NONE;           angle += 180;       break;
+                    case 0b011: flip = SDL_FLIP_NONE;           angle += 270;       break;
+                    case 0b100: flip = SDL_FLIP_HORIZONTAL;     angle = 0;          break;
+                    case 0b111: flip = SDL_FLIP_HORIZONTAL;     angle += 90;        break;
+                    case 0b010: flip = SDL_FLIP_HORIZONTAL;     angle += 180;       break;
+                    case 0b001: flip = SDL_FLIP_HORIZONTAL;     angle += 270;       break;
+                    }
+                    app->render->DrawTexture(tileset->texture,
+                        pos.x,
+                        pos.y, flip,
+                        &r, 1, angle);
                 }
-                    
             }
         }
-    }
+        mapLayerItem = mapLayerItem->next;
 
+    }
 
     return true;
 }
@@ -241,16 +309,6 @@ bool Map::Load()
     LoadEntities("Entidades");
     LoadCollisionsObject();
 
-
-  /*  PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
-    c1->ctype = ColliderType::PLATFORM;
-    
-
-    PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
-    c2->ctype = ColliderType::PLATFORM;
-
-    PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
-    c3->ctype = ColliderType::PLATFORM;*/
     
     if(ret == true)
     {
@@ -401,7 +459,7 @@ bool Map::LoadObject(pugi::xml_node& node, MapObjects* mapObjects)
     //mapObjects->objects = new MapObject[mapObjects->width * mapObjects->height];
     //memset(mapObjects->objects, 0, mapObjects->width * mapObjects->height);
 
-    //Iterate over all the tiles and assign the values
+    //Iterate over all the objects and assign the values
     pugi::xml_node object;
     int i = 0;
     for (object = node.child("object"); object && ret; object = object.next_sibling("object"))
@@ -479,77 +537,23 @@ bool Map::LoadCollisions(std::string layerName) {
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
 
-                    /*NO BORRAR, prototipo de un nuevo sistema de colisiones*/
-                   /* if (gid == tileset->firstgid) {
-
-                       
-                        
-                        if (colisionsPointsSize.x == -1 || colisionsPointsSize.y == -1) {
-                            startPointcolisions.x = pos.x;
-                            startPointcolisions.y = pos.y;
-                            colisionsPointsSize.x = 0;
-                            colisionsPointsSize.y = 0;
-                            
-                        }
-                        if (x != colisionsLastCords.x) {
-                            colisionsPointsSize.x += 32;
-                        }
-                        colisionsPointsSize.y += 32;
-                        
-                        colisionsLastCords.x = x;
-                        colisionsLastCords.y = y;
-
-                    }
-                    else {
-
-                        if (x != colisionsLastCords.x - 1 && x != colisionsLastCords.x) {
-                            if (colisionsPointsSize.x != -1 && colisionsPointsSize.y != -1) {
-                                PhysBody* c1 = app->physics->CreateRectangle(startPointcolisions.x + colisionsPointsSize.x / 2, startPointcolisions.y + colisionsPointsSize.y / 2, colisionsPointsSize.x, colisionsPointsSize.y, STATIC);
-                                c1->ctype = ColliderType::PLATFORM;
-                                colisionsPointsSize.x = -1;
-                                colisionsPointsSize.y = -1;
-                            }
-                        }
-                       
-                    }*/
+                   
 
                     /*No borrar, original sistema de colisiones*/
                     if (gid == tileset->firstgid) {
-                       
-                       
-
                         PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16 , 32, 32, STATIC);
                         c1->ctype = ColliderType::PLATFORM;
-                        
                         ret = true;
-
-                        /*gid = mapLayerItem->data->Get(x, y-1);
-                        if (gid == tileset->firstgid) {
-                            PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y, 32, 32, STATIC);
-                            c1->ctype = ColliderType::PLATFORM;
-                        }
-
-                        gid = mapLayerItem->data->Get(x+1, y);
-                        if (gid == tileset->firstgid) {
-                            PhysBody* c1 = app->physics->CreateRectangle(pos.x + 32, pos.y + 16, 32, 32, STATIC);
-                            c1->ctype = ColliderType::PLATFORM;
-                        }*/
-
-
-
                     }
                    
 
-
                     if (gid == tileset->firstgid + 1) {
-                        //PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+8, 32, 16, STATIC);
                         PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+1, 32, 2, STATIC);
                         c1->ctype = ColliderType::PLATFORM_TRASPASS;
                         traspasedPlatformList.Add(c1);
                         ret = true;
                     }
                     if (gid == tileset->firstgid + 6) {
-                        //PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+8, 32, 16, STATIC);
                         PhysBody* c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
                         c1->ctype = ColliderType::SPYKES;
                         
@@ -582,9 +586,6 @@ bool Map::LoadCollisionsObject()
         for (int i = 0; i < mapObjectsItem->data->objects.Count(); i++) {
 
             MapObject* object = mapObjectsItem->data->objects[i];
-           
-            
-            
 
             PhysBody* c1 = app->physics->CreateRectangle(object->x + object->width/2, object->y + object->height/2, object->width, object->height, STATIC);
             c1->ctype = ColliderType::PLATFORM;

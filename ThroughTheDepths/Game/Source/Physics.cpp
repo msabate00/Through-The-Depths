@@ -220,7 +220,7 @@ PhysBody* Physics::CreateChain(int x, int y, int* points, int size, bodyType typ
 }
 
 // 
-bool Physics::PostUpdate()
+bool Physics::PostLateUpdate()
 {
 	bool ret = true;
 

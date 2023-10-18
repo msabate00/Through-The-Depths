@@ -74,7 +74,7 @@ bool Render::Update(float dt)
 	return true;
 }
 
-bool Render::PostUpdate()
+bool Render::PostLateUpdate()
 {
 	SDL_SetRenderDrawColor(renderer, background.r, background.g, background.b, background.a);
 	SDL_RenderPresent(renderer);

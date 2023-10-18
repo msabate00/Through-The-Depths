@@ -4,6 +4,7 @@
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
+#include "Map.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -129,6 +130,8 @@ bool EntityManager::Update(float dt)
 		ret = item->data->Update(dt);
 	}
 
+	
+
 	return ret;
 }
 
@@ -145,6 +148,8 @@ bool EntityManager::PostUpdate()
 		if (pEntity->active == false) continue;
 		ret = item->data->PostUpdate();
 	}
+
+	app->map->UpdateFrontEntities();
 
 	return ret;
 }

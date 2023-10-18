@@ -145,6 +145,11 @@ bool App::Update()
 
 	if(ret == true)
 		ret = PostUpdate();
+	
+	if(ret == true)
+		ret = PostLateUpdate();
+
+
 
 	FinishUpdate();
 	return ret;
@@ -287,6 +292,27 @@ bool App::PostUpdate()
 		}
 
 		ret = item->data->PostUpdate();
+	}
+
+	return ret;
+}
+
+// Call modules after each loop iteration
+bool App::PostLateUpdate()
+{
+	bool ret = true;
+	ListItem<Module*>* item;
+	Module* pModule = NULL;
+
+	for(item = modules.start; item != NULL && ret == true; item = item->next)
+	{
+		pModule = item->data;
+
+		if(pModule->active == false) {
+			continue;
+		}
+
+		ret = item->data->PostLateUpdate();
 	}
 
 	return ret;

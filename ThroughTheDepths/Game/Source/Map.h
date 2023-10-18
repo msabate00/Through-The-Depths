@@ -142,6 +142,11 @@ public:
 
 	// Called each loop iteration
 	bool Update(float dt);
+	bool PostUpdate();
+
+
+	// Called each loop iteration after entities
+	bool UpdateFrontEntities();
 
     // Called before quitting
     bool CleanUp();
