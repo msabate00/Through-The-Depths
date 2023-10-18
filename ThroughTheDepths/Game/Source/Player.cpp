@@ -255,7 +255,8 @@ bool Player::Update(float dt)
 		int targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
 		int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10);
 
-		
+		targetPosY = MAX(targetPosY, -600);
+		targetPosX = MIN(targetPosX, -100);
 		
 		targetPosX += (isFacingLeft) ? 75 : -50;
 
