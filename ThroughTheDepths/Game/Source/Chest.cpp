@@ -23,7 +23,7 @@ Chest::~Chest() {}
 bool Chest::Awake() {
 
 	
-	switch (parameters.attribute("state").as_int())
+	/*switch (parameters.attribute("state").as_int())
 	{
 		case 1:
 			state = CHEST_STATE::CLOSED;
@@ -37,7 +37,7 @@ bool Chest::Awake() {
 		default:
 			state = CHEST_STATE::CLOSED;
 			break;
-	}
+	}*/
 
 
 	closedAnim.PushBack({0, 4, 34, 28});
@@ -63,12 +63,13 @@ bool Chest::Awake() {
 bool Chest::Start() {
 
 	//initilize textures
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
+	//position.x = parameters.attribute("x").as_int();
+	//position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 
 	texture = app->tex->Load(texturePath);
-	pbody = app->physics->CreateRectangle(position.x + 16, position.y + 16, 30, 27, bodyType::STATIC);
+
+	pbody = app->physics->CreateRectangle(position.x + 16, position.y, 32, 32, bodyType::STATIC);
 	pbody->ctype = ColliderType::CHEST;
 	pbody->listener = this;
 
@@ -77,7 +78,7 @@ bool Chest::Start() {
 
 bool Chest::Update(float dt)
 {
-
+	LOG("cofre: %d", closedAnim.GetCurrentFrame().y);
 	switch (state)
 	{
 	case Chest::CHEST_STATE::CLOSED:

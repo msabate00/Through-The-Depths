@@ -639,6 +639,7 @@ bool Map::LoadEntities(std::string layerName)
                     if (gid == tileset->firstgid + 1) {
                         Chest* chest = (Chest*)app->entityManager->CreateEntity(EntityType::CHEST);
                         chest->parameters = configNode.child("scene").child("chest");
+                        chest->position = iPoint(pos.x + 16, pos.y + 16);
                         LOG("AAAAAAAA");
                     }
 
