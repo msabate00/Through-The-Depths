@@ -292,7 +292,14 @@ bool Player::Update(float dt)
 		app->win->GetWindowSize(windowW, windowH);
 
 		//app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
-		int targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
+		int targetPosX;
+		if (isFacingLeft) {
+			targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
+		}
+		else {
+			targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 100);
+		}
+		
 		int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10);
 
 		targetPosY = MAX(targetPosY, -600);
@@ -300,7 +307,7 @@ bool Player::Update(float dt)
 		
 		targetPosX += (isFacingLeft) ? 75 : -50;
 
-		app->render->camera.x = lerp(app->render->camera.x,targetPosX, dt * 0.01f);
+		app->render->camera.x = lerp(app->render->camera.x,targetPosX, dt * 0.005f);
 		app->render->camera.y = lerp(app->render->camera.y,targetPosY, dt * 0.002f);
 		//app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
 	}
