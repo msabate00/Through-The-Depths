@@ -177,6 +177,14 @@ void App::PrepareUpdate()
 void App::FinishUpdate()
 {
 	// This is a good place to call Load / Save functions
+
+
+	if (input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {
+		maxFrameDuration = (maxFrameDuration == 16) ? 32 : 16;
+	
+	}
+
+
 	double currentDt = frameTime.ReadMs();
 	if (maxFrameDuration > 0 && currentDt < maxFrameDuration) {
 		uint32 delay = (uint32) (maxFrameDuration - currentDt);

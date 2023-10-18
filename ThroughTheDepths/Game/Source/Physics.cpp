@@ -225,7 +225,7 @@ bool Physics::PostUpdate()
 	bool ret = true;
 
 	// Activate or deactivate debug mode
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		app->debug = !app->debug;
 	
 	//  Iterate all objects in the world and draw the bodies
@@ -255,17 +255,27 @@ bool Physics::PostUpdate()
 					int32 count = polygonShape->GetVertexCount();
 					b2Vec2 prev, v;
 
+					int color_R = 255;
+					int color_G = 255;
+					int color_B = 100;
+
+					if (!b->IsActive()) {
+						color_R = 255;
+						color_G = 255;
+						color_B = 255;
+					}
+
 					for (int32 i = 0; i < count; ++i)
 					{
 						v = b->GetWorldPoint(polygonShape->GetVertex(i));
 						if (i > 0)
-							app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 255, 255, 100);
+							app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), color_R, color_G, color_B);
 
 						prev = v;
 					}
 
 					v = b->GetWorldPoint(polygonShape->GetVertex(0));
-					app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), 255, 100, 100);
+					app->render->DrawLine(METERS_TO_PIXELS(prev.x), METERS_TO_PIXELS(prev.y), METERS_TO_PIXELS(v.x), METERS_TO_PIXELS(v.y), color_R, color_B, color_B);
 				}
 				break;
 
