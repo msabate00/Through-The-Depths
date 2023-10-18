@@ -35,6 +35,10 @@ public:
 	bool CleanUp();
 
 	Player* getPlayer();
+	void setPlayer(Player* new_player);
+
+
+	pugi::xml_node* configScene;
 
 private:
 	SDL_Texture* img;

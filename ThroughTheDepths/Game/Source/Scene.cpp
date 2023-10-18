@@ -14,6 +14,7 @@
 Scene::Scene() : Module()
 {
 	name.Create("scene");
+	
 }
 
 // Destructor
@@ -26,24 +27,27 @@ bool Scene::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
+	configScene = &config;
+
 	// iterate all objects in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
-	for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
-	{
-		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-		item->parameters = itemNode;
-	}
+	//for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
+	//{
+	//	Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
+	//	item->parameters = itemNode;
+	//}
 
-	for (pugi::xml_node chestNode = config.child("chest"); chestNode; chestNode = chestNode.next_sibling("chest"))
-	{
-		Chest* chest = (Chest*)app->entityManager->CreateEntity(EntityType::CHEST);
-		chest->parameters = chestNode;
-	}
+	//for (pugi::xml_node chestNode = config.child("chest"); chestNode; chestNode = chestNode.next_sibling("chest"))
+	//{
+	//	Chest* chest = (Chest*)app->entityManager->CreateEntity(EntityType::CHEST);
+	//	chest->parameters = chestNode;
+	//	LOG("AAA");
+	//}
 
-	if (config.child("player")) {
+	/*if (config.child("player")) {
 		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 		player->parameters = config.child("player");
-	}
+	}*/
 
 	return ret;
 }
@@ -129,4 +133,10 @@ bool Scene::CleanUp()
 Player* Scene::getPlayer()
 {
 	return player;
+}
+
+void Scene::setPlayer(Player* new_player)
+{
+	player = new_player;
+
 }

@@ -57718,7 +57718,7 @@
   </data>
  </layer>
  <objectgroup color="#ff0000" id="19" name="Colisions_floor">
-  <object id="3" x="0.0170455" y="288.031" width="63.8011" height="416.094"/>
+  <object id="3" x="0" y="288.031" width="64" height="416.094"/>
   <object id="4" x="62.9958" y="415.938" width="577" height="64"/>
   <object id="5" x="544" y="471" width="96" height="200"/>
   <object id="7" x="625.273" y="640.061" width="366.667" height="33.3333"/>

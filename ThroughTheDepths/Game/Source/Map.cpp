@@ -15,6 +15,7 @@
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 #include <bitset>
+#include "Chest.h"
 
 Map::Map() : Module(), mapLoaded(false)
 {
@@ -47,22 +48,23 @@ bool Map::Awake(pugi::xml_node& config)
 bool Map::Update(float dt)
 {
     
+    if(app->scene->getPlayer() != nullptr){
 
-
-    if (app->scene->getPlayer()->pbody->body->GetLinearVelocity().y < 0) {
-        for (int i = 0; i < traspasedPlatformList.Count(); i++) {
-            traspasedPlatformList.At(i)->data->body->SetActive(false);
-        }
+        if (app->scene->getPlayer()->pbody->body->GetLinearVelocity().y < 0) {
+            for (int i = 0; i < traspasedPlatformList.Count(); i++) {
+                traspasedPlatformList.At(i)->data->body->SetActive(false);
+            }
        
         
-    }
-    else {
-        if (!app->scene->getPlayer()->traspassingColision) {
-            for (int i = 0; i < traspasedPlatformList.Count(); i++) {
-                if (traspasedPlatformList.At(i)->data->body->GetPosition().y > app->scene->getPlayer()->pbody->body->GetPosition().y) {
-                    traspasedPlatformList.At(i)->data->body->SetActive(true);
-                }
+        }
+        else {
+            if (!app->scene->getPlayer()->traspassingColision) {
+                for (int i = 0; i < traspasedPlatformList.Count(); i++) {
+                    if (traspasedPlatformList.At(i)->data->body->GetPosition().y > app->scene->getPlayer()->pbody->body->GetPosition().y) {
+                        traspasedPlatformList.At(i)->data->body->SetActive(true);
+                    }
                     
+                }
             }
         }
     }
@@ -305,10 +307,9 @@ bool Map::Load()
 
 
     //NUEVO
+    LoadCollisionsObject();
     LoadCollisions("Colisions");
     LoadEntities("Entidades");
-    LoadCollisionsObject();
-
     
     if(ret == true)
     {
@@ -605,6 +606,15 @@ bool Map::LoadEntities(std::string layerName)
     mapLayerItem = mapData.maplayers.start;
     bool ret = false;
 
+    pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+    if (parseResult) {
+        configNode = configFile.child("config");
+    }
+    else {
+        LOG("Error in Map::LoadEntities(): %s", parseResult.description());
+        return false;
+    }
+
     while (mapLayerItem != NULL) {
 
         if (mapLayerItem->data->name.GetString() == layerName) {
@@ -627,7 +637,9 @@ bool Map::LoadEntities(std::string layerName)
 
                     //cofre con Monedas
                     if (gid == tileset->firstgid + 1) {
-
+                        Chest* chest = (Chest*)app->entityManager->CreateEntity(EntityType::CHEST);
+                        chest->parameters = configNode.child("scene").child("chest");
+                        LOG("AAAAAAAA");
                     }
 
                     //espina que se rompe
@@ -638,6 +650,14 @@ bool Map::LoadEntities(std::string layerName)
                     //barrera de espinas
                     if (gid == tileset->firstgid + 3) {
 
+                    }
+
+                    //player
+                    if (gid == tileset->firstgid + 4) {
+
+                        app->scene->setPlayer((Player*)app->entityManager->CreateEntity(EntityType::PLAYER));
+                        app->scene->getPlayer()->parameters = configNode.child("scene").child("player");
+                        
                     }
 
 

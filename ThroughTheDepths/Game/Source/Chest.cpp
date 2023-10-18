@@ -22,9 +22,7 @@ Chest::~Chest() {}
 
 bool Chest::Awake() {
 
-	position.x = parameters.attribute("x").as_int();
-	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturepath").as_string();
+	
 	switch (parameters.attribute("state").as_int())
 	{
 		case 1:
@@ -65,6 +63,10 @@ bool Chest::Awake() {
 bool Chest::Start() {
 
 	//initilize textures
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
+	texturePath = parameters.attribute("texturepath").as_string();
+
 	texture = app->tex->Load(texturePath);
 	pbody = app->physics->CreateRectangle(position.x + 16, position.y + 16, 30, 27, bodyType::STATIC);
 	pbody->ctype = ColliderType::CHEST;
