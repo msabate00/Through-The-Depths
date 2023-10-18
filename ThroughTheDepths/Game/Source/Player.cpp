@@ -176,14 +176,14 @@ bool Player::Update(float dt)
 	
 	//Moverse a la izquierda
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		vel = b2Vec2(-speed*dt, pbody->body->GetLinearVelocity().y);
+		vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
 		isFacingLeft = true;
 		currentAnimation = &runAnim;
 	}
 
 	//Moverse a la derecha
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		vel = b2Vec2(speed*dt, pbody->body->GetLinearVelocity().y);
+		vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
 		isFacingLeft = false;
 		currentAnimation = &runAnim;
 	}
