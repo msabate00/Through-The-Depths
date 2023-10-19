@@ -120,7 +120,9 @@ void EntityManager::DestroyEntity(Entity* entity)
 
 	for (item = entities.start; item != NULL; item = item->next)
 	{
-		if (item->data == entity) entities.Del(item);
+		if (item->data == entity) {
+			entities.Del(item);
+		}
 	}
 }
 

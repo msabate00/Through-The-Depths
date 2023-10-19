@@ -55,6 +55,7 @@ bool Particles::Awake(pugi::xml_node& config){
 	basicAttackR.anim.speed = 0.3f;
 	basicAttackR.lifetime = 15;
 	basicAttackR.speed = fPoint(2, 0);
+	basicAttackR.ctype = ColliderType::PLAYER_PROYECTILE;
 
 
 	basicAttackL.anim.PushBack({ 0, 0, 32, 32 });
@@ -67,6 +68,7 @@ bool Particles::Awake(pugi::xml_node& config){
 	basicAttackL.lifetime = 15;
 	basicAttackL.speed = fPoint(-2, 0);
 	basicAttackL.flip = true;
+	basicAttackL.ctype = ColliderType::PLAYER_PROYECTILE;
 
 
 	return ret;
@@ -242,8 +244,9 @@ int Particles::AddParticle(const Particle& particle, int x, int y,  uint delay)
 	p->position.x = x;						// so when frameCount reaches 0 the particle will be activated
 	p->position.y = y;
 	p->flip = particle.flip;
-	p->pbody = app->physics->CreateRectangleSensor(p->position.x + 16, p->position.y + 16, 16,32, bodyType::KINEMATIC);
-	p->pbody->ctype = ColliderType::PLAYER_PROYECTILE;
+	p->pbody = app->physics->CreateRectangleSensor(p->position.x + 16, p->position.y + 16, 16,32, bodyType::DYNAMIC);
+	p->pbody->ctype = particle.ctype;
+	//p->pbody->ctype = ColliderType::PLAYER_PROYECTILE;
 	//Adding the particle's collider
 	/*if (colliderType != Collider::Type::NONE)
 		p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), colliderType, this);*/

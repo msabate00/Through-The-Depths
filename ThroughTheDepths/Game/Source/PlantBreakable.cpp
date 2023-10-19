@@ -72,7 +72,7 @@ bool PlantBreakable::Start() {
 
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateRectangleSensor(position.x + 16, position.y, 32, 32, bodyType::STATIC);
+	pbody = app->physics->CreateRectangle(position.x + 16, position.y, 15, 32, bodyType::STATIC);
 	pbody->ctype = ColliderType::PLANT_BREAKABLE;
 	pbody->listener = this;
 
@@ -110,4 +110,18 @@ bool PlantBreakable::PostUpdate() {
 bool PlantBreakable::CleanUp()
 {
 	return true;
+}
+
+void PlantBreakable::OnCollision(PhysBody* physA, PhysBody* physB) {
+
+	
+
+	if (physB->ctype == ColliderType::PLAYER_PROYECTILE) {		
+		pbody->body->GetWorld()->DestroyBody(pbody->body);
+		pbody->body->SetActive(false);
+		pbody->listener = nullptr;
+		pbody->body->SetTransform(b2Vec2(-10000, -10000), 0);
+		app->entityManager->DestroyEntity(this);
+	}
+
 }

@@ -52,6 +52,7 @@ public:
 	bool flip = false;
 
 	PhysBody* pbody;
+	ColliderType ctype;
 
 	
 

@@ -232,7 +232,7 @@ bool Player::Update(float dt)
 		//Sistema de salto
 		
 		pbodyFoot->body->SetActive((abs(pbody->body->GetLinearVelocity().y) == 1.0f));
-		LOG("Numerito magico: %d", numFootContacts);
+		
 
 		if (!canJump) {
 			//canJump = (abs(pbody->body->GetLinearVelocity().y) == 1.0f);
