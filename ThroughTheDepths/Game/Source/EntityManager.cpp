@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "Chest.h"
 #include "Coin.h"
+#include "PlantBreakable.h"
+#include "PlantBarrier.h"
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
@@ -97,10 +99,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		entity = new Coin();
 		break;
 	case EntityType::PLANT_BARRIER:
-		entity = new Coin();
+		entity = new PlantBarrier();
 		break;
 	case EntityType::PLANT_BREAKABLE:
-		entity = new Coin();
+		entity = new PlantBreakable();
 		break;
 	default:
 		break;

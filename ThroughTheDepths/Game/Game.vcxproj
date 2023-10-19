@@ -108,6 +108,8 @@
     <ClCompile Include="Source\Particle.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
+    <ClCompile Include="Source\PlantBarrier.cpp" />
+    <ClCompile Include="Source\PlantBreakable.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Render.cpp" />
@@ -125,6 +127,8 @@
     <ClInclude Include="Source\Particle.h" />
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />
+    <ClInclude Include="Source\PlantBarrier.h" />
+    <ClInclude Include="Source\PlantBreakable.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Queue.h" />
     <ClInclude Include="Source\Scene.h" />

@@ -38,6 +38,9 @@
 		<chest x="470" y="388" texturepath="Assets/Maps/tilesets/Animations.png" state="2"/>
 		<chest x="510" y="388" texturepath="Assets/Maps/tilesets/Animations.png" state="3"/>
 		<coin texturepath="Assets/Maps/tilesets/Animations.png"/>
+		<plant_breakable texturepath="Assets/Maps/tilesets/Animations.png"/>
+		<plant_barrier texturepath="Assets/Maps/tilesets/Animations.png"/>
+		
 	</scene>
 
 	<map>

@@ -17,6 +17,8 @@
 #include <bitset>
 #include "Chest.h"
 #include "Coin.h"
+#include "PlantBarrier.h"
+#include "PlantBreakable.h"
 
 Map::Map() : Module(), mapLoaded(false)
 {
@@ -648,12 +650,16 @@ bool Map::LoadEntities(std::string layerName)
 
                     //espina que se rompe
                     if (gid == tileset->firstgid + 2) {
-
+                        PlantBreakable* entity = (PlantBreakable*)app->entityManager->CreateEntity(EntityType::PLANT_BREAKABLE);
+                        entity->parameters = configNode.child("scene").child("plant_breakable");
+                        entity->position = iPoint(pos.x + 16, pos.y + 16);
                     }
 
                     //barrera de espinas
                     if (gid == tileset->firstgid + 3) {
-
+                        PlantBarrier* entity = (PlantBarrier*)app->entityManager->CreateEntity(EntityType::PLANT_BARRIER);
+                        entity->parameters = configNode.child("scene").child("plant_barrier");
+                        entity->position = iPoint(pos.x + 16, pos.y + 16);
                     }
 
                     //player

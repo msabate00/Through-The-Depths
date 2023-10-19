@@ -60,6 +60,12 @@
     <ClCompile Include="Source\Coin.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PlantBarrier.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\PlantBreakable.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -148,6 +154,12 @@
       <Filter>MisUtils</Filter>
     </ClInclude>
     <ClInclude Include="Source\Coin.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlantBarrier.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PlantBreakable.h">
       <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
