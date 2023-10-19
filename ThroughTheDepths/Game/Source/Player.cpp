@@ -399,33 +399,36 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 		switch (physB->ctype)
 		{
-		case ColliderType::ITEM:
-			LOG("Collision ITEM");
-			app->audio->PlayFx(pickCoinFxId);
-			break;
-		case ColliderType::CHEST:
-			LOG("Collision CHEST");
-			app->audio->PlayFx(pickCoinFxId);
-			((Chest*)physB->listener)->ChangeState(Chest::CHEST_STATE::OPENING);
-			break;
-		case ColliderType::PLATFORM:
-			LOG("Collision PLATFORM");
-			//numFootContacts++;
-			break;
-		case ColliderType::UNKNOWN:
-			LOG("Collision UNKNOWN");
-			break;
-		case ColliderType::PLATFORM_TRASPASS:
-			//numFootContacts++;
-			colisionTraspassing.Add(physB);
-			if (colisionTraspassing.Count() > 10) {
-				colisionTraspassing.Del(colisionTraspassing.At(0));
-			}
-			
+			case ColliderType::ITEM:
+				LOG("Collision ITEM");
+				app->audio->PlayFx(pickCoinFxId);
+				break;
+			case ColliderType::CHEST:
+				LOG("Collision CHEST");
+				app->audio->PlayFx(pickCoinFxId);
+				((Chest*)physB->listener)->ChangeState(Chest::CHEST_STATE::OPENING);
+				break;
+			case ColliderType::PLATFORM:
+				LOG("Collision PLATFORM");
+				break;
+			case ColliderType::UNKNOWN:
+				LOG("Collision UNKNOWN");
+				break;
+
+			case ColliderType::COIN: 
+				app->audio->PlayFx(pickCoinFxId);
+				app->entityManager->DestroyEntity(physB->listener);
+				break;
+		
 
 
 
-			break;
+			case ColliderType::PLATFORM_TRASPASS:
+				colisionTraspassing.Add(physB);
+				if (colisionTraspassing.Count() > 10) {
+					colisionTraspassing.Del(colisionTraspassing.At(0));
+				}
+				break;
 		}
 	}
 

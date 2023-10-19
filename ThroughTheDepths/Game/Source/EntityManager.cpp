@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "Player.h"
 #include "Chest.h"
+#include "Coin.h"
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
@@ -89,8 +90,17 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::ITEM:
 		entity = new Item();
 		break;
-	case EntityType::CHEST:
+	case EntityType::CHEST_COIN:
 		entity = new Chest();
+		break;
+	case EntityType::COIN:
+		entity = new Coin();
+		break;
+	case EntityType::PLANT_BARRIER:
+		entity = new Coin();
+		break;
+	case EntityType::PLANT_BREAKABLE:
+		entity = new Coin();
 		break;
 	default:
 		break;

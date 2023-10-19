@@ -12,7 +12,10 @@ enum class EntityType
 {
 	PLAYER,
 	ITEM,
-	CHEST,
+	CHEST_COIN,
+	COIN,
+	PLANT_BARRIER,
+	PLANT_BREAKABLE,
 	UNKNOWN
 };
 

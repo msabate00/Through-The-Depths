@@ -16,6 +16,7 @@
 #include "SDL_image/include/SDL_image.h"
 #include <bitset>
 #include "Chest.h"
+#include "Coin.h"
 
 Map::Map() : Module(), mapLoaded(false)
 {
@@ -632,15 +633,17 @@ bool Map::LoadEntities(std::string layerName)
 
                     //Monedas
                     if (gid == tileset->firstgid) {
-                       
+                       Coin* coin = (Coin*)app->entityManager->CreateEntity(EntityType::COIN);
+                       coin->parameters = configNode.child("scene").child("coin");
+                       coin->position = iPoint(pos.x + 16, pos.y + 16);
                     }
 
                     //cofre con Monedas
                     if (gid == tileset->firstgid + 1) {
-                        Chest* chest = (Chest*)app->entityManager->CreateEntity(EntityType::CHEST);
+                        Chest* chest = (Chest*)app->entityManager->CreateEntity(EntityType::CHEST_COIN);
                         chest->parameters = configNode.child("scene").child("chest");
                         chest->position = iPoint(pos.x + 16, pos.y + 16);
-                        LOG("AAAAAAAA");
+                      
                     }
 
                     //espina que se rompe

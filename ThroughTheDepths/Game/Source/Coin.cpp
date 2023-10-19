@@ -1,4 +1,4 @@
-#include "Chest.h"
+#include "Coin.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,38 +9,38 @@
 #include "Point.h"
 #include "Physics.h"
 
-Chest::Chest() : Entity(EntityType::CHEST_COIN)
+Coin::Coin() : Entity(EntityType::COIN)
 {
-	name.Create("chest");
+	name.Create("Coin");
 
 	
 
 
 }
 
-Chest::~Chest() {}
+Coin::~Coin() {}
 
-bool Chest::Awake() {
+bool Coin::Awake() {
 
 	
 	/*switch (parameters.attribute("state").as_int())
 	{
 		case 1:
-			state = CHEST_STATE::CLOSED;
+			state = Coin_STATE::CLOSED;
 			break;
 		case 2:
-			state = CHEST_STATE::OPENING;
+			state = Coin_STATE::OPENING;
 			break;
 		case 3:
-			state = CHEST_STATE::OPENED;
+			state = Coin_STATE::OPENED;
 			break;
 		default:
-			state = CHEST_STATE::CLOSED;
+			state = Coin_STATE::CLOSED;
 			break;
 	}*/
 
 
-	closedAnim.PushBack({0, 4, 34, 28});
+	/*closedAnim.PushBack({0, 4, 34, 28});
 
 
 	openingAnim.PushBack({ 0, 4, 34, 28 });
@@ -52,15 +52,25 @@ bool Chest::Awake() {
 	openingAnim.speed = 0.1f;
 
 
-	openedAnim.PushBack({ 256, 4, 34, 28 });
+	openedAnim.PushBack({ 256, 4, 34, 28 });*/
 
+	
+	idleAnim.PushBack({96, 32, 32, 32});
+	idleAnim.PushBack({128, 32, 32, 32});
+	idleAnim.PushBack({160, 32, 32, 32});
+	idleAnim.PushBack({192, 32, 32, 32});
+	idleAnim.PushBack({ 160, 32, 32, 32 });
+	idleAnim.PushBack({ 128, 32, 32, 32 });
+	idleAnim.PushBack({ 96, 32, 32, 32 });
+	idleAnim.loop = true;
+	idleAnim.speed = 0.1f;
 
 
 
 	return true;
 }
 
-bool Chest::Start() {
+bool Coin::Start() {
 
 	//initilize textures
 	//position.x = parameters.attribute("x").as_int();
@@ -69,30 +79,17 @@ bool Chest::Start() {
 
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateRectangle(position.x + 16, position.y, 32, 32, bodyType::STATIC);
-	pbody->ctype = ColliderType::CHEST;
+	pbody = app->physics->CreateRectangleSensor(position.x + 16, position.y, 32, 32, bodyType::STATIC);
+	pbody->ctype = ColliderType::COIN;
 	pbody->listener = this;
 
 	return true;
 }
 
-bool Chest::Update(float dt)
+bool Coin::Update(float dt)
 {
+	currentAnimation = &idleAnim;
 	
-	switch (state)
-	{
-	case Chest::CHEST_STATE::CLOSED:
-		currentAnimation = &closedAnim;
-		break;
-	case Chest::CHEST_STATE::OPENING:
-		currentAnimation = &openingAnim;
-		break;
-	case Chest::CHEST_STATE::OPENED:
-		currentAnimation = &openedAnim;
-		break;
-	default:
-		break;
-	}
 
 
 
@@ -107,28 +104,17 @@ bool Chest::Update(float dt)
 	return true;
 }
 
-bool Chest::PostUpdate() {
+bool Coin::PostUpdate() {
 
 
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_NONE, &rect);
 
 
-	if (state == CHEST_STATE::OPENING && currentAnimation->HasFinished()) {
-		state = CHEST_STATE::OPENED;
-	}
-
-
 	return true;
 }
 
-bool Chest::CleanUp()
+bool Coin::CleanUp()
 {
 	return true;
-}
-
-void Chest::ChangeState(CHEST_STATE new_state) {
-
-	state = new_state;
-
 }

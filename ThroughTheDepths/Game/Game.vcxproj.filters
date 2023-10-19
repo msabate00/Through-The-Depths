@@ -57,6 +57,9 @@
     <ClCompile Include="Source\Map.cpp">
       <Filter>MisUtils</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Coin.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="Source\Timer.h">
       <Filter>MisUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Coin.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
