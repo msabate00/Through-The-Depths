@@ -49,6 +49,8 @@ bool Scene::Awake(pugi::xml_node& config)
 		player->parameters = config.child("player");
 	}*/
 
+	
+
 	return ret;
 }
 
