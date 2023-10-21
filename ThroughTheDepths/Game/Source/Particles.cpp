@@ -246,6 +246,7 @@ int Particles::AddParticle(const Particle& particle, int x, int y,  uint delay)
 	p->flip = particle.flip;
 	p->pbody = app->physics->CreateRectangleSensor(p->position.x + 16, p->position.y + 16, 16,32, bodyType::DYNAMIC);
 	p->pbody->ctype = particle.ctype;
+	
 	//p->pbody->ctype = ColliderType::PLAYER_PROYECTILE;
 	//Adding the particle's collider
 	/*if (colliderType != Collider::Type::NONE)
@@ -317,6 +318,9 @@ int Particles::AddParticle(const Particle& particle, int x, int y, fPoint initia
 //	return aux;
 //
 //}
+
+
+
 
 
 void Particles::SetSpeedParticle(int position, fPoint speed) {

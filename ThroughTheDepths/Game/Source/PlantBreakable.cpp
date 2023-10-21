@@ -57,6 +57,12 @@ bool PlantBreakable::Awake() {
 	
 	idleAnim.PushBack({0, 96, 32, 33});
 
+	damagedAnim.PushBack({ 0, 96, 32, 33 });
+	damagedAnim.PushBack({ 32, 96, 32, 33 });
+	damagedAnim.PushBack({ 32+32, 96, 32, 33 });
+	damagedAnim.PushBack({ 32+32+32, 96, 32, 33 });
+	damagedAnim.loop = false;
+	damagedAnim.speed = 0.8;
 
 
 
@@ -83,6 +89,13 @@ bool PlantBreakable::Update(float dt)
 {
 	currentAnimation = &idleAnim;
 	
+	if (isDamaged) {
+		currentAnimation = &damagedAnim;
+		if (damagedAnim.HasFinished()) {
+			isDamaged = false;
+			damagedAnim.Reset();
+		}
+	}
 
 
 
@@ -116,12 +129,20 @@ void PlantBreakable::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	
 
-	if (physB->ctype == ColliderType::PLAYER_PROYECTILE) {		
-		pbody->body->GetWorld()->DestroyBody(pbody->body);
-		pbody->body->SetActive(false);
-		pbody->listener = nullptr;
-		pbody->body->SetTransform(b2Vec2(-10000, -10000), 0);
-		app->entityManager->DestroyEntity(this);
+	if (physB->ctype == ColliderType::PLAYER_PROYECTILE) {	
+		if (!isDamaged) {
+			life--;
+			isDamaged = true;
+			if (life <= 0) {
+				pbody->body->GetWorld()->DestroyBody(pbody->body);
+				pbody->body->SetActive(false);
+				pbody->listener = nullptr;
+				pbody->body->SetTransform(b2Vec2(-10000, -10000), 0);
+				app->entityManager->DestroyEntity(this);
+			}
+		}
+		
+		
 	}
 
 }

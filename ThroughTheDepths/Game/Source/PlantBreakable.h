@@ -43,7 +43,11 @@ private:
 
 	Animation* currentAnimation = nullptr;
 	Animation idleAnim;
-	Animation pickedAnim;
+	Animation damagedAnim;
+
+	bool isDamaged = false;
+
+	int life = 3;
 	
 
 
