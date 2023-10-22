@@ -60,6 +60,8 @@ public:
 
 private:
 	
+	b2Transform startTransform;
+
 	List<PhysBody*> colisionTraspassing;
 	Timer traspassingTimer;
 

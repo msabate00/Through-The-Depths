@@ -51,7 +51,7 @@ bool Map::Awake(pugi::xml_node& config)
 bool Map::Update(float dt)
 {
     
-    if(app->scene->getPlayer() != nullptr){
+    if(app->scene->getPlayer() != nullptr && app->scene->getPlayer()->pbody != nullptr){
 
         if (app->scene->getPlayer()->pbody->body->GetLinearVelocity().y < 0) {
             for (int i = 0; i < traspasedPlatformList.Count(); i++) {

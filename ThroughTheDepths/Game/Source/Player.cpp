@@ -119,7 +119,7 @@ bool Player::Start() {
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 	pbody->body->SetFixedRotation(true);
-
+	startTransform = pbody->body->GetTransform();
 
 	pbodyFoot = app->physics->CreateRectangle(position.x + 16, position.y + 16, 16, 3, bodyType::DYNAMIC);
 
@@ -154,7 +154,7 @@ bool Player::Update(float dt)
 
 
 	if (app->input->GetKey(SDL_SCANCODE_F1)) {
-		//pbody->body->SetTransform(b2Vec2(10, 2), 0);
+		pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle() );
 	}
 
 	
