@@ -114462,10 +114462,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="917"/>
+   <tile gid="918"/>
+   <tile gid="919"/>
+   <tile gid="920"/>
    <tile/>
    <tile/>
    <tile/>
@@ -114742,10 +114742,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="935"/>
+   <tile gid="936"/>
+   <tile gid="937"/>
+   <tile gid="938"/>
    <tile/>
    <tile/>
    <tile/>
@@ -115022,10 +115022,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="953"/>
+   <tile gid="954"/>
+   <tile gid="955"/>
+   <tile gid="956"/>
    <tile/>
    <tile/>
    <tile/>
@@ -115302,10 +115302,10 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="971"/>
+   <tile gid="972"/>
+   <tile gid="973"/>
+   <tile gid="974"/>
    <tile/>
    <tile/>
    <tile/>
@@ -131555,9 +131555,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="944"/>
+   <tile gid="945"/>
+   <tile gid="946"/>
    <tile/>
    <tile/>
    <tile/>
@@ -131835,9 +131835,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="962"/>
+   <tile gid="963"/>
+   <tile gid="964"/>
    <tile/>
    <tile/>
    <tile/>
@@ -200620,8 +200620,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="200"/>
+   <tile gid="200"/>
    <tile gid="200"/>
    <tile gid="200"/>
    <tile gid="200"/>
@@ -201717,7 +201717,7 @@
    <tile/>
   </data>
  </layer>
- <objectgroup color="#ff0000" id="19" name="Colisions_floor">
+ <objectgroup color="#ff0000" id="19" name="Colisions_floor" visible="0">
   <object id="3" x="-1.7803" y="1441.36" width="64" height="479.427"/>
   <object id="4" x="61.2155" y="1632.6" width="577" height="64"/>
   <object id="5" x="542.22" y="1687.66" width="96" height="200"/>
