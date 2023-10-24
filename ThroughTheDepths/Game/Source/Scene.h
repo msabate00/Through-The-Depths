@@ -39,7 +39,7 @@ public:
 
 
 	pugi::xml_node* configScene;
-
+	
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;
@@ -47,6 +47,7 @@ private:
 	uint windowW, windowH;
 	Player* player;
 
+	
 };
 
 #endif // __SCENE_H__

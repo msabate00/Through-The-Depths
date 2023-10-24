@@ -57,6 +57,10 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
+	SDL_Texture* Fondo0 = app->tex->Load("Assets/Maps/tilesets/ background_0_32x32.png");
+	SDL_Texture* Fondo1 = app->tex->Load("Assets/Maps/tilesets/ background_1_32x32.png");
+	SDL_Texture* Fondo2 = app->tex->Load("Assets/Maps/tilesets/ background_2_32x32.png");
+
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	//img = app->tex->Load("Assets/Textures/test.png");
 	
@@ -114,6 +118,8 @@ bool Scene::Update(float dt)
 		/*app->map->CleanUp();*/
 		//app->map->Load();
 	}
+
+	
 
 	// Renders the image in the center of the screen 
 	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
