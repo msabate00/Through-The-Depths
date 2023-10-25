@@ -78,7 +78,7 @@ void App::AddModule(Module* module)
 // Called before render is available
 bool App::Awake()
 {
-	debug = true;
+	debug = false;
 	Timer timer = Timer();
 
 	bool ret = LoadConfig();
