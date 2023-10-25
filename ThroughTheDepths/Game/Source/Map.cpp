@@ -676,7 +676,7 @@ bool Map::LoadEntities(std::string layerName)
                     if (gid == tileset->firstgid + 3) {
                         PlantBarrier* entity = (PlantBarrier*)app->entityManager->CreateEntity(EntityType::PLANT_BARRIER);
                         entity->parameters = configNode.child("scene").child("plant_barrier");
-                        entity->position = iPoint(pos.x + 16, pos.y + 16);
+                        entity->position = iPoint(pos.x, pos.y + 16);
                     }
 
                     //player
