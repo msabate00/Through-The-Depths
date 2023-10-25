@@ -91,9 +91,18 @@ bool Map::PostUpdate()
             mapLayerItem->data->properties.GetProperty("Front") != NULL && !mapLayerItem->data->properties.GetProperty("Front")->value
             ) {
 
-            for (int x = 0; x < mapLayerItem->data->width; x++)
+
+            iPoint playerPos = app->scene->getPlayer()->position;            
+            int xToTiledLeft = MAX((playerPos.x / 32)-25, 0);
+            int xToTiledRight = MIN((playerPos.x / 32)+25, mapLayerItem->data->width);
+
+            int yToTiledTop = MAX((playerPos.y / 32) - 25, 0);
+            int yToTiledDown = MIN((playerPos.y / 32) + 25, mapLayerItem->data->height);
+
+            for (int x = xToTiledLeft; x < xToTiledRight; x++)
             {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
+               
+                for (int y = yToTiledTop; y < yToTiledDown; y++)
                 {
                     unsigned int gid = mapLayerItem->data->Get(x, y);
                     TileSet* tileset = GetTilesetFromTileId(gid);
@@ -149,9 +158,17 @@ bool Map::UpdateFrontEntities()
             mapLayerItem->data->properties.GetProperty("Front") != NULL && mapLayerItem->data->properties.GetProperty("Front")->value
             ) {
 
-            for (int x = 0; x < mapLayerItem->data->width; x++)
+
+            iPoint playerPos = app->scene->getPlayer()->position;
+            int xToTiledLeft = MAX((playerPos.x / 32) - 25, 0);
+            int xToTiledRight = MIN((playerPos.x / 32) + 25, mapLayerItem->data->width);
+
+            int yToTiledTop = MAX((playerPos.y / 32) - 25, 0);
+            int yToTiledDown = MIN((playerPos.y / 32) + 25, mapLayerItem->data->height);
+
+            for (int x = xToTiledLeft; x < xToTiledRight; x++)
             {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
+                for (int y = yToTiledTop; y < yToTiledDown; y++)
                 {
                     unsigned int gid = mapLayerItem->data->Get(x, y);
                     TileSet* tileset = GetTilesetFromTileId(gid);
