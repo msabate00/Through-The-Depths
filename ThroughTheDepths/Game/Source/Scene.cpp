@@ -57,9 +57,9 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
-	SDL_Texture* Fondo0 = app->tex->Load("Assets/Maps/tilesets/ background_0_32x32.png");
-	SDL_Texture* Fondo1 = app->tex->Load("Assets/Maps/tilesets/ background_1_32x32.png");
-	SDL_Texture* Fondo2 = app->tex->Load("Assets/Maps/tilesets/ background_2_32x32.png");
+	fondo0 = app->tex->Load("Assets/Maps/tilesets/background_0_32x32.png");
+	fondo1 = app->tex->Load("Assets/Maps/tilesets/background_1_32x32.png");
+	fondo2 = app->tex->Load("Assets/Maps/tilesets/background_2_32x32.png");
 	
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	//img = app->tex->Load("Assets/Textures/test.png");
@@ -120,6 +120,24 @@ bool Scene::Update(float dt)
 	}
 
 	
+	SDL_Rect fondo0x{ 0,0, 576, 360 };
+	SDL_Rect fondo0y{ 0,0, 576, 360 };
+
+	app->render->DrawTexture(fondo0, 0, 282, SDL_FLIP_NONE, &fondo0x, 0.2f);
+	app->render->DrawTexture(fondo0, 500, 282, SDL_FLIP_NONE, &fondo0y, 0.2f);
+
+
+	SDL_Rect fondo1x{ 0,0, 576, 360 };
+	SDL_Rect fondo1y{ 0,0, 576, 360 };
+
+	app->render->DrawTexture(fondo1, 0, 563, SDL_FLIP_NONE, &fondo1x, 0.4f);
+	app->render->DrawTexture(fondo1, 600, 563, SDL_FLIP_NONE, &fondo1y, 0.4f);
+
+	/*SDL_Rect fondo2x{ 0,0, 576, 360 };
+	SDL_Rect fondo2y{ 0,0, 576, 360 };
+
+	app->render->DrawTexture(fondo2, 0, 845, SDL_FLIP_NONE, &fondo2x, 0.6f);
+	app->render->DrawTexture(fondo2, 360, 845, SDL_FLIP_NONE, &fondo2y, 0.6f);*/
 
 	// Renders the image in the center of the screen 
 	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
@@ -135,6 +153,7 @@ bool Scene::PostUpdate()
 	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
 
+	
 	return ret;
 }
 

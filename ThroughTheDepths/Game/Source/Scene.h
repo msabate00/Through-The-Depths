@@ -40,12 +40,17 @@ public:
 
 	pugi::xml_node* configScene;
 	SDL_Texture* img;
+	SDL_Texture* fondo1;
+	SDL_Texture* fondo2;
+	SDL_Texture* fondo0;
 private:
 	
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
 	Player* player;
+
+	
 
 	
 };

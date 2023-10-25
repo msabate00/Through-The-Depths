@@ -23,8 +23,8 @@
  </tileset>
  <layer id="7" name="Fondo 0" width="280" height="60">
   <properties>
-   <property name="Draw" type="bool" value="true"/>
-   <property name="Fondo" type="bool" value="true"/>
+   <property name="Draw" type="bool" value="false"/>
+   <property name="Fondo" type="bool" value="false"/>
    <property name="Front" type="bool" value="false"/>
   </properties>
   <data>
@@ -16832,8 +16832,8 @@
  </layer>
  <layer id="6" name="Fondo 1" width="280" height="60">
   <properties>
-   <property name="Draw" type="bool" value="true"/>
-   <property name="Fondo" type="bool" value="true"/>
+   <property name="Draw" type="bool" value="false"/>
+   <property name="Fondo" type="bool" value="false"/>
    <property name="Front" type="bool" value="false"/>
   </properties>
   <data>
@@ -33641,8 +33641,8 @@
  </layer>
  <layer id="5" name="Fondo 2" width="280" height="60">
   <properties>
-   <property name="Draw" type="bool" value="true"/>
-   <property name="Fondo" type="bool" value="true"/>
+   <property name="Draw" type="bool" value="false"/>
+   <property name="Fondo" type="bool" value="false"/>
    <property name="Front" type="bool" value="false"/>
   </properties>
   <data>
@@ -86935,7 +86935,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="813"/>
+   <tile gid="905"/>
    <tile/>
    <tile/>
    <tile/>
@@ -89176,7 +89176,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="813"/>
+   <tile gid="905"/>
    <tile/>
    <tile/>
    <tile/>
@@ -91417,7 +91417,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="813"/>
+   <tile gid="905"/>
    <tile/>
    <tile/>
    <tile/>
@@ -187783,7 +187783,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="905"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
