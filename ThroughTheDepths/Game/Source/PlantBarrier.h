@@ -42,6 +42,8 @@ private:
 	Animation* currentAnimation = nullptr;
 	Animation idleAnim;
 	Animation pickedAnim;
+
+
 	
 
 

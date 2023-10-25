@@ -34,6 +34,7 @@ public:
 
 public:
 	float speed = 4.5f;
+	float speedFast = 4.5f;
 	//float accelerationY = 0;
 	//float accelerationY_max = 10;
 	//int jumpStep = 0;

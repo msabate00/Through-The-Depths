@@ -42,6 +42,11 @@ Player::Player() : Entity(EntityType::PLAYER)
 	idleAnim.PushBack({ 33, 1, 32, 32 });
 	idleAnim.speed = 0.1f;
 
+	/*idleAnim.PushBack({ 1, 1, 64, 64 });
+	idleAnim.PushBack({ 65, 1, 64, 64 });
+	idleAnim.speed = 0.1f;*/
+	
+
 	//Saltar
 
 	jumpUpAnim.PushBack({ 1, 161, 32, 32 });
@@ -258,13 +263,20 @@ bool Player::Update(float dt)
 	}
 	else {
 
+		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+			speedFast = speed * 2;
+		}
+		else {
+			speedFast = speed;
+		}
+
 
 		vel = b2Vec2(0, 0);
 		pbody->body->SetLinearVelocity(vel);
 		pbody->body->GetFixtureList()[0].SetSensor(true);
 		//Moverse a la izquierda
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
+			vel = b2Vec2(-speedFast, pbody->body->GetLinearVelocity().y);
 			isFacingLeft = true;
 			currentAnimation = &runAnim;
 			pbody->body->SetLinearVelocity(vel);
@@ -272,22 +284,17 @@ bool Player::Update(float dt)
 
 		//Moverse a la derecha
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
+			vel = b2Vec2(speedFast, pbody->body->GetLinearVelocity().y);
 			isFacingLeft = false;
 			currentAnimation = &runAnim;
 			pbody->body->SetLinearVelocity(vel);
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT) {
-			vel = 10*b2Vec2(speed, pbody->body->GetLinearVelocity().y);
-			isFacingLeft = false;
-			currentAnimation = &runAnim;
-			pbody->body->SetLinearVelocity(vel);
-		}
+		
 
 		//Moverse a la izquierda
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-			vel = b2Vec2(pbody->body->GetLinearVelocity().x, -speed);
+			vel = b2Vec2(pbody->body->GetLinearVelocity().x, -speedFast);
 			isFacingLeft = true;
 			currentAnimation = &runAnim;
 			pbody->body->SetLinearVelocity(vel);
@@ -295,7 +302,7 @@ bool Player::Update(float dt)
 
 		//Moverse a la derecha
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			vel = b2Vec2(pbody->body->GetLinearVelocity().x, speed);
+			vel = b2Vec2(pbody->body->GetLinearVelocity().x, speedFast);
 			isFacingLeft = false;
 			currentAnimation = &runAnim;
 			pbody->body->SetLinearVelocity(vel);
