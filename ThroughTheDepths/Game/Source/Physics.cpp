@@ -223,7 +223,6 @@ PhysBody* Physics::CreateChain(int x, int y, int* points, int size, bodyType typ
 bool Physics::PostLateUpdate()
 {
 	bool ret = true;
-
 	// Activate or deactivate debug mode
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		app->debug = !app->debug;
