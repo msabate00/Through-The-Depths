@@ -57,7 +57,7 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
-	fondo0 = app->tex->Load("Assets/Maps/tilesets/background_0_32x32.png");
+	fondo0 = app->tex->Load("Assets/Maps/tilesets/Fondo0.png");
 	fondo1 = app->tex->Load("Assets/Maps/tilesets/background_1_32x32.png");
 	fondo2 = app->tex->Load("Assets/Maps/tilesets/background_2_32x32.png");
 	
@@ -120,27 +120,31 @@ bool Scene::Update(float dt)
 	}
 
 	
-	SDL_Rect fondo0x{ 0,0, 576, 360 };
-	SDL_Rect fondo0y{ 0,0, 576, 360 };
-
+	SDL_Rect fondo0x{ 0,0, 576, 1760 };
+	SDL_Rect fondo0y{ 0,0, 576, 1760 };
+	SDL_Rect fondo1x{ 0,0, 576, 360 };
+	SDL_Rect fondo1y{ 0,0, 576, 360 };
+	SDL_Rect fondo2x{ 0,0, 576, 360 };
+	SDL_Rect fondo2y{ 0,0, 576, 360 };
 	
-	int alturaFondos = 282;
-
+	int alturaFondo0 = -1150;
+	int alturaFondo1 = 550;
+	int alturaFondo2 = 850;
 
 
 	//FONDO 0
 	float paralaxSpeed = 0.2f;
 
-	app->render->DrawTexture(fondo0, fondo0Offset, alturaFondos, SDL_FLIP_NONE, &fondo0x, paralaxSpeed);
-	app->render->DrawTexture(fondo0, fondo0Offset + 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
-	app->render->DrawTexture(fondo0, fondo0Offset + 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
-	app->render->DrawTexture(fondo0, fondo0Offset - 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
-	app->render->DrawTexture(fondo0, fondo0Offset - 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo0, fondo0Offset, alturaFondo0, SDL_FLIP_NONE, &fondo0x, paralaxSpeed);
+	app->render->DrawTexture(fondo0, fondo0Offset + 500, alturaFondo0, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo0, fondo0Offset + 1000, alturaFondo0, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo0, fondo0Offset - 500, alturaFondo0, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo0, fondo0Offset - 1000, alturaFondo0, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
 
 
 	
 
-	int posJugadorParalax = (int)(player->position.x * 0.2f);
+	int posJugadorParalax = (int)(player->position.x * paralaxSpeed);
 	int posicionFondos = 500;
 	int posicionJugadorOffset = 200;
 
@@ -157,16 +161,16 @@ bool Scene::Update(float dt)
 
 	paralaxSpeed = 0.4f;
 
-	app->render->DrawTexture(fondo1, fondo1Offset, alturaFondos, SDL_FLIP_NONE, &fondo0x, paralaxSpeed);
-	app->render->DrawTexture(fondo1, fondo1Offset + 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
-	app->render->DrawTexture(fondo1, fondo1Offset + 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
-	app->render->DrawTexture(fondo1, fondo1Offset - 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
-	app->render->DrawTexture(fondo1, fondo1Offset - 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo1, fondo1Offset, alturaFondo1, SDL_FLIP_NONE, &fondo1x, paralaxSpeed);
+	app->render->DrawTexture(fondo1, fondo1Offset + 500, alturaFondo1, SDL_FLIP_NONE, &fondo1y, paralaxSpeed);
+	app->render->DrawTexture(fondo1, fondo1Offset + 1000, alturaFondo1, SDL_FLIP_NONE, &fondo1y, paralaxSpeed);
+	app->render->DrawTexture(fondo1, fondo1Offset - 500, alturaFondo1, SDL_FLIP_NONE, &fondo1y, paralaxSpeed);
+	app->render->DrawTexture(fondo1, fondo1Offset - 1000, alturaFondo1, SDL_FLIP_NONE, &fondo1y, paralaxSpeed);
 
 
 
 
-	posJugadorParalax = (int)(player->position.x * 0.4f);
+	posJugadorParalax = (int)(player->position.x * paralaxSpeed);
 	posicionFondos = 500;
 	posicionJugadorOffset = 200;
 
@@ -181,16 +185,16 @@ bool Scene::Update(float dt)
 	
 	//FONDO2
 	paralaxSpeed = 0.6f;
-	app->render->DrawTexture(fondo2, fondo2Offset, alturaFondos, SDL_FLIP_NONE, &fondo0x, paralaxSpeed);
-	app->render->DrawTexture(fondo2, fondo2Offset + 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
-	app->render->DrawTexture(fondo2, fondo2Offset + 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
-	app->render->DrawTexture(fondo2, fondo2Offset - 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
-	app->render->DrawTexture(fondo2, fondo2Offset - 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo2, fondo2Offset, alturaFondo2, SDL_FLIP_NONE, &fondo2x, paralaxSpeed);
+	app->render->DrawTexture(fondo2, fondo2Offset + 500, alturaFondo2, SDL_FLIP_NONE, &fondo2y, paralaxSpeed);
+	app->render->DrawTexture(fondo2, fondo2Offset + 1000, alturaFondo2, SDL_FLIP_NONE, &fondo2y, paralaxSpeed);
+	app->render->DrawTexture(fondo2, fondo2Offset - 500, alturaFondo2, SDL_FLIP_NONE, &fondo2y, paralaxSpeed);
+	app->render->DrawTexture(fondo2, fondo2Offset - 1000, alturaFondo2, SDL_FLIP_NONE, &fondo2y, paralaxSpeed);
 
 
 
 
-	posJugadorParalax = (int)(player->position.x * 0.2f);
+	posJugadorParalax = (int)(player->position.x * paralaxSpeed);
 	posicionFondos = 500;
 	posicionJugadorOffset = 200;
 

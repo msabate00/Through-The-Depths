@@ -12085,7 +12085,7 @@
    <tile gid="245"/>
    <tile gid="245"/>
    <tile gid="245"/>
-   <tile gid="245"/>
+   <tile gid="215"/>
    <tile gid="245"/>
    <tile gid="245"/>
    <tile gid="245"/>
@@ -84694,7 +84694,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="813"/>
+   <tile gid="905"/>
    <tile/>
    <tile/>
    <tile/>
@@ -185542,7 +185542,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="905"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
