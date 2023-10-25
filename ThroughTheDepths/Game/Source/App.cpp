@@ -185,6 +185,8 @@ void App::FinishUpdate()
 
 
 	if (input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) {
+	
+
 		maxFrameDuration = (maxFrameDuration == 16) ? 32 : 16;
 	
 	}

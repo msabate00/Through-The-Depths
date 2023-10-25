@@ -50,6 +50,12 @@ private:
 	uint windowW, windowH;
 	Player* player;
 
+
+	int fondo0Offset = 0;
+	int fondo1Offset = 0;
+	int fondo2Offset = 0;
+
+
 	
 
 	

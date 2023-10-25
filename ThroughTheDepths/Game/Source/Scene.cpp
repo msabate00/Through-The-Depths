@@ -123,15 +123,94 @@ bool Scene::Update(float dt)
 	SDL_Rect fondo0x{ 0,0, 576, 360 };
 	SDL_Rect fondo0y{ 0,0, 576, 360 };
 
-	app->render->DrawTexture(fondo0, 0, 282, SDL_FLIP_NONE, &fondo0x, 0.2f);
-	app->render->DrawTexture(fondo0, 500, 282, SDL_FLIP_NONE, &fondo0y, 0.2f);
+	
+	int alturaFondos = 282;
 
 
-	SDL_Rect fondo1x{ 0,0, 576, 360 };
+
+	//FONDO 0
+	float paralaxSpeed = 0.2f;
+
+	app->render->DrawTexture(fondo0, fondo0Offset, alturaFondos, SDL_FLIP_NONE, &fondo0x, paralaxSpeed);
+	app->render->DrawTexture(fondo0, fondo0Offset + 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo0, fondo0Offset + 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo0, fondo0Offset - 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo0, fondo0Offset - 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+
+
+	
+
+	int posJugadorParalax = (int)(player->position.x * 0.2f);
+	int posicionFondos = 500;
+	int posicionJugadorOffset = 200;
+
+
+	if (posJugadorParalax + posicionJugadorOffset > fondo0Offset + posicionFondos) {
+		fondo0Offset += posicionFondos;
+	}
+	if (posJugadorParalax + posicionJugadorOffset < fondo0Offset + posicionFondos) {
+		fondo0Offset -= posicionFondos;
+	}
+
+
+	//FONDO1
+
+	paralaxSpeed = 0.4f;
+
+	app->render->DrawTexture(fondo1, fondo1Offset, alturaFondos, SDL_FLIP_NONE, &fondo0x, paralaxSpeed);
+	app->render->DrawTexture(fondo1, fondo1Offset + 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo1, fondo1Offset + 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo1, fondo1Offset - 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo1, fondo1Offset - 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+
+
+
+
+	posJugadorParalax = (int)(player->position.x * 0.4f);
+	posicionFondos = 500;
+	posicionJugadorOffset = 200;
+
+
+	if (posJugadorParalax + posicionJugadorOffset > fondo1Offset + posicionFondos) {
+		fondo1Offset += posicionFondos;
+	}
+	if (posJugadorParalax + posicionJugadorOffset < fondo1Offset + posicionFondos) {
+		fondo1Offset -= posicionFondos;
+	}
+
+	
+	//FONDO2
+	paralaxSpeed = 0.6f;
+	app->render->DrawTexture(fondo2, fondo2Offset, alturaFondos, SDL_FLIP_NONE, &fondo0x, paralaxSpeed);
+	app->render->DrawTexture(fondo2, fondo2Offset + 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo2, fondo2Offset + 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo2, fondo2Offset - 500, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+	app->render->DrawTexture(fondo2, fondo2Offset - 1000, alturaFondos, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
+
+
+
+
+	posJugadorParalax = (int)(player->position.x * 0.2f);
+	posicionFondos = 500;
+	posicionJugadorOffset = 200;
+
+
+	if (posJugadorParalax + posicionJugadorOffset > fondo2Offset + posicionFondos) {
+		fondo2Offset += posicionFondos;
+	}
+	if (posJugadorParalax + posicionJugadorOffset < fondo2Offset + posicionFondos) {
+		fondo2Offset -= posicionFondos;
+	}
+
+
+	
+
+
+	/*SDL_Rect fondo1x{ 0,0, 576, 360 };
 	SDL_Rect fondo1y{ 0,0, 576, 360 };
 
 	app->render->DrawTexture(fondo1, 0, 563, SDL_FLIP_NONE, &fondo1x, 0.4f);
-	app->render->DrawTexture(fondo1, 600, 563, SDL_FLIP_NONE, &fondo1y, 0.4f);
+	app->render->DrawTexture(fondo1, 600, 563, SDL_FLIP_NONE, &fondo1y, 0.4f);*/
 
 	/*SDL_Rect fondo2x{ 0,0, 576, 360 };
 	SDL_Rect fondo2y{ 0,0, 576, 360 };
