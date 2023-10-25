@@ -38,8 +38,8 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Estar relajao
 
-	idleAnim.PushBack({ 1, 1, 32, 32 });
-	idleAnim.PushBack({ 33, 1, 32, 32 });
+	idleAnim.PushBack({ 1, 1, 64, 64 });
+	idleAnim.PushBack({ 65, 1, 64, 64 });
 	idleAnim.speed = 0.1f;
 
 	//Saltar
