@@ -93,11 +93,11 @@ bool Map::PostUpdate()
 
 
             iPoint playerPos = app->scene->getPlayer()->position;            
-            int xToTiledLeft = MAX((playerPos.x / 32)-25, 0);
-            int xToTiledRight = MIN((playerPos.x / 32)+25, mapLayerItem->data->width);
+            int xToTiledLeft = MAX((playerPos.x / 32)- TILES_TO_LOAD, 0);
+            int xToTiledRight = MIN((playerPos.x / 32)+ TILES_TO_LOAD, mapLayerItem->data->width);
 
-            int yToTiledTop = MAX((playerPos.y / 32) - 25, 0);
-            int yToTiledDown = MIN((playerPos.y / 32) + 25, mapLayerItem->data->height);
+            int yToTiledTop = MAX((playerPos.y / 32) - TILES_TO_LOAD, 0);
+            int yToTiledDown = MIN((playerPos.y / 32) + TILES_TO_LOAD, mapLayerItem->data->height);
 
             for (int x = xToTiledLeft; x < xToTiledRight; x++)
             {
@@ -160,11 +160,11 @@ bool Map::UpdateFrontEntities()
 
 
             iPoint playerPos = app->scene->getPlayer()->position;
-            int xToTiledLeft = MAX((playerPos.x / 32) - 25, 0);
-            int xToTiledRight = MIN((playerPos.x / 32) + 25, mapLayerItem->data->width);
+            int xToTiledLeft = MAX((playerPos.x / 32) - TILES_TO_LOAD, 0);
+            int xToTiledRight = MIN((playerPos.x / 32) + TILES_TO_LOAD, mapLayerItem->data->width);
 
-            int yToTiledTop = MAX((playerPos.y / 32) - 25, 0);
-            int yToTiledDown = MIN((playerPos.y / 32) + 25, mapLayerItem->data->height);
+            int yToTiledTop = MAX((playerPos.y / 32) - TILES_TO_LOAD, 0);
+            int yToTiledDown = MIN((playerPos.y / 32) + TILES_TO_LOAD, mapLayerItem->data->height);
 
             for (int x = xToTiledLeft; x < xToTiledRight; x++)
             {
