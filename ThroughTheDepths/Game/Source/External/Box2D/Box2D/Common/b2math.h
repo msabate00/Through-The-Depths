@@ -346,7 +346,7 @@ struct b2Rot
 };
 
 /// A transform contains translation and rotation. It is used to represent
-/// the position and orientation of rigid frames.
+/// the pob2Transformsition and orientation of rigid frames.
 struct b2Transform
 {
 	/// The default constructor does nothing.

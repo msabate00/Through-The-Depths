@@ -38,8 +38,8 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Estar relajao
 
-	idleAnim.PushBack({ 1, 1, 64, 64 });
-	idleAnim.PushBack({ 65, 1, 64, 64 });
+	idleAnim.PushBack({ 1, 1, 32, 32 });
+	idleAnim.PushBack({ 33, 1, 32, 32 });
 	idleAnim.speed = 0.1f;
 
 	//Saltar
@@ -151,11 +151,6 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-
-
-	if (app->input->GetKey(SDL_SCANCODE_F1)) {
-		pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle() );
-	}
 
 	
 
@@ -282,6 +277,14 @@ bool Player::Update(float dt)
 			currentAnimation = &runAnim;
 			pbody->body->SetLinearVelocity(vel);
 		}
+
+		if (app->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT) {
+			vel = 10*b2Vec2(speed, pbody->body->GetLinearVelocity().y);
+			isFacingLeft = false;
+			currentAnimation = &runAnim;
+			pbody->body->SetLinearVelocity(vel);
+		}
+
 		//Moverse a la izquierda
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 			vel = b2Vec2(pbody->body->GetLinearVelocity().x, -speed);
@@ -297,7 +300,6 @@ bool Player::Update(float dt)
 			currentAnimation = &runAnim;
 			pbody->body->SetLinearVelocity(vel);
 		}
-		
 	}
 	
 	
