@@ -39,9 +39,9 @@ public:
 
 
 	pugi::xml_node* configScene;
-	
-private:
 	SDL_Texture* img;
+private:
+	
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
