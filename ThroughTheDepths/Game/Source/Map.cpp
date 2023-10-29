@@ -581,6 +581,14 @@ bool Map::LoadCollisions(std::string layerName) {
                         ret = true;
                     }
 
+                    //Fuera del mapa
+                    if (gid == tileset->firstgid + 15) {
+                        PhysBody* c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        c1->ctype = ColliderType::DIE_HOLE;
+
+                        ret = true;
+                    }
+
                 }
             }
         }

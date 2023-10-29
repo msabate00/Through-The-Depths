@@ -226,7 +226,6 @@ bool Player::Update(float dt)
 			watchUpDownTimer.Start();
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && watchUpDownTimer.ReadMSec() > 400) {
-			//Camara mover abajo
 			yCameraOffset = -300;
 		}
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP && watchUpDownTimer.ReadMSec() > 400 || (abs(pbody->body->GetLinearVelocity().x) > 0)) {
@@ -238,7 +237,6 @@ bool Player::Update(float dt)
 			watchUpDownTimer.Start();
 		}
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && watchUpDownTimer.ReadMSec() > 400) {
-			//Camara mover abajo
 			yCameraOffset = 300;
 		}
 		if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_UP && watchUpDownTimer.ReadMSec() > 400) || (abs(pbody->body->GetLinearVelocity().x) > 0)) {
@@ -475,6 +473,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				app->entityManager->DestroyEntity(physB->listener);
 				break;
 		
+			case ColliderType::DIE_HOLE:
 			case ColliderType::SPYKES:
 				isDying = true;
 				break;
