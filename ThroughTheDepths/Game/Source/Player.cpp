@@ -229,7 +229,7 @@ bool Player::Update(float dt)
 			//Camara mover abajo
 			yCameraOffset = -300;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP && watchUpDownTimer.ReadMSec() > 400) {
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP && watchUpDownTimer.ReadMSec() > 400 || (abs(pbody->body->GetLinearVelocity().x) > 0)) {
 			yCameraOffset = 0;
 		}
 
@@ -241,7 +241,7 @@ bool Player::Update(float dt)
 			//Camara mover abajo
 			yCameraOffset = 300;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP && watchUpDownTimer.ReadMSec() > 400) {
+		if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_UP && watchUpDownTimer.ReadMSec() > 400) || (abs(pbody->body->GetLinearVelocity().x) > 0)) {
 			yCameraOffset = 0;
 		}
 
