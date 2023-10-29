@@ -83,6 +83,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	dieAnim.PushBack({ 193, 225, 32, 32 });
 	dieAnim.PushBack({ 225, 225, 32, 32 });
 	dieAnim.speed = 0.17f;
+	dieAnim.loop = false;
 
 	//Atacar
 	
@@ -157,6 +158,11 @@ bool Player::Start() {
 bool Player::Update(float dt)
 {
 
+
+	if (app->input->GetKey(SDL_SCANCODE_F1)) {
+		pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
+	}
+
 	
 
 	currentAnimation = &idleAnim;
@@ -184,7 +190,7 @@ bool Player::Update(float dt)
 	}
 	
 
-	if (!app->godMode) {
+	if (!app->godMode && !isDying) {
 		pbody->body->GetFixtureList()[0].SetSensor(false);
 		vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 	
@@ -288,50 +294,54 @@ bool Player::Update(float dt)
 
 	}
 	else {
-
-		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-			speedFast = speed * 2;
-		}
-		else {
-			speedFast = speed;
-		}
-
-
-		vel = b2Vec2(0, 0);
-		pbody->body->SetLinearVelocity(vel);
-		pbody->body->GetFixtureList()[0].SetSensor(true);
-		//Moverse a la izquierda
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			vel = b2Vec2(-speedFast, pbody->body->GetLinearVelocity().y);
-			isFacingLeft = true;
-			currentAnimation = &runAnim;
-			pbody->body->SetLinearVelocity(vel);
-		}
-
-		//Moverse a la derecha
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			vel = b2Vec2(speedFast, pbody->body->GetLinearVelocity().y);
-			isFacingLeft = false;
-			currentAnimation = &runAnim;
-			pbody->body->SetLinearVelocity(vel);
-		}
+		if (!isDying) {
 
 		
 
-		//Moverse a la izquierda
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-			vel = b2Vec2(pbody->body->GetLinearVelocity().x, -speedFast);
-			isFacingLeft = true;
-			currentAnimation = &runAnim;
-			pbody->body->SetLinearVelocity(vel);
-		}
+			if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+				speedFast = speed * 2;
+			}
+			else {
+				speedFast = speed;
+			}
 
-		//Moverse a la derecha
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-			vel = b2Vec2(pbody->body->GetLinearVelocity().x, speedFast);
-			isFacingLeft = false;
-			currentAnimation = &runAnim;
+
+			vel = b2Vec2(0, 0);
 			pbody->body->SetLinearVelocity(vel);
+			pbody->body->GetFixtureList()[0].SetSensor(true);
+			//Moverse a la izquierda
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+				vel = b2Vec2(-speedFast, pbody->body->GetLinearVelocity().y);
+				isFacingLeft = true;
+				currentAnimation = &runAnim;
+				pbody->body->SetLinearVelocity(vel);
+			}
+
+			//Moverse a la derecha
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+				vel = b2Vec2(speedFast, pbody->body->GetLinearVelocity().y);
+				isFacingLeft = false;
+				currentAnimation = &runAnim;
+				pbody->body->SetLinearVelocity(vel);
+			}
+
+		
+
+			//Moverse a la izquierda
+			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
+				vel = b2Vec2(pbody->body->GetLinearVelocity().x, -speedFast);
+				isFacingLeft = true;
+				currentAnimation = &runAnim;
+				pbody->body->SetLinearVelocity(vel);
+			}
+
+			//Moverse a la derecha
+			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+				vel = b2Vec2(pbody->body->GetLinearVelocity().x, speedFast);
+				isFacingLeft = false;
+				currentAnimation = &runAnim;
+				pbody->body->SetLinearVelocity(vel);
+			}
 		}
 	}
 	
@@ -392,6 +402,11 @@ bool Player::Update(float dt)
 
 	if (isDying) {
 		currentAnimation = &dieAnim;
+		if (dieAnim.HasFinished()) {
+			pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
+			isDying = false;
+			dieAnim.Reset();
+		}
 	}
 
 
@@ -460,7 +475,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				app->entityManager->DestroyEntity(physB->listener);
 				break;
 		
-
+			case ColliderType::SPYKES:
+				isDying = true;
+				break;
 
 
 			case ColliderType::PLATFORM_TRASPASS:
