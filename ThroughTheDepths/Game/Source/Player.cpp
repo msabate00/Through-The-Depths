@@ -214,14 +214,28 @@ bool Player::Update(float dt)
 
 		}
 
+
+		/*CAMARA MIRAR ABAJO*/
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
-			watchDownTimer.Start();
+			watchUpDownTimer.Start();
 		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && watchDownTimer.ReadMSec() > 400) {
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && watchUpDownTimer.ReadMSec() > 400) {
 			//Camara mover abajo
 			yCameraOffset = -300;
 		}
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP && watchDownTimer.ReadMSec() > 400) {
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP && watchUpDownTimer.ReadMSec() > 400) {
+			yCameraOffset = 0;
+		}
+
+		/*CAMARA MIRAR ARRIBA*/
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
+			watchUpDownTimer.Start();
+		}
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && watchUpDownTimer.ReadMSec() > 400) {
+			//Camara mover abajo
+			yCameraOffset = 300;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP && watchUpDownTimer.ReadMSec() > 400) {
 			yCameraOffset = 0;
 		}
 
