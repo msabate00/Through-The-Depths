@@ -65,7 +65,8 @@ private:
 
 	List<PhysBody*> colisionTraspassing;
 	Timer traspassingTimer;
-
+	Timer watchDownTimer;
+	int yCameraOffset = 0;
 
 	
 
@@ -81,6 +82,8 @@ private:
 
 	bool isDying = false;
 	bool isAttacking = false;
+
+
 	
 
 };

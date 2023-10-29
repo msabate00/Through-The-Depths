@@ -214,6 +214,18 @@ bool Player::Update(float dt)
 
 		}
 
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) {
+			watchDownTimer.Start();
+		}
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && watchDownTimer.ReadMSec() > 400) {
+			//Camara mover abajo
+			yCameraOffset = -300;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_UP && watchDownTimer.ReadMSec() > 400) {
+			yCameraOffset = 0;
+		}
+
+
 		//Ataque
 		if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && !isAttacking) {
 			isAttacking = true;
@@ -332,7 +344,7 @@ bool Player::Update(float dt)
 			targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 100);
 		}
 		
-		int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10);
+		int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + yCameraOffset;
 
 		targetPosY = MAX(targetPosY, -2980);
 		targetPosX = MIN(targetPosX, -100);
