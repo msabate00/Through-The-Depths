@@ -58,8 +58,8 @@ Player::Player() : Entity(EntityType::PLAYER)
 	jumpDownAnim.PushBack({ 193, 161, 32, 32 });
 	jumpDownAnim.PushBack({ 225, 161, 32, 32 });
 	
-	jumpDownAnim.speed = 0.17f;
-	jumpUpAnim.speed = 0.17f;
+	jumpDownAnim.speed = 0.1f;
+	jumpUpAnim.speed = 0.15f;
 	//CAMBIAR jumpAnim, y dividirlo en jumpUpAnim y jumpDownAnim; La de up va con loop = false; la de bajar va con loop= true;
 
 
@@ -343,7 +343,15 @@ bool Player::Update(float dt)
 		}
 	}
 	
-	
+	if (vel.y > 0 && canJump == false)
+	{
+		currentAnimation = &jumpDownAnim;
+	}
+
+	if (vel.y < 0 && canJump==false)
+	{
+		currentAnimation = &jumpUpAnim;
+	}
 
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
