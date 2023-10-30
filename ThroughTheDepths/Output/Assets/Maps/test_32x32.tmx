@@ -72844,12 +72844,12 @@
    <tile gid="888"/>
    <tile gid="888"/>
    <tile gid="888"/>
-   <tile gid="888"/>
-   <tile gid="888"/>
-   <tile gid="888"/>
-   <tile gid="888"/>
-   <tile gid="888"/>
-   <tile gid="887"/>
+   <tile gid="890"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
    <tile gid="872"/>
    <tile/>
    <tile/>
@@ -74035,9 +74035,9 @@
    <tile gid="854"/>
    <tile gid="854"/>
    <tile gid="854"/>
-   <tile gid="1610613591"/>
-   <tile gid="1610613591"/>
-   <tile gid="1610613564"/>
+   <tile gid="854"/>
+   <tile gid="854"/>
+   <tile gid="810"/>
    <tile/>
    <tile/>
    <tile/>
@@ -168110,6 +168110,7 @@
  <layer id="20" name="Carteles" width="280" height="60">
   <properties>
    <property name="Draw" type="bool" value="true"/>
+   <property name="Front" type="bool" value="false"/>
   </properties>
   <data>
    <tile/>
@@ -172855,8 +172856,8 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="536871947"/>
-   <tile gid="536871979"/>
+   <tile/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -201722,7 +201723,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="2" name="Colisions" width="280" height="60">
+ <layer id="2" name="Colisions" width="280" height="60" visible="0">
   <properties>
    <property name="Draw" type="bool" value="false"/>
    <property name="Front" type="bool" value="false"/>
@@ -218530,7 +218531,7 @@
    <tile gid="214"/>
   </data>
  </layer>
- <objectgroup color="#ff0000" id="19" name="Colisions_floor">
+ <objectgroup color="#ff0000" id="19" name="Colisions_floor" visible="0">
   <object id="3" x="-1.7803" y="1441.36" width="64" height="479.427"/>
   <object id="4" x="61.2155" y="1632.6" width="577" height="64"/>
   <object id="5" x="542.22" y="1687.66" width="96" height="200"/>
