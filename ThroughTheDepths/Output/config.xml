@@ -61,17 +61,59 @@
 			<frame x="225" y="97" w="32" h="32"/>
 		</runAnim>
 
-		<idleAnim loop="true" speed="0.17">
-			<frame x="1" y="97" w="32" h="32"/>
-			<frame x="33" y="97" w="32" h="32"/>
-			<frame x="65" y="97" w="32" h="32"/>
-			<frame x="97" y="97" w="32" h="32"/>
-			<frame x="129" y="97" w="32" h="32"/>
-			<frame x="161" y="97" w="32" h="32"/>
-			<frame x="193" y="97" w="32" h="32"/>
-			<frame x="225" y="97" w="32" h="32"/>
+		<idleAnim loop="true" speed="0.1">
+			<frame x="1" y="1" w="32" h="32"/>
+			<frame x="33" y="1" w="32" h="32"/>
 		</idleAnim>
 
+		<walkAnim loop="true" speed="0.17">
+			<frame x="1" y="65" w="32" h="32"/>
+			<frame x="33" y="65" w="32" h="32"/>
+			<frame x="65" y="65" w="32" h="32"/>
+			<frame x="97" y="65" w="32" h="32"/>
+		</walkAnim>
+
+		<jumpUpAnim loop="false" speed="0.15">
+			<frame x="1" y="161" w="32" h="32"/>
+			<frame x="33" y="161" w="32" h="32"/>
+			<frame x="65" y="161" w="32" h="32"/>
+			<frame x="97" y="161" w="32" h="32"/>
+		</jumpUpAnim>
+
+		<jumpDownAnim loop="false" speed="0.1">
+			<frame x="129" y="161" w="32" h="32"/>
+			<frame x="161" y="161" w="32" h="32"/>
+			<frame x="193" y="161" w="32" h="32"/>
+			<frame x="224" y="161" w="32" h="32"/>
+		</jumpDownAnim>
+
+		<ghostAnim loop="false" speed="0.17">
+			<frame x="1" y="193" w="32" h="32"/>
+			<frame x="33" y="193" w="32" h="32"/>
+			<frame x="65" y="193" w="32" h="32"/>
+		</ghostAnim>
+
+		<dieAnim loop="false" speed="0.17">
+			<frame x="1" y="225" w="32" h="32"/>
+			<frame x="33" y="225" w="32" h="32"/>
+			<frame x="65" y="225" w="32" h="32"/>
+			<frame x="97" y="225" w="32" h="32"/>
+			<frame x="129" y="225" w="32" h="32"/>
+			<frame x="161" y="225" w="32" h="32"/>
+			<frame x="193" y="225" w="32" h="32"/>
+			<frame x="225" y="225" w="32" h="32"/>
+		</dieAnim>
+
+		<attackAnim loop="false" speed="0.35">
+			<frame x="1" y="257" w="32" h="32"/>
+			<frame x="33" y="257" w="32" h="32"/>
+			<frame x="65" y="257" w="32" h="32"/>
+			<frame x="97" y="257" w="32" h="32"/>
+			<frame x="129" y="257" w="32" h="32"/>
+			<frame x="161" y="257" w="32" h="32"/>
+			<frame x="193" y="257" w="32" h="32"/>
+			<frame x="225" y="257" w="32" h="32"/>
+		</attackAnim>
 	
 		
 		
