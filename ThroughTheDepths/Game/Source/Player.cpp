@@ -18,7 +18,10 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Correr
 
-	runAnim.PushBack({ 1, 97,  32, 32 });
+	runAnim.LoadAnimation("runAnim");
+	
+
+	/*runAnim.PushBack({ 1, 97,  32, 32 });
 	runAnim.PushBack({ 33,97,  32, 32 });
 	runAnim.PushBack({ 65, 97, 32, 32 });
 	runAnim.PushBack({ 97, 97, 32, 32 });
@@ -26,7 +29,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	runAnim.PushBack({ 161, 97, 32, 32 });
 	runAnim.PushBack({ 193, 97, 32, 32 });
 	runAnim.PushBack({ 225, 97, 32, 32 });
-	runAnim.speed = 0.17f;
+	runAnim.speed = 0.17f;*/
 
 	//Caminar
 
@@ -38,9 +41,11 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Estar relajao
 
-	idleAnim.PushBack({ 1, 1, 32, 32 });
-	idleAnim.PushBack({ 33, 1, 32, 32 });
-	idleAnim.speed = 0.1f;
+	//idleAnim.PushBack({ 1, 1, 32, 32 });
+	//idleAnim.PushBack({ 33, 1, 32, 32 });
+	//idleAnim.speed = 0.1f;
+
+	idleAnim.LoadAnimation("idleAnim");
 
 	/*idleAnim.PushBack({ 1, 1, 64, 64 });
 	idleAnim.PushBack({ 65, 1, 64, 64 });

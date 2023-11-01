@@ -491,6 +491,7 @@ bool Map::LoadObject(pugi::xml_node& node, MapObjects* mapObjects)
             object.attribute("y").as_uint(),
             object.attribute("width").as_uint(),
             object.attribute("height").as_uint(),
+            List<uint>()
 
             });
         i++;

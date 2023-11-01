@@ -48,4 +48,34 @@
 		<mapfile path="Assets/Maps/test_32x32.tmx"/>
 	</map>
 
+	<animations>
+		
+		<runAnim loop="true" speed="0.17">
+			<frame x="1" y="97" w="32" h="32"/>
+			<frame x="33" y="97" w="32" h="32"/>
+			<frame x="65" y="97" w="32" h="32"/>
+			<frame x="97" y="97" w="32" h="32"/>
+			<frame x="129" y="97" w="32" h="32"/>
+			<frame x="161" y="97" w="32" h="32"/>
+			<frame x="193" y="97" w="32" h="32"/>
+			<frame x="225" y="97" w="32" h="32"/>
+		</runAnim>
+
+		<idleAnim loop="true" speed="0.17">
+			<frame x="1" y="97" w="32" h="32"/>
+			<frame x="33" y="97" w="32" h="32"/>
+			<frame x="65" y="97" w="32" h="32"/>
+			<frame x="97" y="97" w="32" h="32"/>
+			<frame x="129" y="97" w="32" h="32"/>
+			<frame x="161" y="97" w="32" h="32"/>
+			<frame x="193" y="97" w="32" h="32"/>
+			<frame x="225" y="97" w="32" h="32"/>
+		</idleAnim>
+
+	
+		
+		
+		
+	</animations>
+
 </config>
