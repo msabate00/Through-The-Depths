@@ -127,6 +127,7 @@ bool Player::Start() {
 	//position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	speed = parameters.attribute("speed").as_float();
+	jumpForce = parameters.attribute("jumpForce").as_float();
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	int points = 2;
