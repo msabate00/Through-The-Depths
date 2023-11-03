@@ -28,6 +28,7 @@
 	</audio>
 
 	<scene>
+		<!-- La posicion del player ahora funciona por el tiled-->
 		<player x="300" y="352" texturepath="Assets/Textures/player.png" speed="0.34">
 			<coinAudio path="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
 			
