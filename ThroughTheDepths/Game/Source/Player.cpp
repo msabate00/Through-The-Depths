@@ -491,11 +491,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			case ColliderType::COIN: 
 				app->audio->PlayFx(pickCoinFxId);
 				app->entityManager->DestroyEntity(physB->listener);
+				physB->body->SetActive(false);
 				break;
 		
 			case ColliderType::DIE_HOLE:
 			case ColliderType::SPYKES:
-				isDying = true;
+				if (!app->godMode) {
+					isDying = true;
+				}
 				break;
 
 
