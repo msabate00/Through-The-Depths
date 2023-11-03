@@ -6,8 +6,8 @@ Link to the project: [https://github.com/msabate00/Through-The-Depths](https://g
 
 ## Members
 
--   Martí Sabaté. Github:  [@msabate00](https://github.com/msabate00). Responsibility: Code leader
--   Raül Sanchez. Github:  [@Galycon](https://github.com/Galycon). Responsibility: General Analysis
+-   Martí Sabaté. Github:  [@msabate00](https://github.com/msabate00). 
+-   Raül Sanchez. Github:  [@Galycon](https://github.com/Galycon). 
 
 
 ## What is Through the Depths?
@@ -16,8 +16,7 @@ In this first release we can simply move around the map and move forward being c
 
 ## Keyboard Controls
 ### Basic Controls
- - 1 - Insert Coin
- - SPACE - Confirm/Start/Jump button
+ - SPACE - Jump button
  - hold W - Look up
  - hold S - Look down
  - A/D - Move left/right
@@ -29,6 +28,8 @@ In this first release we can simply move around the map and move forward being c
 
 
 ### Debug Controls
+
+ - F1 - Go to level1
  - F3 - Reset level
  - F9 - Show/hide Collisions and other metas
  - F10 - Toggle godmode
