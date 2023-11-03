@@ -126,7 +126,7 @@ bool Player::Start() {
 	//position.x = parameters.attribute("x").as_int();
 	//position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-
+	speed = parameters.attribute("speed").as_float();
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	int points = 2;
@@ -148,7 +148,7 @@ bool Player::Start() {
 	
 	
 
-	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
+	pickCoinFxId = app->audio->LoadFx(parameters.child("coinAudio").attribute("path").as_string());
 
 
 
@@ -170,7 +170,7 @@ bool Player::Update(float dt)
 {
 
 
-	if (app->input->GetKey(SDL_SCANCODE_F1)) {
+	if (app->input->GetKey(SDL_SCANCODE_F3)) {
 		pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
 	}
 
