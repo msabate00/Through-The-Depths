@@ -51,6 +51,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	// Render last to swap buffer
 	AddModule(render);
 
+	godMode = false;
+	debug = false;
+
 	LOG("Timer App Constructor: %f", timer.ReadMSec());
 }
 
@@ -124,6 +127,8 @@ bool App::Start()
 	}
 
 	LOG("Timer App Start(): %f", timer.ReadMSec());
+
+	
 
 	return ret;
 }
@@ -320,6 +325,12 @@ bool App::PostLateUpdate()
 	}
 
 	return ret;
+}
+
+uint64 App::GetFrameCount()
+{
+	return frameCount;
+	
 }
 
 // Called before quitting

@@ -164,14 +164,18 @@ bool Player::Start() {
 	app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
 	app->render->camera.y = (-position.y * app->win->GetScale() + (windowH / 2));
 
+
+
+
 	return true;
 }
 
 bool Player::Update(float dt)
 {
+	
 
 
-	if (app->input->GetKey(SDL_SCANCODE_F3)) {
+	if (app->input->GetKey(SDL_SCANCODE_F3) || app->input->GetKey(SDL_SCANCODE_F1)) {
 		pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
 	}
 
@@ -393,13 +397,28 @@ bool Player::Update(float dt)
 		
 		targetPosX += (isFacingLeft) ? 75 : -50;
 
-		app->render->camera.x = lerp(app->render->camera.x,targetPosX, dt * 0.005f);
-		app->render->camera.y = lerp(app->render->camera.y,targetPosY, dt * 0.002f);
+		
+
+		//El if este es un fix para el modo release
+		if (app->GetFrameCount() < 20) {
+			app->render->camera.x = lerp(app->render->camera.x, targetPosX, 1);
+			app->render->camera.y = lerp(app->render->camera.y, targetPosY, 1);
+		}
+		else {
+			app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+			app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.002f);
+		}
+
+		
+		
 		//app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
+
+
+
 	}
-
 	
-
+	
+	LOG("CAMARA: %d   JUGADOR: %d", app->render->camera.x, position.x);
 
 
 	if (isAttacking) {

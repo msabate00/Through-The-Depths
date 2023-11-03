@@ -15,6 +15,9 @@ Render::Render() : Module()
 	background.g = 53;
 	background.b = 95;
 	background.a = 9;
+
+	camera.x = 0;
+	camera.y = 0;
 }
 
 // Destructor
