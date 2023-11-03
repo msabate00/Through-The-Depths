@@ -44,6 +44,10 @@
 		<coin texturepath="Assets/Maps/tilesets/Animations.png"/>
 		<plant_breakable texturepath="Assets/Maps/tilesets/Animations.png"/>
 		<plant_barrier texturepath="Assets/Maps/tilesets/Animations.png"/>
+
+		<fondo0 texturepath="Assets/Maps/tilesets/Fondo0.png"/>
+		<fondo1 texturepath="Assets/Maps/tilesets/background_1_32x32.png"/>
+		<fondo2 texturepath="Assets/Maps/tilesets/background_2_32x32.png"/>
 		
 	</scene>
 

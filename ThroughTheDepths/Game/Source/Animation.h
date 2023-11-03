@@ -88,13 +88,7 @@ public:
 
 		this->loop = animationsNode.attribute("loop").as_bool();
 		this->speed = animationsNode.attribute("speed").as_float();
-
-
-
 	}
-
-
-
 };
 
 #endif

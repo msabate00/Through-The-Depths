@@ -38,7 +38,7 @@ public:
 	void setPlayer(Player* new_player);
 
 
-	pugi::xml_node* configScene;
+	
 	SDL_Texture* img;
 	SDL_Texture* fondo1;
 	SDL_Texture* fondo2;
