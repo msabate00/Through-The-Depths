@@ -18,14 +18,17 @@ In this first release we can simply move around the map and move forward being c
 ### Basic Controls
  - 1 - Insert Coin
  - SPACE - Confirm/Start/Jump button
- - W - Look up
+ - hold W - Look up
+ - hold S - Look down
  - A/D - Move left/right
- - S - Look down
  - J - Attack
  - ESC - Close Game
 
-### Debug Controls
+ ### Advanced Controls
+ - S+SPACE - Traverse platform downward
 
+
+### Debug Controls
  - F3 - Reset level
  - F9 - Show/hide Collisions and other metas
  - F10 - Toggle godmode
