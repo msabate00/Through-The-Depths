@@ -70,6 +70,6 @@ inline double lerp(double A, double B, double t) {
 }
 
 
-#define TILES_TO_LOAD 15
+#define TILES_TO_LOAD 17
 
 #endif	// __DEFS_H__

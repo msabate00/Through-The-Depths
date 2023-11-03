@@ -277,7 +277,7 @@ bool Player::Update(float dt)
 	
 		//Sistema de salto
 		
-		pbodyFoot->body->SetActive((abs(pbody->body->GetLinearVelocity().y) == 1.0f));
+		pbodyFoot->body->SetActive((abs(pbody->body->GetLinearVelocity().y) == -GRAVITY_Y));
 		
 
 		if (!canJump) {

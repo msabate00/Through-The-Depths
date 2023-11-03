@@ -570,7 +570,7 @@ bool Map::LoadCollisions(std::string layerName) {
                    
 
                     if (gid == tileset->firstgid + 1) {
-                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+1, 32, 2, STATIC);
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+2, 32, 4, STATIC);
                         c1->ctype = ColliderType::PLATFORM_TRASPASS;
                         traspasedPlatformList.Add(c1);
                         ret = true;
