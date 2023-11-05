@@ -36,6 +36,10 @@ private:
 
 	_Mix_Music* music;
 	List<Mix_Chunk *>	fx;
+
+	int sfvVolumne;
+	int musicVolumne;
+
 };
 
 #endif // __AUDIO_H__

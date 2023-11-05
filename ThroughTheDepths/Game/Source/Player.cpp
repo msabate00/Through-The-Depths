@@ -511,6 +511,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				app->audio->PlayFx(pickCoinFxId);
 				app->entityManager->DestroyEntity(physB->listener);
 				physB->body->SetActive(false);
+				
+
 				break;
 		
 			case ColliderType::DIE_HOLE:

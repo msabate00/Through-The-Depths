@@ -23,8 +23,8 @@
 
 
 	<audio>
-		<music volume="128"/>
-		<fx volume="128"/>
+		<music volume="12"/>
+		<fx volume="12"/>
 	</audio>
 
 	<scene>

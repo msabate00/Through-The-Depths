@@ -562,7 +562,7 @@ bool Map::LoadCollisions(std::string layerName) {
                    
 
                     /*No borrar, original sistema de colisiones*/
-                    if (gid == tileset->firstgid) {
+                    if (gid == tileset->firstgid + 0) {
                         PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16 , 32, 32, STATIC);
                         c1->ctype = ColliderType::PLATFORM;
                         ret = true;
