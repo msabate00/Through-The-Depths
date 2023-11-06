@@ -23,9 +23,24 @@ Player::Player() : Entity(EntityType::PLAYER)
 	walkAnim.LoadAnimation("walkAnim");
 	jumpUpAnim.LoadAnimation("jumpUpAnim");
 	jumpDownAnim.LoadAnimation("jumpDownAnim");
-	ghostAnim.LoadAnimation("ghostAnim");
+	ghostAnim.LoadAnimation("dmgAnim");
 	dieAnim.LoadAnimation("dieAnim");
-	attackAnim.LoadAnimation("attackAnim");
+	//attackAnim.LoadAnimation("attackAnim");
+	attackAnim.LoadAnimation("attack2Anim");
+	
+	//Estar relajao
+
+	//idleAnim.PushBack({ 1, 1, 48, 48 });
+	//idleAnim.PushBack({ 33, 1, 32, 32 });
+	//idleAnim.speed = 0.1f;
+
+
+
+
+
+
+
+
 
 	/*runAnim.PushBack({ 1, 97,  32, 32 });
 	runAnim.PushBack({ 33,97,  32, 32 });
@@ -45,11 +60,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	walkAnim.PushBack({ 97, 65, 32, 32 });
 	walkAnim.speed = 0.17f;*/
 
-	//Estar relajao
-
-	//idleAnim.PushBack({ 1, 1, 32, 32 });
-	//idleAnim.PushBack({ 33, 1, 32, 32 });
-	//idleAnim.speed = 0.1f;
+	
 
 	
 
@@ -273,7 +284,17 @@ bool Player::Update(float dt)
 
 		}
 
-	
+	/*	if (app->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && !isAttacking) {
+			isAttacking = true;
+			if (isFacingLeft) {
+				app->particles->AddParticle(app->particles->basicAttackL, position.x - 16, position.y);
+			}
+			else {
+				app->particles->AddParticle(app->particles->basicAttackR, position.x + 16, position.y);
+			}
+
+
+		}*/
 
 
 	
@@ -460,10 +481,10 @@ bool Player::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x-15, position.y-15, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x, position.y-15, SDL_FLIP_NONE, &rect);
 	}
 
 

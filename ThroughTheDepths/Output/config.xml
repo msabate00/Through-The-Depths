@@ -29,7 +29,7 @@
 
 	<scene>
 		<!-- La posicion del player ahora funciona por el tiled-->
-		<player x="1440" y="80" texturepath="Assets/Textures/Player_Standar.png" speed="0.34" jumpForce="4.5">
+		<player x="2080" y="600" texturepath="Assets/Textures/Player_Standar.png" speed="0.34" jumpForce="4.5">
 			<coinAudio path="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
 			
 		</player>
@@ -57,73 +57,139 @@
 	</map>
 
 	<animations>
-		
-		<runAnim loop="true" speed="0.17">
-			<frame x="1" y="97" w="32" h="32"/>
-			<frame x="33" y="97" w="32" h="32"/>
-			<frame x="65" y="97" w="32" h="32"/>
-			<frame x="97" y="97" w="32" h="32"/>
-			<frame x="129" y="97" w="32" h="32"/>
-			<frame x="161" y="97" w="32" h="32"/>
-			<frame x="193" y="97" w="32" h="32"/>
-			<frame x="225" y="97" w="32" h="32"/>
-		</runAnim>
 
-		<idleAnim loop="true" speed="0.1">
-			<frame x="1" y="1" w="32" h="32"/>
-			<frame x="33" y="1" w="32" h="32"/>
+		<idleAnim loop="true" speed="0.2">
+			<frame x="16" y="12" w="48" h="48"/>
+			<frame x="96" y="12" w="48" h="48"/>
+            <frame x="176" y="12" w="48" h="48"/>
+            <frame x="256" y="12" w="48" h="48"/>
+			<frame x="336" y="12" w="48" h="48"/>
+            <frame x="416" y="12" w="48" h="48"/>
+            <frame x="496" y="12" w="48" h="48"/>
+			<frame x="576" y="12" w="48" h="48"/>
+            <frame x="656" y="12" w="48" h="48"/>
+            <frame x="736" y="12" w="48" h="48"/>
+			<frame x="816" y="12" w="48" h="48"/>
+            <frame x="896" y="12" w="48" h="48"/>
+            <frame x="976" y="12" w="48" h="48"/>
+			<frame x="1056" y="12" w="48" h="48"/>
+            <frame x="1136" y="12" w="48" h="48"/>
+            <frame x="1216" y="12" w="48" h="48"/>
+			<frame x="1296" y="12" w="48" h="48"/>
+            <frame x="1376" y="12" w="48" h="48"/>
 		</idleAnim>
 
-		<walkAnim loop="true" speed="0.17">
-			<frame x="1" y="65" w="32" h="32"/>
-			<frame x="33" y="65" w="32" h="32"/>
-			<frame x="65" y="65" w="32" h="32"/>
-			<frame x="97" y="65" w="32" h="32"/>
-		</walkAnim>
+		<runAnim loop="true" speed="0.5">
+			<frame x="16" y="61" w="48" h="48"/>
+			<frame x="96" y="61" w="48" h="48"/>
+            <frame x="176" y="61" w="48" h="48"/>
+            <frame x="256" y="61" w="48" h="48"/>
+			<frame x="336" y="61" w="48" h="48"/>
+            <frame x="416" y="61" w="48" h="48"/>
+            <frame x="496" y="61" w="48" h="48"/>
+			<frame x="576" y="61" w="48" h="48"/>
+            <frame x="656" y="61" w="48" h="48"/>
+            <frame x="736" y="61" w="48" h="48"/>
+			<frame x="816" y="61" w="48" h="48"/>
+            <frame x="896" y="61" w="48" h="48"/>
+            <frame x="976" y="61" w="48" h="48"/>
+			<frame x="1056" y="61" w="48" h="48"/>
+            <frame x="1136" y="61" w="48" h="48"/>
+            <frame x="1216" y="61" w="48" h="48"/>
+			<frame x="1296" y="61" w="48" h="48"/>
+            <frame x="1376" y="61" w="48" h="48"/>
+            <frame x="1456" y="61" w="48" h="48"/>
+			<frame x="1536" y="61" w="48" h="48"/>
+            <frame x="1616" y="61" w="48" h="48"/>
+            <frame x="1696" y="61" w="48" h="48"/>
+			<frame x="1776" y="61" w="48" h="48"/>
+            <frame x="1856" y="61" w="48" h="48"/>
+		</runAnim>
 
-		<jumpUpAnim loop="false" speed="0.15">
-			<frame x="1" y="161" w="32" h="32"/>
-			<frame x="33" y="161" w="32" h="32"/>
-			<frame x="65" y="161" w="32" h="32"/>
-			<frame x="97" y="161" w="32" h="32"/>
+		<jumpUpAnim loop="true" speed="0.1">
+			<frame x="16" y="159" w="48" h="48"/>
+			<frame x="96" y="159" w="48" h="48"/>
+            <frame x="176" y="159" w="48" h="48"/>
+            <frame x="256" y="159" w="48" h="48"/>
+			<frame x="336" y="159" w="48" h="48"/>
+            <frame x="416" y="159" w="48" h="48"/>
+            <frame x="496" y="159" w="48" h="48"/>
+			<frame x="576" y="159" w="48" h="48"/>
+            <frame x="656" y="159" w="48" h="48"/>
+            <frame x="736" y="159" w="48" h="48"/>
+			
 		</jumpUpAnim>
 
-		<jumpDownAnim loop="false" speed="0.1">
-			<frame x="129" y="161" w="32" h="32"/>
-			<frame x="161" y="161" w="32" h="32"/>
-			<frame x="193" y="161" w="32" h="32"/>
-			<frame x="224" y="161" w="32" h="32"/>
+		<jumpDownAnim loop="true" speed="0.1">
+			<frame x="816" y="159" w="48" h="48"/>
+            <frame x="896" y="159" w="48" h="48"/>
+            <frame x="976" y="159" w="48" h="48"/>
+			<frame x="1056" y="159" w="48" h="48"/>
+            <frame x="1136" y="159" w="48" h="48"/>
+            <frame x="1216" y="159" w="48" h="48"/>
+			<frame x="1296" y="159" w="48" h="48"/>
+            <frame x="1376" y="159" w="48" h="48"/>
+            <frame x="1456" y="159" w="48" h="48"/>
 		</jumpDownAnim>
 
-		<ghostAnim loop="false" speed="0.17">
-			<frame x="1" y="193" w="32" h="32"/>
-			<frame x="33" y="193" w="32" h="32"/>
-			<frame x="65" y="193" w="32" h="32"/>
-		</ghostAnim>
-
 		<dieAnim loop="false" speed="0.17">
-			<frame x="1" y="225" w="32" h="32"/>
-			<frame x="33" y="225" w="32" h="32"/>
-			<frame x="65" y="225" w="32" h="32"/>
-			<frame x="97" y="225" w="32" h="32"/>
-			<frame x="129" y="225" w="32" h="32"/>
-			<frame x="161" y="225" w="32" h="32"/>
-			<frame x="193" y="225" w="32" h="32"/>
-			<frame x="225" y="225" w="32" h="32"/>
+			<frame x="16" y="257" w="48" h="48"/>
+			<frame x="96" y="257" w="48" h="48"/>
+            <frame x="176" y="257" w="48" h="48"/>
+            <frame x="256" y="257" w="48" h="48"/>
+			<frame x="336" y="257" w="48" h="48"/>
+            <frame x="416" y="257" w="48" h="48"/>
+            <frame x="496" y="257" w="48" h="48"/>
 		</dieAnim>
 
-		<attackAnim loop="false" speed="0.35">
-			<frame x="1" y="257" w="32" h="32"/>
-			<frame x="33" y="257" w="32" h="32"/>
-			<frame x="65" y="257" w="32" h="32"/>
-			<frame x="97" y="257" w="32" h="32"/>
-			<frame x="129" y="257" w="32" h="32"/>
-			<frame x="161" y="257" w="32" h="32"/>
-			<frame x="193" y="257" w="32" h="32"/>
-			<frame x="225" y="257" w="32" h="32"/>
+		<dmgAnim loop="false" speed="0.17">
+			<frame x="16" y="208" w="48" h="48"/>
+			<frame x="96" y="208" w="48" h="48"/>
+            <frame x="176" y="208" w="48" h="48"/>
+            <frame x="256" y="208" w="48" h="48"/>
+			<frame x="336" y="208" w="48" h="48"/>
+            <frame x="416" y="208" w="48" h="48"/>
+            <frame x="496" y="208" w="48" h="48"/>
+		</dmgAnim>
+
+		<attack2Anim loop="false" speed="0.35">
+			<frame x="16" y="110" w="48" h="48"/>
+			<frame x="96" y="110" w="48" h="48"/>
+            <frame x="176" y="110" w="48" h="48"/>
+            <frame x="256" y="110" w="48" h="48"/>
+			<frame x="336" y="110" w="48" h="48"/>
+            <frame x="416" y="110" w="48" h="48"/>
+            <frame x="496" y="110" w="48" h="48"/>
+			<frame x="576" y="110" w="48" h="48"/>
+            <frame x="656" y="110" w="48" h="48"/>
+            <frame x="736" y="110" w="48" h="48"/>
+			<frame x="816" y="110" w="48" h="48"/>
+            <frame x="896" y="110" w="48" h="48"/>
+            <frame x="976" y="110" w="48" h="48"/>
+			<frame x="1056" y="110" w="48" h="48"/>
+            <frame x="1136" y="110" w="48" h="48"/>
+            <frame x="1216" y="110" w="48" h="48"/>
+			<frame x="1296" y="110" w="48" h="48"/>
+            <frame x="1376" y="110" w="48" h="48"/>
+            <frame x="1456" y="110" w="48" h="48"/>
+			<frame x="1536" y="110" w="48" h="48"/>
+            <frame x="1616" y="110" w="48" h="48"/>
+            <frame x="1696" y="110" w="48" h="48"/>
+			<frame x="1776" y="110" w="48" h="48"/>
+            <frame x="1856" y="110" w="48" h="48"/>
+            <frame x="1936" y="110" w="48" h="48"/>
+            <frame x="2016" y="110" w="48" h="48"/>
+		</attack2Anim>
+        
+	   <attackAnim loop="false" speed="0.35">
+            <frame x="16" y="110" w="48" h="48"/>
+			<frame x="96" y="110" w="48" h="48"/>
+            <frame x="176" y="110" w="48" h="48"/>
+            <frame x="256" y="110" w="48" h="48"/>
+			<frame x="336" y="110" w="48" h="48"/>
+            <frame x="416" y="110" w="48" h="48"/>
+            <frame x="496" y="110" w="48" h="48"/>
 		</attackAnim>
-	
-		
 		
 		
 	</animations>
