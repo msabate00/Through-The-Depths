@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="280" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="23" nextobjectid="233">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="280" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="23" nextobjectid="233">
  <tileset firstgid="1" name="MainTiles" tilewidth="32" tileheight="32" tilecount="198" columns="18">
   <image source="tilesets/tileset_32x32.png" width="576" height="352"/>
  </tileset>
@@ -22,7 +22,7 @@
   <image source="tilesets/Entities.png" width="128" height="128"/>
  </tileset>
  <tileset firstgid="1023" name="TX Village Props" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
-  <image source="Downloads/utils/TX Village Props.png" width="1024" height="1024"/>
+  <image source="tilesets2/TX Village Props.png" width="1024" height="1024"/>
  </tileset>
  <layer id="7" name="Fondo 0" width="280" height="60">
   <properties>
@@ -65036,7 +65036,7 @@
    <tile gid="163"/>
    <tile gid="163"/>
    <tile gid="163"/>
-   <tile gid="163"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -65316,7 +65316,7 @@
    <tile/>
    <tile gid="163"/>
    <tile gid="163"/>
-   <tile gid="163"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -65596,7 +65596,7 @@
    <tile/>
    <tile gid="163"/>
    <tile gid="163"/>
-   <tile gid="163"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -98653,7 +98653,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="2684354673"/>
+   <tile gid="906"/>
    <tile/>
    <tile/>
    <tile/>
@@ -98933,7 +98933,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="2684354673"/>
+   <tile gid="906"/>
    <tile/>
    <tile/>
    <tile/>
@@ -99213,7 +99213,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="2684354673"/>
+   <tile gid="906"/>
    <tile/>
    <tile/>
    <tile/>
@@ -218531,7 +218531,7 @@
    <tile gid="214"/>
   </data>
  </layer>
- <objectgroup color="#ff0000" id="19" name="Colisions_floor">
+ <objectgroup color="#ff0000" id="19" name="Colisions_floor" visible="0">
   <object id="3" x="-1.7803" y="1441.36" width="64" height="479.427"/>
   <object id="4" x="61.2155" y="1632.6" width="577" height="64"/>
   <object id="5" x="542.22" y="1687.66" width="96" height="200"/>
