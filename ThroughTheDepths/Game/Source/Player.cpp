@@ -446,8 +446,10 @@ bool Player::Update(float dt)
 		currentAnimation = &attackAnim;
 
 		if (attackAnim.HasFinished()) {
-			attackAnim.Reset();
+			
 			isAttacking = false;
+			attackAnim.Reset();
+			currentAnimation = &idleAnim;
 		}
 	}
 
