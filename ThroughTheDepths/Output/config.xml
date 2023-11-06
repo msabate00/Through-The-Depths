@@ -53,7 +53,7 @@
 
 	<map>
 		<mapfolder path="Assets/Maps/"/>
-		<mapfile path="Assets/Maps/test_32x32.tmx"/>
+		<mapfile path="Assets/Maps/Bosque.tmx"/>
 	</map>
 
 	<animations>

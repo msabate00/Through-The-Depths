@@ -218531,7 +218531,7 @@
    <tile gid="214"/>
   </data>
  </layer>
- <objectgroup color="#ff0000" id="19" name="Colisions_floor" visible="0">
+ <objectgroup color="#ff0000" id="19" name="Colisions_floor">
   <object id="3" x="-1.7803" y="1441.36" width="64" height="479.427"/>
   <object id="4" x="61.2155" y="1632.6" width="577" height="64"/>
   <object id="5" x="542.22" y="1687.66" width="96" height="200"/>
