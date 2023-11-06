@@ -18,7 +18,16 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Correr
 
-	runAnim.PushBack({ 1, 97,  32, 32 });
+	runAnim.LoadAnimation("runAnim");
+	idleAnim.LoadAnimation("idleAnim");
+	walkAnim.LoadAnimation("walkAnim");
+	jumpUpAnim.LoadAnimation("jumpUpAnim");
+	jumpDownAnim.LoadAnimation("jumpDownAnim");
+	ghostAnim.LoadAnimation("ghostAnim");
+	dieAnim.LoadAnimation("dieAnim");
+	attackAnim.LoadAnimation("attackAnim");
+
+	/*runAnim.PushBack({ 1, 97,  32, 32 });
 	runAnim.PushBack({ 33,97,  32, 32 });
 	runAnim.PushBack({ 65, 97, 32, 32 });
 	runAnim.PushBack({ 97, 97, 32, 32 });
@@ -26,21 +35,23 @@ Player::Player() : Entity(EntityType::PLAYER)
 	runAnim.PushBack({ 161, 97, 32, 32 });
 	runAnim.PushBack({ 193, 97, 32, 32 });
 	runAnim.PushBack({ 225, 97, 32, 32 });
-	runAnim.speed = 0.17f;
+	runAnim.speed = 0.17f;*/
 
 	//Caminar
 
-	walkAnim.PushBack({ 1, 65, 32, 32 });
+	/*walkAnim.PushBack({ 1, 65, 32, 32 });
 	walkAnim.PushBack({ 33, 65, 32, 32 });
 	walkAnim.PushBack({ 65, 65, 32, 32 });
 	walkAnim.PushBack({ 97, 65, 32, 32 });
-	walkAnim.speed = 0.17f;
+	walkAnim.speed = 0.17f;*/
 
 	//Estar relajao
 
-	idleAnim.PushBack({ 1, 1, 32, 32 });
-	idleAnim.PushBack({ 33, 1, 32, 32 });
-	idleAnim.speed = 0.1f;
+	//idleAnim.PushBack({ 1, 1, 32, 32 });
+	//idleAnim.PushBack({ 33, 1, 32, 32 });
+	//idleAnim.speed = 0.1f;
+
+	
 
 	/*idleAnim.PushBack({ 1, 1, 64, 64 });
 	idleAnim.PushBack({ 65, 1, 64, 64 });
@@ -49,7 +60,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Saltar
 
-	jumpUpAnim.PushBack({ 1, 161, 32, 32 });
+	/*jumpUpAnim.PushBack({ 1, 161, 32, 32 });
 	jumpUpAnim.PushBack({ 33, 161, 32, 32 });
 	jumpUpAnim.PushBack({ 65, 161, 32, 32 });
 	jumpUpAnim.PushBack({ 97, 161, 32, 32 });
@@ -59,7 +70,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	jumpDownAnim.PushBack({ 225, 161, 32, 32 });
 	
 	jumpDownAnim.speed = 0.1f;
-	jumpUpAnim.speed = 0.15f;
+	jumpUpAnim.speed = 0.15f;*/
 	//CAMBIAR jumpAnim, y dividirlo en jumpUpAnim y jumpDownAnim; La de up va con loop = false; la de bajar va con loop= true;
 
 
@@ -67,14 +78,14 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Morir Desvanecido
 
-	ghostAnim.PushBack({ 1, 193, 32, 32 });
+	/*ghostAnim.PushBack({ 1, 193, 32, 32 });
 	ghostAnim.PushBack({ 33, 193, 32, 32 });
 	ghostAnim.PushBack({ 65, 193, 32, 32 });
-	ghostAnim.speed = 0.17f;
+	ghostAnim.speed = 0.17f;*/
 
 	//Morir
 
-	dieAnim.PushBack({ 1, 225, 32, 32 });
+	/*dieAnim.PushBack({ 1, 225, 32, 32 });
 	dieAnim.PushBack({ 33, 225, 32, 32 });
 	dieAnim.PushBack({ 65, 225, 32, 32 });
 	dieAnim.PushBack({ 97, 225, 32, 32 });
@@ -83,11 +94,11 @@ Player::Player() : Entity(EntityType::PLAYER)
 	dieAnim.PushBack({ 193, 225, 32, 32 });
 	dieAnim.PushBack({ 225, 225, 32, 32 });
 	dieAnim.speed = 0.17f;
-	dieAnim.loop = false;
+	dieAnim.loop = false;*/
 
 	//Atacar
 	
-	attackAnim.PushBack({ 1, 257, 32, 32 });
+	/*attackAnim.PushBack({ 1, 257, 32, 32 });
 	attackAnim.PushBack({ 33, 257, 32, 32 });
 	attackAnim.PushBack({ 65, 257, 32, 32 });
 	attackAnim.PushBack({ 97, 257, 32, 32 });
@@ -96,7 +107,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	attackAnim.PushBack({ 193, 257, 32, 32 });
 	attackAnim.PushBack({ 225, 257, 32, 32 });
 	attackAnim.speed = 0.35f;
-	attackAnim.loop = false;
+	attackAnim.loop = false;*/
 }
 
 Player::~Player() {
@@ -115,7 +126,8 @@ bool Player::Start() {
 	//position.x = parameters.attribute("x").as_int();
 	//position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-
+	speed = parameters.attribute("speed").as_float();
+	jumpForce = parameters.attribute("jumpForce").as_float();
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	int points = 2;
@@ -137,7 +149,7 @@ bool Player::Start() {
 	
 	
 
-	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
+	pickCoinFxId = app->audio->LoadFx(parameters.child("coinAudio").attribute("path").as_string());
 
 
 
@@ -152,14 +164,18 @@ bool Player::Start() {
 	app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
 	app->render->camera.y = (-position.y * app->win->GetScale() + (windowH / 2));
 
+
+
+
 	return true;
 }
 
 bool Player::Update(float dt)
 {
+	
 
 
-	if (app->input->GetKey(SDL_SCANCODE_F1)) {
+	if (app->input->GetKey(SDL_SCANCODE_F3) || app->input->GetKey(SDL_SCANCODE_F1)) {
 		pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
 	}
 
@@ -196,14 +212,14 @@ bool Player::Update(float dt)
 	
 		//Moverse a la izquierda
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			vel = b2Vec2(-speed, pbody->body->GetLinearVelocity().y);
+			vel = b2Vec2(-speed * dt, pbody->body->GetLinearVelocity().y);
 			isFacingLeft = true;
 			currentAnimation = &runAnim;
 		}
 
 		//Moverse a la derecha
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			vel = b2Vec2(speed, pbody->body->GetLinearVelocity().y);
+			vel = b2Vec2(speed * dt, pbody->body->GetLinearVelocity().y);
 			isFacingLeft = false;
 			currentAnimation = &runAnim;
 		}
@@ -266,7 +282,7 @@ bool Player::Update(float dt)
 	
 		//Sistema de salto
 		
-		pbodyFoot->body->SetActive((abs(pbody->body->GetLinearVelocity().y) == 1.0f));
+		pbodyFoot->body->SetActive((abs(pbody->body->GetLinearVelocity().y) == -GRAVITY_Y));
 		
 
 		if (!canJump) {
@@ -309,7 +325,7 @@ bool Player::Update(float dt)
 			pbody->body->GetFixtureList()[0].SetSensor(true);
 			//Moverse a la izquierda
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-				vel = b2Vec2(-speedFast, pbody->body->GetLinearVelocity().y);
+				vel = b2Vec2(-speedFast * dt, pbody->body->GetLinearVelocity().y);
 				isFacingLeft = true;
 				currentAnimation = &runAnim;
 				pbody->body->SetLinearVelocity(vel);
@@ -317,7 +333,7 @@ bool Player::Update(float dt)
 
 			//Moverse a la derecha
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-				vel = b2Vec2(speedFast, pbody->body->GetLinearVelocity().y);
+				vel = b2Vec2(speedFast * dt, pbody->body->GetLinearVelocity().y);
 				isFacingLeft = false;
 				currentAnimation = &runAnim;
 				pbody->body->SetLinearVelocity(vel);
@@ -327,7 +343,7 @@ bool Player::Update(float dt)
 
 			//Moverse a la izquierda
 			if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-				vel = b2Vec2(pbody->body->GetLinearVelocity().x, -speedFast);
+				vel = b2Vec2(pbody->body->GetLinearVelocity().x, -speedFast * dt);
 				isFacingLeft = true;
 				currentAnimation = &runAnim;
 				pbody->body->SetLinearVelocity(vel);
@@ -335,7 +351,7 @@ bool Player::Update(float dt)
 
 			//Moverse a la derecha
 			if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-				vel = b2Vec2(pbody->body->GetLinearVelocity().x, speedFast);
+				vel = b2Vec2(pbody->body->GetLinearVelocity().x, speedFast * dt);
 				isFacingLeft = false;
 				currentAnimation = &runAnim;
 				pbody->body->SetLinearVelocity(vel);
@@ -381,13 +397,28 @@ bool Player::Update(float dt)
 		
 		targetPosX += (isFacingLeft) ? 75 : -50;
 
-		app->render->camera.x = lerp(app->render->camera.x,targetPosX, dt * 0.005f);
-		app->render->camera.y = lerp(app->render->camera.y,targetPosY, dt * 0.002f);
+		
+
+		//El if este es un fix para el modo release
+		if (app->GetFrameCount() < 20) {
+			app->render->camera.x = lerp(app->render->camera.x, targetPosX, 1);
+			app->render->camera.y = lerp(app->render->camera.y, targetPosY, 1);
+		}
+		else {
+			app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+			app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.002f);
+		}
+
+		
+		
 		//app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
+
+
+
 	}
-
 	
-
+	
+	LOG("CAMARA: %d   JUGADOR: %d", app->render->camera.x, position.x);
 
 
 	if (isAttacking) {
@@ -479,11 +510,16 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			case ColliderType::COIN: 
 				app->audio->PlayFx(pickCoinFxId);
 				app->entityManager->DestroyEntity(physB->listener);
+				physB->body->SetActive(false);
+				
+
 				break;
 		
 			case ColliderType::DIE_HOLE:
 			case ColliderType::SPYKES:
-				isDying = true;
+				if (!app->godMode) {
+					isDying = true;
+				}
 				break;
 
 

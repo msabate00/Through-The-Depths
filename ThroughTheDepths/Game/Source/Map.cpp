@@ -491,6 +491,7 @@ bool Map::LoadObject(pugi::xml_node& node, MapObjects* mapObjects)
             object.attribute("y").as_uint(),
             object.attribute("width").as_uint(),
             object.attribute("height").as_uint(),
+            List<uint>()
 
             });
         i++;
@@ -561,7 +562,7 @@ bool Map::LoadCollisions(std::string layerName) {
                    
 
                     /*No borrar, original sistema de colisiones*/
-                    if (gid == tileset->firstgid) {
+                    if (gid == tileset->firstgid + 0) {
                         PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16 , 32, 32, STATIC);
                         c1->ctype = ColliderType::PLATFORM;
                         ret = true;
@@ -569,7 +570,7 @@ bool Map::LoadCollisions(std::string layerName) {
                    
 
                     if (gid == tileset->firstgid + 1) {
-                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+1, 32, 2, STATIC);
+                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+2, 32, 4, STATIC);
                         c1->ctype = ColliderType::PLATFORM_TRASPASS;
                         traspasedPlatformList.Add(c1);
                         ret = true;

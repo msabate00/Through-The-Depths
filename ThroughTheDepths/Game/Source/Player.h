@@ -48,7 +48,7 @@ public:
 
 
 	/*NEW JUMPING SYSTEM*/
-	float jumpForce = 5;
+	float jumpForce = 4.5f;
 	bool canJump = true;
 	int numFootContacts = 0;
 

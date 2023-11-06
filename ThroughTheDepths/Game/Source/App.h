@@ -52,6 +52,9 @@ public:
 	const char* GetTitle() const;
 	const char* GetOrganization() const;
 
+
+	uint64 GetFrameCount();
+
 private:
 
 	// Load config file
@@ -73,6 +76,7 @@ private:
 	bool PostUpdate();
 
 	bool PostLateUpdate();
+
 
 public:
 

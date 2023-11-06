@@ -55,6 +55,10 @@ bool Audio::Awake(pugi::xml_node& config)
 		ret = true;
 	}
 
+
+	sfvVolumne = config.child("fx").attribute("volume").as_int();
+	musicVolumne = config.child("music").attribute("volume").as_int();
+
 	return ret;
 }
 
@@ -134,6 +138,7 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 		}
 	}
 
+	Mix_VolumeMusic(musicVolumne);
 	LOG("Successfully playing %s", path);
 	return ret;
 }
@@ -173,6 +178,9 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 	{
 		Mix_PlayChannel(-1, fx[id - 1], repeat);
 	}
+
+	Mix_Volume(-1, sfvVolumne);
+
 
 	return ret;
 }

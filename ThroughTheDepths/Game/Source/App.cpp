@@ -51,6 +51,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	// Render last to swap buffer
 	AddModule(render);
 
+	godMode = false;
+	debug = false;
+
 	LOG("Timer App Constructor: %f", timer.ReadMSec());
 }
 
@@ -124,6 +127,8 @@ bool App::Start()
 	}
 
 	LOG("Timer App Start(): %f", timer.ReadMSec());
+
+	
 
 	return ret;
 }
@@ -226,10 +231,12 @@ void App::FinishUpdate()
 	}
 
 
-	// Shows the time measurements in the window title
+	// Shows the time measurements in the window titley luego
 	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %I32u Frame Count: %I64u ",
-		averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
+#define formatBool(b) ((b) ? "On" : "Off")
+
+	sprintf_s(title, 256, "Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %I32u Frame Count: %I64u VSync: %s ",
+		averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount, formatBool(app->render->vsync));
 
 	app->win->SetTitle(title);
 }
@@ -318,6 +325,12 @@ bool App::PostLateUpdate()
 	}
 
 	return ret;
+}
+
+uint64 App::GetFrameCount()
+{
+	return frameCount;
+	
 }
 
 // Called before quitting

@@ -27,7 +27,9 @@ bool Scene::Awake(pugi::xml_node& config)
 	LOG("Loading Scene");
 	bool ret = true;
 
-	configScene = &config;
+	//configScene = &config;
+	
+	
 
 	// iterate all objects in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
@@ -50,6 +52,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	}*/
 
 	
+	
 
 	return ret;
 }
@@ -57,10 +60,16 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
-	fondo0 = app->tex->Load("Assets/Maps/tilesets/Fondo0.png");
-	fondo1 = app->tex->Load("Assets/Maps/tilesets/background_1_32x32.png");
-	fondo2 = app->tex->Load("Assets/Maps/tilesets/background_2_32x32.png");
+	pugi::xml_document configFile;
+	pugi::xml_node sceneNode;
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	sceneNode = configFile.child("config").child("scene");
+
+	fondo0 = app->tex->Load(sceneNode.child("fondo0").attribute("texturepath").as_string());
+	fondo1 = app->tex->Load(sceneNode.child("fondo1").attribute("texturepath").as_string());
+	fondo2 = app->tex->Load(sceneNode.child("fondo2").attribute("texturepath").as_string());
 	
+
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	//img = app->tex->Load("Assets/Textures/test.png");
 	

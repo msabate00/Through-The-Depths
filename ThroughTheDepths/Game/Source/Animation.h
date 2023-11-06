@@ -2,6 +2,8 @@
 #define __ANIMATION_H__
 
 #include "SDL/include/SDL_rect.h"
+#include "PugiXml/src/pugixml.hpp"
+
 #define MAX_FRAMES 2500
 
 class Animation
@@ -57,6 +59,35 @@ public:
 			actualFrame = totalFrames - currentFrame;
 
 		return frames[actualFrame];
+	}
+
+
+	void LoadAnimation(const char* nombre) {
+		pugi::xml_document configFile;
+		pugi::xml_node animationsNode;
+		pugi::xml_node animationNode;
+		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+		animationsNode = configFile.child("config").child("animations").child(nombre);
+
+		animationNode = animationsNode.child("frame");
+		//animationsNode.child("anim").next_sibling
+		while(animationNode != NULL){
+		
+			//map.attribute("height").as_int();
+			this->PushBack({
+					animationNode.attribute("x").as_int(),
+					animationNode.attribute("y").as_int(),
+					animationNode.attribute("w").as_int(),
+					animationNode.attribute("h").as_int()
+				});
+
+
+			animationNode = animationNode.next_sibling();
+		}
+
+
+		this->loop = animationsNode.attribute("loop").as_bool();
+		this->speed = animationsNode.attribute("speed").as_float();
 	}
 };
 

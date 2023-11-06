@@ -23,12 +23,16 @@
 
 
 	<audio>
-		<music volume="128"/>
-		<fx volume="128"/>
+		<music volume="12"/>
+		<fx volume="12"/>
 	</audio>
 
 	<scene>
-		<player x="300" y="352" texturepath="Assets/Textures/player.png"/>
+		<!-- La posicion del player ahora funciona por el tiled-->
+		<player x="300" y="352" texturepath="Assets/Textures/player.png" speed="0.34" jumpForce="4.5">
+			<coinAudio path="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
+			
+		</player>
 		<item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
 		<item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
 		<item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
@@ -40,6 +44,10 @@
 		<coin texturepath="Assets/Maps/tilesets/Animations.png"/>
 		<plant_breakable texturepath="Assets/Maps/tilesets/Animations.png"/>
 		<plant_barrier texturepath="Assets/Maps/tilesets/Animations.png"/>
+
+		<fondo0 texturepath="Assets/Maps/tilesets/Fondo0.png"/>
+		<fondo1 texturepath="Assets/Maps/tilesets/background_1_32x32.png"/>
+		<fondo2 texturepath="Assets/Maps/tilesets/background_2_32x32.png"/>
 		
 	</scene>
 
@@ -47,5 +55,77 @@
 		<mapfolder path="Assets/Maps/"/>
 		<mapfile path="Assets/Maps/test_32x32.tmx"/>
 	</map>
+
+	<animations>
+		
+		<runAnim loop="true" speed="0.17">
+			<frame x="1" y="97" w="32" h="32"/>
+			<frame x="33" y="97" w="32" h="32"/>
+			<frame x="65" y="97" w="32" h="32"/>
+			<frame x="97" y="97" w="32" h="32"/>
+			<frame x="129" y="97" w="32" h="32"/>
+			<frame x="161" y="97" w="32" h="32"/>
+			<frame x="193" y="97" w="32" h="32"/>
+			<frame x="225" y="97" w="32" h="32"/>
+		</runAnim>
+
+		<idleAnim loop="true" speed="0.1">
+			<frame x="1" y="1" w="32" h="32"/>
+			<frame x="33" y="1" w="32" h="32"/>
+		</idleAnim>
+
+		<walkAnim loop="true" speed="0.17">
+			<frame x="1" y="65" w="32" h="32"/>
+			<frame x="33" y="65" w="32" h="32"/>
+			<frame x="65" y="65" w="32" h="32"/>
+			<frame x="97" y="65" w="32" h="32"/>
+		</walkAnim>
+
+		<jumpUpAnim loop="false" speed="0.15">
+			<frame x="1" y="161" w="32" h="32"/>
+			<frame x="33" y="161" w="32" h="32"/>
+			<frame x="65" y="161" w="32" h="32"/>
+			<frame x="97" y="161" w="32" h="32"/>
+		</jumpUpAnim>
+
+		<jumpDownAnim loop="false" speed="0.1">
+			<frame x="129" y="161" w="32" h="32"/>
+			<frame x="161" y="161" w="32" h="32"/>
+			<frame x="193" y="161" w="32" h="32"/>
+			<frame x="224" y="161" w="32" h="32"/>
+		</jumpDownAnim>
+
+		<ghostAnim loop="false" speed="0.17">
+			<frame x="1" y="193" w="32" h="32"/>
+			<frame x="33" y="193" w="32" h="32"/>
+			<frame x="65" y="193" w="32" h="32"/>
+		</ghostAnim>
+
+		<dieAnim loop="false" speed="0.17">
+			<frame x="1" y="225" w="32" h="32"/>
+			<frame x="33" y="225" w="32" h="32"/>
+			<frame x="65" y="225" w="32" h="32"/>
+			<frame x="97" y="225" w="32" h="32"/>
+			<frame x="129" y="225" w="32" h="32"/>
+			<frame x="161" y="225" w="32" h="32"/>
+			<frame x="193" y="225" w="32" h="32"/>
+			<frame x="225" y="225" w="32" h="32"/>
+		</dieAnim>
+
+		<attackAnim loop="false" speed="0.35">
+			<frame x="1" y="257" w="32" h="32"/>
+			<frame x="33" y="257" w="32" h="32"/>
+			<frame x="65" y="257" w="32" h="32"/>
+			<frame x="97" y="257" w="32" h="32"/>
+			<frame x="129" y="257" w="32" h="32"/>
+			<frame x="161" y="257" w="32" h="32"/>
+			<frame x="193" y="257" w="32" h="32"/>
+			<frame x="225" y="257" w="32" h="32"/>
+		</attackAnim>
+	
+		
+		
+		
+	</animations>
 
 </config>
