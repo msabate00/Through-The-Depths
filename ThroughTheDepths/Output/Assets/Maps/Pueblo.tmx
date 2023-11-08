@@ -16822,7 +16822,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="7" name="Fondo2" width="280" height="60">
+ <layer id="7" name="Fondo2" width="280" height="60" locked="1">
   <data>
    <tile/>
    <tile/>
@@ -33626,7 +33626,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="10" name="Fondo3" width="280" height="60">
+ <layer id="10" name="Fondo3" width="280" height="60" locked="1">
   <data>
    <tile gid="182"/>
    <tile gid="182"/>
@@ -50430,7 +50430,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="11" name="Oscuridad" width="280" height="60" tintcolor="#64000000">
+ <layer id="11" name="Oscuridad" width="280" height="60" locked="1" tintcolor="#64000000">
   <data>
    <tile gid="182"/>
    <tile gid="182"/>
