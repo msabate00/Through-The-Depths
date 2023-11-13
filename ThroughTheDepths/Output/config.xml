@@ -44,12 +44,22 @@
 		<coin texturepath="Assets/Maps/tilesets/Animations.png"/>
 		<plant_breakable texturepath="Assets/Maps/tilesets/Animations.png"/>
 		<plant_barrier texturepath="Assets/Maps/tilesets/Animations.png"/>
+		
 
 		<fondo0 texturepath="Assets/Maps/tilesets/Fondo0.png"/>
 		<fondo1 texturepath="Assets/Maps/tilesets/background_1_32x32.png"/>
 		<fondo2 texturepath="Assets/Maps/tilesets/background_2_32x32.png"/>
 		
+		
+		
+		<!-- ENEMIES -->
+		<enemyArmadillo texturepath="Assets/Textures/Armadillo.png"/>
+		
+		
+		
 	</scene>
+
+
 
 	<map>
 		<mapfolder path="Assets/Maps/"/>
@@ -58,6 +68,7 @@
 
 	<animations>
 
+		<!-- PLAYER -->
 		<idleAnim loop="true" speed="0.2">
 			<frame x="16" y="12" w="48" h="48"/>
 			<frame x="96" y="12" w="48" h="48"/>
@@ -191,7 +202,14 @@
             <frame x="416" y="110" w="48" h="48"/>
             <frame x="496" y="110" w="48" h="48"/>
 		</attackAnim>
-		
+
+
+		<!-- ENEMY_ARMADILLO -->
+		<enemyArmadillo_idle loop="true" speed="0.35">
+			<frame x="0" y="0" w="32" h="32"/>
+			<frame x="0" y="0" w="32" h="32"/>
+			<frame x="0" y="0" w="32" h="32"/>
+		</enemyArmadillo_idle>
 		
 	</animations>
 

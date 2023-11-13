@@ -3,6 +3,7 @@
 #include "Chest.h"
 #include "Coin.h"
 #include "PlantBreakable.h"
+#include "Enemy_Armadillo.h"
 #include "PlantBarrier.h"
 #include "App.h"
 #include "Textures.h"
@@ -103,6 +104,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::PLANT_BREAKABLE:
 		entity = new PlantBreakable();
+		break;
+	case EntityType::ENEMY_ARMADILLO:
+		entity = new EnemyArmadillo();
 		break;
 	default:
 		break;

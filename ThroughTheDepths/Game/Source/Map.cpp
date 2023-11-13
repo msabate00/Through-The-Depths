@@ -19,6 +19,7 @@
 #include "Coin.h"
 #include "PlantBarrier.h"
 #include "PlantBreakable.h"
+#include "Enemy_Armadillo.h"
 
 Map::Map() : Module(), mapLoaded(false)
 {
@@ -695,6 +696,15 @@ bool Map::LoadEntities(std::string layerName)
                         app->scene->getPlayer()->parameters = configNode.child("scene").child("player");
                         app->scene->getPlayer()->position = iPoint(pos.x + 16, pos.y + 16);
                         
+                    }
+
+                    //Enemy armadillo
+                    if (gid == tileset->firstgid + 5) {
+
+                        EnemyArmadillo* entity = (EnemyArmadillo*)app->entityManager->CreateEntity(EntityType::ENEMY_ARMADILLO);
+                        entity->parameters = configNode.child("scene").child("enemyArmadillo");
+                        entity->position = iPoint(pos.x + 16, pos.y + 16);
+
                     }
 
 

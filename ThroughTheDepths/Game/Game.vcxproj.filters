@@ -66,6 +66,9 @@
     <ClCompile Include="Source\PlantBreakable.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy_Armadillo.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -162,6 +165,9 @@
     <ClInclude Include="Source\PlantBreakable.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Enemy_Armadillo.h">
+      <Filter>Entities\Enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -181,6 +187,9 @@
     </Filter>
     <Filter Include="MisUtils">
       <UniqueIdentifier>{509eec3f-6825-4e39-8422-058abe611341}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemies">
+      <UniqueIdentifier>{35b3a048-81e5-497a-ba3e-9d235b3ac098}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

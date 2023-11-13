@@ -36,6 +36,7 @@ enum class ColliderType {
 	PLATFORM_TRASPASS,
 	SPYKES,
 	DIE_HOLE,
+	ENEMY,
 	UNKNOWN
 	// ..
 };

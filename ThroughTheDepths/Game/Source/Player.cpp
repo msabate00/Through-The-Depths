@@ -438,8 +438,6 @@ bool Player::Update(float dt)
 
 	}
 	
-	
-	LOG("CAMARA: %d   JUGADOR: %d", app->render->camera.x, position.x);
 
 
 	if (isAttacking) {

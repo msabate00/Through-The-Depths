@@ -16,7 +16,9 @@ enum class EntityType
 	COIN,
 	PLANT_BARRIER,
 	PLANT_BREAKABLE,
+	ENEMY_ARMADILLO,
 	UNKNOWN
+
 };
 
 class Entity
