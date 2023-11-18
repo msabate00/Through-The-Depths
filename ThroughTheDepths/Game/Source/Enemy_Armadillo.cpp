@@ -43,6 +43,8 @@ bool EnemyArmadillo::Start() {
 	pbody->ctype = ColliderType::ENEMY;
 	pbody->listener = this;
 
+	speed = 0.2f;
+
 	return true;
 }
 
@@ -52,30 +54,54 @@ bool EnemyArmadillo::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+	origPos = app->map->WorldToMap(position.x + 1, position.y + 1);
 
 
 	if (dist(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y, position.x, position.y) < app->map->GetTileWidth() * tilesView) {
 		onView = true;
-		iPoint origPos = app->map->WorldToMap(position.x+1, position.y+1);
-		iPoint targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
+		
+		targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 
 		app->map->pathfindingFloor->CreatePath(origPos, targPos);
-
+		lastPath = *app->map->pathfindingFloor->GetLastPath();
+		
 	}
 	else {
 		onView = false;
+
+		targPos = app->map->WorldToMap(originalPosition.x, originalPosition.y);
+		app->map->pathfindingFloor->CreatePath(origPos, targPos);
+		lastPath = *app->map->pathfindingFloor->GetLastPath();
 	}
 
+
 	
 	
 
 
+	b2Vec2 vel = b2Vec2(0,0);
+
+	
+	vel.y -= GRAVITY_Y;
+	iPoint nextPathTile;
+	lastPath.Pop(nextPathTile);
+	if (nextPathTile.x < origPos.x) {
+		vel.x -= speed * dt;
+	}
+	else {
+		vel.x += speed * dt;
+	}
+	
 
 
+
+	pbody->body->SetLinearVelocity(vel);
+
+
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	currentAnimation = &idleAnim;
-
-
 	currentAnimation->Update();
 
 
@@ -94,12 +120,12 @@ bool EnemyArmadillo::PostUpdate() {
 		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_NONE, &rect);
 	}
 
-	if (onView && app->debug) {
-		const DynArray<iPoint>* path = app->map->pathfindingFloor->GetLastPath();
+	if (app->debug) {
+		
 
-		for (uint i = 0; i < path->Count(); ++i)
+		for (uint i = 0; i <  lastPath.Count(); ++i)
 		{
-			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
 			app->render->DrawTexture(app->map->pathfindingFloor->tilePathTex, pos.x, pos.y);
 		}
 	}

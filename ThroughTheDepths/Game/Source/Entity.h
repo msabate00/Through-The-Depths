@@ -97,7 +97,12 @@ public:
 	bool onView = false;
 	bool renderable = true;
 
+	iPoint origPos;
+	iPoint targPos;
+
 	PhysBody* pbody = nullptr;
+
+	float speed;
 
 	//DynArray<iPoint>* path = nullptr;
 

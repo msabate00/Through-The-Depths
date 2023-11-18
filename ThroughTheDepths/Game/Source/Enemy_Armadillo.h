@@ -8,6 +8,7 @@
 #include "List.h"
 #include "Timer.h"
 #include "Animation.h"
+#include "DynArray.h"
 
 struct SDL_Texture;
 
@@ -76,7 +77,7 @@ private:
 	bool isAttacking = false;
 
 
-
+	DynArray<iPoint> lastPath;
 
 };
 

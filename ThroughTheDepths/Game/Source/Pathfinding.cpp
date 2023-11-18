@@ -76,6 +76,7 @@ const DynArray<iPoint>* PathFinding::GetLastPath() const
 void PathFinding::ClearLastPath()
 {
 	lastPath.Clear();
+	
 }
 
 
