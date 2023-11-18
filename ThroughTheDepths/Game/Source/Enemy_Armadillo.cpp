@@ -43,7 +43,9 @@ bool EnemyArmadillo::Start() {
 	pbody->ctype = ColliderType::ENEMY;
 	pbody->listener = this;
 
-	speed = 0.2f;
+	state = EntityState::IDLE;
+	speed = 0.02f;
+
 
 	return true;
 }
@@ -86,9 +88,11 @@ bool EnemyArmadillo::Update(float dt)
 	iPoint nextPathTile;
 	lastPath.Pop(nextPathTile);
 	if (nextPathTile.x < origPos.x) {
+		isFacingLeft = true;
 		vel.x -= speed * dt;
 	}
 	else {
+		isFacingLeft = false;
 		vel.x += speed * dt;
 	}
 	
@@ -101,7 +105,30 @@ bool EnemyArmadillo::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	currentAnimation = &idleAnim;
+
+
+
+	switch (state)
+	{
+	case EntityState::IDLE:
+		currentAnimation = &idleAnim;
+		break;
+	case EntityState::RUNNING:
+		break;
+	case EntityState::ATTACKING:
+		break;
+	case EntityState::JUMPING:
+		break;
+	case EntityState::FALLING:
+		break;
+	case EntityState::DYING:
+		break;
+	default:
+		currentAnimation = &idleAnim;
+		break;
+	}
+
+
 	currentAnimation->Update();
 
 

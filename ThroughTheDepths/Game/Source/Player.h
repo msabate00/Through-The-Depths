@@ -29,6 +29,10 @@ public:
 
 	bool CleanUp();
 
+	void Movement(float dt);
+	void GodModeMovement(float dt);
+	void CameraMovement(float dt);
+
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 	void OnExitCollision(PhysBody* physA, PhysBody* physB);
 

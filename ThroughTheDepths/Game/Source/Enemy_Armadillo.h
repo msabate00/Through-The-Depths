@@ -34,8 +34,6 @@ public:
 	void OnExitCollision(PhysBody* physA, PhysBody* physB);
 
 public:
-	float speed = 4.5f;
-
 
 	const char* texturePath;
 	SDL_Texture* texture = NULL;

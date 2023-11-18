@@ -8,6 +8,19 @@
 
 class PhysBody;
 
+
+enum class EntityState {
+	IDLE,
+	RUNNING,
+	ATTACKING,
+	JUMPING,
+	FALLING,
+	DYING
+
+};
+
+
+
 enum class EntityType
 {
 	PLAYER,
@@ -86,6 +99,7 @@ public:
 
 	SString name;
 	EntityType type;
+	EntityState state;
 	bool active = true;
 	pugi::xml_node parameters; 
 
