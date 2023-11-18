@@ -177,13 +177,14 @@ private:
 	bool LoadEntities(std::string layerName);
 
 	bool LoadNavigationLayer();
-	void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
+	void CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer* navigationLayer) const;
 
 
 public: 
 
 	MapData mapData;
-	PathFinding* pathfinding;
+	PathFinding* pathfindingFloor;
+	PathFinding* pathfindingFly;
 
 private:
 
@@ -201,7 +202,8 @@ private:
 	pugi::xml_node configNode;
 
 
-	MapLayer* navigationLayer;
+	MapLayer* navigationLayer_Floor;
+	MapLayer* navigationLayer_Fly;
 
 
 };

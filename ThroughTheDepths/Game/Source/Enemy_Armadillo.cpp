@@ -59,7 +59,7 @@ bool EnemyArmadillo::Update(float dt)
 		iPoint origPos = app->map->WorldToMap(position.x+1, position.y+1);
 		iPoint targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 
-		app->map->pathfinding->CreatePath(origPos, targPos);
+		app->map->pathfindingFloor->CreatePath(origPos, targPos);
 
 	}
 	else {
@@ -95,12 +95,12 @@ bool EnemyArmadillo::PostUpdate() {
 	}
 
 	if (onView && app->debug) {
-		const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
+		const DynArray<iPoint>* path = app->map->pathfindingFloor->GetLastPath();
 
 		for (uint i = 0; i < path->Count(); ++i)
 		{
 			iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-			app->render->DrawTexture(app->map->pathfinding->tilePathTex, pos.x, pos.y);
+			app->render->DrawTexture(app->map->pathfindingFloor->tilePathTex, pos.x, pos.y);
 		}
 	}
 

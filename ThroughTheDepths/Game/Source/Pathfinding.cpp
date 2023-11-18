@@ -131,7 +131,7 @@ int PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 			// L13: DONE 4: Fill a list of all adjancent nodes. 
 			// use the FindWalkableAdjacents function
 			PathList adjacent;
-			node->data.FindWalkableAdjacents(adjacent);
+			node->data.FindWalkableAdjacents(adjacent, this);
 
 			// L13: DONE 5: Iterate adjancent nodes:
 			// If it is a better path, Update the parent
@@ -223,26 +223,43 @@ PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), 
 // PathNode -------------------------------------------------------------------------
 // Fills a list (PathList) of all valid adjacent pathnodes
 // ----------------------------------------------------------------------------------
-uint PathNode::FindWalkableAdjacents(PathList& listToFill) const
+uint PathNode::FindWalkableAdjacents(PathList& listToFill, PathFinding* pathfinding) const
 {
 	iPoint tile;
 	uint before = listToFill.list.Count();
 
+	//// top
+	//tile.Create(pos.x, pos.y + 1);
+	//if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+
+	//// bottom
+	//tile.Create(pos.x, pos.y - 1);
+	//if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+
+	//// left
+	//tile.Create(pos.x + 1, pos.y);
+	//if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+
+	//// right
+	//tile.Create(pos.x - 1, pos.y);
+	//if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+
+
 	// top
 	tile.Create(pos.x, pos.y + 1);
-	if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	if(pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	// bottom
 	tile.Create(pos.x, pos.y - 1);
-	if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	if(pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	// left
 	tile.Create(pos.x + 1, pos.y);
-	if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	if(pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	// right
 	tile.Create(pos.x - 1, pos.y);
-	if(app->map->pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
+	if(pathfinding->IsWalkable(tile)) listToFill.list.Add(PathNode(-1, -1, tile, this));
 
 	return listToFill.list.Count();
 }
