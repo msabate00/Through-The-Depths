@@ -9,6 +9,7 @@
 #include "Point.h"
 
 #include "PugiXml\src\pugixml.hpp"
+#include "Pathfinding.h"
 
 // Ignore Terrain Types and Tile Types for now, but we want the image!
 struct TileSet
@@ -28,6 +29,7 @@ struct TileSet
 
 //  We create an enum for map type, just for convenience,
 // NOTE: Platformer game will be of type ORTHOGONAL
+
 enum MapTypes
 {
 	MAPTYPE_UNKNOWN = 0,
@@ -126,6 +128,7 @@ struct MapData
 
 	List<MapLayer*> maplayers;
 	List<MapObjects*> mapObjects;
+
 };
 
 class Map : public Module
@@ -155,7 +158,9 @@ public:
     bool Load();
 
 	iPoint MapToWorld(int x, int y) const;
-	iPoint Map::WorldToMap(int x, int y);
+	iPoint WorldToMap(int x, int y);
+	int GetTileWidth();
+	int GetTileHeight();
 
 private:
 
@@ -171,9 +176,14 @@ private:
 	bool LoadCollisionsObject();
 	bool LoadEntities(std::string layerName);
 
+	bool LoadNavigationLayer();
+	void CreateNavigationMap(int& width, int& height, uchar** buffer) const;
+
+
 public: 
 
 	MapData mapData;
+	PathFinding* pathfinding;
 
 private:
 
@@ -189,6 +199,9 @@ private:
 
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
+
+
+	MapLayer* navigationLayer;
 
 
 };

@@ -92,9 +92,15 @@ public:
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
 	iPoint position;       
+	iPoint originalPosition;
+	int tilesView;
+	bool onView = false;
 	bool renderable = true;
 
 	PhysBody* pbody = nullptr;
+
+	//DynArray<iPoint>* path = nullptr;
+
 };
 
 #endif // __ENTITY_H__
