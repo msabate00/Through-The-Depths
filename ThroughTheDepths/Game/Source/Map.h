@@ -196,6 +196,7 @@ private:
 	SString mapFolder;
     bool mapLoaded;
 	List<PhysBody*> traspasedPlatformList;
+	List<PhysBody*> collisionsList;
 
 	
 	iPoint startPointcolisions = iPoint(-1, -1);

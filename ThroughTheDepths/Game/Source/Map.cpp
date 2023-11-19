@@ -318,6 +318,17 @@ bool Map::CleanUp()
     }
     mapData.maplayers.Clear();
 
+
+    //ListItem<PhysBody*>* collision;
+    //collision = collisionsList.start;
+    //while (collision != NULL) {
+    //    //app->physics->GetWorld()->DestroyBody(collision->data->body);
+    //    collision->data->body->SetActive(false);
+    //    RELEASE(collision->data);
+    //    collision = collision->next;
+    //}
+
+
     return true;
 }
 
@@ -629,21 +640,22 @@ bool Map::LoadCollisions(std::string layerName) {
                    
 
                     /*No borrar, original sistema de colisiones*/
+                    PhysBody* c1;
                     if (gid == tileset->firstgid + 0) {
-                        PhysBody* c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16 , 32, 32, STATIC);
+                        c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16 , 32, 32, STATIC);
                         c1->ctype = ColliderType::PLATFORM;
                         ret = true;
                     }
                    
 
                     if (gid == tileset->firstgid + 1) {
-                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+2, 32, 4, STATIC);
+                        c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+2, 32, 4, STATIC);
                         c1->ctype = ColliderType::PLATFORM_TRASPASS;
                         traspasedPlatformList.Add(c1);
                         ret = true;
                     }
                     if (gid == tileset->firstgid + 6) {
-                        PhysBody* c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
                         c1->ctype = ColliderType::SPYKES;
                         
                         ret = true;
@@ -651,11 +663,12 @@ bool Map::LoadCollisions(std::string layerName) {
 
                     //Fuera del mapa
                     if (gid == tileset->firstgid + 15) {
-                        PhysBody* c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
                         c1->ctype = ColliderType::DIE_HOLE;
 
                         ret = true;
                     }
+                    collisionsList.Add(c1);
 
                 }
             }
@@ -686,6 +699,7 @@ bool Map::LoadCollisionsObject()
 
             PhysBody* c1 = app->physics->CreateRectangle(object->x + object->width/2, object->y + object->height/2, object->width, object->height, STATIC);
             c1->ctype = ColliderType::PLATFORM;
+            collisionsList.Add(c1);
 
         }
             mapObjectsItem = mapObjectsItem->next;

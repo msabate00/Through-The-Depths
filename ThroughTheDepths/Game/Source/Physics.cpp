@@ -360,6 +360,11 @@ void Physics::EndContact(b2Contact* contact) {
 		physB->listener->OnExitCollision(physB, physA);
 }
 
+b2World* Physics::GetWorld()
+{
+	return world;
+}
+
 //--------------- PhysBody
 
 void PhysBody::GetPosition(int& x, int& y) const
