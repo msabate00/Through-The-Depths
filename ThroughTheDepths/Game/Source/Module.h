@@ -9,14 +9,43 @@ class App;
 
 class Module
 {
+
+private:
+	
+
 public:
 
-	Module() : active(false)
-	{}
+	Module(bool start_active = true) : active(start_active)
+	{
+		
+	}
 
 	void Init()
 	{
-		active = true;
+		//active = true;
+	}
+
+	bool IsEnabled() const
+	{
+		return active;
+	}
+
+	void Enable()
+	{
+		if (active == false)
+		{
+			active = true;
+			Start();
+		}
+	}
+
+	void Disable()
+	{
+		if (active == true)
+		{
+			active = false;
+			CleanUp();
+		}
 	}
 
 	// Called before render is available

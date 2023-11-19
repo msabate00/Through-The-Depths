@@ -32,6 +32,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	audio = new Audio();
 	physics = new Physics();
 	scene = new Scene();
+
 	map = new Map();
 	entityManager = new EntityManager();
 	particles = new Particles();
@@ -122,6 +123,9 @@ bool App::Start()
 
 	while(item != NULL && ret == true)
 	{
+		if (!item->data->active) {
+			continue;
+		}
 		ret = item->data->Start();
 		item = item->next;
 	}
