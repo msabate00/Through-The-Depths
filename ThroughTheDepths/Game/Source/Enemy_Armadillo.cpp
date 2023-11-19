@@ -137,7 +137,7 @@ bool EnemyArmadillo::Update(float dt)
 
 bool EnemyArmadillo::PostUpdate() {
 	
-
+	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	
 	if (isFacingLeft) {

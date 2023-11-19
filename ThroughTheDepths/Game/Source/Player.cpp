@@ -10,6 +10,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Particles.h"
+#include "FadeToBlack.h"
 #include "Chest.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
@@ -187,7 +188,14 @@ bool Player::Update(float dt)
 
 
 	if (app->input->GetKey(SDL_SCANCODE_F3) || app->input->GetKey(SDL_SCANCODE_F1)) {
-		pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
+		//pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
+		app->sceneLevel = 0;
+		app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F2)) {
+		//pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
+		app->sceneLevel = 1;
+		app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene);
 	}
 
 	state = EntityState::IDLE;
@@ -197,6 +205,7 @@ bool Player::Update(float dt)
 	b2Vec2 positionFoot;
 	positionFoot.x = PIXEL_TO_METERS(position.x+0.3);
 	positionFoot.y = PIXEL_TO_METERS(position.y + 0.67);
+	
 	pbodyFoot->body->SetTransform(positionFoot, pbodyFoot->body->GetAngle());
 
 	//Sistema de atravesar plataformas
@@ -295,7 +304,7 @@ bool Player::Update(float dt)
 bool Player::PostUpdate() {
 
 
-
+	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	if (isFacingLeft) {

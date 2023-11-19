@@ -43,10 +43,23 @@ bool Map::Awake(pugi::xml_node& config)
     LOG("Loading Map Parser");
     bool ret = true;
 
-    mapFileName = config.child("mapfile").attribute("path").as_string();
+    mapFileName_Bosque = config.child("mapBosque").attribute("path").as_string(); 
+    mapFileName_Pueblo = config.child("mapPueblo").attribute("path").as_string();
     mapFolder = config.child("mapfolder").attribute("path").as_string();
 
     return ret;
+}
+
+bool Map::Start()
+{
+    switch (app->sceneLevel)
+    {
+    case 0:  mapFileName = mapFileName_Bosque; break;
+    case 1:  mapFileName = mapFileName_Pueblo; break;
+    default:  mapFileName = mapFileName_Bosque; break;
+    }
+
+    return true;
 }
 
 bool Map::Update(float dt)
@@ -303,6 +316,7 @@ bool Map::CleanUp()
         RELEASE(layerItem->data);
         layerItem = layerItem->next;
     }
+    mapData.maplayers.Clear();
 
     return true;
 }
@@ -865,18 +879,20 @@ int Map::GetTileHeight() {
 
 Properties::Property* Properties::GetProperty(const char* name)
 {
-    ListItem<Property*>* item = list.start;
     Property* p = NULL;
+    if (this != nullptr) {
+        ListItem<Property*>* item = list.start;
+       
 
-    while (item)
-    {
-        if (item->data->name == name) {
-            p = item->data;
-            break;
+        while (item)
+        {
+            if (item->data->name == name) {
+                p = item->data;
+                break;
+            }
+            item = item->next;
         }
-        item = item->next;
     }
-
     return p;
 }
 

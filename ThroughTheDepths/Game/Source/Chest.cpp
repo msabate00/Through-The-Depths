@@ -109,7 +109,7 @@ bool Chest::Update(float dt)
 
 bool Chest::PostUpdate() {
 
-
+	if(currentAnimation == nullptr){ currentAnimation = &closedAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_NONE, &rect);
 

@@ -129,6 +129,7 @@ bool Scene::Update(float dt)
 	}
 
 	
+	
 	SDL_Rect fondo0x{ 0,0, 576, 1760 };
 	SDL_Rect fondo0y{ 0,0, 576, 1760 };
 	SDL_Rect fondo1x{ 0,0, 576, 360 };
@@ -144,6 +145,8 @@ bool Scene::Update(float dt)
 	//FONDO 0
 	float paralaxSpeed = 0.2f;
 
+
+
 	app->render->DrawTexture(fondo0, fondo0Offset, alturaFondo0, SDL_FLIP_NONE, &fondo0x, paralaxSpeed);
 	app->render->DrawTexture(fondo0, fondo0Offset + 500, alturaFondo0, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
 	app->render->DrawTexture(fondo0, fondo0Offset + 1000, alturaFondo0, SDL_FLIP_NONE, &fondo0y, paralaxSpeed);
@@ -152,7 +155,7 @@ bool Scene::Update(float dt)
 
 
 	
-
+	
 	int posJugadorParalax = (int)(player->position.x * paralaxSpeed);
 	int posicionFondos = 500;
 	int posicionJugadorOffset = 200;

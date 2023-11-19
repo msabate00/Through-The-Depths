@@ -114,6 +114,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 
 	entities.Add(entity);
 	entity->Awake();
+	
 
 	return entity;
 }

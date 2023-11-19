@@ -82,7 +82,7 @@ bool Coin::Start() {
 	pbody = app->physics->CreateRectangleSensor(position.x + 16, position.y, 32, 32, bodyType::STATIC);
 	pbody->ctype = ColliderType::COIN;
 	pbody->listener = this;
-
+	
 	return true;
 }
 
@@ -106,7 +106,7 @@ bool Coin::Update(float dt)
 
 bool Coin::PostUpdate() {
 
-
+	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_NONE, &rect);
 

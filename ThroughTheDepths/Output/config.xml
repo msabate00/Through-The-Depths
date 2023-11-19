@@ -63,7 +63,8 @@
 
 	<map>
 		<mapfolder path="Assets/Maps/"/>
-		<mapfile path="Assets/Maps/Bosque.tmx"/>
+		<mapBosque path="Assets/Maps/Bosque.tmx" level="0"/>
+		<mapPueblo path="Assets/Maps/Pueblo.tmx" level="1"/>
 	</map>
 
 	<animations>

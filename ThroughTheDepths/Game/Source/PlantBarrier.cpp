@@ -98,7 +98,7 @@ bool PlantBarrier::Update(float dt)
 
 bool PlantBarrier::PostUpdate() {
 
-
+	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_NONE, &rect);
 

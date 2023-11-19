@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Physics.h"
 #include "Particles.h"
+#include "FadeToBlack.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -36,6 +37,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map();
 	entityManager = new EntityManager();
 	particles = new Particles();
+	fadeToBlack = new FadeToBlack();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -44,12 +46,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(tex);
 	AddModule(audio);
 	AddModule(physics);
-	AddModule(scene);
+
 	AddModule(map);
+	AddModule(scene);
+	
 	AddModule(particles);
 	AddModule(entityManager);
 
 	// Render last to swap buffer
+	AddModule(fadeToBlack);
 	AddModule(render);
 
 	godMode = false;
@@ -257,7 +262,7 @@ bool App::PreUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->active == false) {
+		if (!pModule->active) {
 			continue;
 		}
 
@@ -279,7 +284,7 @@ bool App::DoUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->active == false) {
+		if (!pModule->active) {
 			continue;
 		}
 
@@ -300,7 +305,7 @@ bool App::PostUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->active == false) {
+		if (!pModule->active) {
 			continue;
 		}
 
@@ -321,7 +326,7 @@ bool App::PostLateUpdate()
 	{
 		pModule = item->data;
 
-		if(pModule->active == false) {
+		if (!pModule->active) {
 			continue;
 		}
 

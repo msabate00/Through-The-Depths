@@ -143,6 +143,8 @@ public:
     // Called before render is available
     bool Awake(pugi::xml_node& conf);
 
+	bool Start();
+
 	// Called each loop iteration
 	bool Update(float dt);
 	bool PostUpdate();
@@ -189,6 +191,8 @@ public:
 private:
 
     SString mapFileName;
+    SString mapFileName_Bosque;
+    SString mapFileName_Pueblo;
 	SString mapFolder;
     bool mapLoaded;
 	List<PhysBody*> traspasedPlatformList;

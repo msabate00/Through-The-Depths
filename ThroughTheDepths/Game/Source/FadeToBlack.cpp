@@ -3,31 +3,31 @@
 #include "App.h"
 #include "Render.h"
 #include "Window.h"
+#include "Map.h"
 
 #include "SDL/include/SDL_render.h"
 #include "Log.h"
 
 
-ModuleFadeToBlack::ModuleFadeToBlack(bool startEnabled) : Module(startEnabled)
+FadeToBlack::FadeToBlack(bool startEnabled) : Module(startEnabled)
 {
+
+
+}
+
+FadeToBlack::~FadeToBlack()
+{
+
+}
+
+bool FadeToBlack::Start()
+{
+	LOG("Preparing Fade Screen");
 
 	uint windowW, windowH;
 
 	app->win->GetWindowSize(windowW, windowH);
-
-
-
 	screenRect = { 0, 0, (int)(windowW * app->win->GetScale()),  (int)(windowH * app->win->GetScale()) };
-}
-
-ModuleFadeToBlack::~ModuleFadeToBlack()
-{
-
-}
-
-bool ModuleFadeToBlack::Start()
-{
-	LOG("Preparing Fade Screen");
 
 	currentStep = Fade_Step::NONE;
 
@@ -36,7 +36,7 @@ bool ModuleFadeToBlack::Start()
 	return true;
 }
 
-bool ModuleFadeToBlack::Update(float dt)
+bool FadeToBlack::Update(float dt)
 {
 	
 	if (currentStep == Fade_Step::NONE) return true;
@@ -47,8 +47,15 @@ bool ModuleFadeToBlack::Update(float dt)
 		if (frameCount >= maxFadeFrames)
 		{
 			// TODO 1: Enable / Disable the modules received when FadeToBlacks(...) gets called
+			app->map->Disable();
 			moduleToDisable->Disable();
+			app->entityManager->Disable();
+			
+
+			app->map->Enable();
 			moduleToEnable->Enable();
+			app->entityManager->Enable();
+
 
 			currentStep = Fade_Step::FROM_BLACK;
 		}
@@ -65,7 +72,7 @@ bool ModuleFadeToBlack::Update(float dt)
 	return true;
 }
 
-bool ModuleFadeToBlack::PostUpdate()
+bool FadeToBlack::PostUpdate()
 {
 	// Exit this function if we are not performing a fade
 	if (currentStep == Fade_Step::NONE) return true;
@@ -79,7 +86,7 @@ bool ModuleFadeToBlack::PostUpdate()
 	return true;
 }
 
-bool ModuleFadeToBlack::FadeToBlack(Module* moduleToDisable, Module* moduleToEnable, float frames)
+bool FadeToBlack::FadeToBlackTransition(Module* moduleToDisable, Module* moduleToEnable, float frames)
 {
 	bool ret = false;
 

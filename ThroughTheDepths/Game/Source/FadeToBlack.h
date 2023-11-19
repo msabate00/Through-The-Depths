@@ -1,17 +1,17 @@
-#ifndef __MODULEFADETOBLACK_H__
-#define __MODULEFADETOBLACK_H__
+#ifndef __FADETOBLACK_H__
+#define __FADETOBLACK_H__
 
 #include "Module.h"
 #include "SDL\include\SDL_rect.h"
 
-class ModuleFadeToBlack : public Module
+class FadeToBlack : public Module
 {
 public:
 	//Constructor
-	ModuleFadeToBlack(bool startEnabled);
+	FadeToBlack(bool start_enabled = true);
 
 	//Destructor
-	~ModuleFadeToBlack();
+	~FadeToBlack();
 
 	// Called when the module is activated
 	// Enables the blending mode for transparency
@@ -28,7 +28,7 @@ public:
 	// Called from another module
 	// Starts the fade process which has two steps, fade_out and fade_in
 	// After the first step, the modules should be switched
-	bool FadeToBlack(Module* toDisable, Module* toEnable, float frames = 60);
+	bool FadeToBlackTransition(Module* toDisable, Module* toEnable, float frames = 60);
 
 private:
 

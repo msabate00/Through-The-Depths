@@ -20,6 +20,7 @@ class EntityManager;
 class Map;
 class Physics;
 class Particles;
+class FadeToBlack;
 
 class App
 {
@@ -95,6 +96,9 @@ public:
 	Map* map;
 	Physics* physics;
 	Particles* particles;
+	FadeToBlack* fadeToBlack;
+
+	int sceneLevel = 0;
 
 private:
 
@@ -126,6 +130,9 @@ private:
 	uint32 secondsSinceStartup = 0;
 
 	uint32 maxFrameDuration = 16;
+
+
+	
 
 };
 
