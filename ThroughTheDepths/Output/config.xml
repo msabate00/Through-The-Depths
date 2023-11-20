@@ -207,10 +207,58 @@
 
 		<!-- ENEMY_ARMADILLO -->
 		<enemyArmadillo_idle loop="true" speed="0.35">
-			<frame x="0" y="0" w="32" h="32"/>
-			<frame x="0" y="0" w="32" h="32"/>
-			<frame x="0" y="0" w="32" h="32"/>
+			<frame x="1" y="1" w="40" h="40"/>
+            <frame x="41" y="1" w="40" h="40"/>
+            <frame x="81" y="1" w="40" h="40"/>
+            <frame x="121" y="1" w="40" h="40"/>
+            <frame x="161" y="1" w="40" h="40"/>
+            <frame x="201" y="1" w="40" h="40"/>
+            <frame x="241" y="1" w="40" h="40"/>
 		</enemyArmadillo_idle>
+        
+        <enemyArmadillo_track loop="true" speed="0.35">
+			<frame x="1" y="41" w="40" h="40"/>
+            <frame x="41" y="41" w="40" h="40"/>
+            <frame x="81" y="41" w="40" h="40"/>
+            <frame x="121" y="41" w="40" h="40"/>
+		</enemyArmadillo_track>
+        
+        <enemyArmadillo_run loop="true" speed="0.35">
+			<frame x="1" y="81" w="40" h="40"/>
+            <frame x="41" y="81" w="40" h="40"/>
+            <frame x="81" y="81" w="40" h="40"/>
+            <frame x="121" y="81" w="40" h="40"/>
+            <frame x="161" y="81" w="40" h="40"/>
+            <frame x="201" y="81" w="40" h="40"/>
+            <frame x="241" y="81" w="40" h="40"/>
+            <frame x="281" y="81" w="40" h="40"/>
+		</enemyArmadillo_run>
+        
+        <enemyArmadillo_attack loop="true" speed="0.35">
+			<frame x="1" y="121" w="40" h="40"/>
+            <frame x="41" y="121" w="40" h="40"/>
+            <frame x="81" y="121" w="40" h="40"/>
+            <frame x="121" y="121" w="40" h="40"/>
+            <frame x="161" y="121" w="40" h="40"/>
+            <frame x="201" y="121" w="40" h="40"/>
+            <frame x="241" y="121" w="40" h="40"/>
+            <frame x="281" y="121" w="40" h="40"/>
+            <frame x="321" y="121" w="40" h="40"/>
+            <frame x="361" y="121" w="40" h="40"/>
+		</enemyArmadillo_attack>
+        
+        <enemyArmadillo_attackloop loop="true" speed="0.35">
+			<frame x="1" y="161" w="40" h="40"/>
+            <frame x="41" y="161" w="40" h="40"/>
+            <frame x="81" y="161" w="40" h="40"/>
+            <frame x="121" y="161" w="40" h="40"/>
+            <frame x="161" y="161" w="40" h="40"/>
+            <frame x="201" y="161" w="40" h="40"/>
+            <frame x="241" y="161" w="40" h="40"/>
+            <frame x="281" y="161" w="40" h="40"/>
+            <frame x="321" y="161" w="40" h="40"/>
+            <frame x="361" y="161" w="40" h="40"/>
+		</enemyArmadillo_attackloop>
 		
 	</animations>
 
