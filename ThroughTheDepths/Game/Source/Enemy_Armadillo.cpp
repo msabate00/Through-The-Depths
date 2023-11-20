@@ -43,7 +43,7 @@ bool EnemyArmadillo::Start() {
 	texture = app->tex->Load(texturePath);
 	originalPosition = app->map->WorldToMap(position.x, position.y);
 
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 10, bodyType::DYNAMIC);
 	pbody->ctype = ColliderType::ENEMY;
 	pbody->listener = this;
 
@@ -188,10 +188,10 @@ bool EnemyArmadillo::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x, position.y-6, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x-4, position.y-14, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x, position.y-6, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x-4, position.y-14, SDL_FLIP_NONE, &rect);
 	}
 
 	if (app->debug) {
