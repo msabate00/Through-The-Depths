@@ -15,6 +15,7 @@ enum class EntityState {
 	ATTACKING,
 	JUMPING,
 	FALLING,
+	TRACK,
 	WALKAROUND,
 	DYING
 

@@ -69,6 +69,8 @@ private:
 	Animation ghostAnim;
 	Animation dieAnim;
 	Animation attackAnim;
+	Animation attackLoopAnim;
+	Animation trackAnim;
 
 
 	bool isDying = false;

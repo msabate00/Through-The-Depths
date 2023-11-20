@@ -24,6 +24,10 @@ bool EnemyArmadillo::Awake() {
 	
 
 	idleAnim.LoadAnimation("enemyArmadillo_idle");
+	runAnim.LoadAnimation("enemyArmadillo_run");
+	attackAnim.LoadAnimation("enemyArmadillo_attack");
+	attackLoopAnim.LoadAnimation("enemyArmadillo_attackloop");
+	trackAnim.LoadAnimation("enemyArmadillo_track	");
 	tilesView = 5;
 
 
@@ -73,11 +77,11 @@ bool EnemyArmadillo::Update(float dt)
 		onView = false;
 		
 		
-		if (state != EntityState::WALKAROUND) {
+		if (state != EntityState::RUNNING && state != EntityState::ATTACKING) {
 			targPos = originalPosition;
 			state = EntityState::IDLE;
 			if (origPos == originalPosition) {
-				state = EntityState::WALKAROUND;
+				state = EntityState::RUNNING;
 			}
 		}
 		else {
@@ -161,15 +165,12 @@ bool EnemyArmadillo::Update(float dt)
 	switch (state)
 	{
 	case EntityState::IDLE:			currentAnimation = &idleAnim; break;
-	case EntityState::RUNNING:		currentAnimation = &idleAnim; break;
-		
-	case EntityState::ATTACKING:	currentAnimation = &idleAnim; break;
-	
+	case EntityState::RUNNING:		currentAnimation = &runAnim; break;
+	case EntityState::ATTACKING:	currentAnimation = &attackAnim; break;
 	case EntityState::JUMPING:		currentAnimation = &idleAnim; break;
-	
 	case EntityState::FALLING:		currentAnimation = &idleAnim; break;
-	
 	case EntityState::DYING:		currentAnimation = &idleAnim; break;
+	case EntityState::TRACK:		currentAnimation = &trackAnim; break;
 	
 	default:						currentAnimation = &idleAnim;break;
 	}
@@ -187,10 +188,10 @@ bool EnemyArmadillo::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x, position.y-6, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x, position.y-6, SDL_FLIP_NONE, &rect);
 	}
 
 	if (app->debug) {
