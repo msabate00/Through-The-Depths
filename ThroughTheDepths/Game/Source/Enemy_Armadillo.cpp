@@ -37,7 +37,7 @@ bool EnemyArmadillo::Start() {
 
 
 	texture = app->tex->Load(texturePath);
-	originalPosition = position;
+	originalPosition = app->map->WorldToMap(position.x, position.y);
 
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::DYNAMIC);
 	pbody->ctype = ColliderType::ENEMY;
@@ -61,22 +61,70 @@ bool EnemyArmadillo::Update(float dt)
 
 	if (dist(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y, position.x, position.y) < app->map->GetTileWidth() * tilesView) {
 		onView = true;
-		
+		state = EntityState::RUNNING;
 		targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 
 		app->map->pathfindingFloor->CreatePath(origPos, targPos);
 		lastPath = *app->map->pathfindingFloor->GetLastPath();
 		
+		
 	}
 	else {
 		onView = false;
-
-		targPos = app->map->WorldToMap(originalPosition.x, originalPosition.y);
+		
+		
+		if (state != EntityState::WALKAROUND) {
+			targPos = originalPosition;
+			state = EntityState::IDLE;
+			if (origPos == originalPosition) {
+				state = EntityState::WALKAROUND;
+			}
+		}
+		else {
+		
+			if (targPos.x == app->map->WorldToMap(position.x, position.y).x) {
+				
+				if (targPos.x < app->map->WorldToMap(originalPosition.x, originalPosition.y).x) {
+					targPos = iPoint(originalPosition.x + 5, originalPosition.y);
+					
+				}
+				else {
+					targPos = iPoint(originalPosition.x - 5, originalPosition.y);
+				}
+			}
+		}
 		app->map->pathfindingFloor->CreatePath(origPos, targPos);
 		lastPath = *app->map->pathfindingFloor->GetLastPath();
+ 
+		//onView = false;
+		//state = EntityState::IDLE;
+	
+		//if (state == EntityState::IDLE) {
+		//	
+		//	/*targPos = app->map->WorldToMap(originalPosition.x+16, originalPosition.y+16);
+		//	if (targPos == originalPosition) {
+		//		
+		//	}
+		//	app->map->pathfindingFloor->ClearLastPath();
+		//	app->map->pathfindingFloor->CreatePath(origPos, targPos);
+		//	lastPath = *app->map->pathfindingFloor->GetLastPath();*/
+		//
+		//}
+
+		///*if (targPos.x == app->map->WorldToMap(position.x, position.y).x) {
+		//	if (targPos.x < app->map->WorldToMap(originalPosition.x, originalPosition.y).x) {
+		//		targPos = app->map->WorldToMap(originalPosition.x + 5, originalPosition.y);
+		//	}
+		//	else {
+		//		targPos = app->map->WorldToMap(originalPosition.x - 5, originalPosition.y);
+		//	}
+		//	
+		//}*/
+		//
+		
 	}
 
-
+	LOG("TPosx: %d TPosy: %d    --    Posx: %d  Posy: %d", targPos.x, targPos.y, app->map->WorldToMap(position.x+1, position.y+1).x, app->map->WorldToMap(position.x+1, position.y+1).y);
 	
 	
 
@@ -95,6 +143,8 @@ bool EnemyArmadillo::Update(float dt)
 		isFacingLeft = false;
 		vel.x += speed * dt;
 	}
+
+	
 	
 
 
@@ -110,22 +160,18 @@ bool EnemyArmadillo::Update(float dt)
 
 	switch (state)
 	{
-	case EntityState::IDLE:
-		currentAnimation = &idleAnim;
-		break;
-	case EntityState::RUNNING:
-		break;
-	case EntityState::ATTACKING:
-		break;
-	case EntityState::JUMPING:
-		break;
-	case EntityState::FALLING:
-		break;
-	case EntityState::DYING:
-		break;
-	default:
-		currentAnimation = &idleAnim;
-		break;
+	case EntityState::IDLE:			currentAnimation = &idleAnim; break;
+	case EntityState::RUNNING:		currentAnimation = &idleAnim; break;
+		
+	case EntityState::ATTACKING:	currentAnimation = &idleAnim; break;
+	
+	case EntityState::JUMPING:		currentAnimation = &idleAnim; break;
+	
+	case EntityState::FALLING:		currentAnimation = &idleAnim; break;
+	
+	case EntityState::DYING:		currentAnimation = &idleAnim; break;
+	
+	default:						currentAnimation = &idleAnim;break;
 	}
 
 
