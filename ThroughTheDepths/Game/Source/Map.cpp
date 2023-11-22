@@ -333,7 +333,6 @@ bool Map::CleanUp()
     collision = collisionsList.start;
     while (collision != NULL) {
         //app->physics->GetWorld()->DestroyBody(collision->data->body);
-        collision->data->body->SetActive(false);
         collision->data->pendingToDelete = true;
         //RELEASE(collision->data);
         collision = collision->next;
@@ -720,9 +719,6 @@ bool Map::LoadCollisions(std::string layerName) {
                         collisionsList.Add(c1);
                         ret = true;
                     }
-                    
-                    
-                    /*collisionsListCount++;*/
                 }
             }
         }
@@ -749,17 +745,17 @@ bool Map::LoadCollisionsObject()
         for (int i = 0; i < mapObjectsItem->data->objects.Count(); i++) {
 
             MapObject* object = mapObjectsItem->data->objects[i];
-
-            PhysBody* c1 = app->physics->CreateRectangle(object->x + object->width/2, object->y + object->height/2, object->width, object->height, STATIC);
+            PhysBody* c1;
+            c1 = app->physics->CreateRectangle(object->x + object->width/2, object->y + object->height/2, object->width, object->height, STATIC);
             c1->ctype = ColliderType::PLATFORM;
             collisionsList.Add(c1);
-            /*collisionsListCount++;*/
+            ret = true;
         }
-            mapObjectsItem = mapObjectsItem->next;
+        mapObjectsItem = mapObjectsItem->next;
     }
 
 
-    return false;
+    return ret;
 }
 
 bool Map::LoadEntities(std::string layerName)

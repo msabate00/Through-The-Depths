@@ -111,7 +111,7 @@ bool Physics::PreUpdate()
 
 	
 		
-	/*b2Body* body = world->GetBodyList();
+	b2Body* body = world->GetBodyList();
 	while (body != NULL) {
 
 		PhysBody* pb1 = (PhysBody*)body->GetUserData();
@@ -121,7 +121,7 @@ bool Physics::PreUpdate()
 
 		}
 		body = body->GetNext();
-	}*/
+	}
 
 		
 			
