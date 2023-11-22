@@ -20,9 +20,6 @@ EnemyArmadillo::~EnemyArmadillo() {}
 
 bool EnemyArmadillo::Awake() {
 
-	
-	
-
 	idleAnim.LoadAnimation("enemyArmadillo_idle");
 	runAnim.LoadAnimation("enemyArmadillo_run");
 	attackAnim.LoadAnimation("enemyArmadillo_attack");
@@ -70,13 +67,13 @@ bool EnemyArmadillo::Update(float dt)
 
 		app->map->pathfindingFloor->CreatePath(origPos, targPos);
 		lastPath = *app->map->pathfindingFloor->GetLastPath();
-		
-		
+
+
 	}
 	else {
 		onView = false;
-		
-		
+
+
 		if (state != EntityState::RUNNING && state != EntityState::ATTACKING) {
 			targPos = originalPosition;
 			state = EntityState::IDLE;
@@ -85,24 +82,30 @@ bool EnemyArmadillo::Update(float dt)
 			}
 		}
 		else {
-		
+
 			if (targPos.x == app->map->WorldToMap(position.x, position.y).x) {
-				
-				if (targPos.x < app->map->WorldToMap(originalPosition.x, originalPosition.y).x) {
-					targPos = iPoint(originalPosition.x + 5, originalPosition.y);
+
+
+				targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView + 1, originalPosition.y);
+
+				/*if (targPos.x < app->map->WorldToMap(originalPosition.x, originalPosition.y).x) {
+					targPos = iPoint(originalPosition.x + rand() % tilesView*2-tilesView + 1, originalPosition.y);
 					
 				}
 				else {
 					targPos = iPoint(originalPosition.x - 5, originalPosition.y);
-				}
+				}*/
+				app->map->pathfindingFloor->CreatePath(origPos, targPos);
+				lastPath = *app->map->pathfindingFloor->GetLastPath();
+				
 			}
+
 		}
-		app->map->pathfindingFloor->CreatePath(origPos, targPos);
-		lastPath = *app->map->pathfindingFloor->GetLastPath();
- 
+		
+
 		//onView = false;
 		//state = EntityState::IDLE;
-	
+
 		//if (state == EntityState::IDLE) {
 		//	
 		//	/*targPos = app->map->WorldToMap(originalPosition.x+16, originalPosition.y+16);
@@ -125,17 +128,17 @@ bool EnemyArmadillo::Update(float dt)
 		//	
 		//}*/
 		//
-		
+
 	}
 
-	LOG("TPosx: %d TPosy: %d    --    Posx: %d  Posy: %d", targPos.x, targPos.y, app->map->WorldToMap(position.x+1, position.y+1).x, app->map->WorldToMap(position.x+1, position.y+1).y);
-	
-	
+	//LOG("TPosx: %d TPosy: %d    --    Posx: %d  Posy: %d", targPos.x, targPos.y, app->map->WorldToMap(position.x + 1, position.y + 1).x, app->map->WorldToMap(position.x + 1, position.y + 1).y);
 
 
-	b2Vec2 vel = b2Vec2(0,0);
 
-	
+
+	b2Vec2 vel = b2Vec2(0, 0);
+
+
 	vel.y -= GRAVITY_Y;
 	iPoint nextPathTile;
 	lastPath.Pop(nextPathTile);
@@ -148,8 +151,8 @@ bool EnemyArmadillo::Update(float dt)
 		vel.x += speed * dt;
 	}
 
-	
-	
+
+
 
 
 
@@ -171,8 +174,8 @@ bool EnemyArmadillo::Update(float dt)
 	case EntityState::FALLING:		currentAnimation = &idleAnim; break;
 	case EntityState::DYING:		currentAnimation = &idleAnim; break;
 	case EntityState::TRACK:		currentAnimation = &trackAnim; break;
-	
-	default:						currentAnimation = &idleAnim;break;
+
+	default:						currentAnimation = &idleAnim; break;
 	}
 
 
@@ -183,21 +186,21 @@ bool EnemyArmadillo::Update(float dt)
 }
 
 bool EnemyArmadillo::PostUpdate() {
-	
+
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	
+
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x-4, position.y-14, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 4, position.y - 14, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x-4, position.y-14, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 4, position.y - 14, SDL_FLIP_NONE, &rect);
 	}
 
 	if (app->debug) {
-		
 
-		for (uint i = 0; i <  lastPath.Count(); ++i)
+
+		for (uint i = 0; i < lastPath.Count(); ++i)
 		{
 			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
 			app->render->DrawTexture(app->map->pathfindingFloor->tilePathTex, pos.x, pos.y);
