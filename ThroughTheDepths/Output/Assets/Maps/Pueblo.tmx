@@ -134485,7 +134485,7 @@
  </layer>
  <layer id="17" name="Detalles4" width="280" height="60">
   <properties>
-   <property name="Draw" type="bool" value="false"/>
+   <property name="Draw" type="bool" value="true"/>
    <property name="Front" type="bool" value="false"/>
   </properties>
   <data>
@@ -151293,7 +151293,7 @@
  </layer>
  <layer id="18" name="Sombra" width="280" height="60" opacity="0.4" tintcolor="#000000">
   <properties>
-   <property name="Draw" type="bool" value="false"/>
+   <property name="Draw" type="bool" value="true"/>
    <property name="Front" type="bool" value="false"/>
   </properties>
   <data>
@@ -168101,7 +168101,7 @@
  </layer>
  <layer id="16" name="Detalles3" width="280" height="60">
   <properties>
-   <property name="Draw" type="bool" value="false"/>
+   <property name="Draw" type="bool" value="true"/>
    <property name="Front" type="bool" value="false"/>
   </properties>
   <data>
