@@ -1,7 +1,10 @@
 #pragma once
 #include "Module.h"
 #include "Entity.h"
+#include "List.h"
+#include "Point.h"
 
+#include "PugiXml\src\pugixml.hpp"
 #include "Box2D/Box2D/Box2D.h"
 
 #define GRAVITY_X 0.0f
@@ -60,6 +63,7 @@ public:
 	b2Body* body;
 	Entity* listener;
 	ColliderType ctype;
+	bool pendingToDelete = false;
 };
 
 // Module --------------------------------------
@@ -89,6 +93,9 @@ public:
 
 	b2World* GetWorld();
 
+	//List<PhysBody*> collisionsListPendingToDelete;
+	/*PhysBody* collisionsListPendingToDelete;*/
+	bool destroyCollisions = false;
 
 private:
 

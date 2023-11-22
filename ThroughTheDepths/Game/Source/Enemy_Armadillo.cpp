@@ -213,6 +213,10 @@ bool EnemyArmadillo::PostUpdate() {
 
 bool EnemyArmadillo::CleanUp()
 {
+
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+
+
 	return true;
 }
 

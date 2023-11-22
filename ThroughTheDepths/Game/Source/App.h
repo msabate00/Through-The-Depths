@@ -98,7 +98,7 @@ public:
 	Particles* particles;
 	FadeToBlack* fadeToBlack;
 
-	int sceneLevel = 1;
+	int sceneLevel = 0;
 
 private:
 

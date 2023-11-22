@@ -40,6 +40,12 @@ bool Physics::Start()
 	// Set this module as a listener for contacts
 	world->SetContactListener(this);
 
+	
+
+
+	/*collisionsListPendingToDelete = new PhysBody[2000];
+	memset(collisionsListPendingToDelete, 0, 2000);*/
+
 	return true;
 }
 
@@ -47,6 +53,9 @@ bool Physics::Start()
 bool Physics::PreUpdate()
 {
 	bool ret = true;
+
+
+	
 
 	// Step (update) the World
 	// WARNING: WE ARE STEPPING BY CONSTANT 1/60 SECONDS!
@@ -67,6 +76,58 @@ bool Physics::PreUpdate()
 				pb1->listener->OnCollision(pb1, pb2);
 		}
 	}
+
+
+	//if (destroyCollisions) {
+
+
+
+
+	//	/*ListItem<PhysBody*>* collision;
+	//	collision = collisionsList.start;
+	//	while (collision != NULL && collision->data != NULL && collision->data != nullptr) {
+	//		LOG("BORRANDO COLISION");
+	//	    app->physics->GetWorld()->DestroyBody(collision->data->body);
+	//	    collision->data->body->SetActive(false);
+	//	    RELEASE(collision->data);
+	//	    collision = collision->next;
+	//	}*/
+
+	//	/*for (int i = 0; i < 2000; i++) {
+	//		LOG("BORRANDO COLISION");
+	//		
+	//		if(collisionsListPendingToDelete[i].body != nullptr)
+	//			world->DestroyBody(collisionsListPendingToDelete[i].body);
+	//		
+	//	}
+	//	RELEASE(collisionsListPendingToDelete);*/
+
+	//	
+
+
+	//	//LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %d", collisionsListPendingToDelete.Count());
+	//	destroyCollisions = false;
+	//}
+
+	
+		
+	/*b2Body* body = world->GetBodyList();
+	while (body != NULL) {
+
+		PhysBody* pb1 = (PhysBody*)body->GetUserData();
+		if (pb1->pendingToDelete) {
+			pb1->body->SetActive(false);
+			world->DestroyBody(pb1->body);
+
+		}
+		body = body->GetNext();
+	}*/
+
+		
+			
+		
+
+	
 
 	return ret;
 }
@@ -152,6 +213,7 @@ PhysBody* Physics::CreateRectangleSensor(int x, int y, int width, int height, bo
 
 	// Add BODY to the world
 	b2Body* b = world->CreateBody(&body);
+	
 
 	// Create SHAPE
 	b2PolygonShape box;
@@ -322,7 +384,6 @@ bool Physics::PostLateUpdate()
 bool Physics::CleanUp()
 {
 	LOG("Destroying physics world");
-
 	// Delete the whole physics world!
 	delete world;
 

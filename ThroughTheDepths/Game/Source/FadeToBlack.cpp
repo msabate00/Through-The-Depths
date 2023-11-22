@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Window.h"
 #include "Map.h"
+#include "Physics.h"
 
 #include "SDL/include/SDL_render.h"
 #include "Log.h"
@@ -51,6 +52,10 @@ bool FadeToBlack::Update(float dt)
 			moduleToDisable->Disable();
 			app->entityManager->Disable();
 			
+			
+			/*app->physics->Disable();
+			app->physics->Enable();*/
+			/*app->physics->CleanUp();*/
 
 			app->map->Enable();
 			moduleToEnable->Enable();

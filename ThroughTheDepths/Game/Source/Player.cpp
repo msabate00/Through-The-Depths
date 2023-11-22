@@ -17,7 +17,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
 
-	//Correr
+
 
 	runAnim.LoadAnimation("runAnim");
 	idleAnim.LoadAnimation("idleAnim");
@@ -28,98 +28,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	dieAnim.LoadAnimation("dieAnim");
 	//attackAnim.LoadAnimation("attackAnim");
 	attackAnim.LoadAnimation("attack2Anim");
-	
-	//Estar relajao
 
-	//idleAnim.PushBack({ 1, 1, 48, 48 });
-	//idleAnim.PushBack({ 33, 1, 32, 32 });
-	//idleAnim.speed = 0.1f;
-
-
-
-
-
-
-
-
-
-	/*runAnim.PushBack({ 1, 97,  32, 32 });
-	runAnim.PushBack({ 33,97,  32, 32 });
-	runAnim.PushBack({ 65, 97, 32, 32 });
-	runAnim.PushBack({ 97, 97, 32, 32 });
-	runAnim.PushBack({ 129, 97, 32, 32 });
-	runAnim.PushBack({ 161, 97, 32, 32 });
-	runAnim.PushBack({ 193, 97, 32, 32 });
-	runAnim.PushBack({ 225, 97, 32, 32 });
-	runAnim.speed = 0.17f;*/
-
-	//Caminar
-
-	/*walkAnim.PushBack({ 1, 65, 32, 32 });
-	walkAnim.PushBack({ 33, 65, 32, 32 });
-	walkAnim.PushBack({ 65, 65, 32, 32 });
-	walkAnim.PushBack({ 97, 65, 32, 32 });
-	walkAnim.speed = 0.17f;*/
-
-	
-
-	
-
-	/*idleAnim.PushBack({ 1, 1, 64, 64 });
-	idleAnim.PushBack({ 65, 1, 64, 64 });
-	idleAnim.speed = 0.1f;*/
-	
-
-	//Saltar
-
-	/*jumpUpAnim.PushBack({ 1, 161, 32, 32 });
-	jumpUpAnim.PushBack({ 33, 161, 32, 32 });
-	jumpUpAnim.PushBack({ 65, 161, 32, 32 });
-	jumpUpAnim.PushBack({ 97, 161, 32, 32 });
-	jumpDownAnim.PushBack({ 129, 161, 32, 32 });
-	jumpDownAnim.PushBack({ 161, 161, 32, 32 });
-	jumpDownAnim.PushBack({ 193, 161, 32, 32 });
-	jumpDownAnim.PushBack({ 225, 161, 32, 32 });
-	
-	jumpDownAnim.speed = 0.1f;
-	jumpUpAnim.speed = 0.15f;*/
-	//CAMBIAR jumpAnim, y dividirlo en jumpUpAnim y jumpDownAnim; La de up va con loop = false; la de bajar va con loop= true;
-
-
-
-
-	//Morir Desvanecido
-
-	/*ghostAnim.PushBack({ 1, 193, 32, 32 });
-	ghostAnim.PushBack({ 33, 193, 32, 32 });
-	ghostAnim.PushBack({ 65, 193, 32, 32 });
-	ghostAnim.speed = 0.17f;*/
-
-	//Morir
-
-	/*dieAnim.PushBack({ 1, 225, 32, 32 });
-	dieAnim.PushBack({ 33, 225, 32, 32 });
-	dieAnim.PushBack({ 65, 225, 32, 32 });
-	dieAnim.PushBack({ 97, 225, 32, 32 });
-	dieAnim.PushBack({ 129, 225, 32, 32 });
-	dieAnim.PushBack({ 161, 225, 32, 32 });
-	dieAnim.PushBack({ 193, 225, 32, 32 });
-	dieAnim.PushBack({ 225, 225, 32, 32 });
-	dieAnim.speed = 0.17f;
-	dieAnim.loop = false;*/
-
-	//Atacar
-	
-	/*attackAnim.PushBack({ 1, 257, 32, 32 });
-	attackAnim.PushBack({ 33, 257, 32, 32 });
-	attackAnim.PushBack({ 65, 257, 32, 32 });
-	attackAnim.PushBack({ 97, 257, 32, 32 });
-	attackAnim.PushBack({ 129, 257, 32, 32 });
-	attackAnim.PushBack({ 161, 257, 32, 32 });
-	attackAnim.PushBack({ 193, 257, 32, 32 });
-	attackAnim.PushBack({ 225, 257, 32, 32 });
-	attackAnim.speed = 0.35f;
-	attackAnim.loop = false;*/
 }
 
 Player::~Player() {
@@ -323,6 +232,10 @@ bool Player::PostUpdate() {
 bool Player::CleanUp()
 {
 
+
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+	
 	return true;
 }
 
@@ -533,19 +446,19 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		switch (physB->ctype)
 		{
 			case ColliderType::ITEM:
-				LOG("Collision ITEM");
+				//LOG("Collision ITEM");
 				app->audio->PlayFx(pickCoinFxId);
 				break;
 			case ColliderType::CHEST:
-				LOG("Collision CHEST");
+				//LOG("Collision CHEST");
 				app->audio->PlayFx(pickCoinFxId);
 				((Chest*)physB->listener)->ChangeState(Chest::CHEST_STATE::OPENING);
 				break;
 			case ColliderType::PLATFORM:
-				LOG("Collision PLATFORM");
+				//LOG("Collision PLATFORM");
 				break;
 			case ColliderType::UNKNOWN:
-				LOG("Collision UNKNOWN");
+				//LOG("Collision UNKNOWN");
 				break;
 
 			case ColliderType::COIN: 

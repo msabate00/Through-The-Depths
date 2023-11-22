@@ -52,6 +52,8 @@ bool Map::Awake(pugi::xml_node& config)
 
 bool Map::Start()
 {
+   
+   /* collisionsListCount = 0;*/
     switch (app->sceneLevel)
     {
     case 0:  mapFileName = mapFileName_Bosque; break;
@@ -318,15 +320,63 @@ bool Map::CleanUp()
     }
     mapData.maplayers.Clear();
 
+   /* for (int i = 0; i < collisionsListCount; i++) {
+        app->physics->collisionsListPendingToDelete[i] = *collisionsList.At(i)->data;
+    }
+   
+    app->physics->destroyCollisions = true;*/
+
+
+    traspasedPlatformList.Clear();
+
+    ListItem<PhysBody*>* collision;
+    collision = collisionsList.start;
+    while (collision != NULL) {
+        //app->physics->GetWorld()->DestroyBody(collision->data->body);
+        collision->data->body->SetActive(false);
+        collision->data->pendingToDelete = true;
+        //RELEASE(collision->data);
+        collision = collision->next;
+    }
+    LOG("-------------------------ANTES DEL CLEAR: %d", collisionsList.Count());
+    collisionsList.Clear();
+    LOG("-------------------------DESPUES DEL CLEAR: %d", collisionsList.Count());
+
+
+    //for (int i = 0; i < collisionsList.Count(); i++) {
+    //    //collisionsList.At(i)->data->body->GetWorld()->DestroyBody(collisionsList.At(i)->data->body);
+    //   /* collisionsList.At(i)->data->body->DestroyFixture(&collisionsList.At(i)->data->body->GetFixtureList()[0]);*/
+    // /*   collisionsList.At(i)->data->body->GetWorld()->DestroyBody(collisionsList.At(i)->data->body);*/
+    //}
+    //collisionsList.Clear();
+
+   /* b2Body* colision = app->physics->GetWorld()->GetBodyList();
+
+    while (colision != nullptr) {
+        app->physics->GetWorld()->DestroyBody(colision);
+        colision = colision->GetNext();
+    }*/
 
     //ListItem<PhysBody*>* collision;
     //collision = collisionsList.start;
+
     //while (collision != NULL) {
+    //
     //    //app->physics->GetWorld()->DestroyBody(collision->data->body);
-    //    collision->data->body->SetActive(false);
-    //    RELEASE(collision->data);
+    //   
+    //    //collision->data->body->destroyBody = true;
+    //    collision->data->pendingToDelete = true;
     //    collision = collision->next;
+    //   
+    //    
+    //    //RELEASE(collision->data);
+    //   
     //}
+    //LOG("-------------------------ANTES DEL CLEAR: %d", collisionsList.Count());
+    //app->physics->destroyCollisions = true;
+    ////collisionsList.Clear();
+  
+    //LOG("-------------------------DESPUES DEL CLEAR: %d", collisionsList.Count());
 
 
     return true;
@@ -644,6 +694,7 @@ bool Map::LoadCollisions(std::string layerName) {
                     if (gid == tileset->firstgid + 0) {
                         c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16 , 32, 32, STATIC);
                         c1->ctype = ColliderType::PLATFORM;
+                        collisionsList.Add(c1);
                         ret = true;
                     }
                    
@@ -652,12 +703,13 @@ bool Map::LoadCollisions(std::string layerName) {
                         c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+2, 32, 4, STATIC);
                         c1->ctype = ColliderType::PLATFORM_TRASPASS;
                         traspasedPlatformList.Add(c1);
+                        collisionsList.Add(c1);
                         ret = true;
                     }
                     if (gid == tileset->firstgid + 6) {
                         c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
                         c1->ctype = ColliderType::SPYKES;
-                        
+                        collisionsList.Add(c1);
                         ret = true;
                     }
 
@@ -665,11 +717,12 @@ bool Map::LoadCollisions(std::string layerName) {
                     if (gid == tileset->firstgid + 15) {
                         c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
                         c1->ctype = ColliderType::DIE_HOLE;
-
+                        collisionsList.Add(c1);
                         ret = true;
                     }
-                    collisionsList.Add(c1);
-
+                    
+                    
+                    /*collisionsListCount++;*/
                 }
             }
         }
@@ -700,7 +753,7 @@ bool Map::LoadCollisionsObject()
             PhysBody* c1 = app->physics->CreateRectangle(object->x + object->width/2, object->y + object->height/2, object->width, object->height, STATIC);
             c1->ctype = ColliderType::PLATFORM;
             collisionsList.Add(c1);
-
+            /*collisionsListCount++;*/
         }
             mapObjectsItem = mapObjectsItem->next;
     }
