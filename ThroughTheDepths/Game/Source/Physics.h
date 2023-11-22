@@ -63,7 +63,6 @@ public:
 	b2Body* body;
 	Entity* listener;
 	ColliderType ctype;
-	bool pendingToDelete = false;
 };
 
 // Module --------------------------------------
@@ -92,10 +91,6 @@ public:
 	void EndContact(b2Contact* contact);
 
 	b2World* GetWorld();
-
-	//List<PhysBody*> collisionsListPendingToDelete;
-	/*PhysBody* collisionsListPendingToDelete;*/
-	bool destroyCollisions = false;
 
 private:
 

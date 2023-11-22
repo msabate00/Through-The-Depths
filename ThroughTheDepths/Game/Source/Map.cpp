@@ -320,63 +320,32 @@ bool Map::CleanUp()
     }
     mapData.maplayers.Clear();
 
-   /* for (int i = 0; i < collisionsListCount; i++) {
-        app->physics->collisionsListPendingToDelete[i] = *collisionsList.At(i)->data;
+
+    // Remove all groupobject
+    ListItem<MapObjects*>* objectsItem;
+    objectsItem = mapData.mapObjects.start;
+
+    while (objectsItem != NULL)
+    {
+        RELEASE(objectsItem->data);
+        objectsItem = objectsItem->next;
     }
-   
-    app->physics->destroyCollisions = true;*/
+    mapData.mapObjects.Clear();
 
 
-    traspasedPlatformList.Clear();
 
+    
+    // Remove all colisions
     ListItem<PhysBody*>* collision;
     collision = collisionsList.start;
     while (collision != NULL) {
-        //app->physics->GetWorld()->DestroyBody(collision->data->body);
-        collision->data->pendingToDelete = true;
-        //RELEASE(collision->data);
+        app->physics->GetWorld()->DestroyBody(collision->data->body);
         collision = collision->next;
     }
-    LOG("-------------------------ANTES DEL CLEAR: %d", collisionsList.Count());
     collisionsList.Clear();
-    LOG("-------------------------DESPUES DEL CLEAR: %d", collisionsList.Count());
 
-
-    //for (int i = 0; i < collisionsList.Count(); i++) {
-    //    //collisionsList.At(i)->data->body->GetWorld()->DestroyBody(collisionsList.At(i)->data->body);
-    //   /* collisionsList.At(i)->data->body->DestroyFixture(&collisionsList.At(i)->data->body->GetFixtureList()[0]);*/
-    // /*   collisionsList.At(i)->data->body->GetWorld()->DestroyBody(collisionsList.At(i)->data->body);*/
-    //}
-    //collisionsList.Clear();
-
-   /* b2Body* colision = app->physics->GetWorld()->GetBodyList();
-
-    while (colision != nullptr) {
-        app->physics->GetWorld()->DestroyBody(colision);
-        colision = colision->GetNext();
-    }*/
-
-    //ListItem<PhysBody*>* collision;
-    //collision = collisionsList.start;
-
-    //while (collision != NULL) {
-    //
-    //    //app->physics->GetWorld()->DestroyBody(collision->data->body);
-    //   
-    //    //collision->data->body->destroyBody = true;
-    //    collision->data->pendingToDelete = true;
-    //    collision = collision->next;
-    //   
-    //    
-    //    //RELEASE(collision->data);
-    //   
-    //}
-    //LOG("-------------------------ANTES DEL CLEAR: %d", collisionsList.Count());
-    //app->physics->destroyCollisions = true;
-    ////collisionsList.Clear();
-  
-    //LOG("-------------------------DESPUES DEL CLEAR: %d", collisionsList.Count());
-
+    //Remove traspassed list
+    traspasedPlatformList.Clear();
 
     return true;
 }

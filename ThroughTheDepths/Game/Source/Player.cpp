@@ -233,25 +233,9 @@ bool Player::CleanUp()
 {
 
 
-	//app->physics->GetWorld()->DestroyBody(pbody->body);
-	//app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	pbody->pendingToDelete = true;
-	pbodyFoot->pendingToDelete = true;
-
-	/*b2Body* body = app->physics->GetWorld()->GetBodyList();
-	while (body != NULL) {
-
-		PhysBody* pb1 = (PhysBody*)body->GetUserData();
-		if (pb1->pendingToDelete) {
-			if (pbody == pb1) {
-				LOG("hay");
-			}
-			pb1->body->SetActive(false);
-			app->physics->GetWorld()->DestroyBody(pb1->body);
-
-		}
-		body = body->GetNext();
-	}*/
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
+	
 
 	
 	return true;

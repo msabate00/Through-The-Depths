@@ -40,11 +40,7 @@ bool Physics::Start()
 	// Set this module as a listener for contacts
 	world->SetContactListener(this);
 
-	
 
-
-	/*collisionsListPendingToDelete = new PhysBody[2000];
-	memset(collisionsListPendingToDelete, 0, 2000);*/
 
 	return true;
 }
@@ -77,57 +73,6 @@ bool Physics::PreUpdate()
 		}
 	}
 
-
-	//if (destroyCollisions) {
-
-
-
-
-	//	/*ListItem<PhysBody*>* collision;
-	//	collision = collisionsList.start;
-	//	while (collision != NULL && collision->data != NULL && collision->data != nullptr) {
-	//		LOG("BORRANDO COLISION");
-	//	    app->physics->GetWorld()->DestroyBody(collision->data->body);
-	//	    collision->data->body->SetActive(false);
-	//	    RELEASE(collision->data);
-	//	    collision = collision->next;
-	//	}*/
-
-	//	/*for (int i = 0; i < 2000; i++) {
-	//		LOG("BORRANDO COLISION");
-	//		
-	//		if(collisionsListPendingToDelete[i].body != nullptr)
-	//			world->DestroyBody(collisionsListPendingToDelete[i].body);
-	//		
-	//	}
-	//	RELEASE(collisionsListPendingToDelete);*/
-
-	//	
-
-
-	//	//LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %d", collisionsListPendingToDelete.Count());
-	//	destroyCollisions = false;
-	//}
-
-	
-		
-	b2Body* body = world->GetBodyList();
-	while (body != NULL) {
-
-		PhysBody* pb1 = (PhysBody*)body->GetUserData();
-		if (pb1->pendingToDelete) {
-			pb1->body->SetActive(false);
-			world->DestroyBody(pb1->body);
-
-		}
-		body = body->GetNext();
-	}
-
-		
-			
-		
-
-	
 
 	return ret;
 }
@@ -409,10 +354,6 @@ void Physics::EndContact(b2Contact* contact) {
 	// Call the OnCollision listener function to bodies A and B, passing as inputs our custom PhysBody classes
 	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
 	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
-
-	/*if (physA->ctype == ColliderType::PLAYER_FOOT) {
-		LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-	}*/
 
 	if (physA && physA->listener != NULL)
 		physA->listener->OnExitCollision(physA, physB);
