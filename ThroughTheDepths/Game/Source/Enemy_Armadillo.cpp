@@ -28,6 +28,10 @@ bool EnemyArmadillo::Awake() {
 	tilesView = 5;
 
 
+	state = EntityState::IDLE;
+	speed = 0.02f;
+	goToPath = false;
+
 	return true;
 }
 
@@ -44,9 +48,7 @@ bool EnemyArmadillo::Start() {
 	pbody->ctype = ColliderType::ENEMY;
 	pbody->listener = this;
 
-	state = EntityState::IDLE;
-	speed = 0.02f;
-
+	
 
 	return true;
 }
@@ -58,20 +60,26 @@ bool EnemyArmadillo::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	origPos = app->map->WorldToMap(position.x + 1, position.y + 1);
+	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 
-
-	if (dist(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y, position.x, position.y) < app->map->GetTileWidth() * tilesView) {
+	if (dist(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y, position.x, position.y) < app->map->GetTileWidth() * tilesView &&
+		app->map->pathfindingFloor->CheckBoundaries(targPos)) {
 		onView = true;
 		state = EntityState::RUNNING;
-		targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 
 		app->map->pathfindingFloor->CreatePath(origPos, targPos);
 		lastPath = *app->map->pathfindingFloor->GetLastPath();
-
-
 	}
 	else {
 		onView = false;
+		if (lastPath.Count() == 0) {
+			
+			targPos = iPoint( originalPosition.x + rand()%tilesView*2 - tilesView, originalPosition.y);
+			app->map->pathfindingFloor->CreatePath(origPos, targPos);
+			lastPath = *app->map->pathfindingFloor->GetLastPath();
+		}
+		
+
 
 	}
 
@@ -81,13 +89,17 @@ bool EnemyArmadillo::Update(float dt)
 
 
 	b2Vec2 vel = b2Vec2(0, 0);
-
-
 	vel.y -= GRAVITY_Y;
-	if (onView) {
-		iPoint nextPathTile;
-		lastPath.Pop(nextPathTile);
-		if (nextPathTile.x < origPos.x) {
+
+
+
+
+
+	if (lastPath.Count() > 0) {
+		iPoint* nextPathTile;
+		nextPathTile = lastPath.At(lastPath.Count() - 1);
+
+		if (nextPathTile->x < origPos.x) {
 			isFacingLeft = true;
 			vel.x -= speed * dt;
 		}
@@ -95,7 +107,13 @@ bool EnemyArmadillo::Update(float dt)
 			isFacingLeft = false;
 			vel.x += speed * dt;
 		}
+
+		if (nextPathTile->x == origPos.x) {
+			lastPath.Pop(*nextPathTile);
+		}
+
 	}
+
 
 
 
@@ -113,15 +131,15 @@ bool EnemyArmadillo::Update(float dt)
 
 	switch (state)
 	{
-		case EntityState::IDLE:			currentAnimation = &idleAnim; break;
-		case EntityState::RUNNING:		currentAnimation = &runAnim; break;
-		case EntityState::ATTACKING:	currentAnimation = &attackAnim; break;
-		case EntityState::JUMPING:		currentAnimation = &idleAnim; break;
-		case EntityState::FALLING:		currentAnimation = &idleAnim; break;
-		case EntityState::DYING:		currentAnimation = &idleAnim; break;
-		case EntityState::TRACK:		currentAnimation = &trackAnim; break;
+	case EntityState::IDLE:			currentAnimation = &idleAnim; break;
+	case EntityState::RUNNING:		currentAnimation = &runAnim; break;
+	case EntityState::ATTACKING:	currentAnimation = &attackAnim; break;
+	case EntityState::JUMPING:		currentAnimation = &idleAnim; break;
+	case EntityState::FALLING:		currentAnimation = &idleAnim; break;
+	case EntityState::DYING:		currentAnimation = &idleAnim; break;
+	case EntityState::TRACK:		currentAnimation = &trackAnim; break;
 
-		default:						currentAnimation = &idleAnim; break;
+	default:						currentAnimation = &idleAnim; break;
 	}
 
 

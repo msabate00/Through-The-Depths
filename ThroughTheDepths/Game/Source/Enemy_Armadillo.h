@@ -75,7 +75,7 @@ private:
 
 	bool isDying = false;
 	bool isAttacking = false;
-
+	bool goToPath = false;
 
 	DynArray<iPoint> lastPath;
 
