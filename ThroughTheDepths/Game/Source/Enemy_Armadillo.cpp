@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Timer.h"
 #include "Map.h"
 #include "../Utils.cpp"
 
@@ -25,11 +26,10 @@ bool EnemyArmadillo::Awake() {
 	attackAnim.LoadAnimation("enemyArmadillo_attack");
 	attackLoopAnim.LoadAnimation("enemyArmadillo_attackloop");
 	trackAnim.LoadAnimation("enemyArmadillo_track	");
-	tilesView = 5;
+	
 
 
 	state = EntityState::IDLE;
-	speed = 0.02f;
 	goToPath = false;
 
 	return true;
@@ -39,6 +39,13 @@ bool EnemyArmadillo::Start() {
 
 	//initilize textures
 	texturePath = parameters.attribute("texturepath").as_string();
+
+	walkSpeed = parameters.attribute("walkSpeed").as_float();
+	runSpeed = parameters.attribute("runSpeed").as_float();
+	tilesView = parameters.attribute("tilesView").as_int();
+	tilesAttack = parameters.attribute("tilesAttack").as_int();
+	attackTimeMax = parameters.attribute("attackTimerMax").as_int();
+	speed = walkSpeed;
 
 
 	texture = app->tex->Load(texturePath);
@@ -59,41 +66,72 @@ bool EnemyArmadillo::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	origPos = app->map->WorldToMap(position.x + 1, position.y + 1);
+	origPos = app->map->WorldToMap(position.x+32, position.y);
+	playerPos = app->scene->getPlayer()->position;
 	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 
-	if (dist(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y, position.x, position.y) < app->map->GetTileWidth() * tilesView &&
-		app->map->pathfindingFloor->CheckBoundaries(targPos)) {
+
+	//;
+
+
+	if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
 		onView = true;
 		state = EntityState::RUNNING;
+		speed = runSpeed;
+
 
 		app->map->pathfindingFloor->CreatePath(origPos, targPos);
 		lastPath = *app->map->pathfindingFloor->GetLastPath();
+
+		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesAttack) {
+			isAttacking = true;
+			attackTimer.Start();
+		}
+
+
 	}
 	else {
+		
 		onView = false;
+		speed = walkSpeed;
+		
 		if (lastPath.Count() == 0) {
 			
-			targPos = iPoint( originalPosition.x + rand()%tilesView*2 - tilesView, originalPosition.y);
-			app->map->pathfindingFloor->CreatePath(origPos, targPos);
-			lastPath = *app->map->pathfindingFloor->GetLastPath();
+			if (!idleAnim.HasFinished()) {
+				state = EntityState::IDLE;
+			}
+			else {
+
+				idleAnim.Reset();
+				state = EntityState::RUNNING;
+				targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
+				app->map->pathfindingFloor->CreatePath(origPos, targPos);
+				lastPath = *app->map->pathfindingFloor->GetLastPath();
+
+			}
 		}
-		
-
-
+		else {
+			state = EntityState::RUNNING;
+		}
 	}
 
 	//LOG("TPosx: %d TPosy: %d    --    Posx: %d  Posy: %d", targPos.x, targPos.y, app->map->WorldToMap(position.x + 1, position.y + 1).x, app->map->WorldToMap(position.x + 1, position.y + 1).y);
 
+	if (isAttacking) {
+		speed = runSpeed;
+		state = EntityState::ATTACKING;
+		LOG("Timer: %f", attackTimer.ReadMSec());
+		if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
+			isAttacking = false;
+			attackAnim.Reset();
+			attackLoopAnim.Reset();
 
+		}
+	}
 
 
 	b2Vec2 vel = b2Vec2(0, 0);
 	vel.y -= GRAVITY_Y;
-
-
-
-
 
 	if (lastPath.Count() > 0) {
 		iPoint* nextPathTile;
@@ -115,7 +153,7 @@ bool EnemyArmadillo::Update(float dt)
 	}
 
 
-
+	
 
 
 
@@ -131,15 +169,14 @@ bool EnemyArmadillo::Update(float dt)
 
 	switch (state)
 	{
-	case EntityState::IDLE:			currentAnimation = &idleAnim; break;
-	case EntityState::RUNNING:		currentAnimation = &runAnim; break;
-	case EntityState::ATTACKING:	currentAnimation = &attackAnim; break;
-	case EntityState::JUMPING:		currentAnimation = &idleAnim; break;
-	case EntityState::FALLING:		currentAnimation = &idleAnim; break;
-	case EntityState::DYING:		currentAnimation = &idleAnim; break;
-	case EntityState::TRACK:		currentAnimation = &trackAnim; break;
-
-	default:						currentAnimation = &idleAnim; break;
+		case EntityState::IDLE:			currentAnimation = &idleAnim; break;
+		case EntityState::RUNNING:		currentAnimation = &runAnim; break;
+		case EntityState::ATTACKING:	currentAnimation = &attackAnim; if (attackAnim.HasFinished()) { currentAnimation = &attackLoopAnim; }   break;
+		case EntityState::JUMPING:		currentAnimation = &idleAnim; break;
+		case EntityState::FALLING:		currentAnimation = &idleAnim; break;
+		case EntityState::DYING:		currentAnimation = &idleAnim; break;
+		case EntityState::TRACK:		currentAnimation = &trackAnim; break;
+		default:						currentAnimation = &idleAnim; break;
 	}
 
 

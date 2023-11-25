@@ -77,6 +77,8 @@ private:
 	bool isAttacking = false;
 	bool goToPath = false;
 
+	float walkSpeed, runSpeed;
+
 	DynArray<iPoint> lastPath;
 
 };

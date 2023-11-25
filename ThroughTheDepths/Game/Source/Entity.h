@@ -5,6 +5,7 @@
 #include "SString.h"
 #include "Input.h"
 #include "Render.h"
+#include "Timer.h"
 
 class PhysBody;
 
@@ -110,13 +111,19 @@ public:
 	iPoint position;       
 	iPoint originalPosition;
 	int tilesView;
+	int tilesAttack;
 	bool onView = false;
 	bool renderable = true;
+	bool isAttacking = false;
 
+	iPoint playerPos;
 	iPoint origPos;
 	iPoint targPos;
 
 	PhysBody* pbody = nullptr;
+
+	Timer attackTimer;
+	float attackTimeMax;
 
 	float speed;
 
