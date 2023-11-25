@@ -62,12 +62,12 @@ public:
 	}
 
 
-	void LoadAnimation(const char* nombre) {
+	void LoadAnimation(const char* entity, const char* nombre) {
 		pugi::xml_document configFile;
 		pugi::xml_node animationsNode;
 		pugi::xml_node animationNode;
 		pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
-		animationsNode = configFile.child("config").child("animations").child(nombre);
+		animationsNode = configFile.child("config").child("animations").child(entity).child(nombre);
 
 		animationNode = animationsNode.child("frame");
 		//animationsNode.child("anim").next_sibling

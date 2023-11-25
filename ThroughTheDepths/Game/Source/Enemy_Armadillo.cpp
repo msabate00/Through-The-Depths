@@ -21,11 +21,11 @@ EnemyArmadillo::~EnemyArmadillo() {}
 
 bool EnemyArmadillo::Awake() {
 
-	idleAnim.LoadAnimation("enemyArmadillo_idle");
-	runAnim.LoadAnimation("enemyArmadillo_run");
-	attackAnim.LoadAnimation("enemyArmadillo_attack");
-	attackLoopAnim.LoadAnimation("enemyArmadillo_attackloop");
-	trackAnim.LoadAnimation("enemyArmadillo_track	");
+	idleAnim.LoadAnimation(name.GetString(), "idleAnim");
+	runAnim.LoadAnimation(name.GetString(), "runAnim");
+	attackAnim.LoadAnimation(name.GetString(), "attackAnim");
+	attackLoopAnim.LoadAnimation(name.GetString(), "attackLoopAnim");
+	trackAnim.LoadAnimation(name.GetString(), "trackAnim");
 	
 
 
@@ -42,6 +42,7 @@ bool EnemyArmadillo::Start() {
 
 	walkSpeed = parameters.attribute("walkSpeed").as_float();
 	runSpeed = parameters.attribute("runSpeed").as_float();
+	attackSpeed = parameters.attribute("attackSpeed").as_float();
 	tilesView = parameters.attribute("tilesView").as_int();
 	tilesAttack = parameters.attribute("tilesAttack").as_int();
 	attackTimeMax = parameters.attribute("attackTimerMax").as_int();
@@ -84,8 +85,10 @@ bool EnemyArmadillo::Update(float dt)
 		lastPath = *app->map->pathfindingFloor->GetLastPath();
 
 		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesAttack) {
-			isAttacking = true;
-			attackTimer.Start();
+			if (!isAttacking) {
+				isAttacking = true;
+				attackTimer.Start();
+			}
 		}
 
 
@@ -116,7 +119,7 @@ bool EnemyArmadillo::Update(float dt)
 	}
 
 	if (isAttacking) {
-		speed = runSpeed;
+		speed = attackSpeed;
 		state = EntityState::ATTACKING;
 		LOG("Timer: %f", attackTimer.ReadMSec());
 		if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
@@ -124,6 +127,14 @@ bool EnemyArmadillo::Update(float dt)
 			attackAnim.Reset();
 			attackLoopAnim.Reset();
 
+		}
+	}
+	else {
+		if (attackTimer.ReadMSec() < attackTimeMax + 2 * 1000) {
+			//Descansar
+			
+			state = EntityState::IDLE;
+			speed = 0;
 		}
 	}
 

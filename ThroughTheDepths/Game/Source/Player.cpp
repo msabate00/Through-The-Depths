@@ -15,19 +15,19 @@
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
-	name.Create("Player");
+	name.Create("player");
 
 
 
-	runAnim.LoadAnimation("runAnim");
-	idleAnim.LoadAnimation("idleAnim");
-	walkAnim.LoadAnimation("walkAnim");
-	jumpUpAnim.LoadAnimation("jumpUpAnim");
-	jumpDownAnim.LoadAnimation("jumpDownAnim");
-	ghostAnim.LoadAnimation("dmgAnim");
-	dieAnim.LoadAnimation("dieAnim");
+	runAnim.LoadAnimation(name.GetString(), "runAnim");
+	idleAnim.LoadAnimation(name.GetString(), "idleAnim");
+	walkAnim.LoadAnimation(name.GetString(), "walkAnim");
+	jumpUpAnim.LoadAnimation(name.GetString(), "jumpUpAnim");
+	jumpDownAnim.LoadAnimation(name.GetString(), "jumpDownAnim");
+	ghostAnim.LoadAnimation(name.GetString(), "dmgAnim");
+	dieAnim.LoadAnimation(name.GetString(), "dieAnim");
 	//attackAnim.LoadAnimation("attackAnim");
-	attackAnim.LoadAnimation("attack2Anim");
+	attackAnim.LoadAnimation(name.GetString(), "attack2Anim");
 
 }
 
