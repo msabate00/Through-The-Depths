@@ -37,23 +37,21 @@ Player::~Player() {
 
 bool Player::Awake() {
 
-	
-
 	return true;
 }
 
 bool Player::Start() {
 
-	//position.x = parameters.attribute("x").as_int();
-	//position.y = parameters.attribute("y").as_int();
+	
 	texturePath = parameters.attribute("texturepath").as_string();
 	speed = parameters.attribute("speed").as_float();
 	jumpForce = parameters.attribute("jumpForce").as_float();
+
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	int points = 2;
+	
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 15,  bodyType::DYNAMIC);
-	//pbody = app->physics->CreateRectangle(position.x + 16, position.y + 16, 32, 32,  bodyType::DYNAMIC);
+	
 	
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
@@ -72,12 +70,6 @@ bool Player::Start() {
 
 	pickCoinFxId = app->audio->LoadFx(parameters.child("coinAudio").attribute("path").as_string());
 
-
-
-
-
-
-
 	uint windowH;
 	uint windowW;
 	app->win->GetWindowSize(windowW, windowH);
@@ -95,15 +87,17 @@ bool Player::Update(float dt)
 {
 	
 
-
-	if (app->input->GetKey(SDL_SCANCODE_F3) || app->input->GetKey(SDL_SCANCODE_F1)) {
-		//pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
+	if (app->input->GetKey(SDL_SCANCODE_F1)) {
 		app->sceneLevel = 0;
 		app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene);
 	}
+
 	if (app->input->GetKey(SDL_SCANCODE_F2)) {
-		//pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
 		app->sceneLevel = 1;
+		app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F3)) {
 		app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene);
 	}
 

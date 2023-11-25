@@ -92,6 +92,9 @@ public:
 
 	b2World* GetWorld();
 
+
+	float worldStep = 16.0f;
+
 private:
 
 	

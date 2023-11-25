@@ -55,6 +55,8 @@ public:
 
 
 	uint64 GetFrameCount();
+	uint32 GetMaxFrameDuration();
+	float GetDeltaTime();
 
 private:
 
@@ -77,6 +79,8 @@ private:
 	bool PostUpdate();
 
 	bool PostLateUpdate();
+
+	
 
 
 public:

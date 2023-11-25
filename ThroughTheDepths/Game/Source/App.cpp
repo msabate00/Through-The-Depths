@@ -202,6 +202,7 @@ void App::FinishUpdate()
 	
 
 		maxFrameDuration = (maxFrameDuration == 16) ? 32 : 16;
+		//app->physics->worldStep = (app->physics->worldStep == 16.0f) ? 8.0f : 16.0f;
 	
 	}
 	if (input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
@@ -334,6 +335,16 @@ bool App::PostLateUpdate()
 	}
 
 	return ret;
+}
+
+uint32 App::GetMaxFrameDuration()
+{
+	return maxFrameDuration;
+}
+
+float App::GetDeltaTime()
+{
+	return dt;
 }
 
 uint64 App::GetFrameCount()

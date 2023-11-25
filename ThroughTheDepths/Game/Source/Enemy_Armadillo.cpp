@@ -62,7 +62,7 @@ bool EnemyArmadillo::Start() {
 
 bool EnemyArmadillo::Update(float dt)
 {
-	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
+
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
@@ -71,7 +71,7 @@ bool EnemyArmadillo::Update(float dt)
 	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 
 
-	//;
+	
 
 
 	if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
@@ -115,8 +115,6 @@ bool EnemyArmadillo::Update(float dt)
 		}
 	}
 
-	//LOG("TPosx: %d TPosy: %d    --    Posx: %d  Posy: %d", targPos.x, targPos.y, app->map->WorldToMap(position.x + 1, position.y + 1).x, app->map->WorldToMap(position.x + 1, position.y + 1).y);
-
 	if (isAttacking) {
 		speed = runSpeed;
 		state = EntityState::ATTACKING;
@@ -152,20 +150,10 @@ bool EnemyArmadillo::Update(float dt)
 
 	}
 
-
-	
-
-
-
-
 	pbody->body->SetLinearVelocity(vel);
-
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
-
-
 
 	switch (state)
 	{
@@ -179,9 +167,7 @@ bool EnemyArmadillo::Update(float dt)
 		default:						currentAnimation = &idleAnim; break;
 	}
 
-
 	currentAnimation->Update();
-
 
 	return true;
 }
