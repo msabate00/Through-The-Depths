@@ -122,6 +122,8 @@ bool PlantBreakable::PostUpdate() {
 
 bool PlantBreakable::CleanUp()
 {
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+	SDL_DestroyTexture(texture);
 	return true;
 }
 

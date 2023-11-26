@@ -212,6 +212,7 @@ bool EnemyArmadillo::CleanUp()
 {
 
 	app->physics->GetWorld()->DestroyBody(pbody->body);
+	SDL_DestroyTexture(texture);
 
 
 	return true;

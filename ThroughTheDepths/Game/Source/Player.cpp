@@ -235,7 +235,7 @@ bool Player::CleanUp()
 
 	app->physics->GetWorld()->DestroyBody(pbody->body);
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
-	
+	SDL_DestroyTexture(texture);
 
 	
 	return true;

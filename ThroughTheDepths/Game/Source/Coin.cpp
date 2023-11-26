@@ -116,5 +116,7 @@ bool Coin::PostUpdate() {
 
 bool Coin::CleanUp()
 {
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+	SDL_DestroyTexture(texture);
 	return true;
 }

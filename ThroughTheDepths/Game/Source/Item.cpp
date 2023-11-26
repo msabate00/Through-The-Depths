@@ -54,5 +54,7 @@ bool Item::PostUpdate() {
 
 bool Item::CleanUp()
 {
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+	SDL_DestroyTexture(texture);
 	return true;
 }
