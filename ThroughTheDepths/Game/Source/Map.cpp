@@ -104,8 +104,7 @@ bool Map::PostUpdate()
     while (mapLayerItem != NULL) {
 
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value &&
-            mapLayerItem->data->properties.GetProperty("Front") != NULL && !mapLayerItem->data->properties.GetProperty("Front")->value
-            ) {
+            mapLayerItem->data->properties.GetProperty("Front") != NULL && !mapLayerItem->data->properties.GetProperty("Front")->value) {
 
 
             iPoint playerPos = app->scene->getPlayer()->position;            
@@ -145,6 +144,12 @@ bool Map::PostUpdate()
                     case 0b010: flip = SDL_FLIP_HORIZONTAL;     angle += 180;       break;
                     case 0b001: flip = SDL_FLIP_HORIZONTAL;     angle += 270;       break;
                     }
+
+
+                   
+                    SDL_SetTextureColorMod(tileset->texture, 255 * mapLayerItem->data->opacity, 255 * mapLayerItem->data->opacity, 255 * mapLayerItem->data->opacity);
+                    
+
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
                         pos.y, flip,
@@ -211,10 +216,16 @@ bool Map::UpdateFrontEntities()
                     case 0b010: flip = SDL_FLIP_HORIZONTAL;     angle += 180;       break;
                     case 0b001: flip = SDL_FLIP_HORIZONTAL;     angle += 270;       break;
                     }
+
+                    SDL_SetTextureColorMod(tileset->texture, 255 * mapLayerItem->data->opacity, 255 * mapLayerItem->data->opacity, 255 * mapLayerItem->data->opacity);
+
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
                         pos.y, flip,
                         &r, 1, angle);
+
+                    
+
                 }
             }
         }
@@ -521,6 +532,21 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     layer->name = node.attribute("name").as_string();
     layer->width = node.attribute("width").as_int();
     layer->height = node.attribute("height").as_int();
+    
+    if (node.attribute("opacity") != NULL) {
+        layer->opacity = node.attribute("opacity").as_float();
+    }
+    else {
+        layer->opacity = 1.0f;
+    }
+
+    if (node.attribute("tintcolor") != NULL) {
+        layer->tint = node.attribute("tintcolor").as_string();
+    }
+    else {
+        layer->tint = "#FFFFFF";
+    }
+   
 
     LoadProperties(node, layer->properties);
 

@@ -47,6 +47,7 @@ bool Player::Start() {
 	speed = parameters.attribute("speed").as_float();
 	jumpForce = parameters.attribute("jumpForce").as_float();
 	invulnerableTime = parameters.attribute("invulnerableTime").as_float();
+	
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	
@@ -211,7 +212,7 @@ bool Player::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 
-	if ((invulnerableTimer.ReadMSec() < invulnerableTime * 1000 && app->GetFrameCount() % 2 == 0) || invulnerableTimer.ReadMSec() > invulnerableTime * 1000) {
+	if (invulnerableTimer.ReadMSec() > invulnerableTime * 1000 || (invulnerableTimer.ReadMSec() < invulnerableTime * 1000 && app->GetFrameCount() % 2 == 0)) {
 		if (isFacingLeft) {
 			app->render->DrawTexture(texture, position.x - 15, position.y - 15, SDL_FLIP_HORIZONTAL, &rect);
 		}

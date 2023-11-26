@@ -7,6 +7,7 @@
 	
 Timer::Timer()
 {
+	startTime = -1000000;
 	//Start();
 }
 
@@ -24,3 +25,4 @@ float Timer::ReadMSec() const
 {
 	return (float)(SDL_GetTicks() - startTime);
 }
+

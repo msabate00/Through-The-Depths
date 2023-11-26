@@ -72,6 +72,8 @@ struct MapLayer
 	int id; 
 	int width;
 	int height;
+	float opacity = 1.0f;
+	SString	tint;
 	uint* data;
 
 	Properties properties;
