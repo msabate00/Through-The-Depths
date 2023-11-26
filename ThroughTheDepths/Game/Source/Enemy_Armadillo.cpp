@@ -121,7 +121,6 @@ bool EnemyArmadillo::Update(float dt)
 	if (isAttacking) {
 		speed = attackSpeed;
 		state = EntityState::ATTACKING;
-		LOG("Timer: %f", attackTimer.ReadMSec());
 		if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
 			isAttacking = false;
 			attackAnim.Reset();
@@ -145,7 +144,7 @@ bool EnemyArmadillo::Update(float dt)
 	if (lastPath.Count() > 0) {
 		iPoint* nextPathTile;
 		nextPathTile = lastPath.At(lastPath.Count() - 1);
-
+		//LOG("LAST PATH X: %d  ENEMY X: %d", nextPathTile->x, origPos.x);
 		if (nextPathTile->x < origPos.x) {
 			isFacingLeft = true;
 			vel.x -= speed * dt;

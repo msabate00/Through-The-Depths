@@ -46,7 +46,7 @@ bool Player::Start() {
 	texturePath = parameters.attribute("texturepath").as_string();
 	speed = parameters.attribute("speed").as_float();
 	jumpForce = parameters.attribute("jumpForce").as_float();
-
+	invulnerableTime = parameters.attribute("invulnerableTime").as_float();
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 	
@@ -210,12 +210,17 @@ bool Player::PostUpdate() {
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
-	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x-15, position.y-15, SDL_FLIP_HORIZONTAL, &rect);
+
+	if ((invulnerableTimer.ReadMSec() < invulnerableTime * 1000 && app->GetFrameCount() % 2 == 0) || invulnerableTimer.ReadMSec() > invulnerableTime * 1000) {
+		if (isFacingLeft) {
+			app->render->DrawTexture(texture, position.x - 15, position.y - 15, SDL_FLIP_HORIZONTAL, &rect);
+		}
+		else {
+			app->render->DrawTexture(texture, position.x, position.y - 15, SDL_FLIP_NONE, &rect);
+		}
 	}
-	else {
-		app->render->DrawTexture(texture, position.x, position.y-15, SDL_FLIP_NONE, &rect);
-	}
+
+	
 
 
 
@@ -477,6 +482,18 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 				colisionTraspassing.Add(physB);
 				if (colisionTraspassing.Count() > 10) {
 					colisionTraspassing.Del(colisionTraspassing.At(0));
+				}
+				break;
+
+			case ColliderType::ENEMY:
+				PhysBody* enemyBody = (PhysBody*)physB->body->GetUserData();
+				if (enemyBody->listener->state == EntityState::ATTACKING) {
+					LOG("DETECTA COLISION AU");
+					if (invulnerableTimer.ReadMSec() > invulnerableTime * 1000) {
+						LOG("RESTAR VIDA");
+						invulnerableTimer.Start();
+					}
+					
 				}
 				break;
 		}

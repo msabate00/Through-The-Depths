@@ -70,6 +70,8 @@ private:
 	List<PhysBody*> colisionTraspassing;
 	Timer traspassingTimer;
 	Timer watchUpDownTimer;
+	Timer invulnerableTimer;
+	float invulnerableTime;
 	int yCameraOffset = 0;
 
 	

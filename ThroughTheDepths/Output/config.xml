@@ -29,7 +29,7 @@
 
 	<scene>
 		<!-- La posicion del player ahora funciona por el tiled-->
-		<player x="2080" y="600" texturepath="Assets/Textures/Player_Standar.png" speed="0.34" jumpForce="4.5">
+		<player x="2080" y="600" texturepath="Assets/Textures/Player_Standar.png" speed="0.34" jumpForce="4.5" invulnerableTime="1.0">
 			<coinAudio path="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
 			
 		</player>
