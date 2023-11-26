@@ -74,94 +74,109 @@ bool EnemyArmadillo::Update(float dt)
 
 	
 
+	if (!cansado) {
+		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
+			onView = true;
+			state = EntityState::RUNNING;
+			speed = runSpeed;
 
-	if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
-		onView = true;
-		state = EntityState::RUNNING;
-		speed = runSpeed;
 
+			app->map->pathfindingFloor->CreatePath(origPos, targPos);
+			lastPath = *app->map->pathfindingFloor->GetLastPath();
 
-		app->map->pathfindingFloor->CreatePath(origPos, targPos);
-		lastPath = *app->map->pathfindingFloor->GetLastPath();
-
-		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesAttack) {
-			if (!isAttacking) {
-				isAttacking = true;
-				attackTimer.Start();
+			if (dist(playerPos, position) < app->map->GetTileWidth() * tilesAttack) {
+				if (!isAttacking) {
+					isAttacking = true;
+					attackTimer.Start();
+				}
 			}
+
+
 		}
+		else {
 
+			onView = false;
+			speed = walkSpeed;
 
-	}
-	else {
-		
-		onView = false;
-		speed = walkSpeed;
-		
-		if (lastPath.Count() == 0) {
-			
-			if (!idleAnim.HasFinished()) {
-				state = EntityState::IDLE;
+			if (lastPath.Count() == 0) {
+
+				if (!idleAnim.HasFinished()) {
+					state = EntityState::IDLE;
+				}
+				else {
+
+					idleAnim.Reset();
+					state = EntityState::RUNNING;
+					targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
+					app->map->pathfindingFloor->CreatePath(origPos, targPos);
+					lastPath = *app->map->pathfindingFloor->GetLastPath();
+
+				}
 			}
 			else {
-
-				idleAnim.Reset();
 				state = EntityState::RUNNING;
-				targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
-				app->map->pathfindingFloor->CreatePath(origPos, targPos);
-				lastPath = *app->map->pathfindingFloor->GetLastPath();
+			}
+		}
+
+		if (isAttacking) {
+			speed = attackSpeed;
+			state = EntityState::ATTACKING;
+			if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
+				cansado = true;
+				cansadoTimer.Start();
+				isAttacking = false;
+				attackAnim.Reset();
+				attackLoopAnim.Reset();
 
 			}
 		}
 		else {
-			state = EntityState::RUNNING;
-		}
-	}
+			if (attackTimer.ReadMSec() < attackTimeMax + 2 * 1000) {
+				//Descansar
 
-	if (isAttacking) {
-		speed = attackSpeed;
-		state = EntityState::ATTACKING;
-		if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
-			isAttacking = false;
-			attackAnim.Reset();
-			attackLoopAnim.Reset();
+				state = EntityState::IDLE;
+				speed = 0;
+			}
+		}
+
+
+		b2Vec2 vel = b2Vec2(0, 0);
+		vel.y -= GRAVITY_Y;
+
+		if (lastPath.Count() > 0) {
+			iPoint* nextPathTile;
+			nextPathTile = lastPath.At(lastPath.Count() - 1);
+			//LOG("LAST PATH X: %d  ENEMY X: %d", nextPathTile->x, origPos.x);
+			if (nextPathTile->x < origPos.x) {
+				isFacingLeft = true;
+				vel.x -= speed * dt;
+			}
+			else {
+				isFacingLeft = false;
+				vel.x += speed * dt;
+			}
+
+			if (nextPathTile->x == origPos.x) {
+				lastPath.Pop(*nextPathTile);
+			}
 
 		}
+
+		pbody->body->SetLinearVelocity(vel);
 	}
 	else {
-		if (attackTimer.ReadMSec() < attackTimeMax + 2 * 1000) {
-			//Descansar
-			
+
+		if (cansadoTimer.ReadMSec() < 5000) {
+			b2Vec2 vel = b2Vec2(0, 0);
+			vel.y -= GRAVITY_Y;
+			pbody->body->SetLinearVelocity(vel);
 			state = EntityState::IDLE;
-			speed = 0;
-		}
-	}
-
-
-	b2Vec2 vel = b2Vec2(0, 0);
-	vel.y -= GRAVITY_Y;
-
-	if (lastPath.Count() > 0) {
-		iPoint* nextPathTile;
-		nextPathTile = lastPath.At(lastPath.Count() - 1);
-		//LOG("LAST PATH X: %d  ENEMY X: %d", nextPathTile->x, origPos.x);
-		if (nextPathTile->x < origPos.x) {
-			isFacingLeft = true;
-			vel.x -= speed * dt;
 		}
 		else {
-			isFacingLeft = false;
-			vel.x += speed * dt;
-		}
-
-		if (nextPathTile->x == origPos.x) {
-			lastPath.Pop(*nextPathTile);
+			cansado = false;
 		}
 
 	}
-
-	pbody->body->SetLinearVelocity(vel);
-
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 

@@ -76,8 +76,10 @@ private:
 	bool isDying = false;
 	bool isAttacking = false;
 	bool goToPath = false;
-
+	bool cansado = false;
 	float walkSpeed, runSpeed, attackSpeed;
+
+	Timer cansadoTimer;
 
 	DynArray<iPoint> lastPath;
 
