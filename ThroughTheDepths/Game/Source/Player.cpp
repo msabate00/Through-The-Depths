@@ -42,18 +42,18 @@ bool Player::Awake() {
 
 bool Player::Start() {
 
-	
+
 	texturePath = parameters.attribute("texturepath").as_string();
 	speed = parameters.attribute("speed").as_float();
 	jumpForce = parameters.attribute("jumpForce").as_float();
 	invulnerableTime = parameters.attribute("invulnerableTime").as_float();
-	
+
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 15,  bodyType::DYNAMIC);
-	
-	
+
+	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 15, bodyType::DYNAMIC);
+
+
 	pbody->listener = this;
 	pbody->ctype = ColliderType::PLAYER;
 	pbody->body->SetFixedRotation(true);
@@ -65,9 +65,9 @@ bool Player::Start() {
 	pbodyFoot->ctype = ColliderType::PLAYER_FOOT;
 	pbodyFoot->body->SetFixedRotation(true);
 
-	
+
 	state = EntityState::IDLE;
-	
+
 
 	pickCoinFxId = app->audio->LoadFx(parameters.child("coinAudio").attribute("path").as_string());
 
@@ -78,15 +78,11 @@ bool Player::Start() {
 	app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
 	app->render->camera.y = (-position.y * app->win->GetScale() + (windowH / 2));
 
-
-
-
 	return true;
 }
 
 bool Player::Update(float dt)
 {
-	
 
 	if (app->input->GetKey(SDL_SCANCODE_F1)) {
 		app->sceneLevel = 0;
@@ -107,9 +103,9 @@ bool Player::Update(float dt)
 
 	//Movimiento colision pies
 	b2Vec2 positionFoot;
-	positionFoot.x = PIXEL_TO_METERS(position.x+0.3);
+	positionFoot.x = PIXEL_TO_METERS(position.x + 0.3);
 	positionFoot.y = PIXEL_TO_METERS(position.y + 0.67);
-	
+
 	pbodyFoot->body->SetTransform(positionFoot, pbodyFoot->body->GetAngle());
 
 	//Sistema de atravesar plataformas
@@ -120,7 +116,7 @@ bool Player::Update(float dt)
 		}
 		traspassingColision = false;
 	}
-	
+
 	//Movimientos personaje
 	if (!app->godMode && !isDying) {
 		Movement(dt);
@@ -131,32 +127,26 @@ bool Player::Update(float dt)
 			GodModeMovement(dt);
 		}
 	}
-	
-	
 
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-
-
 	//Movimiento de la camara
 	if (!app->debug) {
 		CameraMovement(dt);
 	}
-	
 
 	//Sistema de Ataque
 	if (isAttacking) {
 		state = EntityState::ATTACKING;
 		if (attackAnim.HasFinished()) {
-			
+
 			isAttacking = false;
 			attackAnim.Reset();
 			currentAnimation = &idleAnim;
 		}
 	}
-
 
 	//Sistema de Muerte
 	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
@@ -170,8 +160,6 @@ bool Player::Update(float dt)
 			dieAnim.Reset();
 		}
 	}
-
-
 
 	//Gestor de animaciones por estado
 	switch (state)
@@ -221,11 +209,6 @@ bool Player::PostUpdate() {
 		}
 	}
 
-	
-
-
-
-	
 	return true;
 }
 
@@ -237,7 +220,7 @@ bool Player::CleanUp()
 	app->physics->GetWorld()->DestroyBody(pbodyFoot->body);
 	SDL_DestroyTexture(texture);
 
-	
+
 	return true;
 }
 
@@ -304,7 +287,7 @@ void Player::Movement(float dt)
 		state = EntityState::JUMPING;
 	}
 
-	
+
 
 
 	//Ataque
@@ -351,9 +334,6 @@ void Player::GodModeMovement(float dt)
 		state = EntityState::RUNNING;
 		pbody->body->SetLinearVelocity(vel);
 	}
-
-
-
 	//Moverse arriba
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		vel = b2Vec2(pbody->body->GetLinearVelocity().x, -speedFast * dt);
@@ -441,66 +421,66 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	if (physA->ctype == ColliderType::PLAYER_FOOT) {
 		numFootContacts++;
 	}
-	
-	if(physA->ctype == ColliderType::PLAYER){
+
+	if (physA->ctype == ColliderType::PLAYER) {
 
 
 		switch (physB->ctype)
 		{
-			case ColliderType::ITEM:
-				//LOG("Collision ITEM");
-				app->audio->PlayFx(pickCoinFxId);
-				break;
-			case ColliderType::CHEST:
-				//LOG("Collision CHEST");
-				app->audio->PlayFx(pickCoinFxId);
-				((Chest*)physB->listener)->ChangeState(Chest::CHEST_STATE::OPENING);
-				break;
-			case ColliderType::PLATFORM:
-				//LOG("Collision PLATFORM");
-				break;
-			case ColliderType::UNKNOWN:
-				//LOG("Collision UNKNOWN");
-				break;
+		case ColliderType::ITEM:
+			//LOG("Collision ITEM");
+			app->audio->PlayFx(pickCoinFxId);
+			break;
+		case ColliderType::CHEST:
+			//LOG("Collision CHEST");
+			app->audio->PlayFx(pickCoinFxId);
+			((Chest*)physB->listener)->ChangeState(Chest::CHEST_STATE::OPENING);
+			break;
+		case ColliderType::PLATFORM:
+			//LOG("Collision PLATFORM");
+			break;
+		case ColliderType::UNKNOWN:
+			//LOG("Collision UNKNOWN");
+			break;
 
-			case ColliderType::COIN: 
-				app->audio->PlayFx(pickCoinFxId);
-				app->entityManager->DestroyEntity(physB->listener);
-				physB->body->SetActive(false);
-				
+		case ColliderType::COIN:
+			app->audio->PlayFx(pickCoinFxId);
+			app->entityManager->DestroyEntity(physB->listener);
+			physB->body->SetActive(false);
 
-				break;
-		
-			case ColliderType::DIE_HOLE:
-			case ColliderType::SPYKES:
-				if (!app->godMode) {
-					isDying = true;
+
+			break;
+
+		case ColliderType::DIE_HOLE:
+		case ColliderType::SPYKES:
+			if (!app->godMode) {
+				isDying = true;
+			}
+			break;
+
+
+		case ColliderType::PLATFORM_TRASPASS:
+			colisionTraspassing.Add(physB);
+			if (colisionTraspassing.Count() > 10) {
+				colisionTraspassing.Del(colisionTraspassing.At(0));
+			}
+			break;
+
+		case ColliderType::ENEMY:
+			PhysBody* enemyBody = (PhysBody*)physB->body->GetUserData();
+			if (enemyBody->listener->state == EntityState::ATTACKING) {
+				LOG("DETECTA COLISION AU");
+				if (invulnerableTimer.ReadMSec() > invulnerableTime * 1000) {
+					LOG("RESTAR VIDA");
+					invulnerableTimer.Start();
 				}
-				break;
 
-
-			case ColliderType::PLATFORM_TRASPASS:
-				colisionTraspassing.Add(physB);
-				if (colisionTraspassing.Count() > 10) {
-					colisionTraspassing.Del(colisionTraspassing.At(0));
-				}
-				break;
-
-			case ColliderType::ENEMY:
-				PhysBody* enemyBody = (PhysBody*)physB->body->GetUserData();
-				if (enemyBody->listener->state == EntityState::ATTACKING) {
-					LOG("DETECTA COLISION AU");
-					if (invulnerableTimer.ReadMSec() > invulnerableTime * 1000) {
-						LOG("RESTAR VIDA");
-						invulnerableTimer.Start();
-					}
-					
-				}
-				break;
+			}
+			break;
 		}
 	}
 
-	
+
 }
 
 void Player::OnExitCollision(PhysBody* physA, PhysBody* physB)
@@ -508,30 +488,21 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB)
 
 	if (physA->ctype == ColliderType::PLAYER_FOOT) {
 		numFootContacts--;
-		//LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 	}
-
-	
 
 	switch (physB->ctype)
 	{
 	case ColliderType::ITEM:
 		break;
 	case ColliderType::CHEST:
-		
+
 		break;
 	case ColliderType::PLATFORM:
-		//numFootContacts--;
 		break;
 	case ColliderType::UNKNOWN:
-		
+
 		break;
 	case ColliderType::PLATFORM_TRASPASS:
-		//numFootContacts--;
-		
-
-
-
 		break;
 	}
 
