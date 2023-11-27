@@ -115,6 +115,7 @@ public:
 	bool onView = false;
 	bool renderable = true;
 	bool isAttacking = false;
+	bool isDying = false;
 
 	iPoint playerPos;
 	iPoint origPos;

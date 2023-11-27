@@ -67,6 +67,13 @@ bool EnemyArmadillo::Update(float dt)
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+
+	
+
+
+
+
+
 	origPos = app->map->WorldToMap(position.x+32, position.y);
 	playerPos = app->scene->getPlayer()->position;
 	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
@@ -171,7 +178,7 @@ bool EnemyArmadillo::Update(float dt)
 			vel.y -= GRAVITY_Y;
 			pbody->body->SetLinearVelocity(vel);
 			state = EntityState::IDLE;
-			currentAnimation = &idleAnim;
+		
 
 			if (idleAnim.HasFinished()) {
 				idleAnim.Reset();
@@ -184,6 +191,18 @@ bool EnemyArmadillo::Update(float dt)
 		}
 
 	}
+
+	if (isDying) {
+		b2Vec2 vel = b2Vec2(0, 0);
+		vel.y -= GRAVITY_Y;
+		pbody->body->SetLinearVelocity(vel);
+		state = EntityState::DYING;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_P)) {
+		isDying = true;
+	}
+
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
@@ -194,7 +213,7 @@ bool EnemyArmadillo::Update(float dt)
 		case EntityState::ATTACKING:	currentAnimation = &attackAnim; if (attackAnim.HasFinished()) { currentAnimation = &attackLoopAnim; }   break;
 		case EntityState::JUMPING:		currentAnimation = &idleAnim; break;
 		case EntityState::FALLING:		currentAnimation = &idleAnim; break;
-		case EntityState::DYING:		currentAnimation = &idleAnim; break;
+		case EntityState::DYING:		currentAnimation = &dieAnim; break;
 		case EntityState::TRACK:		currentAnimation = &trackAnim; break;
 		default:						currentAnimation = &idleAnim; break;
 	}
