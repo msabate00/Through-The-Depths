@@ -203,7 +203,8 @@ bool EnemyArmadillo::Update(float dt)
 		state = EntityState::DYING;
 
 		if (dieAnim.HasFinished()) {
-			//desaparese
+			active = false;
+			
 		}
 
 	}

@@ -94,6 +94,7 @@ public:
 
 
 	float worldStep = 16.0f;
+	bool pendingToDelete = false;
 
 private:
 
