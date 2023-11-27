@@ -166,14 +166,20 @@ bool EnemyArmadillo::Update(float dt)
 	}
 	else {
 
-		if (cansadoTimer.ReadMSec() < 5000) {
+		if (cansadoTimer.ReadMSec() < 2000) {
 			b2Vec2 vel = b2Vec2(0, 0);
 			vel.y -= GRAVITY_Y;
 			pbody->body->SetLinearVelocity(vel);
 			state = EntityState::IDLE;
 			currentAnimation = &idleAnim;
+
+			if (idleAnim.HasFinished()) {
+				idleAnim.Reset();
+			}
+
 		}
 		else {
+			idleAnim.Reset();
 			cansado = false;
 		}
 
