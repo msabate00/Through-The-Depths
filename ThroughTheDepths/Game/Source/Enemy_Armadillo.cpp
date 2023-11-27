@@ -119,7 +119,7 @@ bool EnemyArmadillo::Update(float dt)
 		}
 
 		if (isAttacking) {
-			speed = attackSpeed;
+			speed = attackSpeed*1.5;
 			state = EntityState::ATTACKING;
 			if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
 				cansado = true;
@@ -171,6 +171,7 @@ bool EnemyArmadillo::Update(float dt)
 			vel.y -= GRAVITY_Y;
 			pbody->body->SetLinearVelocity(vel);
 			state = EntityState::IDLE;
+			currentAnimation = &idleAnim;
 		}
 		else {
 			cansado = false;
