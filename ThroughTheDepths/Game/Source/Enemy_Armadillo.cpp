@@ -193,13 +193,14 @@ bool EnemyArmadillo::Update(float dt)
 	}
 
 	if (isDying) {
+		pbody->body->SetActive(false);
 		b2Vec2 vel = b2Vec2(0, 0);
 		vel.y -= GRAVITY_Y;
 		pbody->body->SetLinearVelocity(vel);
 		state = EntityState::DYING;
 
 		if (dieAnim.HasFinished()) {
-			CleanUp();
+			//desaparese
 		}
 
 	}
