@@ -163,7 +163,7 @@
 				<frame x="496" y="208" w="48" h="48"/>
 			</dmgAnim>
 
-			<attack2Anim loop="false" speed="0.35">
+            <attackAnim loop="false" speed="0.35">
 				<frame x="16" y="110" w="48" h="48"/>
 				<frame x="96" y="110" w="48" h="48"/>
 				<frame x="176" y="110" w="48" h="48"/>
@@ -171,6 +171,9 @@
 				<frame x="336" y="110" w="48" h="48"/>
 				<frame x="416" y="110" w="48" h="48"/>
 				<frame x="496" y="110" w="48" h="48"/>
+			</attackAnim>
+            
+			<attack2Anim loop="false" speed="0.35">
 				<frame x="576" y="110" w="48" h="48"/>
 				<frame x="656" y="110" w="48" h="48"/>
 				<frame x="736" y="110" w="48" h="48"/>
@@ -179,7 +182,11 @@
 				<frame x="976" y="110" w="48" h="48"/>
 				<frame x="1056" y="110" w="48" h="48"/>
 				<frame x="1136" y="110" w="48" h="48"/>
-				<frame x="1216" y="110" w="48" h="48"/>
+
+			</attack2Anim>
+
+            <attack3Anim loop="false" speed="0.35">
+			    <frame x="1216" y="110" w="48" h="48"/>
 				<frame x="1296" y="110" w="48" h="48"/>
 				<frame x="1376" y="110" w="48" h="48"/>
 				<frame x="1456" y="110" w="48" h="48"/>
@@ -190,19 +197,7 @@
 				<frame x="1856" y="110" w="48" h="48"/>
 				<frame x="1936" y="110" w="48" h="48"/>
 				<frame x="2016" y="110" w="48" h="48"/>
-
-			</attack2Anim>
-
-			<attackAnim loop="false" speed="0.35">
-				<frame x="16" y="110" w="48" h="48"/>
-				<frame x="96" y="110" w="48" h="48"/>
-				<frame x="176" y="110" w="48" h="48"/>
-				<frame x="256" y="110" w="48" h="48"/>
-				<frame x="336" y="110" w="48" h="48"/>
-				<frame x="416" y="110" w="48" h="48"/>
-				<frame x="496" y="110" w="48" h="48"/>
-			</attackAnim>
-			
+			</attack3Anim>
 			
 		</player>
 
@@ -257,7 +252,30 @@
 				<frame x="121" y="161" w="40" h="40"/>
 
 			</attackLoopAnim>
+            
+            <dieAnim loop="true" speed="0.35">
+				<frame x="1" y="201" w="40" h="40"/>
+				<frame x="41" y="201" w="40" h="40"/>
+				<frame x="81" y="201" w="40" h="40"/>
+				<frame x="121" y="201" w="40" h="40"/>
+				<frame x="161" y="201" w="40" h="40"/>
+				<frame x="201" y="201" w="40" h="40"/>
+				<frame x="241" y="201" w="40" h="40"/>
+				<frame x="281" y="201" w="40" h="40"/>
+				<frame x="321" y="201" w="40" h="40"/>
+				<frame x="361" y="201" w="40" h="40"/>
+                <frame x="401" y="201" w="40" h="40"/>
+                <frame x="441" y="201" w="40" h="40"/>
+                <frame x="481" y="201" w="40" h="40"/>
+                <frame x="521" y="201" w="40" h="40"/>
+                <frame x="561" y="201" w="40" h="40"/>
+                <frame x="601" y="201" w="40" h="40"/>
+                <frame x="641" y="201" w="40" h="40"/>
+                <frame x="681" y="201" w="40" h="40"/>
+                <frame x="721" y="201" w="40" h="40"/>
+                <frame x="761" y="201" w="40" h="40"/>
 
+			</dieAnim>
 		</enemyArmadillo>
 
 

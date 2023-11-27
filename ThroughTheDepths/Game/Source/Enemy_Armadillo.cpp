@@ -26,7 +26,7 @@ bool EnemyArmadillo::Awake() {
 	attackAnim.LoadAnimation(name.GetString(), "attackAnim");
 	attackLoopAnim.LoadAnimation(name.GetString(), "attackLoopAnim");
 	trackAnim.LoadAnimation(name.GetString(), "trackAnim");
-	
+	dieAnim.LoadAnimation(name.GetString(), "dieAnim");
 
 
 	state = EntityState::IDLE;
