@@ -787,14 +787,14 @@ bool Map::LoadEntities(std::string layerName)
                     //Monedas
                     if (gid == tileset->firstgid) {
                        Coin* coin = (Coin*)app->entityManager->CreateEntity(EntityType::COIN);
-                       coin->parameters = configNode.child("scene").child("coin");
+                       coin->parameters = configNode.child("scene").child("textures").child("coin");
                        coin->position = iPoint(pos.x + 16, pos.y + 16);
                     }
 
                     //cofre con Monedas
                     if (gid == tileset->firstgid + 1) {
                         Chest* chest = (Chest*)app->entityManager->CreateEntity(EntityType::CHEST_COIN);
-                        chest->parameters = configNode.child("scene").child("chest");
+                        chest->parameters = configNode.child("scene").child("textures").child("chest");
                         chest->position = iPoint(pos.x + 16, pos.y + 16);
                       
                     }
@@ -802,14 +802,14 @@ bool Map::LoadEntities(std::string layerName)
                     //espina que se rompe
                     if (gid == tileset->firstgid + 2) {
                         PlantBreakable* entity = (PlantBreakable*)app->entityManager->CreateEntity(EntityType::PLANT_BREAKABLE);
-                        entity->parameters = configNode.child("scene").child("plant_breakable");
+                        entity->parameters = configNode.child("scene").child("textures").child("plant_breakable");
                         entity->position = iPoint(pos.x + 16, pos.y + 16);
                     }
 
                     //barrera de espinas
                     if (gid == tileset->firstgid + 3) {
                         PlantBarrier* entity = (PlantBarrier*)app->entityManager->CreateEntity(EntityType::PLANT_BARRIER);
-                        entity->parameters = configNode.child("scene").child("plant_barrier");
+                        entity->parameters = configNode.child("scene").child("textures").child("plant_barrier");
                         entity->position = iPoint(pos.x, pos.y + 16);
                     }
 

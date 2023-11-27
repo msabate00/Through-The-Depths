@@ -65,9 +65,31 @@ bool Scene::Start()
 	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
 	sceneNode = configFile.child("config").child("scene");
 
-	fondo0 = app->tex->Load(sceneNode.child("fondo0").attribute("texturepath").as_string());
-	fondo1 = app->tex->Load(sceneNode.child("fondo1").attribute("texturepath").as_string());
-	fondo2 = app->tex->Load(sceneNode.child("fondo2").attribute("texturepath").as_string());
+
+	char* nombreNivel;
+
+	switch (app->sceneLevel)
+	{
+	case 0:
+		fondo0 = app->tex->Load(sceneNode.child("textures").child("fondo0Bosque").attribute("texturepath").as_string());
+		fondo1 = app->tex->Load(sceneNode.child("textures").child("fondo1Bosque").attribute("texturepath").as_string());
+		fondo2 = app->tex->Load(sceneNode.child("textures").child("fondo2Bosque").attribute("texturepath").as_string());
+		break;
+	case 1:
+		fondo0 = app->tex->Load(sceneNode.child("textures").child("fondo0Pueblo").attribute("texturepath").as_string());
+		fondo1 = app->tex->Load(sceneNode.child("textures").child("fondo1Pueblo").attribute("texturepath").as_string());
+		fondo2 = app->tex->Load(sceneNode.child("textures").child("fondo2Pueblo").attribute("texturepath").as_string());
+		break;
+	default:
+		fondo0 = app->tex->Load(sceneNode.child("textures").child("fondo0Bosque").attribute("texturepath").as_string());
+		fondo1 = app->tex->Load(sceneNode.child("textures").child("fondo1Bosque").attribute("texturepath").as_string());
+		fondo2 = app->tex->Load(sceneNode.child("textures").child("fondo2Bosque").attribute("texturepath").as_string());
+		break;
+	}
+
+
+	
+	
 	
 
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
