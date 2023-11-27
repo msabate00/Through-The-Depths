@@ -197,11 +197,14 @@ bool EnemyArmadillo::Update(float dt)
 		vel.y -= GRAVITY_Y;
 		pbody->body->SetLinearVelocity(vel);
 		state = EntityState::DYING;
+
+		if (dieAnim.HasFinished()) {
+			CleanUp();
+		}
+
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_P)) {
-		isDying = true;
-	}
+	
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
@@ -261,7 +264,9 @@ bool EnemyArmadillo::CleanUp()
 
 void EnemyArmadillo::OnCollision(PhysBody* physA, PhysBody* physB)
 {
-
+	if (physB->ctype == ColliderType::PLAYER_PROYECTILE) {
+		isDying = true;
+	}
 }
 
 void EnemyArmadillo::OnExitCollision(PhysBody* physA, PhysBody* physB)
