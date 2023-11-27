@@ -14,6 +14,7 @@ enum class EntityState {
 	IDLE,
 	RUNNING,
 	ATTACKING,
+	STOP_ATTACKING,
 	JUMPING,
 	FALLING,
 	TRACK,

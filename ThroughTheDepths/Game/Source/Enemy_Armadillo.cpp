@@ -27,6 +27,7 @@ bool EnemyArmadillo::Awake() {
 	attackLoopAnim.LoadAnimation(name.GetString(), "attackLoopAnim");
 	trackAnim.LoadAnimation(name.GetString(), "trackAnim");
 	dieAnim.LoadAnimation(name.GetString(), "dieAnim");
+	stopAnim.LoadAnimation(name.GetString(), "stopAttackAnim");
 
 
 	state = EntityState::IDLE;
@@ -94,6 +95,7 @@ bool EnemyArmadillo::Update(float dt)
 			if (dist(playerPos, position) < app->map->GetTileWidth() * tilesAttack) {
 				if (!isAttacking) {
 					isAttacking = true;
+					stopAnim.Reset();
 					attackTimer.Start();
 				}
 			}
@@ -132,6 +134,7 @@ bool EnemyArmadillo::Update(float dt)
 				cansado = true;
 				cansadoTimer.Start();
 				isAttacking = false;
+				
 				attackAnim.Reset();
 				attackLoopAnim.Reset();
 
@@ -177,7 +180,7 @@ bool EnemyArmadillo::Update(float dt)
 			b2Vec2 vel = b2Vec2(0, 0);
 			vel.y -= GRAVITY_Y;
 			pbody->body->SetLinearVelocity(vel);
-			state = EntityState::IDLE;
+			state = EntityState::STOP_ATTACKING;
 		
 
 			if (idleAnim.HasFinished()) {
@@ -212,14 +215,15 @@ bool EnemyArmadillo::Update(float dt)
 
 	switch (state)
 	{
-		case EntityState::IDLE:			currentAnimation = &idleAnim; break;
-		case EntityState::RUNNING:		currentAnimation = &runAnim; break;
-		case EntityState::ATTACKING:	currentAnimation = &attackAnim; if (attackAnim.HasFinished()) { currentAnimation = &attackLoopAnim; }   break;
-		case EntityState::JUMPING:		currentAnimation = &idleAnim; break;
-		case EntityState::FALLING:		currentAnimation = &idleAnim; break;
-		case EntityState::DYING:		currentAnimation = &dieAnim; break;
-		case EntityState::TRACK:		currentAnimation = &trackAnim; break;
-		default:						currentAnimation = &idleAnim; break;
+		case EntityState::IDLE:				currentAnimation = &idleAnim; break;
+		case EntityState::STOP_ATTACKING:	currentAnimation = &stopAnim; if (stopAnim.HasFinished()) { currentAnimation = &idleAnim; } break;
+		case EntityState::RUNNING:			currentAnimation = &runAnim; break;
+		case EntityState::ATTACKING:		currentAnimation = &attackAnim; if (attackAnim.HasFinished()) { currentAnimation = &attackLoopAnim; }   break;
+		case EntityState::JUMPING:			currentAnimation = &idleAnim; break;
+		case EntityState::FALLING:			currentAnimation = &idleAnim; break;
+		case EntityState::DYING:			currentAnimation = &dieAnim; break;
+		case EntityState::TRACK:			currentAnimation = &trackAnim; break;
+		default:							currentAnimation = &idleAnim; break;
 	}
 
 	currentAnimation->Update();

@@ -71,6 +71,7 @@ private:
 	Animation attackAnim;
 	Animation attackLoopAnim;
 	Animation trackAnim;
+	Animation stopAnim;
 
 
 	bool isDying = false;
