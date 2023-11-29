@@ -417,7 +417,7 @@ void Player::CameraMovement(float dt)
 
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
-
+	SaveStatue* statue;
 
 	if (physA->ctype == ColliderType::PLAYER_FOOT) {
 		numFootContacts++;
@@ -468,8 +468,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 
 		case ColliderType::SAVE_STATUE:
-			/*SaveStatue* statue = (SaveStatue*)physB->body->GetUserData();
-			statue->saved = true;*/
+			statue = (SaveStatue*)physB->listener;
+			statue->saved = true;
 			break;
 
 		case ColliderType::ENEMY:
