@@ -7,7 +7,7 @@
 	<:anonymous />
 	<map />
 	<scene>
-		<player x="123" y="1600" />
+		<player x="119" y="1600" />
 	</scene>
 	<particles />
 	<entitymanager />
