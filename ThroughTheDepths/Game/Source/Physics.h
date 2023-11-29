@@ -40,6 +40,7 @@ enum class ColliderType {
 	SPYKES,
 	DIE_HOLE,
 	ENEMY,
+	SAVE_STATUE,
 	UNKNOWN
 	// ..
 };

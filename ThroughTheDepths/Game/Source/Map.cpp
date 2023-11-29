@@ -20,6 +20,7 @@
 #include "PlantBarrier.h"
 #include "PlantBreakable.h"
 #include "Enemy_Armadillo.h"
+#include "SaveStatue.h"
 
 Map::Map() : Module(), mapLoaded(false)
 {
@@ -828,6 +829,15 @@ bool Map::LoadEntities(std::string layerName)
                         EnemyArmadillo* entity = (EnemyArmadillo*)app->entityManager->CreateEntity(EntityType::ENEMY_ARMADILLO);
                         entity->parameters = configNode.child("scene").child("enemyArmadillo");
                         entity->position = iPoint(pos.x + 16, pos.y + 16);
+
+                    }
+
+                    //Entidad de guardar
+                    if (gid == tileset->firstgid + 6) {
+
+                        SaveStatue* entity = (SaveStatue*)app->entityManager->CreateEntity(EntityType::SAVE_STATUE);
+                        entity->parameters = configNode.child("scene").child("textures").child("saveStatue");
+                        entity->position = iPoint(pos.x + 16, pos.y + 16 - 32 );
 
                     }
 

@@ -5,6 +5,7 @@
 #include "PlantBreakable.h"
 #include "Enemy_Armadillo.h"
 #include "PlantBarrier.h"
+#include "SaveStatue.h"
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
@@ -104,6 +105,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::PLANT_BREAKABLE:
 		entity = new PlantBreakable();
+		break;
+	case EntityType::SAVE_STATUE:
+		entity = new SaveStatue();
 		break;
 	case EntityType::ENEMY_ARMADILLO:
 		entity = new EnemyArmadillo();

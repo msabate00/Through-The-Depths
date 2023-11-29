@@ -11,6 +11,7 @@
 #include "Physics.h"
 #include "Particles.h"
 #include "FadeToBlack.h"
+#include "SaveStatue.h"
 #include "Chest.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
@@ -464,6 +465,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (colisionTraspassing.Count() > 10) {
 				colisionTraspassing.Del(colisionTraspassing.At(0));
 			}
+			break;
+
+		case ColliderType::SAVE_STATUE:
+			/*SaveStatue* statue = (SaveStatue*)physB->body->GetUserData();
+			statue->saved = true;*/
 			break;
 
 		case ColliderType::ENEMY:
