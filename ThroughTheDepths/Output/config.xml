@@ -208,7 +208,25 @@
 			
 		</player>
 
-
+        <saveStatue>
+            <idleAnim>
+                <frame x="1" y="1" w="40" h="40"/>
+            </idleAnim>
+        
+            
+            <savedAnim loop="false" speed="0.35">
+				<frame x="1" y="181" w="64" h="96"/>
+				<frame x="65" y="181" w="64" h="96"/>
+				<frame x="129" y="181" w="64" h="96"/>
+				<frame x="193" y="181" w="64" h="96"/>
+				<frame x="257" y="181" w="64" h="96"/>
+				<frame x="321" y="181" w="64" h="96"/>
+				<frame x="385" y="181" w="64" h="96"/>
+                <frame x="449" y="181" w="64" h="96"/>
+            </savedAnim>
+        
+        </saveStatue>
+            
 		<enemyArmadillo>
 
 			<idleAnim loop="false" speed="0.35">
