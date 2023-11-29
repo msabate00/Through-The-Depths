@@ -507,3 +507,12 @@ void Player::OnExitCollision(PhysBody* physA, PhysBody* physB)
 	}
 
 }
+
+void Player::SetPosition(int x, int y)
+{
+
+	LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAA: %d %d", x, y);
+
+	pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(x),PIXEL_TO_METERS(y)), 0);
+
+}

@@ -259,6 +259,10 @@ bool Scene::Update(float dt)
 	// Renders the image in the center of the screen 
 	//app->render->DrawTexture(img, (int)textPosX, (int)textPosY);
 
+
+	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
+
 	return true;
 }
 
@@ -291,4 +295,27 @@ void Scene::setPlayer(Player* new_player)
 {
 	player = new_player;
 
+}
+
+// L14: TODO 6: Implement a method to load the state
+// for now load camera's x and y
+bool Scene::LoadState(pugi::xml_node node) {
+
+	
+	player->position.x =  node.child("player").attribute("x").as_int();
+	player->position.y =  node.child("player").attribute("y").as_int();
+	player->SetPosition(node.child("player").attribute("x").as_int(), node.child("player").attribute("y").as_int());
+
+	return true;
+}
+
+// L14: TODO 8: Create a method to save the state of the renderer
+// using append_child and append_attribute
+bool Scene::SaveState(pugi::xml_node node) {
+
+	pugi::xml_node playerNode = node.append_child("player");
+	playerNode.append_attribute("x").set_value(player->position.x);
+	playerNode.append_attribute("y").set_value(player->position.y);
+
+	return true;
 }

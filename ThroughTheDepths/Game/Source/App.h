@@ -58,6 +58,14 @@ public:
 	uint32 GetMaxFrameDuration();
 	float GetDeltaTime();
 
+
+	// Request a save data in an XML file 
+	bool LoadRequest();
+
+	// Request to load data from XML file 
+	bool SaveRequest();
+
+
 private:
 
 	// Load config file
@@ -81,7 +89,11 @@ private:
 	bool PostLateUpdate();
 
 	
+	// Reads XML file and loads the data
+	bool LoadFromFile();
 
+	// Sace XML file with modules data
+	bool SaveFromFile();
 
 public:
 
@@ -135,7 +147,8 @@ private:
 
 	uint32 maxFrameDuration = 16;
 
-
+	bool loadRequest = false;
+	bool saveRequest = false;
 	
 
 };

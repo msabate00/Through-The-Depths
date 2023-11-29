@@ -36,6 +36,8 @@ public:
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 	void OnExitCollision(PhysBody* physA, PhysBody* physB);
 
+	void SetPosition(int x, int y);
+
 public:
 	float speed = 4.5f;
 	float speedFast = 4.5f;

@@ -37,6 +37,9 @@ public:
 	Player* getPlayer();
 	void setPlayer(Player* new_player);
 
+	bool LoadState(pugi::xml_node node);
+	bool SaveState(pugi::xml_node node);
+
 
 	
 	SDL_Texture* img;
