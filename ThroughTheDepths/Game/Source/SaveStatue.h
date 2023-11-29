@@ -31,6 +31,7 @@ public:
 public:
 
 	bool saved = false;
+	Animation savedAnim;
 
 private:
 	
@@ -40,7 +41,7 @@ private:
 
 	Animation* currentAnimation = nullptr;
 	Animation idleAnim;
-	Animation savedAnim;
+	
 	
 
 

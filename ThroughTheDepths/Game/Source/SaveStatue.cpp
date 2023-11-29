@@ -55,13 +55,16 @@ bool SaveStatue::Awake() {
 	openedAnim.PushBack({ 256, 4, 34, 28 });*/
 
 	
-	idleAnim.PushBack({0, 193, 64, 96});
+	/*idleAnim.PushBack({0, 193, 64, 96});
 	idleAnim.loop = true;
 	idleAnim.speed = 0.1f;
 
 	savedAnim.PushBack({ 64, 193, 64, 96 });
 	idleAnim.loop = true;
-	idleAnim.speed = 0.1f;
+	idleAnim.speed = 0.1f;*/
+
+	idleAnim.LoadAnimation("saveStatue", "idleAnim");
+	savedAnim.LoadAnimation("saveStatue", "savedAnim");
 
 
 

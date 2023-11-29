@@ -202,6 +202,7 @@ void EntityManager::ApagarTodosLosSave() {
 
 		if (pEntity->type == EntityType::SAVE_STATUE) {
 			((SaveStatue*)pEntity)->saved = false;
+			((SaveStatue*)pEntity)->savedAnim.Reset();
 		}
 		
 	}
