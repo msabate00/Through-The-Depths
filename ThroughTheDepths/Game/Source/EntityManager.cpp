@@ -189,3 +189,20 @@ bool EntityManager::PostUpdate()
 
 	return ret;
 }
+
+void EntityManager::ApagarTodosLosSave() {
+
+	bool ret = true;
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+
+	for (item = entities.start; item != NULL && ret == true; item = item->next)
+	{
+		pEntity = item->data;
+
+		if (pEntity->type == EntityType::SAVE_STATUE) {
+			((SaveStatue*)pEntity)->saved = false;
+		}
+		
+	}
+}

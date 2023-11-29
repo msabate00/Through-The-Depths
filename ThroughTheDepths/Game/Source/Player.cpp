@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Window.h"
 #include "Render.h"
+#include "EntityManager.h"
 #include "Scene.h"
 #include "Log.h"
 #include "Point.h"
@@ -468,8 +469,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 
 		case ColliderType::SAVE_STATUE:
+
+
+			app->entityManager->ApagarTodosLosSave();
+
 			statue = (SaveStatue*)physB->listener;
 			statue->saved = true;
+			app->SaveRequest();
 			break;
 
 		case ColliderType::ENEMY:

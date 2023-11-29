@@ -37,6 +37,9 @@ public:
 
 	void AddEntity(Entity* entity);
 
+
+	void ApagarTodosLosSave();
+
 public:
 
 	List<Entity*> entities;
