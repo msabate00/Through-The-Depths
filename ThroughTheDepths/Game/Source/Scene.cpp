@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Map.h"
 #include "Chest.h"
+#include "FadeToBlack.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -108,7 +109,7 @@ bool Scene::Start()
 	textPosY = (float)windowH / 2 - (float)texH / 2;
 
 	app->map->Load();
-
+	//app->LoadRequest();
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 		app->map->mapData.width,
 		app->map->mapData.height,
@@ -301,11 +302,21 @@ void Scene::setPlayer(Player* new_player)
 // for now load camera's x and y
 bool Scene::LoadState(pugi::xml_node node) {
 
+	if (app->sceneLevel != node.child("player").attribute("sceneLevel").as_int()) {
+		app->sceneLevel = node.child("player").attribute("sceneLevel").as_int();
+		app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene);
+	}
+	else {
+		player->position.x = node.child("player").attribute("x").as_int();
+		player->position.y = node.child("player").attribute("y").as_int();
+		player->SetPosition(node.child("player").attribute("x").as_int(), node.child("player").attribute("y").as_int());
+		app->sceneLevel = node.child("player").attribute("sceneLevel").as_int();
+	}
 	
-	player->position.x =  node.child("player").attribute("x").as_int();
-	player->position.y =  node.child("player").attribute("y").as_int();
-	player->SetPosition(node.child("player").attribute("x").as_int(), node.child("player").attribute("y").as_int());
+	
+	
 
+	
 	return true;
 }
 
@@ -316,6 +327,7 @@ bool Scene::SaveState(pugi::xml_node node) {
 	pugi::xml_node playerNode = node.append_child("player");
 	playerNode.append_attribute("x").set_value(player->position.x);
 	playerNode.append_attribute("y").set_value(player->position.y);
+	playerNode.append_attribute("sceneLevel").set_value(app->sceneLevel);
 
 	return true;
 }
