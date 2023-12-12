@@ -80,7 +80,7 @@ bool SaveStatue::Start() {
 
 	texture = app->tex->Load(texturePath);
 
-	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 32, 92, bodyType::STATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x, position.y+20, 16, 64, bodyType::STATIC);
 	pbody->ctype = ColliderType::SAVE_STATUE;
 	pbody->listener = this;
 	
@@ -111,7 +111,7 @@ bool SaveStatue::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x-16, position.y - 30, SDL_FLIP_NONE, &rect);
+	app->render->DrawTexture(texture, position.x-16, position.y - 50, SDL_FLIP_NONE, &rect);
 
 
 	return true;

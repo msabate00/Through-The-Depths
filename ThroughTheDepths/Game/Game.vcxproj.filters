@@ -81,6 +81,9 @@
     <ClCompile Include="Source\SaveStatue.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy_Pajaro.cpp">
+      <Filter>Entities\Enemies</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -188,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="Source\SaveStatue.h">
       <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_Pajaro.h">
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

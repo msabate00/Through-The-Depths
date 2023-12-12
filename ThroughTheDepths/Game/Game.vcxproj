@@ -98,6 +98,7 @@
     <ClCompile Include="Source\Chest.cpp" />
     <ClCompile Include="Source\Coin.cpp" />
     <ClCompile Include="Source\Enemy_Armadillo.cpp" />
+    <ClCompile Include="Source\Enemy_Pajaro.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\Item.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="Source\Chest.h" />
     <ClInclude Include="Source\Coin.h" />
     <ClInclude Include="Source\Enemy_Armadillo.h" />
+    <ClInclude Include="Source\Enemy_Pajaro.h" />
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\FadeToBlack.h" />

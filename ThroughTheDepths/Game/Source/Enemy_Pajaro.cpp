@@ -1,4 +1,4 @@
-#include "Enemy_Armadillo.h"
+#include "Enemy_Pajaro.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -12,14 +12,14 @@
 #include "Map.h"
 #include "../Utils.cpp"
 
-EnemyArmadillo::EnemyArmadillo() : Entity(EntityType::ENEMY_ARMADILLO)
+EnemyPajaro::EnemyPajaro() : Entity(EntityType::ENEMY_ARMADILLO)
 {
-	name.Create("enemyArmadillo");
+	name.Create("enemyPajaro");
 }
 
-EnemyArmadillo::~EnemyArmadillo() {}
+EnemyPajaro::~EnemyPajaro() {}
 
-bool EnemyArmadillo::Awake() {
+bool EnemyPajaro::Awake() {
 
 	idleAnim.LoadAnimation(name.GetString(), "idleAnim");
 	runAnim.LoadAnimation(name.GetString(), "runAnim");
@@ -36,7 +36,7 @@ bool EnemyArmadillo::Awake() {
 	return true;
 }
 
-bool EnemyArmadillo::Start() {
+bool EnemyPajaro::Start() {
 
 	//initilize textures
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -62,7 +62,7 @@ bool EnemyArmadillo::Start() {
 	return true;
 }
 
-bool EnemyArmadillo::Update(float dt)
+bool EnemyPajaro::Update(float dt)
 {
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
@@ -157,10 +157,7 @@ bool EnemyArmadillo::Update(float dt)
 			iPoint* nextPathTile;
 			nextPathTile = lastPath.At(lastPath.Count() - 1);
 			//LOG("LAST PATH X: %d  ENEMY X: %d", nextPathTile->x, origPos.x);
-			if (nextPathTile->x == origPos.x) {
-				cansado = true;
-				cansadoTimer.Start();
-			}else if (nextPathTile->x < origPos.x) {
+			if (nextPathTile->x < origPos.x) {
 				isFacingLeft = true;
 				vel.x -= speed * dt;
 			}
@@ -235,7 +232,7 @@ bool EnemyArmadillo::Update(float dt)
 	return true;
 }
 
-bool EnemyArmadillo::PostUpdate() {
+bool EnemyPajaro::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
@@ -261,7 +258,7 @@ bool EnemyArmadillo::PostUpdate() {
 	return true;
 }
 
-bool EnemyArmadillo::CleanUp()
+bool EnemyPajaro::CleanUp()
 {
 
 	app->physics->GetWorld()->DestroyBody(pbody->body);
@@ -271,14 +268,14 @@ bool EnemyArmadillo::CleanUp()
 	return true;
 }
 
-void EnemyArmadillo::OnCollision(PhysBody* physA, PhysBody* physB)
+void EnemyPajaro::OnCollision(PhysBody* physA, PhysBody* physB)
 {
 	if (physB->ctype == ColliderType::PLAYER_PROYECTILE) {
 		isDying = true;
 	}
 }
 
-void EnemyArmadillo::OnExitCollision(PhysBody* physA, PhysBody* physB)
+void EnemyPajaro::OnExitCollision(PhysBody* physA, PhysBody* physB)
 {
 
 }
