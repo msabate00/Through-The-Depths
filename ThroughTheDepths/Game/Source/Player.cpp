@@ -73,12 +73,25 @@ bool Player::Start() {
 
 	pickCoinFxId = app->audio->LoadFx(parameters.child("coinAudio").attribute("path").as_string());
 
+	pasoCesped = app->audio->LoadFx("Output/Assets/Audio/Fx/pasoCesped.wav");
+	pasoMetal = app->audio->LoadFx("Output/Assets/Audio/Fx/pasoMetal.wav");
+	pasoRoca = app->audio->LoadFx("Output/Assets/Audio/Fx/pasoRoca.wav");
+	caidaMuerte = app->audio->LoadFx("Output/Assets/Audio/Fx/caidaMuerte.wav");
+	recibirAtaque = app->audio->LoadFx("Output/Assets/Audio/Fx/recibirAtaque.wav");
+	ataqueEspada = app->audio->LoadFx("Output/Assets/Audio/Fx/ataqueEspada.wav");
+	saltoJugador = app->audio->LoadFx("Output/Assets/Audio/Fx/saltoJugador.wav");
+	armadilloAtaque = app->audio->LoadFx("Output/Assets/Audio/Fx/armadilloAtaque.wav");
+	palomaAtaque = app->audio->LoadFx("Output/Assets/Audio/Fx/palomaAtaque.wav");
+
+
 	uint windowH;
 	uint windowW;
 	app->win->GetWindowSize(windowW, windowH);
 
 	app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
 	app->render->camera.y = (-position.y * app->win->GetScale() + (windowH / 2));
+
+	
 
 	return true;
 }
@@ -233,12 +246,16 @@ void Player::Movement(float dt)
 	pbody->body->GetFixtureList()[0].SetSensor(false);
 	vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 
+	
+
 	if (!isAttacking) {
 		//Moverse a la izquierda
+
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			vel = b2Vec2(-speed * dt, pbody->body->GetLinearVelocity().y);
 			isFacingLeft = true;
 			state = EntityState::RUNNING;
+			app->audio->PlayFx(pasoCesped);
 		}
 
 		//Moverse a la derecha
@@ -291,7 +308,10 @@ void Player::Movement(float dt)
 	}
 
 
-
+	if (app->input->GetKey(SDL_SCANCODE_P) == SDL_KEYDOWN)
+	{
+		app->audio->PlayFx(pasoCesped);
+	}
 
 	//Ataque
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && !isAttacking && canJump) {

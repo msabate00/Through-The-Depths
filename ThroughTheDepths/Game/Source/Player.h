@@ -53,6 +53,18 @@ public:
 
 
 
+	int pasoCesped;
+	int pasoMetal;
+	int pasoRoca;
+	int caidaMuerte;
+	int recibirAtaque;
+	int ataqueEspada;
+	int saltoJugador;
+	int armadilloAtaque;
+	int palomaAtaque;
+
+
+
 	/*NEW JUMPING SYSTEM*/
 	float jumpForce = 4.5f;
 	bool canJump = true;
