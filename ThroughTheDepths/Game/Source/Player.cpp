@@ -157,7 +157,8 @@ bool Player::Update(float dt)
 	if (isDying) {
 		state = EntityState::DYING;
 		if (dieAnim.HasFinished()) {
-			pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
+			//pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
+			app->LoadRequest();
 			isDying = false;
 			dieAnim.Reset();
 		}
