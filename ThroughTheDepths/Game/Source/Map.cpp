@@ -841,6 +841,15 @@ bool Map::LoadEntities(std::string layerName)
 
                     }
 
+                    //Enemy pajaro con cuchillo
+                    if (gid == tileset->firstgid + 7) {
+
+                        SaveStatue* entity = (SaveStatue*)app->entityManager->CreateEntity(EntityType::ENEMY_PAJARO);
+                        entity->parameters = configNode.child("scene").child("enemyPajaro");
+                        entity->position = iPoint(pos.x + 16, pos.y + 16 - 32);
+
+                    }
+
 
                 }
             }

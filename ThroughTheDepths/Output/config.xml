@@ -61,6 +61,7 @@
         
 		<!-- ENEMIES -->
 		<enemyArmadillo texturepath="Assets/Textures/Armadillo.png" walkSpeed="0.02" runSpeed="0.08" attackSpeed="0.16" tilesView="7" tilesAttack="3" attackTimerMax="5.5"/>
+        <enemyPajaro texturepath="Assets/Textures/Paloma.png" walkSpeed="0.02" runSpeed="0.08" attackSpeed="0.16" tilesView="10" tilesAttack="5" attackTimerMax="5.5"/>
 		
 		
 		
@@ -330,44 +331,44 @@
 		</enemyArmadillo>
 
         
-    <enemyPaloma>
-        
-        <idleAnim loop="true" speed="0.35">
-            <frame x="1" y="1" w="64" h="64"/>
-            <frame x="65" y="1" w="64" h="64"/>
-            <frame x="129" y="1" w="64" h="64"/>
-            <frame x="193" y="1" w="64" h="64"/>
-            <frame x="257" y="1" w="64" h="64"/>
+        <enemyPaloma>
 
-			</idleAnim>
-        
-        <attackAnim loop="true" speed="0.35">
-            <frame x="1" y="513" w="64" h="64"/>
-            <frame x="65" y="513" w="64" h="64"/>
-            <frame x="129" y="513" w="64" h="64"/>
-            <frame x="193" y="513" w="64" h="64"/>
-            <frame x="257" y="513" w="64" h="64"/>
-            <frame x="321" y="513" w="64" h="64"/>
-            <frame x="385" y="513" w="64" h="64"/>
-            <frame x="449" y="513" w="64" h="64"/>
-            <frame x="513" y="513" w="64" h="64"/>
+            <idleAnim loop="true" speed="0.35">
+                <frame x="1" y="1" w="64" h="64"/>
+                <frame x="65" y="1" w="64" h="64"/>
+                <frame x="129" y="1" w="64" h="64"/>
+                <frame x="193" y="1" w="64" h="64"/>
+                <frame x="257" y="1" w="64" h="64"/>
 
-			</attackAnim>
-        
-        <dieAnim loop="true" speed="0.35">
-            <frame x="1" y="641" w="64" h="64"/>
-            <frame x="65" y="641" w="64" h="64"/>
-            <frame x="129" y="641" w="64" h="64"/>
-            <frame x="193" y="641" w="64" h="64"/>
-            <frame x="257" y="641" w="64" h="64"/>
-            <frame x="321" y="641" w="64" h="64"/>
-            <frame x="385" y="641" w="64" h="64"/>
-            <frame x="449" y="641" w="64" h="64"/>
-            <frame x="513" y="641" w="64" h="64"/>
+                </idleAnim>
 
-			</dieAnim>
-            
-        </enemyPaloma>
+            <attackAnim loop="true" speed="0.35">
+                <frame x="1" y="513" w="64" h="64"/>
+                <frame x="65" y="513" w="64" h="64"/>
+                <frame x="129" y="513" w="64" h="64"/>
+                <frame x="193" y="513" w="64" h="64"/>
+                <frame x="257" y="513" w="64" h="64"/>
+                <frame x="321" y="513" w="64" h="64"/>
+                <frame x="385" y="513" w="64" h="64"/>
+                <frame x="449" y="513" w="64" h="64"/>
+                <frame x="513" y="513" w="64" h="64"/>
+
+                </attackAnim>
+
+            <dieAnim loop="true" speed="0.35">
+                <frame x="1" y="641" w="64" h="64"/>
+                <frame x="65" y="641" w="64" h="64"/>
+                <frame x="129" y="641" w="64" h="64"/>
+                <frame x="193" y="641" w="64" h="64"/>
+                <frame x="257" y="641" w="64" h="64"/>
+                <frame x="321" y="641" w="64" h="64"/>
+                <frame x="385" y="641" w="64" h="64"/>
+                <frame x="449" y="641" w="64" h="64"/>
+                <frame x="513" y="641" w="64" h="64"/>
+
+                </dieAnim>
+
+            </enemyPaloma>
 
 		
 

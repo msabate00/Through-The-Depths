@@ -14,7 +14,7 @@
 
 EnemyPajaro::EnemyPajaro() : Entity(EntityType::ENEMY_ARMADILLO)
 {
-	name.Create("enemyPajaro");
+	name.Create("enemyPaloma");
 }
 
 EnemyPajaro::~EnemyPajaro() {}
@@ -22,12 +22,10 @@ EnemyPajaro::~EnemyPajaro() {}
 bool EnemyPajaro::Awake() {
 
 	idleAnim.LoadAnimation(name.GetString(), "idleAnim");
-	runAnim.LoadAnimation(name.GetString(), "runAnim");
+	runAnim.LoadAnimation(name.GetString(), "idleAnim");
 	attackAnim.LoadAnimation(name.GetString(), "attackAnim");
-	attackLoopAnim.LoadAnimation(name.GetString(), "attackLoopAnim");
-	trackAnim.LoadAnimation(name.GetString(), "trackAnim");
 	dieAnim.LoadAnimation(name.GetString(), "dieAnim");
-	stopAnim.LoadAnimation(name.GetString(), "stopAttackAnim");
+
 
 
 	state = EntityState::IDLE;
@@ -80,136 +78,136 @@ bool EnemyPajaro::Update(float dt)
 	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 
 
-	
+	//
 
-	if (!cansado) {
-		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
-			onView = true;
-			state = EntityState::RUNNING;
-			speed = runSpeed;
-
-
-			app->map->pathfindingFloor->CreatePath(origPos, targPos);
-			lastPath = *app->map->pathfindingFloor->GetLastPath();
-
-			if (dist(playerPos, position) < app->map->GetTileWidth() * tilesAttack) {
-				if (!isAttacking) {
-					isAttacking = true;
-					stopAnim.Reset();
-					attackTimer.Start();
-				}
-			}
+	//if (!cansado) {
+	//	if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
+	//		onView = true;
+	//		state = EntityState::RUNNING;
+	//		speed = runSpeed;
 
 
-		}
-		else {
+	//		app->map->pathfindingFloor->CreatePath(origPos, targPos);
+	//		lastPath = *app->map->pathfindingFloor->GetLastPath();
 
-			onView = false;
-			speed = walkSpeed;
-
-			if (lastPath.Count() == 0) {
-
-				if (!idleAnim.HasFinished()) {
-					state = EntityState::IDLE;
-				}
-				else {
-
-					idleAnim.Reset();
-					state = EntityState::RUNNING;
-					targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
-					app->map->pathfindingFloor->CreatePath(origPos, targPos);
-					lastPath = *app->map->pathfindingFloor->GetLastPath();
-
-				}
-			}
-			else {
-				state = EntityState::RUNNING;
-			}
-		}
-
-		if (isAttacking) {
-			speed = attackSpeed*1.5;
-			state = EntityState::ATTACKING;
-			if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
-				cansado = true;
-				cansadoTimer.Start();
-				isAttacking = false;
-				
-				attackAnim.Reset();
-				attackLoopAnim.Reset();
-
-			}
-		}
-		else {
-			if (attackTimer.ReadMSec() < attackTimeMax + 2 * 1000) {
-				//Descansar
-
-				state = EntityState::IDLE;
-				speed = 0;
-			}
-		}
+	//		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesAttack) {
+	//			if (!isAttacking) {
+	//				isAttacking = true;
+	//				//stopAnim.Reset();
+	//				attackTimer.Start();
+	//			}
+	//		}
 
 
-		b2Vec2 vel = b2Vec2(0, 0);
-		vel.y -= GRAVITY_Y;
+	//	}
+	//	else {
 
-		if (lastPath.Count() > 0) {
-			iPoint* nextPathTile;
-			nextPathTile = lastPath.At(lastPath.Count() - 1);
-			//LOG("LAST PATH X: %d  ENEMY X: %d", nextPathTile->x, origPos.x);
-			if (nextPathTile->x < origPos.x) {
-				isFacingLeft = true;
-				vel.x -= speed * dt;
-			}
-			else {
-				isFacingLeft = false;
-				vel.x += speed * dt;
-			}
+	//		onView = false;
+	//		speed = walkSpeed;
 
-			if (nextPathTile->x == origPos.x) {
-				lastPath.Pop(*nextPathTile);
-			}
+	//		if (lastPath.Count() == 0) {
 
-		}
+	//			if (!idleAnim.HasFinished()) {
+	//				state = EntityState::IDLE;
+	//			}
+	//			else {
 
-		pbody->body->SetLinearVelocity(vel);
-	}
-	else {
+	//				idleAnim.Reset();
+	//				state = EntityState::RUNNING;
+	//				targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
+	//				app->map->pathfindingFloor->CreatePath(origPos, targPos);
+	//				lastPath = *app->map->pathfindingFloor->GetLastPath();
 
-		if (cansadoTimer.ReadMSec() < 2000) {
-			b2Vec2 vel = b2Vec2(0, 0);
-			vel.y -= GRAVITY_Y;
-			pbody->body->SetLinearVelocity(vel);
-			state = EntityState::STOP_ATTACKING;
-		
+	//			}
+	//		}
+	//		else {
+	//			state = EntityState::RUNNING;
+	//		}
+	//	}
 
-			if (idleAnim.HasFinished()) {
-				idleAnim.Reset();
-			}
+	//	if (isAttacking) {
+	//		speed = attackSpeed*1.5;
+	//		state = EntityState::ATTACKING;
+	//		if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
+	//			cansado = true;
+	//			cansadoTimer.Start();
+	//			isAttacking = false;
+	//			
+	//			attackAnim.Reset();
+	//			//attackLoopAnim.Reset();
 
-		}
-		else {
-			idleAnim.Reset();
-			cansado = false;
-		}
+	//		}
+	//	}
+	//	else {
+	//		if (attackTimer.ReadMSec() < attackTimeMax + 2 * 1000) {
+	//			//Descansar
 
-	}
+	//			state = EntityState::IDLE;
+	//			speed = 0;
+	//		}
+	//	}
 
-	if (isDying) {
-		pbody->body->SetActive(false);
-		b2Vec2 vel = b2Vec2(0, 0);
-		vel.y -= GRAVITY_Y;
-		pbody->body->SetLinearVelocity(vel);
-		state = EntityState::DYING;
 
-		if (dieAnim.HasFinished()) {
-			active = false;
-			
-		}
+	//	b2Vec2 vel = b2Vec2(0, 0);
+	//	vel.y -= GRAVITY_Y;
 
-	}
+	//	if (lastPath.Count() > 0) {
+	//		iPoint* nextPathTile;
+	//		nextPathTile = lastPath.At(lastPath.Count() - 1);
+	//		//LOG("LAST PATH X: %d  ENEMY X: %d", nextPathTile->x, origPos.x);
+	//		if (nextPathTile->x < origPos.x) {
+	//			isFacingLeft = true;
+	//			vel.x -= speed * dt;
+	//		}
+	//		else {
+	//			isFacingLeft = false;
+	//			vel.x += speed * dt;
+	//		}
 
-	
+	//		if (nextPathTile->x == origPos.x) {
+	//			lastPath.Pop(*nextPathTile);
+	//		}
+
+	//	}
+
+	//	pbody->body->SetLinearVelocity(vel);
+	//}
+	//else {
+
+	//	if (cansadoTimer.ReadMSec() < 2000) {
+	//		b2Vec2 vel = b2Vec2(0, 0);
+	//		vel.y -= GRAVITY_Y;
+	//		pbody->body->SetLinearVelocity(vel);
+	//		state = EntityState::STOP_ATTACKING;
+	//	
+
+	//		if (idleAnim.HasFinished()) {
+	//			idleAnim.Reset();
+	//		}
+
+	//	}
+	//	else {
+	//		idleAnim.Reset();
+	//		cansado = false;
+	//	}
+
+	//}
+
+	//if (isDying) {
+	//	pbody->body->SetActive(false);
+	//	b2Vec2 vel = b2Vec2(0, 0);
+	//	vel.y -= GRAVITY_Y;
+	//	pbody->body->SetLinearVelocity(vel);
+	//	state = EntityState::DYING;
+
+	//	if (dieAnim.HasFinished()) {
+	//		active = false;
+	//		
+	//	}
+
+	//}
+
+	//
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
@@ -217,13 +215,13 @@ bool EnemyPajaro::Update(float dt)
 	switch (state)
 	{
 		case EntityState::IDLE:				currentAnimation = &idleAnim; break;
-		case EntityState::STOP_ATTACKING:	currentAnimation = &stopAnim; if (stopAnim.HasFinished()) { currentAnimation = &idleAnim; } break;
+		//case EntityState::STOP_ATTACKING:	currentAnimation = &stopAnim; if (stopAnim.HasFinished()) { currentAnimation = &idleAnim; } break;
 		case EntityState::RUNNING:			currentAnimation = &runAnim; break;
-		case EntityState::ATTACKING:		currentAnimation = &attackAnim; if (attackAnim.HasFinished()) { currentAnimation = &attackLoopAnim; }   break;
+		case EntityState::ATTACKING:		currentAnimation = &attackAnim;break;
 		case EntityState::JUMPING:			currentAnimation = &idleAnim; break;
 		case EntityState::FALLING:			currentAnimation = &idleAnim; break;
 		case EntityState::DYING:			currentAnimation = &dieAnim; break;
-		case EntityState::TRACK:			currentAnimation = &trackAnim; break;
+		//case EntityState::TRACK:			currentAnimation = &trackAnim; break;
 		default:							currentAnimation = &idleAnim; break;
 	}
 
@@ -236,7 +234,7 @@ bool EnemyPajaro::PostUpdate() {
 
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-
+	
 	if (isFacingLeft) {
 		app->render->DrawTexture(texture, position.x - 4, position.y - 14, SDL_FLIP_HORIZONTAL, &rect);
 	}

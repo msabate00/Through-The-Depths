@@ -4,6 +4,7 @@
 #include "Coin.h"
 #include "PlantBreakable.h"
 #include "Enemy_Armadillo.h"
+#include "Enemy_Pajaro.h"
 #include "PlantBarrier.h"
 #include "SaveStatue.h"
 #include "App.h"
@@ -111,6 +112,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::ENEMY_ARMADILLO:
 		entity = new EnemyArmadillo();
+		break;
+	case EntityType::ENEMY_PAJARO:
+		entity = new EnemyPajaro();
 		break;
 	default:
 		break;
