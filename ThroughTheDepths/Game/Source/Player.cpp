@@ -73,7 +73,7 @@ bool Player::Start() {
 
 	pickCoinFxId = app->audio->LoadFx(parameters.child("coinAudio").attribute("path").as_string());
 
-	pasoCesped = app->audio->LoadFx("Output/Assets/Audio/Fx/pasoCesped.wav");
+	pasoCesped = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped.wav");
 	pasoMetal = app->audio->LoadFx("Output/Assets/Audio/Fx/pasoMetal.wav");
 	pasoRoca = app->audio->LoadFx("Output/Assets/Audio/Fx/pasoRoca.wav");
 	caidaMuerte = app->audio->LoadFx("Output/Assets/Audio/Fx/caidaMuerte.wav");
