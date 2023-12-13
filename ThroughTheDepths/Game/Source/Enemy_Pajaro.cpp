@@ -78,6 +78,26 @@ bool EnemyPajaro::Update(float dt)
 	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 
 
+	if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
+		onView = true;
+		state = EntityState::RUNNING;
+		speed = runSpeed;
+		app->map->pathfindingFly->CreatePath(origPos, targPos);
+		lastPath = *app->map->pathfindingFly->GetLastPath();
+		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesAttack) {
+			if (!isAttacking) {
+				isAttacking = true;
+				attackTimer.Start();
+			}
+		}
+
+	}
+
+	if (!cansado) {
+
+	}
+
+
 	//
 
 	//if (!cansado) {
