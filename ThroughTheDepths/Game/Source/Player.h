@@ -72,6 +72,8 @@ public:
 	int armadilloAtaque;
 	int palomaAtaque;
 
+	/*int musicaBosque;*/
+
 	Timer pasosTimer;
 	float pasosTime = 400;
 

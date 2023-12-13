@@ -90,10 +90,8 @@ bool Player::Start() {
 	saltoJugador = app->audio->LoadFx("Assets/Audio/Fx/saltoJugador.wav");
 	armadilloAtaque = app->audio->LoadFx("Assets/Audio/Fx/armadilloAtaque.wav");
 	palomaAtaque = app->audio->LoadFx("Assets/Audio/Fx/palomaAtaque.wav");
-	//musicaBosque = app->audio->LoadFx("Assets/Audio/musicaBosque.ogg");
 
-
-	//app->audio->PlayMusic(musicaBosque);
+	app->audio->PlayMusic("Assets/Audio/Music/musicaBosque.ogg", 1.0f);
 
 	uint windowH;
 	uint windowW;
