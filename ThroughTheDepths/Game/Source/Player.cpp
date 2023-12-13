@@ -44,7 +44,6 @@ bool Player::Awake() {
 
 bool Player::Start() {
 
-
 	texturePath = parameters.attribute("texturepath").as_string();
 	speed = parameters.attribute("speed").as_float();
 	jumpForce = parameters.attribute("jumpForce").as_float();
@@ -91,8 +90,10 @@ bool Player::Start() {
 	saltoJugador = app->audio->LoadFx("Assets/Audio/Fx/saltoJugador.wav");
 	armadilloAtaque = app->audio->LoadFx("Assets/Audio/Fx/armadilloAtaque.wav");
 	palomaAtaque = app->audio->LoadFx("Assets/Audio/Fx/palomaAtaque.wav");
+	//musicaBosque = app->audio->LoadFx("Assets/Audio/musicaBosque.ogg");
 
 
+	//app->audio->PlayMusic(musicaBosque);
 
 	uint windowH;
 	uint windowW;
