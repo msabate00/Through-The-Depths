@@ -73,17 +73,8 @@ bool Player::Start() {
 
 	pickCoinFxId = app->audio->LoadFx(parameters.child("coinAudio").attribute("path").as_string());
 
-<<<<<<< Updated upstream
-	pasoCesped = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped.wav");
-	pasoMetal = app->audio->LoadFx("Output/Assets/Audio/Fx/pasoMetal.wav");
-	pasoRoca = app->audio->LoadFx("Output/Assets/Audio/Fx/pasoRoca.wav");
-	caidaMuerte = app->audio->LoadFx("Output/Assets/Audio/Fx/caidaMuerte.wav");
-	recibirAtaque = app->audio->LoadFx("Output/Assets/Audio/Fx/recibirAtaque.wav");
-	ataqueEspada = app->audio->LoadFx("Output/Assets/Audio/Fx/ataqueEspada.wav");
-	saltoJugador = app->audio->LoadFx("Output/Assets/Audio/Fx/saltoJugador.wav");
-	armadilloAtaque = app->audio->LoadFx("Output/Assets/Audio/Fx/armadilloAtaque.wav");
-	palomaAtaque = app->audio->LoadFx("Output/Assets/Audio/Fx/palomaAtaque.wav");
-=======
+
+
 	pasoCesped1 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped1.wav");
 	pasoCesped2 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped2.wav");
 	pasoCesped3 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped3.wav");
@@ -100,7 +91,7 @@ bool Player::Start() {
 	saltoJugador = app->audio->LoadFx("Assets/Audio/Fx/saltoJugador.wav");
 	armadilloAtaque = app->audio->LoadFx("Assets/Audio/Fx/armadilloAtaque.wav");
 	palomaAtaque = app->audio->LoadFx("Assets/Audio/Fx/palomaAtaque.wav");
->>>>>>> Stashed changes
+
 
 
 	uint windowH;
