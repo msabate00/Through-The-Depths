@@ -33,6 +33,8 @@ public:
 	void GodModeMovement(float dt);
 	void CameraMovement(float dt);
 
+	void AudioController();
+
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 	void OnExitCollision(PhysBody* physA, PhysBody* physB);
 
@@ -53,7 +55,14 @@ public:
 
 
 
-	int pasoCesped;
+	int pasoCesped1;
+	int pasoCesped2;
+	int pasoCesped3;
+	int pasoCesped4;
+	int pasoCesped5;
+	int pasoCesped6;
+	int pasoCesped7;
+
 	int pasoMetal;
 	int pasoRoca;
 	int caidaMuerte;
@@ -63,7 +72,8 @@ public:
 	int armadilloAtaque;
 	int palomaAtaque;
 
-
+	Timer pasosTimer;
+	float pasosTime = 400;
 
 	/*NEW JUMPING SYSTEM*/
 	float jumpForce = 4.5f;

@@ -8,6 +8,7 @@
 	<map />
 	<scene>
 		<player x="112" y="1600" sceneLevel="0" />
+
 	</scene>
 	<particles />
 	<entitymanager />
