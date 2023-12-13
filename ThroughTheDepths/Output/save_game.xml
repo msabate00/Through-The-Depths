@@ -7,7 +7,11 @@
 	<:anonymous />
 	<map />
 	<scene>
+<<<<<<< Updated upstream
 		<player x="114" y="1600" sceneLevel="0" />
+=======
+		<player x="489" y="1600" sceneLevel="0" />
+>>>>>>> Stashed changes
 	</scene>
 	<particles />
 	<entitymanager />

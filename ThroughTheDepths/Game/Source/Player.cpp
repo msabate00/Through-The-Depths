@@ -73,6 +73,7 @@ bool Player::Start() {
 
 	pickCoinFxId = app->audio->LoadFx(parameters.child("coinAudio").attribute("path").as_string());
 
+<<<<<<< Updated upstream
 	pasoCesped = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped.wav");
 	pasoMetal = app->audio->LoadFx("Output/Assets/Audio/Fx/pasoMetal.wav");
 	pasoRoca = app->audio->LoadFx("Output/Assets/Audio/Fx/pasoRoca.wav");
@@ -82,6 +83,24 @@ bool Player::Start() {
 	saltoJugador = app->audio->LoadFx("Output/Assets/Audio/Fx/saltoJugador.wav");
 	armadilloAtaque = app->audio->LoadFx("Output/Assets/Audio/Fx/armadilloAtaque.wav");
 	palomaAtaque = app->audio->LoadFx("Output/Assets/Audio/Fx/palomaAtaque.wav");
+=======
+	pasoCesped1 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped1.wav");
+	pasoCesped2 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped2.wav");
+	pasoCesped3 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped3.wav");
+	pasoCesped4 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped4.wav");
+	pasoCesped5 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped5.wav");
+	pasoCesped6 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped6.wav");
+	pasoCesped7 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped7.wav");
+
+	pasoMetal = app->audio->LoadFx("Assets/Audio/Fx/pasoMetal.wav");
+	pasoRoca = app->audio->LoadFx("Assets/Audio/Fx/pasoRoca.wav");
+	caidaMuerte = app->audio->LoadFx("Assets/Audio/Fx/caidaMuerte.wav");
+	recibirAtaque = app->audio->LoadFx("Assets/Audio/Fx/recibirAtaque.wav");
+	ataqueEspada = app->audio->LoadFx("Assets/Audio/Fx/ataqueEspada.wav");
+	saltoJugador = app->audio->LoadFx("Assets/Audio/Fx/saltoJugador.wav");
+	armadilloAtaque = app->audio->LoadFx("Assets/Audio/Fx/armadilloAtaque.wav");
+	palomaAtaque = app->audio->LoadFx("Assets/Audio/Fx/palomaAtaque.wav");
+>>>>>>> Stashed changes
 
 
 	uint windowH;
@@ -91,13 +110,15 @@ bool Player::Start() {
 	app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
 	app->render->camera.y = (-position.y * app->win->GetScale() + (windowH / 2));
 
-	
+	pasosTimer.Start();
 
 	return true;
 }
 
 bool Player::Update(float dt)
 {
+
+	AudioController();
 
 	if (app->input->GetKey(SDL_SCANCODE_F1)) {
 		app->sceneLevel = 0;
@@ -255,7 +276,7 @@ void Player::Movement(float dt)
 			vel = b2Vec2(-speed * dt, pbody->body->GetLinearVelocity().y);
 			isFacingLeft = true;
 			state = EntityState::RUNNING;
-			app->audio->PlayFx(pasoCesped);
+
 		}
 
 		//Moverse a la derecha
@@ -264,6 +285,8 @@ void Player::Movement(float dt)
 			isFacingLeft = false;
 			state = EntityState::RUNNING;
 		}
+
+		
 
 		//Atraves plataformas traspasables
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
@@ -293,6 +316,8 @@ void Player::Movement(float dt)
 			pbody->body->SetLinearVelocity(vel);
 			pbody->body->ApplyLinearImpulse(b2Vec2(0, GRAVITY_Y * jumpForce), pbody->body->GetWorldCenter(), true);
 			canJump = false;
+			
+			app->audio->PlayFx(saltoJugador);
 		}
 
 
@@ -307,12 +332,6 @@ void Player::Movement(float dt)
 		state = EntityState::JUMPING;
 	}
 
-
-	if (app->input->GetKey(SDL_SCANCODE_P) == SDL_KEYDOWN)
-	{
-		app->audio->PlayFx(pasoCesped);
-	}
-
 	//Ataque
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && !isAttacking && canJump) {
 		isAttacking = true;
@@ -323,6 +342,7 @@ void Player::Movement(float dt)
 		else {
 			app->particles->AddParticle(app->particles->basicAttackR, position.x + 16, position.y);
 		}
+		app->audio->PlayFx(ataqueEspada);
 	}
 
 }
@@ -437,6 +457,45 @@ void Player::CameraMovement(float dt)
 
 }
 
+void Player::AudioController()
+{
+	if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) && canJump==true) {
+
+	
+		if (pasosTimer.ReadMSec() > pasosTime) {
+
+			int paso = rand() % 5;
+
+			switch (paso)
+			{
+			default:
+				app->audio->PlayFx(pasoCesped1);
+				break;
+			case 1:
+				app->audio->PlayFx(pasoCesped2);
+				break;
+			case 2:
+				app->audio->PlayFx(pasoCesped3);
+				break;
+			case 3:
+				app->audio->PlayFx(pasoCesped4);
+				break;
+			case 4:
+				app->audio->PlayFx(pasoCesped5);
+				break;
+			case 54:
+				app->audio->PlayFx(pasoCesped6);
+				break;
+			case 6:
+				app->audio->PlayFx(pasoCesped7);
+				break;
+			}
+			pasosTimer.Start();
+		}
+	}
+
+}
+
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	SaveStatue* statue;
@@ -503,9 +562,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			PhysBody* enemyBody = (PhysBody*)physB->body->GetUserData();
 			if (enemyBody->listener->state == EntityState::ATTACKING) {
 				LOG("DETECTA COLISION AU");
+				app->audio->PlayFx(recibirAtaque);
 				if (invulnerableTimer.ReadMSec() > invulnerableTime * 1000) {
 					LOG("RESTAR VIDA");
 					invulnerableTimer.Start();
+
+					
 				}
 
 			}
