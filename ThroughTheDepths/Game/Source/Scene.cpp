@@ -311,14 +311,15 @@ bool Scene::LoadState(pugi::xml_node node) {
 		app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene);
 	}
 	else {
-		player->position.x = node.child("player").attribute("x").as_int();
-		player->position.y = node.child("player").attribute("y").as_int();
+		player->position.x = node.child("player").attribute("x").as_int() + 16;
+		player->position.y = node.child("player").attribute("y").as_int() + 16;
 		player->SetPosition(node.child("player").attribute("x").as_int(), node.child("player").attribute("y").as_int());
 		app->sceneLevel = node.child("player").attribute("sceneLevel").as_int();
 	}
 
 
-
+	app->render->camera.x = node.child("camera").attribute("x").as_int() + 16;
+	app->render->camera.y = node.child("camera").attribute("y").as_int() + 16;
 
 	for (pugi::xml_node itemNode = node.child("coinsPicked").child("coin"); itemNode; itemNode = itemNode.next_sibling("coin"))
 	{
@@ -342,6 +343,11 @@ bool Scene::SaveState(pugi::xml_node node) {
 	playerNode.append_attribute("x").set_value(player->position.x);
 	playerNode.append_attribute("y").set_value(player->position.y);
 	playerNode.append_attribute("sceneLevel").set_value(app->sceneLevel);
+
+	pugi::xml_node cameraNode = node.append_child("camera");
+	cameraNode.append_attribute("x").set_value(app->render->camera.x);
+	cameraNode.append_attribute("y").set_value(app->render->camera.y);
+	
 
 	pugi::xml_node coinsListNode = node.append_child("coinsPicked");
 	
