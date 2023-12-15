@@ -50,7 +50,7 @@ public:
 	uchar GetTileAt(const iPoint& pos) const;
 
 
-	SDL_Texture* tilePathTex = nullptr;
+	
 
 private:
 

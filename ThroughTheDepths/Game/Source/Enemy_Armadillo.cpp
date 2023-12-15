@@ -57,6 +57,14 @@ bool EnemyArmadillo::Start() {
 	pbody->ctype = ColliderType::ENEMY;
 	pbody->listener = this;
 
+
+	pathfinding = new PathFinding();
+	uchar* navigationMap = NULL;
+	
+	app->map->CreateNavigationMap(app->map->mapData.width, app->map->mapData.height, &navigationMap, app->map->navigationLayer_Floor);
+	pathfinding->SetNavigationMap((uint)app->map->mapData.width, (uint)app->map->mapData.height, navigationMap);
+
+	RELEASE_ARRAY(navigationMap);
 	
 
 	return true;
@@ -82,8 +90,8 @@ bool EnemyArmadillo::Update(float dt)
 
 
 	//if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
-	//	app->map->pathfindingFloor->CreatePath(origPos, targPos);
-	//	lastPath = *app->map->pathfindingFloor->GetLastPath();
+	//	pathfinding->CreatePath(origPos, targPos);
+	//	lastPath = *pathfinding->GetLastPath();
 	//}
 	//else {
 	//	lastPath.Clear();
@@ -100,8 +108,8 @@ bool EnemyArmadillo::Update(float dt)
 			state = EntityState::RUNNING;
 			speed = runSpeed;
 
-			app->map->pathfindingFloor->CreatePath(origPos, targPos);
-			lastPath = *app->map->pathfindingFloor->GetLastPath();
+			pathfinding->CreatePath(origPos, targPos);
+			lastPath = *pathfinding->GetLastPath();
 
 			if (dist(playerPos, position) < app->map->GetTileWidth() * tilesAttack) {
 				if (!isAttacking) {
@@ -125,13 +133,13 @@ bool EnemyArmadillo::Update(float dt)
 					
 					state = EntityState::RUNNING;
 					//targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
-					//app->map->pathfindingFloor->CreatePath(origPos, targPos);
+					//pathfinding->CreatePath(origPos, targPos);
 
 					b2Vec2 vel = b2Vec2(0, 0);
 					vel.y -= GRAVITY_Y;
 					if (isFacingLeft){
 						origPos.x -= 1;
-						if (app->map->pathfindingFloor->IsWalkable(origPos)) {
+						if (pathfinding->IsWalkable(origPos)) {
 							vel.x -= speed * dt;
 						}
 						else {
@@ -140,7 +148,7 @@ bool EnemyArmadillo::Update(float dt)
 					}
 					else {
 						origPos.x += 1;
-						if (app->map->pathfindingFloor->IsWalkable(origPos)) {
+						if (pathfinding->IsWalkable(origPos)) {
 							vel.x += speed * dt;
 						}
 						else {
@@ -163,8 +171,8 @@ bool EnemyArmadillo::Update(float dt)
 					idleAnim.Reset();
 					state = EntityState::RUNNING;
 					targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
-					app->map->pathfindingFloor->CreatePath(origPos, targPos);
-					lastPath = *app->map->pathfindingFloor->GetLastPath();
+					pathfinding->CreatePath(origPos, targPos);
+					lastPath = *pathfinding->GetLastPath();
 
 				}
 			}
@@ -301,7 +309,7 @@ bool EnemyArmadillo::PostUpdate() {
 		for (uint i = 0; i < lastPath.Count(); ++i)
 		{
 			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-			app->render->DrawTexture(app->map->pathfindingFloor->tilePathTex, pos.x, pos.y);
+			app->render->DrawTexture(app->map->tilePathTexBrown, pos.x, pos.y);
 		}
 	}
 

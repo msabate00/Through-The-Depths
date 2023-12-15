@@ -227,7 +227,7 @@ bool EnemyPajaro::PostUpdate() {
 		for (uint i = 0; i < lastPath.Count(); ++i)
 		{
 			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-			app->render->DrawTexture(app->map->pathfindingFly->tilePathTex, pos.x, pos.y);
+			app->render->DrawTexture(app->map->tilePathTexBrown, pos.x, pos.y);
 		}
 	}
 

@@ -162,6 +162,9 @@ bool Player::Update(float dt)
 	if (!app->debug) {
 		CameraMovement(dt);
 	}
+	else {
+		DebugCameraMovement(dt);
+	}
 
 	//Sistema de Ataque
 	if (isAttacking) {
@@ -445,6 +448,42 @@ void Player::CameraMovement(float dt)
 
 
 
+}
+
+void Player::DebugCameraMovement(float dt)
+{
+
+	if (app->input->GetKey(SDL_SCANCODE_D) || app->input->GetKey(SDL_SCANCODE_A) || app->input->GetKey(SDL_SCANCODE_W) || app->input->GetKey(SDL_SCANCODE_S) || app->input->GetKey(SDL_SCANCODE_SPACE) || app->input->GetKey(SDL_SCANCODE_J)) {
+		uint windowH;
+		uint windowW;
+		app->win->GetWindowSize(windowW, windowH);
+
+
+		int targetPosX;
+		if (isFacingLeft) {
+			targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 10);
+		}
+		else {
+			targetPosX = (-position.x * app->win->GetScale() + (windowW / 2) - 100);
+		}
+
+		int targetPosY = (-position.y * app->win->GetScale() + (windowH / 2) - 10) + yCameraOffset;
+
+		targetPosY = MAX(targetPosY, -2980);
+		targetPosX = MIN(targetPosX, -100);
+
+		targetPosX += (isFacingLeft) ? 75 : -50;
+
+		if (app->GetFrameCount() < 20) {
+			app->render->camera.x = lerp(app->render->camera.x, targetPosX, 1);
+			app->render->camera.y = lerp(app->render->camera.y, targetPosY, 1);
+		}
+		else {
+			app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+			app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.002f);
+		}
+	}
+	
 }
 
 void Player::AudioController()

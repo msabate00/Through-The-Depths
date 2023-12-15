@@ -411,8 +411,8 @@ bool Map::Load()
             uchar* navigationMap = NULL;
             CreateNavigationMap(mapData.width, mapData.height, &navigationMap, navigationLayer_Floor);
             pathfindingFloor->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
-            pathfindingFloor->tilePathTex = app->tex->Load(tilePathTexBrownPath.GetString());
-            pathfindingFly->tilePathTex = app->tex->Load(tilePathTexRedPath.GetString());
+            tilePathTexBrown = app->tex->Load(tilePathTexBrownPath.GetString());
+            tilePathTexRed = app->tex->Load(tilePathTexRedPath.GetString());
 
             CreateNavigationMap(mapData.width, mapData.height, &navigationMap, navigationLayer_Fly);
             pathfindingFly->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);

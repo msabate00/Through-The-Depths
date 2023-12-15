@@ -9,6 +9,7 @@
 #include "Timer.h"
 #include "Animation.h"
 #include "DynArray.h"
+#include "Pathfinding.h"
 
 struct SDL_Texture;
 
@@ -83,6 +84,9 @@ private:
 	Timer cansadoTimer;
 
 	DynArray<iPoint> lastPath;
+
+	PathFinding* pathfinding;
+
 
 };
 

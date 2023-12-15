@@ -165,7 +165,7 @@ public:
 	iPoint WorldToMap(int x, int y);
 	int GetTileWidth();
 	int GetTileHeight();
-
+	void CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer* navigationLayer) const;
 private:
 
 	bool LoadMap(pugi::xml_node mapFile);
@@ -181,7 +181,7 @@ private:
 	bool LoadEntities(std::string layerName);
 
 	bool LoadNavigationLayer();
-	void CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer* navigationLayer) const;
+	
 
 
 public: 
@@ -189,6 +189,12 @@ public:
 	MapData mapData;
 	PathFinding* pathfindingFloor;
 	PathFinding* pathfindingFly;
+	MapLayer* navigationLayer_Floor;
+	MapLayer* navigationLayer_Fly;
+
+	SDL_Texture* tilePathTexRed = nullptr;
+	SDL_Texture* tilePathTexBrown = nullptr;
+
 
 private:
 
@@ -215,8 +221,7 @@ private:
 	pugi::xml_node configNode;
 
 
-	MapLayer* navigationLayer_Floor;
-	MapLayer* navigationLayer_Fly;
+
 
 
 };
