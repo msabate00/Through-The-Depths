@@ -207,7 +207,7 @@ bool EnemyArmadillo::Update(float dt)
 
 
 		b2Vec2 vel = b2Vec2(0, 0);
-		vel.y -= GRAVITY_Y;
+		vel.y -= GRAVITY_Y*10;
 
 		if (lastPath.Count() > 0) {
 			iPoint* nextPathTile;
