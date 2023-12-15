@@ -56,11 +56,15 @@ bool FadeToBlack::Update(float dt)
 			/*app->physics->Disable();
 			app->physics->Enable();*/
 			/*app->physics->CleanUp();*/
+			
 
 			app->map->Enable();
 			moduleToEnable->Enable();
 			app->entityManager->Enable();
-
+			if (reloadScene) {
+				app->LoadRequest();
+				reloadScene = false;
+			}
 
 			currentStep = Fade_Step::FROM_BLACK;
 		}
@@ -91,13 +95,14 @@ bool FadeToBlack::PostUpdate()
 	return true;
 }
 
-bool FadeToBlack::FadeToBlackTransition(Module* moduleToDisable, Module* moduleToEnable, float frames)
+bool FadeToBlack::FadeToBlackTransition(Module* moduleToDisable, Module* moduleToEnable, bool load,float frames)
 {
 	bool ret = false;
 
 	// If we are already in a fade process, ignore this call
 	if (currentStep == Fade_Step::NONE)
 	{
+		reloadScene = load;
 		currentStep = Fade_Step::TO_BLACK;
 		frameCount = 0;
 		maxFadeFrames = frames;

@@ -79,6 +79,7 @@ bool EntityManager::CleanUp()
 	}
 
 	entities.Clear();
+	coins.Clear();
 
 	return ret;
 }
@@ -100,6 +101,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::COIN:
 		entity = new Coin();
+		coins.Add(entity);
 		break;
 	case EntityType::PLANT_BARRIER:
 		entity = new PlantBarrier();

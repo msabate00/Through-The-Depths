@@ -774,7 +774,7 @@ bool Map::LoadEntities(std::string layerName)
         LOG("Error in Map::LoadEntities(): %s", parseResult.description());
         return false;
     }
-
+    LOG("CARGA ENTIDADES");
     while (mapLayerItem != NULL) {
 
         if (mapLayerItem->data->name.GetString() == layerName) {

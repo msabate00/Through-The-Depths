@@ -262,7 +262,11 @@ bool Scene::Update(float dt)
 
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
-	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) { 
+		app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene, true);
+		
+		//app->LoadRequest(); 
+	};
 
 	return true;
 }
@@ -312,7 +316,16 @@ bool Scene::LoadState(pugi::xml_node node) {
 		player->SetPosition(node.child("player").attribute("x").as_int(), node.child("player").attribute("y").as_int());
 		app->sceneLevel = node.child("player").attribute("sceneLevel").as_int();
 	}
-	
+
+
+
+
+	for (pugi::xml_node itemNode = node.child("coinsPicked").child("coin"); itemNode; itemNode = itemNode.next_sibling("coin"))
+	{
+		if (!itemNode.attribute("active").as_bool()) {
+			LOG("destruiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiir");
+		}
+	}
 	
 	
 
@@ -328,6 +341,16 @@ bool Scene::SaveState(pugi::xml_node node) {
 	playerNode.append_attribute("x").set_value(player->position.x);
 	playerNode.append_attribute("y").set_value(player->position.y);
 	playerNode.append_attribute("sceneLevel").set_value(app->sceneLevel);
+
+	pugi::xml_node coinsListNode = node.append_child("coinsPicked");
+	
+	for (int i = 0; i < app->entityManager->coins.Count(); i++) {
+		pugi::xml_node cointNode = coinsListNode.append_child("coin");
+		cointNode.append_attribute("x").set_value(app->entityManager->coins.At(i)->data->position.x);
+		cointNode.append_attribute("y").set_value(app->entityManager->coins.At(i)->data->position.y);
+		cointNode.append_attribute("active").set_value(app->entityManager->coins.At(i)->data->active);
+	}
+
 
 	return true;
 }

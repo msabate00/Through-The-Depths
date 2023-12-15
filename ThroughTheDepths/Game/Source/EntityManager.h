@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "List.h"
 
+
 class EntityManager : public Module
 {
 public:
@@ -43,6 +44,8 @@ public:
 public:
 
 	List<Entity*> entities;
+	List<Entity*> coins;
+	List<Entity*> coins_to_destroy;
 
 };
 
