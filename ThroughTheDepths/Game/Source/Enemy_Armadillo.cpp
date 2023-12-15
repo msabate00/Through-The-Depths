@@ -57,6 +57,12 @@ bool EnemyArmadillo::Start() {
 	pbody->ctype = ColliderType::ENEMY;
 	pbody->listener = this;
 
+	//Atravesar enemigos
+	b2Filter enemyFilter;
+	enemyFilter.categoryBits = static_cast<uint16_t>(ColliderType::PLATFORM);
+	enemyFilter.maskBits = 0xFFFF & ~static_cast<uint16_t>(ColliderType::PLATFORM);
+	pbody->body->GetFixtureList()->SetFilterData(enemyFilter);
+
 
 	pathfinding = new PathFinding();
 	uchar* navigationMap = NULL;
