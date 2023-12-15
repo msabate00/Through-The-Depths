@@ -590,9 +590,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			PhysBody* enemyBody = (PhysBody*)physB->body->GetUserData();
 			if (enemyBody->listener->state == EntityState::ATTACKING) {
 				LOG("DETECTA COLISION AU");
-				app->audio->PlayFx(recibirAtaque);
+				
 				if (invulnerableTimer.ReadMSec() > invulnerableTime * 1000) {
 					LOG("RESTAR VIDA");
+					
+					app->audio->PlayFx(recibirAtaque);
 					invulnerableTimer.Start();
 
 					
