@@ -76,9 +76,13 @@ bool EnemyPajaro::Update(float dt)
 		onView = true;
 		state = EntityState::RUNNING;
 		speed = runSpeed;
+		if (!isAttacking) {
+			targPos.y -= 5;
+		}
 		app->map->pathfindingFly->CreatePath(origPos, targPos);
 		lastPath = *app->map->pathfindingFly->GetLastPath();
-		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesAttack) {
+
+		if (origPos == targPos) {
 			if (!isAttacking) {
 				isAttacking = true;
 				attackTimer.Start();
@@ -164,35 +168,71 @@ bool EnemyPajaro::Update(float dt)
 
 	b2Vec2 vel = b2Vec2(0, 0);
 	
+	if (!isAttacking) {
+		if (lastPath.Count() > 0) {
+			iPoint* nextPathTile;
+			nextPathTile = lastPath.At(lastPath.Count() - 1);
 
-	if (lastPath.Count() > 0) {
-		iPoint* nextPathTile;
-		nextPathTile = lastPath.At(lastPath.Count() - 1);
-		
 
-		//Movimiento en x
-		if (nextPathTile->x < origPos.x) {
-			isFacingLeft = true;
-			vel.x -= speed * dt;
+			//Movimiento en x
+			if (nextPathTile->x < origPos.x) {
+				isFacingLeft = true;
+				vel.x -= speed * dt;
+			}
+			else {
+				isFacingLeft = false;
+				vel.x += speed * dt;
+			}
+
+			//Movimiento en y
+			if (nextPathTile->y < origPos.y) {
+
+				vel.y -= speed * dt;
+			}
+			else {
+				vel.y += speed * dt;
+			}
+
+			if (nextPathTile->x == origPos.x && nextPathTile->y == origPos.y) {
+				lastPath.Pop(*nextPathTile);
+			}
+
 		}
-		else {
-			isFacingLeft = false;
-			vel.x += speed * dt;
-		}
+	}
+	else {
+		vel.y = -GRAVITY_Y * 2;
+		if (lastPath.Count() > 0) {
+			iPoint* nextPathTile;
+			nextPathTile = lastPath.At(lastPath.Count() - 1);
 
-		//Movimiento en y
-		if (nextPathTile->y < origPos.y) {
 
-			vel.y -= speed * dt;
-		}
-		else {
-			vel.y += speed * dt;
-		}
+			//Movimiento en x
+			if (nextPathTile->x < origPos.x) {
+				isFacingLeft = true;
+				vel.x -= speed * dt;
+			}
+			else {
+				isFacingLeft = false;
+				vel.x += speed * dt;
+			}
 
-		if (nextPathTile->x == origPos.x && nextPathTile->y == origPos.y) {
-			lastPath.Pop(*nextPathTile);
-		}
+			//Movimiento en y
+			if (nextPathTile->y < origPos.y) {
 
+				vel.y -= speed * dt;
+			}
+			else {
+				vel.y += speed * dt;
+			}
+
+			if (nextPathTile->x == origPos.x && nextPathTile->y == origPos.y) {
+				lastPath.Pop(*nextPathTile);
+			}
+			if (lastPosY == position.y) {
+				isAttacking = false;
+			}
+
+		}
 	}
 
 	pbody->body->SetLinearVelocity(vel);
@@ -234,9 +274,10 @@ bool EnemyPajaro::Update(float dt)
 
 	//
 
+	
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
+	lastPosY = position.y;
 	switch (state)
 	{
 		case EntityState::IDLE:				currentAnimation = &idleAnim; break;

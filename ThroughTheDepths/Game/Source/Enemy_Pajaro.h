@@ -75,6 +75,7 @@ private:
 
 	bool isDying = false;
 	bool isAttacking = false;
+	int lastPosY;
 	bool goToPath = false;
 	bool cansado = false;
 	float walkSpeed, runSpeed, attackSpeed;
