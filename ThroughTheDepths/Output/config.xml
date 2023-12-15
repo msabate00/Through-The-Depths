@@ -47,9 +47,9 @@
 			<fondo1Bosque texturepath="Assets/Maps/tilesets/background_1_32x32.png"/>
 			<fondo2Bosque texturepath="Assets/Maps/tilesets/background_2_32x32.png"/>
 
-			<fondo0Pueblo texturepath="Assets/Maps/tilesets/bg0.png"/>
-			<fondo1Pueblo texturepath="Assets/Maps/tilesets/bg1.png"/>
-			<fondo2Pueblo texturepath="Assets/Maps/tilesets/background_2_32x32.png"/>
+			<fondo0Pueblo texturepath="Assets/Maps/tilesets2/bg0.png"/>
+			<fondo1Pueblo texturepath="Assets/Maps/tilesets2/bg1.png"/>
+			
             
             <saveStatue texturepath="Assets/Maps/tilesets/Animations.png"/>
 		</textures>
