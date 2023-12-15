@@ -78,7 +78,7 @@ bool EnemyArmadillo::Update(float dt)
 	origPos = app->map->WorldToMap(position.x+32, position.y);
 	playerPos = app->scene->getPlayer()->position;
 	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
-
+	targPos.x += 1;
 
 	
 
@@ -158,8 +158,10 @@ bool EnemyArmadillo::Update(float dt)
 			nextPathTile = lastPath.At(lastPath.Count() - 1);
 			//LOG("LAST PATH X: %d  ENEMY X: %d", nextPathTile->x, origPos.x);
 			if (nextPathTile->x == origPos.x) {
-				cansado = true;
-				cansadoTimer.Start();
+				//cansado = true;
+				//cansadoTimer.Start();
+				//isFacingLeft = false;
+				
 			}else if (nextPathTile->x < origPos.x) {
 				isFacingLeft = true;
 				vel.x -= speed * dt;

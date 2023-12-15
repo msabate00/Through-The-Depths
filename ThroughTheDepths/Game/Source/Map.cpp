@@ -48,6 +48,9 @@ bool Map::Awake(pugi::xml_node& config)
     mapFileName_Pueblo = config.child("mapPueblo").attribute("path").as_string();
     mapFolder = config.child("mapfolder").attribute("path").as_string();
 
+    tilePathTexRedPath = config.child("tilePathTexRed").attribute("path").as_string();
+    tilePathTexBrownPath = config.child("tilePathTexBrown").attribute("path").as_string();
+
     return ret;
 }
 
@@ -408,7 +411,9 @@ bool Map::Load()
             uchar* navigationMap = NULL;
             CreateNavigationMap(mapData.width, mapData.height, &navigationMap, navigationLayer_Floor);
             pathfindingFloor->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
-            
+            pathfindingFloor->tilePathTex = app->tex->Load(tilePathTexBrownPath.GetString());
+            pathfindingFly->tilePathTex = app->tex->Load(tilePathTexRedPath.GetString());
+
             CreateNavigationMap(mapData.width, mapData.height, &navigationMap, navigationLayer_Fly);
             pathfindingFly->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
 

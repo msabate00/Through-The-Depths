@@ -70,6 +70,8 @@
 
 
 	<map>
+		<tilePathTexRed path="Assets/Maps/tileSelectionRed.png"/>
+		<tilePathTexBrown path="Assets/Maps/tileSelectionBrown.png"/>
 		<mapfolder path="Assets/Maps/"/>
 		<mapBosque path="Assets/Maps/Bosque.tmx" level="0"/>
 		<mapPueblo path="Assets/Maps/Pueblo.tmx" level="1"/>

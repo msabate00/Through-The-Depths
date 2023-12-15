@@ -80,7 +80,7 @@ bool EnemyPajaro::Update(float dt)
 			state = EntityState::RUNNING;
 			speed = runSpeed;
 			if (!isAttacking) {
-				targPos.y -= 5;
+				targPos.y -= 3;
 			}
 			app->map->pathfindingFly->CreatePath(origPos, targPos);
 			lastPath = *app->map->pathfindingFly->GetLastPath();
@@ -227,7 +227,7 @@ bool EnemyPajaro::PostUpdate() {
 		for (uint i = 0; i < lastPath.Count(); ++i)
 		{
 			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-			app->render->DrawTexture(app->map->pathfindingFloor->tilePathTex, pos.x, pos.y);
+			app->render->DrawTexture(app->map->pathfindingFly->tilePathTex, pos.x, pos.y);
 		}
 	}
 

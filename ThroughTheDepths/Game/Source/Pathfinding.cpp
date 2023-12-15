@@ -11,7 +11,7 @@ PathFinding::PathFinding()
 	map = NULL;
 	width = 0;
 	height = 0;
-	tilePathTex = app->tex->Load("Assets/Maps/tileSelection.png");
+	
 }
 
 // Destructor

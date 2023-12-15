@@ -196,6 +196,10 @@ private:
     SString mapFileName_Bosque;
     SString mapFileName_Pueblo;
 	SString mapFolder;
+
+	SString tilePathTexRedPath;
+	SString tilePathTexBrownPath;
+
     bool mapLoaded;
 	List<PhysBody*> traspasedPlatformList;
 	
