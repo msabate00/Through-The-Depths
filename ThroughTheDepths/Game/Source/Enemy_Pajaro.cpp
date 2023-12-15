@@ -193,15 +193,15 @@ bool EnemyPajaro::Update(float dt)
 	lastPosY = position.y;
 	switch (state)
 	{
-		case EntityState::IDLE:				currentAnimation = &idleAnim; break;
+		case EntityState::IDLE:				currentAnimation = &runAnim; break;
 			//case EntityState::STOP_ATTACKING:	currentAnimation = &stopAnim; if (stopAnim.HasFinished()) { currentAnimation = &idleAnim; } break;
 		case EntityState::RUNNING:			currentAnimation = &runAnim; break;
 		case EntityState::ATTACKING:		currentAnimation = &attackAnim;break;
-		case EntityState::JUMPING:			currentAnimation = &idleAnim; break;
-		case EntityState::FALLING:			currentAnimation = &idleAnim; break;
+		case EntityState::JUMPING:			currentAnimation = &runAnim; break;
+		case EntityState::FALLING:			currentAnimation = &runAnim; break;
 		case EntityState::DYING:			currentAnimation = &dieAnim; break;
 			//case EntityState::TRACK:			currentAnimation = &trackAnim; break;
-		default:							currentAnimation = &idleAnim; break;
+		default:							currentAnimation = &runAnim; break;
 	}
 
 	currentAnimation->Update();
