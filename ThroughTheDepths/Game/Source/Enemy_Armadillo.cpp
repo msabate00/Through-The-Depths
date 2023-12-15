@@ -66,6 +66,7 @@ bool EnemyArmadillo::Start() {
 
 	RELEASE_ARRAY(navigationMap);
 
+	ataqueArmadillo = app->audio->LoadFx("Assets/Audio/Fx/armadilloAtaque.wav");
 
 	return true;
 }
@@ -184,6 +185,7 @@ bool EnemyArmadillo::Update(float dt)
 		if (isAttacking) {
 			speed = attackSpeed * 1.5;
 			state = EntityState::ATTACKING;
+			app->audio->PlayFx(ataqueArmadillo);
 			if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
 				cansado = true;
 				cansadoTimer.Start();
@@ -191,7 +193,7 @@ bool EnemyArmadillo::Update(float dt)
 
 				attackAnim.Reset();
 				attackLoopAnim.Reset();
-
+				/*app->audio->Disable(ataqueArmadillo);*/
 			}
 		}
 		else {

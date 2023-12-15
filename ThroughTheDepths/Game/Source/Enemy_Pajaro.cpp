@@ -65,6 +65,8 @@ bool EnemyPajaro::Start() {
 
 	RELEASE_ARRAY(navigationMap);
 
+	palomaAtaque = app->audio->LoadFx("Assets/Audio/Fx/palomaAtaque.wav");
+	muertePaloma = app->audio->LoadFx("Assets/Audio/Fx/muertePaloma.wav");
 
 	return true;
 }
@@ -176,7 +178,7 @@ bool EnemyPajaro::Update(float dt)
 				if (lastPosY == position.y) {
 					isAttacking = false;
 				}
-
+				app->audio->PlayFx(palomaAtaque);
 			}
 		}
 
@@ -194,7 +196,7 @@ bool EnemyPajaro::Update(float dt)
 			active = false;
 
 		}
-
+		app->audio->PlayFx(muertePaloma);
 	}
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;

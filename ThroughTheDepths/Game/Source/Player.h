@@ -70,8 +70,6 @@ public:
 	int recibirAtaque;
 	int ataqueEspada;
 	int saltoJugador;
-	int armadilloAtaque;
-	int palomaAtaque;
 
 	/*int musicaBosque;*/
 
