@@ -47,8 +47,8 @@
 			<fondo1Bosque texturepath="Assets/Maps/tilesets/background_1_32x32.png"/>
 			<fondo2Bosque texturepath="Assets/Maps/tilesets/background_2_32x32.png"/>
 
-			<fondo0Pueblo texturepath="Assets/Maps/tilesets/Fondo0.png"/>
-			<fondo1Pueblo texturepath="Assets/Maps/tilesets/background_1_32x32.png"/>
+			<fondo0Pueblo texturepath="Assets/Maps/tilesets/bg0.png"/>
+			<fondo1Pueblo texturepath="Assets/Maps/tilesets/bg1.png"/>
 			<fondo2Pueblo texturepath="Assets/Maps/tilesets/background_2_32x32.png"/>
             
             <saveStatue texturepath="Assets/Maps/tilesets/Animations.png"/>
@@ -343,6 +343,15 @@
                 <frame x="257" y="1" w="64" h="64"/>
 
                 </idleAnim>
+			
+			<flyAnim loop="true" speed="0.35">
+				<frame x="1" y="193" w="64" h="64"/>
+				<frame x="65" y="193" w="64" h="64"/>
+				<frame x="129" y="193" w="64" h="64"/>
+				<frame x="193" y="193" w="64" h="64"/>
+				<frame x="257" y="193" w="64" h="64"/>
+
+			</flyAnim>
 
             <attackAnim loop="true" speed="0.35">
                 <frame x="1" y="513" w="64" h="64"/>
