@@ -40,7 +40,7 @@ public:
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
 
-
+	int ataqueArmadillo;
 
 
 	/*NEW JUMPING SYSTEM*/

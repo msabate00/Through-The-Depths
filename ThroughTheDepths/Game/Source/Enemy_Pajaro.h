@@ -55,6 +55,9 @@ public:
 
 	Animation* currentAnimation = nullptr;
 
+	int palomaAtaque;
+	int muertePaloma;
+
 private:
 
 	b2Transform startTransform;
