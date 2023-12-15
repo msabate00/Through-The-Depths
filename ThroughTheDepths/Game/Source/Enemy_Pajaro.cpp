@@ -54,7 +54,7 @@ bool EnemyPajaro::Start() {
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 10, bodyType::DYNAMIC);
 	pbody->ctype = ColliderType::ENEMY;
 	pbody->listener = this;
-
+	pbody->body->SetGravityScale(0);
 	
 
 	return true;
@@ -65,12 +65,6 @@ bool EnemyPajaro::Update(float dt)
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
-
-	
-
-
-
 
 
 	origPos = app->map->WorldToMap(position.x+32, position.y);
@@ -168,29 +162,40 @@ bool EnemyPajaro::Update(float dt)
 	//	}
 
 
-	//	b2Vec2 vel = b2Vec2(0, 0);
-	//	vel.y -= GRAVITY_Y;
+	b2Vec2 vel = b2Vec2(0, 0);
+	
 
-	//	if (lastPath.Count() > 0) {
-	//		iPoint* nextPathTile;
-	//		nextPathTile = lastPath.At(lastPath.Count() - 1);
-	//		//LOG("LAST PATH X: %d  ENEMY X: %d", nextPathTile->x, origPos.x);
-	//		if (nextPathTile->x < origPos.x) {
-	//			isFacingLeft = true;
-	//			vel.x -= speed * dt;
-	//		}
-	//		else {
-	//			isFacingLeft = false;
-	//			vel.x += speed * dt;
-	//		}
+	if (lastPath.Count() > 0) {
+		iPoint* nextPathTile;
+		nextPathTile = lastPath.At(lastPath.Count() - 1);
+		
 
-	//		if (nextPathTile->x == origPos.x) {
-	//			lastPath.Pop(*nextPathTile);
-	//		}
+		//Movimiento en x
+		if (nextPathTile->x < origPos.x) {
+			isFacingLeft = true;
+			vel.x -= speed * dt;
+		}
+		else {
+			isFacingLeft = false;
+			vel.x += speed * dt;
+		}
 
-	//	}
+		//Movimiento en y
+		if (nextPathTile->y < origPos.y) {
 
-	//	pbody->body->SetLinearVelocity(vel);
+			vel.y -= speed * dt;
+		}
+		else {
+			vel.y += speed * dt;
+		}
+
+		if (nextPathTile->x == origPos.x && nextPathTile->y == origPos.y) {
+			lastPath.Pop(*nextPathTile);
+		}
+
+	}
+
+	pbody->body->SetLinearVelocity(vel);
 	//}
 	//else {
 
