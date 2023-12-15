@@ -35,7 +35,7 @@ public:
 	int CreatePath(const iPoint& origin, const iPoint& destination);
 
 	// To request all tiles involved in the last generated path
-	const DynArray<iPoint>* GetLastPath() const;
+	DynArray<iPoint>* GetLastPath();
 
 	// To request all tiles involved in the last generated path
 	void ClearLastPath();

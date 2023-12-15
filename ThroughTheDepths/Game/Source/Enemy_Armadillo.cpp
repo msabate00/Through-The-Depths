@@ -80,6 +80,18 @@ bool EnemyArmadillo::Update(float dt)
 	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 	targPos.x += 1;
 
+
+	//if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
+	//	app->map->pathfindingFloor->CreatePath(origPos, targPos);
+	//	lastPath = *app->map->pathfindingFloor->GetLastPath();
+	//}
+	//else {
+	//	lastPath.Clear();
+	//}
+
+
+
+
 	
 
 	if (!cansado) {
@@ -87,7 +99,6 @@ bool EnemyArmadillo::Update(float dt)
 			onView = true;
 			state = EntityState::RUNNING;
 			speed = runSpeed;
-			LOG("%d", this);
 
 			app->map->pathfindingFloor->CreatePath(origPos, targPos);
 			lastPath = *app->map->pathfindingFloor->GetLastPath();
@@ -99,16 +110,51 @@ bool EnemyArmadillo::Update(float dt)
 					attackTimer.Start();
 				}
 			}
-
-
 		}
 		else {
-
+			//lastPath.Clear();
+			if(onView){ lastPath.Clear(); }
 			onView = false;
 			speed = walkSpeed;
 
 			if (lastPath.Count() == 0) {
+				if (!idleAnim.HasFinished()) {
+					state = EntityState::IDLE;
+				}
+				else {
+					
+					state = EntityState::RUNNING;
+					//targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
+					//app->map->pathfindingFloor->CreatePath(origPos, targPos);
 
+					b2Vec2 vel = b2Vec2(0, 0);
+					vel.y -= GRAVITY_Y;
+					if (isFacingLeft){
+						origPos.x -= 1;
+						if (app->map->pathfindingFloor->IsWalkable(origPos)) {
+							vel.x -= speed * dt;
+						}
+						else {
+							isFacingLeft = false;
+						}
+					}
+					else {
+						origPos.x += 1;
+						if (app->map->pathfindingFloor->IsWalkable(origPos)) {
+							vel.x += speed * dt;
+						}
+						else {
+							isFacingLeft = true;
+						}
+					}
+					
+					pbody->body->SetLinearVelocity(vel);
+				}
+			}
+
+
+			/*if (lastPath.Count() == 0) {
+				lastPath.Clear();
 				if (!idleAnim.HasFinished()) {
 					state = EntityState::IDLE;
 				}
@@ -124,7 +170,7 @@ bool EnemyArmadillo::Update(float dt)
 			}
 			else {
 				state = EntityState::RUNNING;
-			}
+			}*/
 		}
 
 		if (isAttacking) {
@@ -174,10 +220,10 @@ bool EnemyArmadillo::Update(float dt)
 			if (nextPathTile->x == origPos.x) {
 				lastPath.Pop(*nextPathTile);
 			}
-
+			pbody->body->SetLinearVelocity(vel);
 		}
 
-		pbody->body->SetLinearVelocity(vel);
+		
 	}
 	else {
 
