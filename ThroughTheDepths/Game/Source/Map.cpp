@@ -863,7 +863,7 @@ bool Map::LoadEntities(std::string layerName)
         mapLayerItem = mapLayerItem->next;
 
     }
-
+   
 
 
 

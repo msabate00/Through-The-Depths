@@ -323,9 +323,10 @@ bool Scene::LoadState(pugi::xml_node node) {
 	for (pugi::xml_node itemNode = node.child("coinsPicked").child("coin"); itemNode; itemNode = itemNode.next_sibling("coin"))
 	{
 		if (!itemNode.attribute("active").as_bool()) {
-			LOG("destruiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiir");
+			app->entityManager->coins_to_destroyPos.Add(iPoint(itemNode.attribute("x").as_int(), itemNode.attribute("y").as_int()));
 		}
 	}
+	app->entityManager->DestroyAllCoinsToDestroy();
 	
 	
 

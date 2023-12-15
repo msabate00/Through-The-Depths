@@ -7,9 +7,9 @@
 	<:anonymous />
 	<map />
 	<scene>
-		<player x="97" y="1584" sceneLevel="0" />
+		<player x="799" y="1536" sceneLevel="0" />
 		<coinsPicked>
-			<coin x="880" y="1536" active="true" />
+			<coin x="880" y="1536" active="false" />
 			<coin x="1744" y="1472" active="true" />
 			<coin x="6192" y="1792" active="true" />
 			<coin x="6224" y="1792" active="true" />

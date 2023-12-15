@@ -35,6 +35,7 @@ public:
 
 	void DestroyEntity(Entity* entity);
 	void DestroyAllEntities();
+	void DestroyAllCoinsToDestroy();
 
 	void AddEntity(Entity* entity);
 
@@ -45,7 +46,7 @@ public:
 
 	List<Entity*> entities;
 	List<Entity*> coins;
-	List<Entity*> coins_to_destroy;
+	List<iPoint> coins_to_destroyPos;
 
 };
 

@@ -146,8 +146,29 @@ void EntityManager::DestroyAllEntities()
 	ListItem<Entity*>* item;
 	for (item = entities.start; item != NULL; item = item->next)
 	{
-		
 		entities.Del(item);
+	}
+
+}
+
+void EntityManager::DestroyAllCoinsToDestroy()
+{
+	ListItem<Entity*>* item;
+	for (item = coins.start; item != NULL; item = item->next)
+	{
+		ListItem<iPoint>* destoyCoin;
+		for (destoyCoin = coins_to_destroyPos.start; destoyCoin != NULL; destoyCoin = destoyCoin->next) {
+
+
+			if(app->map->WorldToMap(destoyCoin->data.x, destoyCoin->data.y) == app->map->WorldToMap(item->data->position.x, item->data->position.y)) {
+
+			
+				item->data->active = false;
+				/*entities.Del(item);
+				coins.Del(item);
+				coins_to_destroyPos.Del(destoyCoin);*/
+			}
+		}
 		
 	}
 
