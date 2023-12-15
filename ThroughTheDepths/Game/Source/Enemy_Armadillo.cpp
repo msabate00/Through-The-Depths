@@ -60,12 +60,12 @@ bool EnemyArmadillo::Start() {
 
 	pathfinding = new PathFinding();
 	uchar* navigationMap = NULL;
-	
+
 	app->map->CreateNavigationMap(app->map->mapData.width, app->map->mapData.height, &navigationMap, app->map->navigationLayer_Floor);
 	pathfinding->SetNavigationMap((uint)app->map->mapData.width, (uint)app->map->mapData.height, navigationMap);
 
 	RELEASE_ARRAY(navigationMap);
-	
+
 
 	return true;
 }
@@ -77,13 +77,13 @@ bool EnemyArmadillo::Update(float dt)
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 
-	
 
 
 
 
 
-	origPos = app->map->WorldToMap(position.x+32, position.y);
+
+	origPos = app->map->WorldToMap(position.x + 32, position.y);
 	playerPos = app->scene->getPlayer()->position;
 	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 	targPos.x += 1;
@@ -100,7 +100,7 @@ bool EnemyArmadillo::Update(float dt)
 
 
 
-	
+
 
 	if (!cansado) {
 		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
@@ -121,7 +121,7 @@ bool EnemyArmadillo::Update(float dt)
 		}
 		else {
 			//lastPath.Clear();
-			if(onView){ lastPath.Clear(); }
+			if (onView) { lastPath.Clear(); }
 			onView = false;
 			speed = walkSpeed;
 
@@ -130,14 +130,14 @@ bool EnemyArmadillo::Update(float dt)
 					state = EntityState::IDLE;
 				}
 				else {
-					
+
 					state = EntityState::RUNNING;
 					//targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
 					//pathfinding->CreatePath(origPos, targPos);
 
 					b2Vec2 vel = b2Vec2(0, 0);
 					vel.y -= GRAVITY_Y;
-					if (isFacingLeft){
+					if (isFacingLeft) {
 						origPos.x -= 1;
 						if (pathfinding->IsWalkable(origPos)) {
 							vel.x -= speed * dt;
@@ -155,7 +155,7 @@ bool EnemyArmadillo::Update(float dt)
 							isFacingLeft = true;
 						}
 					}
-					
+
 					pbody->body->SetLinearVelocity(vel);
 				}
 			}
@@ -182,13 +182,13 @@ bool EnemyArmadillo::Update(float dt)
 		}
 
 		if (isAttacking) {
-			speed = attackSpeed*1.5;
+			speed = attackSpeed * 1.5;
 			state = EntityState::ATTACKING;
 			if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
 				cansado = true;
 				cansadoTimer.Start();
 				isAttacking = false;
-				
+
 				attackAnim.Reset();
 				attackLoopAnim.Reset();
 
@@ -215,8 +215,9 @@ bool EnemyArmadillo::Update(float dt)
 				//cansado = true;
 				//cansadoTimer.Start();
 				//isFacingLeft = false;
-				
-			}else if (nextPathTile->x < origPos.x) {
+
+			}
+			else if (nextPathTile->x < origPos.x) {
 				isFacingLeft = true;
 				vel.x -= speed * dt;
 			}
@@ -231,7 +232,7 @@ bool EnemyArmadillo::Update(float dt)
 			pbody->body->SetLinearVelocity(vel);
 		}
 
-		
+
 	}
 	else {
 
@@ -240,7 +241,7 @@ bool EnemyArmadillo::Update(float dt)
 			vel.y -= GRAVITY_Y;
 			pbody->body->SetLinearVelocity(vel);
 			state = EntityState::STOP_ATTACKING;
-		
+
 
 			if (idleAnim.HasFinished()) {
 				idleAnim.Reset();
@@ -263,27 +264,27 @@ bool EnemyArmadillo::Update(float dt)
 
 		if (dieAnim.HasFinished()) {
 			active = false;
-			
+
 		}
 
 	}
 
-	
+
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	switch (state)
 	{
-		case EntityState::IDLE:				currentAnimation = &idleAnim; break;
-		case EntityState::STOP_ATTACKING:	currentAnimation = &stopAnim; if (stopAnim.HasFinished()) { currentAnimation = &idleAnim; } break;
-		case EntityState::RUNNING:			currentAnimation = &runAnim; break;
-		case EntityState::ATTACKING:		currentAnimation = &attackAnim; if (attackAnim.HasFinished()) { currentAnimation = &attackLoopAnim; }   break;
-		case EntityState::JUMPING:			currentAnimation = &idleAnim; break;
-		case EntityState::FALLING:			currentAnimation = &idleAnim; break;
-		case EntityState::DYING:			currentAnimation = &dieAnim; break;
-		case EntityState::TRACK:			currentAnimation = &trackAnim; break;
-		default:							currentAnimation = &idleAnim; break;
+	case EntityState::IDLE:				currentAnimation = &idleAnim; break;
+	case EntityState::STOP_ATTACKING:	currentAnimation = &stopAnim; if (stopAnim.HasFinished()) { currentAnimation = &idleAnim; } break;
+	case EntityState::RUNNING:			currentAnimation = &runAnim; break;
+	case EntityState::ATTACKING:		currentAnimation = &attackAnim; if (attackAnim.HasFinished()) { currentAnimation = &attackLoopAnim; }   break;
+	case EntityState::JUMPING:			currentAnimation = &idleAnim; break;
+	case EntityState::FALLING:			currentAnimation = &idleAnim; break;
+	case EntityState::DYING:			currentAnimation = &dieAnim; break;
+	case EntityState::TRACK:			currentAnimation = &trackAnim; break;
+	default:							currentAnimation = &idleAnim; break;
 	}
 
 	currentAnimation->Update();
@@ -309,7 +310,12 @@ bool EnemyArmadillo::PostUpdate() {
 		for (uint i = 0; i < lastPath.Count(); ++i)
 		{
 			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-			app->render->DrawTexture(app->map->tilePathTexBrown, pos.x, pos.y);
+			if (isAttacking) {
+				app->render->DrawTexture(app->map->tilePathTexRed, pos.x, pos.y);
+			}
+			else {
+				app->render->DrawTexture(app->map->tilePathTexBrown, pos.x, pos.y);
+			}
 		}
 	}
 

@@ -453,7 +453,7 @@ void Player::CameraMovement(float dt)
 void Player::DebugCameraMovement(float dt)
 {
 
-	if (app->input->GetKey(SDL_SCANCODE_D) || app->input->GetKey(SDL_SCANCODE_A) || app->input->GetKey(SDL_SCANCODE_W) || app->input->GetKey(SDL_SCANCODE_S) || app->input->GetKey(SDL_SCANCODE_SPACE) || app->input->GetKey(SDL_SCANCODE_J)) {
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT) {
 		uint windowH;
 		uint windowW;
 		app->win->GetWindowSize(windowW, windowH);

@@ -57,6 +57,15 @@ bool EnemyPajaro::Start() {
 	pbody->body->SetGravityScale(0);
 
 
+	pathfinding = new PathFinding();
+	uchar* navigationMap = NULL;
+
+	app->map->CreateNavigationMap(app->map->mapData.width, app->map->mapData.height, &navigationMap, app->map->navigationLayer_Fly);
+	pathfinding->SetNavigationMap((uint)app->map->mapData.width, (uint)app->map->mapData.height, navigationMap);
+
+	RELEASE_ARRAY(navigationMap);
+
+
 	return true;
 }
 
@@ -82,8 +91,8 @@ bool EnemyPajaro::Update(float dt)
 			if (!isAttacking) {
 				targPos.y -= 3;
 			}
-			app->map->pathfindingFly->CreatePath(origPos, targPos);
-			lastPath = *app->map->pathfindingFly->GetLastPath();
+			pathfinding->CreatePath(origPos, targPos);
+			lastPath = *pathfinding->GetLastPath();
 
 			if (origPos == targPos) {
 				if (!isAttacking) {
@@ -227,7 +236,12 @@ bool EnemyPajaro::PostUpdate() {
 		for (uint i = 0; i < lastPath.Count(); ++i)
 		{
 			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-			app->render->DrawTexture(app->map->tilePathTexBrown, pos.x, pos.y);
+			if (isAttacking) {
+				app->render->DrawTexture(app->map->tilePathTexRed, pos.x, pos.y);
+			}
+			else {
+				app->render->DrawTexture(app->map->tilePathTexBrown, pos.x, pos.y);
+			}
 		}
 	}
 
