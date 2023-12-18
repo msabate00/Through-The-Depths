@@ -7,8 +7,8 @@
 	<:anonymous />
 	<map />
 	<scene>
-		<player x="5325" y="1632" sceneLevel="1" />
-		<camera x="-10185" y="-2817" />
+		<player x="5359" y="1632" sceneLevel="1" />
+		<camera x="-10298" y="-2862" />
 		<coinsPicked />
 	</scene>
 	<particles />

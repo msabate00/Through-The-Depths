@@ -90,6 +90,7 @@ bool Player::Start() {
 	saltoJugador = app->audio->LoadFx("Assets/Audio/Fx/saltoJugador.wav");
 
 	app->audio->PlayMusic("Assets/Audio/Music/musicaBosque.ogg", 1.0f);
+	app->audio->PlayMusic("Assets/Audio/Music/lluviaAmbiente.ogg", 1.0f);
 
 	uint windowH;
 	uint windowW;
