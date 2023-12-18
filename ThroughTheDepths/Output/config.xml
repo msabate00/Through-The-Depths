@@ -75,6 +75,7 @@
 		<mapfolder path="Assets/Maps/"/>
 		<mapBosque path="Assets/Maps/Bosque.tmx" level="0"/>
 		<mapPueblo path="Assets/Maps/Pueblo.tmx" level="1"/>
+		<entorno_lluvia path="Assets/Textures/Lluvia.png"/>
 	</map>
 
 	<animations>
@@ -383,7 +384,7 @@
 
 		
         <entorno>
-            <lluviaAnim loop="false" speed="0.35">
+            <lluviaAnim loop="true" speed="0.35">
                 <frame x="1" y="1" w="1360" h="720"/>
                 <frame x="721" y="1" w="1360" h="720"/>
                 <frame x="1441" y="1" w="1360" h="720"/>

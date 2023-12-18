@@ -21,6 +21,7 @@
 #include "PlantBreakable.h"
 #include "Enemy_Armadillo.h"
 #include "SaveStatue.h"
+#include "Animation.h"
 
 Map::Map() : Module(), mapLoaded(false)
 {
@@ -51,6 +52,12 @@ bool Map::Awake(pugi::xml_node& config)
     tilePathTexRedPath = config.child("tilePathTexRed").attribute("path").as_string();
     tilePathTexBrownPath = config.child("tilePathTexBrown").attribute("path").as_string();
 
+
+    rainingTextPath = config.child("entorno_lluvia").attribute("path").as_string();
+
+    
+    rainingAnim.LoadAnimation("entorno", "lluviaAnim");
+
     return ret;
 }
 
@@ -64,6 +71,8 @@ bool Map::Start()
     case 1:  mapFileName = mapFileName_Pueblo; break;
     default:  mapFileName = mapFileName_Bosque; break;
     }
+
+    rainingTex = app->tex->Load(rainingTextPath.GetString());
 
     return true;
 }
@@ -164,6 +173,12 @@ bool Map::PostUpdate()
         mapLayerItem = mapLayerItem->next;
 
     }
+
+    currentAnimation = &rainingAnim;
+    currentAnimation->Update();
+    app->render->DrawTexture(rainingTex, 0, 0, SDL_FLIP_NONE, &currentAnimation->GetCurrentFrame(), 0);
+
+
 
     return true;
 }

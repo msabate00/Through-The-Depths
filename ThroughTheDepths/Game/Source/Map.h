@@ -10,6 +10,7 @@
 
 #include "PugiXml\src\pugixml.hpp"
 #include "Pathfinding.h"
+#include "Animation.h"
 
 // Ignore Terrain Types and Tile Types for now, but we want the image!
 struct TileSet
@@ -220,6 +221,10 @@ private:
 	pugi::xml_document configFile;
 	pugi::xml_node configNode;
 
+	SString rainingTextPath;
+	SDL_Texture* rainingTex;
+	Animation* currentAnimation;
+	Animation rainingAnim;
 
 
 
