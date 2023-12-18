@@ -50,6 +50,8 @@ public:
 
 
 	bool isFacingLeft = false;
+	bool goingUp = false;
+
 	bool traspassingColision = false;
 
 
@@ -85,6 +87,8 @@ private:
 	float walkSpeed, runSpeed, attackSpeed;
 
 	Timer cansadoTimer;
+	Timer goingUpTimer;
+	int randomGoingUpTimer;
 
 	DynArray<iPoint> lastPath;
 

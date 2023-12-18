@@ -70,6 +70,8 @@ bool EnemyPajaro::Start() {
 
 	RELEASE_ARRAY(navigationMap);
 
+	randomGoingUpTimer = rand() % 500 + 250;
+
 	palomaAtaque = app->audio->LoadFx("Assets/Audio/Fx/palomaAtaque.wav");
 	muertePaloma = app->audio->LoadFx("Assets/Audio/Fx/muertePaloma.wav");
 
@@ -109,6 +111,73 @@ bool EnemyPajaro::Update(float dt)
 			}
 
 		}
+		else {
+			if (onView) { lastPath.Clear(); }
+			onView = false;
+			speed = walkSpeed;
+			
+			
+
+				state = EntityState::RUNNING;
+				//targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
+				//pathfinding->CreatePath(origPos, targPos);
+
+				b2Vec2 vel = b2Vec2(0, 0);
+				if (isFacingLeft) {
+					origPos.x -= 1;
+					if (pathfinding->IsWalkable(origPos)) {
+						vel.x -= speed * dt;
+					}
+					else {
+						isFacingLeft = false;
+					}
+				}
+				else {
+					origPos.x += 1;
+					if (pathfinding->IsWalkable(origPos)) {
+						vel.x += speed * dt;
+					}
+					else {
+						isFacingLeft = true;
+					}
+				}
+
+				if (goingUp) {
+					origPos.y -= 1;
+					if (pathfinding->IsWalkable(origPos)) {
+						vel.y -= speed * dt;
+					}
+					else {
+						goingUp = false;
+					}
+				}
+				else {
+					origPos.y += 1;
+					if (pathfinding->IsWalkable(origPos)) {
+						vel.y += speed * dt;
+					}
+					else {
+						goingUp = true;
+					}
+				}
+
+				if (goingUpTimer.ReadMSec() + randomGoingUpTimer >= 1000) {
+					goingUp = !goingUp;
+					goingUpTimer.Start();
+				}
+
+
+				pbody->body->SetLinearVelocity(vel);
+			
+
+			/*if (lastPath.Count() <= 0) {
+
+				targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y + rand() % tilesView * 2 - tilesView);
+				pathfinding->CreatePath(origPos, targPos);
+				lastPath = *pathfinding->GetLastPath();
+				LOG("Entidad: %d: C: %d ---- TP X: %d  Y: %d", this,lastPath.Count(), targPos.x, targPos.y);
+			}*/
+		}
 
 		if (!cansado) {
 
@@ -116,78 +185,79 @@ bool EnemyPajaro::Update(float dt)
 
 
 
+		if (onView) {
+			b2Vec2 vel = b2Vec2(0, 0);
 
-		b2Vec2 vel = b2Vec2(0, 0);
-
-		if (!isAttacking) {
-			if (lastPath.Count() > 0) {
-				iPoint* nextPathTile;
-				nextPathTile = lastPath.At(lastPath.Count() - 1);
+			if (!isAttacking) {
+				if (lastPath.Count() > 0) {
+					iPoint* nextPathTile;
+					nextPathTile = lastPath.At(lastPath.Count() - 1);
 
 
-				//Movimiento en x
-				if (nextPathTile->x < origPos.x) {
-					isFacingLeft = true;
-					vel.x -= speed * dt;
+					//Movimiento en x
+					if (nextPathTile->x < origPos.x) {
+						isFacingLeft = true;
+						vel.x -= speed * dt;
+					}
+					else {
+						isFacingLeft = false;
+						vel.x += speed * dt;
+					}
+
+					//Movimiento en y
+					if (nextPathTile->y < origPos.y) {
+
+						vel.y -= speed * dt;
+					}
+					else {
+						vel.y += speed * dt;
+					}
+
+					if (nextPathTile->x == origPos.x && nextPathTile->y == origPos.y) {
+						lastPath.Pop(*nextPathTile);
+					}
+
 				}
-				else {
-					isFacingLeft = false;
-					vel.x += speed * dt;
-				}
-
-				//Movimiento en y
-				if (nextPathTile->y < origPos.y) {
-
-					vel.y -= speed * dt;
-				}
-				else {
-					vel.y += speed * dt;
-				}
-
-				if (nextPathTile->x == origPos.x && nextPathTile->y == origPos.y) {
-					lastPath.Pop(*nextPathTile);
-				}
-
 			}
-		}
-		else {
-			state = EntityState::ATTACKING;
-			vel.y = -GRAVITY_Y * 2;
-			if (lastPath.Count() > 0) {
-				iPoint* nextPathTile;
-				nextPathTile = lastPath.At(lastPath.Count() - 1);
+			else {
+				state = EntityState::ATTACKING;
+				vel.y = -GRAVITY_Y * 2;
+				if (lastPath.Count() > 0) {
+					iPoint* nextPathTile;
+					nextPathTile = lastPath.At(lastPath.Count() - 1);
 
 
-				//Movimiento en x
-				if (nextPathTile->x < origPos.x) {
-					//isFacingLeft = true;
-					vel.x -= speed * dt;
-				}
-				else {
-					isFacingLeft = false;
-					vel.x += speed * dt;
-				}
+					//Movimiento en x
+					if (nextPathTile->x < origPos.x) {
+						//isFacingLeft = true;
+						vel.x -= speed * dt;
+					}
+					else {
+						isFacingLeft = false;
+						vel.x += speed * dt;
+					}
 
-				//Movimiento en y
-				if (nextPathTile->y < origPos.y) {
+					//Movimiento en y
+					if (nextPathTile->y < origPos.y) {
 
-					vel.y -= speed * dt;
-				}
-				else {
-					vel.y += speed * dt;
-				}
+						vel.y -= speed * dt;
+					}
+					else {
+						vel.y += speed * dt;
+					}
 
-				if (nextPathTile->x == origPos.x && nextPathTile->y == origPos.y) {
-					lastPath.Pop(*nextPathTile);
+					if (nextPathTile->x == origPos.x && nextPathTile->y == origPos.y) {
+						lastPath.Pop(*nextPathTile);
+					}
+					if (lastPosY == position.y) {
+						isAttacking = false;
+					}
+					app->audio->PlayFx(palomaAtaque);
 				}
-				if (lastPosY == position.y) {
-					isAttacking = false;
-				}
-				app->audio->PlayFx(palomaAtaque);
 			}
-		}
 
-		pbody->body->SetLinearVelocity(vel);
+			pbody->body->SetLinearVelocity(vel);
+		}
 	}
 
 	if (isDying) {
