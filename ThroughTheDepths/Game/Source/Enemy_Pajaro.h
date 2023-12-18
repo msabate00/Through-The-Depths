@@ -68,6 +68,7 @@ private:
 
 
 	Animation runAnim;
+	Animation flyAnim;
 	Animation walkAnim;
 	Animation idleAnim;
 	Animation jumpUpAnim;

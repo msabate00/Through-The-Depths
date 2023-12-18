@@ -25,8 +25,7 @@ bool EnemyPajaro::Awake() {
 	runAnim.LoadAnimation(name.GetString(), "idleAnim");
 	attackAnim.LoadAnimation(name.GetString(), "attackAnim");
 	dieAnim.LoadAnimation(name.GetString(), "dieAnim");
-
-
+	flyAnim.LoadAnimation(name.GetString(), "flyAnim");
 
 	state = EntityState::IDLE;
 	goToPath = false;
@@ -96,6 +95,7 @@ bool EnemyPajaro::Update(float dt)
 		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
 			onView = true;
 			state = EntityState::RUNNING;
+			
 			speed = runSpeed;
 			if (!isAttacking) {
 				targPos.y -= 3;
@@ -281,7 +281,7 @@ bool EnemyPajaro::Update(float dt)
 	{
 		case EntityState::IDLE:				currentAnimation = &runAnim; break;
 			//case EntityState::STOP_ATTACKING:	currentAnimation = &stopAnim; if (stopAnim.HasFinished()) { currentAnimation = &idleAnim; } break;
-		case EntityState::RUNNING:			currentAnimation = &runAnim; break;
+		case EntityState::RUNNING:			currentAnimation = &flyAnim; break;
 		case EntityState::ATTACKING:		currentAnimation = &attackAnim;break;
 		case EntityState::JUMPING:			currentAnimation = &runAnim; break;
 		case EntityState::FALLING:			currentAnimation = &runAnim; break;

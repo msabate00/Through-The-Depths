@@ -90,7 +90,7 @@ bool SaveStatue::Start() {
 bool SaveStatue::Update(float dt)
 {
 	currentAnimation = &idleAnim;
-	if (saved) {
+	if (saved && currentAnimation != &savedAnim) {
 		currentAnimation = &savedAnim;
 	}
 
