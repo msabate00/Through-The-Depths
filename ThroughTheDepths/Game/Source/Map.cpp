@@ -174,10 +174,11 @@ bool Map::PostUpdate()
 
     }
 
-    currentAnimation = &rainingAnim;
-    currentAnimation->Update();
-    app->render->DrawTexture(rainingTex, 0, 0, SDL_FLIP_NONE, &currentAnimation->GetCurrentFrame(), 0);
-
+    if (app->sceneLevel == 0) {
+        currentAnimation = &rainingAnim;
+        currentAnimation->Update();
+        app->render->DrawTexture(rainingTex, 0, 0, SDL_FLIP_NONE, &currentAnimation->GetCurrentFrame(), 0);
+    }
 
 
     return true;
