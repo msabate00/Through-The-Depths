@@ -100,7 +100,7 @@ private:
 	int yCameraOffset = 0;
 
 	
-
+	Animation lluviaAnim;
 	Animation runAnim;
 	Animation walkAnim;
 	Animation idleAnim;

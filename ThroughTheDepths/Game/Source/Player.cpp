@@ -20,7 +20,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	name.Create("player");
 
 
-
+	lluviaAnim.LoadAnimation(name.GetString(), "lluviaAnim");
 	runAnim.LoadAnimation(name.GetString(), "runAnim");
 	idleAnim.LoadAnimation(name.GetString(), "idleAnim");
 	walkAnim.LoadAnimation(name.GetString(), "walkAnim");
@@ -105,6 +105,7 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	currentAnimation = &lluviaAnim;
 
 	AudioController();
 
@@ -565,6 +566,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::SPYKES:
 			if (!app->godMode) {
 				isDying = true;
+				app->audio->PlayFx(caidaMuerte);
 			}
 			break;
 

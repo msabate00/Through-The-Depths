@@ -1,4 +1,5 @@
 #include "EntityManager.h"
+#include "EntityManager.h"
 #include "Player.h"
 #include "Chest.h"
 #include "Coin.h"

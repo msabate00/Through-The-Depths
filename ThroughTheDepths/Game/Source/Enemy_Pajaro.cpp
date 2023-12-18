@@ -73,7 +73,7 @@ bool EnemyPajaro::Start() {
 
 	palomaAtaque = app->audio->LoadFx("Assets/Audio/Fx/palomaAtaque.wav");
 	muertePaloma = app->audio->LoadFx("Assets/Audio/Fx/muertePaloma.wav");
-
+	volarPaloma = app->audio->LoadFx("Assets/Audio/Fx/volarPaloma.wav");
 	return true;
 }
 
@@ -90,7 +90,7 @@ bool EnemyPajaro::Update(float dt)
 
 	if (!isDying) {
 
-
+		app->audio->PlayFx(volarPaloma);
 
 		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
 			onView = true;
@@ -271,7 +271,7 @@ bool EnemyPajaro::Update(float dt)
 			active = false;
 
 		}
-		app->audio->PlayFx(muertePaloma);
+		
 	}
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
@@ -286,7 +286,7 @@ bool EnemyPajaro::Update(float dt)
 		case EntityState::JUMPING:			currentAnimation = &runAnim; break;
 		case EntityState::FALLING:			currentAnimation = &runAnim; break;
 		case EntityState::DYING:			currentAnimation = &dieAnim; break;
-			//case EntityState::TRACK:			currentAnimation = &trackAnim; break;
+			//case EntityState::TRACK:		currentAnimation = &trackAnim; break;
 		default:							currentAnimation = &runAnim; break;
 	}
 
@@ -340,6 +340,7 @@ void EnemyPajaro::OnCollision(PhysBody* physA, PhysBody* physB)
 {
 	if (physB->ctype == ColliderType::PLAYER_PROYECTILE) {
 		isDying = true;
+		app->audio->PlayFx(muertePaloma);
 	}
 }
 

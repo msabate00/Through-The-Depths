@@ -59,7 +59,7 @@ public:
 
 	int palomaAtaque;
 	int muertePaloma;
-
+	int volarPaloma;
 private:
 
 	b2Transform startTransform;
