@@ -90,7 +90,7 @@ bool Player::Start() {
 	saltoJugador = app->audio->LoadFx("Assets/Audio/Fx/saltoJugador.wav");
 
 	app->audio->PlayMusic("Assets/Audio/Music/musicaBosque.ogg", 1.0f);
-	app->audio->PlayMusic("Assets/Audio/Music/lluviaAmbiente.ogg", 1.0f);
+	//app->audio->PlayMusic("Assets/Audio/Music/lluviaAmbiente.ogg", 1.0f);
 
 	uint windowH;
 	uint windowW;
@@ -566,8 +566,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::DIE_HOLE:
 		case ColliderType::SPYKES:
 			if (!app->godMode) {
+
+				if (isDying == false)
+				{
+					app->audio->PlayFx(caidaMuerte);
+				}
 				isDying = true;
-				app->audio->PlayFx(caidaMuerte);
 			}
 			break;
 

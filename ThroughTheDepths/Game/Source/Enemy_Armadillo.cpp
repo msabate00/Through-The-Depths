@@ -73,6 +73,8 @@ bool EnemyArmadillo::Start() {
 	RELEASE_ARRAY(navigationMap);
 
 	ataqueArmadillo = app->audio->LoadFx("Assets/Audio/Fx/armadilloAtaque.wav");
+	muerteArmadillo = app->audio->LoadFx("Assets/Audio/Fx/muerteArmadillo.wav");
+	caminarArmadillo = app->audio->LoadFx("Assets/Audio/Fx/caminarArmadillo.wav");
 
 	return true;
 }
@@ -219,6 +221,13 @@ bool EnemyArmadillo::Update(float dt)
 			iPoint* nextPathTile;
 			nextPathTile = lastPath.At(lastPath.Count() - 1);
 			//LOG("LAST PATH X: %d  ENEMY X: %d", nextPathTile->x, origPos.x);
+
+			if (!isAttacking)
+			{
+				app->audio->PlayFx(caminarArmadillo);
+			}
+			
+
 			if (nextPathTile->x == origPos.x) {
 				//cansado = true;
 				//cansadoTimer.Start();
@@ -264,6 +273,7 @@ bool EnemyArmadillo::Update(float dt)
 	}
 
 	if (isDying) {
+		app->audio->PlayFx(muerteArmadillo);
 		pbody->body->SetActive(false);
 		b2Vec2 vel = b2Vec2(0, 0);
 		vel.y -= GRAVITY_Y;

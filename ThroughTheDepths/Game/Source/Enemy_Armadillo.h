@@ -41,7 +41,8 @@ public:
 	PhysBody* pbody;
 
 	int ataqueArmadillo;
-
+	int muerteArmadillo;
+	int caminarArmadillo;
 
 	/*NEW JUMPING SYSTEM*/
 	float jumpForce = 4.5f;

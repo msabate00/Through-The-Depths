@@ -55,7 +55,7 @@ bool EnemyPajaro::Start() {
 	pbody->listener = this;
 	pbody->body->SetGravityScale(0);
 	//Atravesar enemigos
-	b2Filter enemyFilter;
+		b2Filter enemyFilter;
 	enemyFilter.categoryBits = static_cast<uint16_t>(ColliderType::PLATFORM);
 	enemyFilter.maskBits = 0xFFFF & ~static_cast<uint16_t>(ColliderType::PLATFORM);
 	pbody->body->GetFixtureList()->SetFilterData(enemyFilter);
@@ -82,7 +82,6 @@ bool EnemyPajaro::Update(float dt)
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
 
 	origPos = app->map->WorldToMap(position.x + 32, position.y);
 	playerPos = app->scene->getPlayer()->position;
