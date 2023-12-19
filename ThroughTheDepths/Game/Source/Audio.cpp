@@ -171,16 +171,23 @@ bool Audio::PlayFx(unsigned int id, int channel, int repeat)
 {
 	bool ret = false;
 
-	if (!active)
+	if (!IsEnabled())
 		return false;
 
 	if (id > 0 && id <= fx.Count())
 	{
 		Mix_PlayChannel(channel, fx[id - 1], repeat);
 	}
+	
 
 	Mix_Volume(channel, sfvVolumne);
 
 
 	return ret;
+}
+
+bool Audio::StopFx(int channel)
+{
+	Mix_HaltChannel(channel);
+	return false;
 }

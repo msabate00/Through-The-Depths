@@ -108,6 +108,8 @@ public:
 	EntityState state;
 	bool active = true;
 	pugi::xml_node parameters; 
+	int id;
+	
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...

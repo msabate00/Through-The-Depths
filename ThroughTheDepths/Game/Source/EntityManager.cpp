@@ -19,6 +19,7 @@
 EntityManager::EntityManager() : Module()
 {
 	name.Create("entitymanager");
+	current_id = 0;
 }
 
 // Destructor
@@ -115,13 +116,17 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::ENEMY_ARMADILLO:
 		entity = new EnemyArmadillo();
+		enemies.Add(entity);
 		break;
 	case EntityType::ENEMY_PAJARO:
 		entity = new EnemyPajaro();
+		enemies.Add(entity);
 		break;
 	default:
 		break;
 	}
+
+	entity->id = current_id++;
 
 	entities.Add(entity);
 	entity->Awake();
@@ -159,20 +164,26 @@ void EntityManager::DestroyAllCoinsToDestroy()
 	{
 		ListItem<iPoint>* destoyCoin;
 		for (destoyCoin = coins_to_destroyPos.start; destoyCoin != NULL; destoyCoin = destoyCoin->next) {
-
-
 			if(app->map->WorldToMap(destoyCoin->data.x, destoyCoin->data.y) == app->map->WorldToMap(item->data->position.x, item->data->position.y)) {
-
-			
 				item->data->active = false;
-				/*entities.Del(item);
-				coins.Del(item);
-				coins_to_destroyPos.Del(destoyCoin);*/
 			}
 		}
-		
 	}
 
+}
+
+void EntityManager::DestroyAllEnemiesToDestroy()
+{
+	ListItem<Entity*>* item;
+	for (item = enemies.start; item != NULL; item = item->next)
+	{
+		ListItem<iPoint>* destroyEnemy;
+		for (destroyEnemy = enemies_to_destroyPos.start; destroyEnemy != NULL; destroyEnemy = destroyEnemy->next) {
+			if (iPoint(destroyEnemy->data.x, destroyEnemy->data.y) == app->map->WorldToMap(item->data->position.x, item->data->position.y)) {
+				item->data->active = false;
+			}
+		}
+	}
 }
 
 void EntityManager::AddEntity(Entity* entity)

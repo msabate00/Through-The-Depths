@@ -97,7 +97,7 @@ bool EnemyPajaro::Update(float dt)
 			
 			speed = runSpeed;
 			if (!isAttacking) {
-				app->audio->PlayFx(volarPaloma);
+				app->audio->PlayFx(volarPaloma, id);
 				targPos.y -= 3;
 			}
 			pathfinding->CreatePath(origPos, targPos);

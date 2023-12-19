@@ -82,6 +82,18 @@ bool EnemyArmadillo::Start() {
 bool EnemyArmadillo::Update(float dt)
 {
 
+
+	if (!active) {
+		if (pbody->body != nullptr) {
+			pbody->body->GetWorld()->DestroyBody(pbody->body);
+			pbody->body = nullptr;
+			pbody->body->SetActive(false);
+		}
+		
+		return true;
+	}
+
+
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
@@ -193,7 +205,7 @@ bool EnemyArmadillo::Update(float dt)
 		if (isAttacking) {
 			speed = attackSpeed * 1.5;
 			state = EntityState::ATTACKING;
-			app->audio->PlayFx(ataqueArmadillo);
+			app->audio->PlayFx(ataqueArmadillo, id);
 			if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
 				cansado = true;
 				cansadoTimer.Start();
@@ -224,7 +236,7 @@ bool EnemyArmadillo::Update(float dt)
 
 			if (!isAttacking)
 			{
-				app->audio->PlayFx(caminarArmadillo);
+				app->audio->PlayFx(caminarArmadillo, id);
 			}
 			
 
@@ -273,7 +285,7 @@ bool EnemyArmadillo::Update(float dt)
 	}
 
 	if (isDying) {
-		app->audio->PlayFx(muerteArmadillo);
+		
 		pbody->body->SetActive(false);
 		b2Vec2 vel = b2Vec2(0, 0);
 		vel.y -= GRAVITY_Y;
@@ -354,6 +366,10 @@ bool EnemyArmadillo::CleanUp()
 void EnemyArmadillo::OnCollision(PhysBody* physA, PhysBody* physB)
 {
 	if (physB->ctype == ColliderType::PLAYER_PROYECTILE) {
+		if (!isDying) {
+			app->audio->StopFx(id);
+			app->audio->PlayFx(muerteArmadillo, id);
+		}
 		isDying = true;
 	}
 }
