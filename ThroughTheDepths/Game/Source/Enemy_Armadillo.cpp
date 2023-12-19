@@ -84,12 +84,12 @@ bool EnemyArmadillo::Update(float dt)
 
 
 	if (!active) {
-		if (pbody->body != nullptr) {
+		/*if (pbody->body != nullptr) {
 			pbody->body->GetWorld()->DestroyBody(pbody->body);
 			pbody->body = nullptr;
 			pbody->body->SetActive(false);
-		}
-		
+		}*/
+		pbody->body->SetActive(false);
 		return true;
 	}
 

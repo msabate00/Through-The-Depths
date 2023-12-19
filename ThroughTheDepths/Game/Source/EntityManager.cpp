@@ -181,6 +181,7 @@ void EntityManager::DestroyAllEnemiesToDestroy()
 		for (destroyEnemy = enemies_to_destroyPos.start; destroyEnemy != NULL; destroyEnemy = destroyEnemy->next) {
 			if (iPoint(destroyEnemy->data.x, destroyEnemy->data.y) == app->map->WorldToMap(item->data->position.x, item->data->position.y)) {
 				item->data->active = false;
+				
 			}
 		}
 	}
@@ -201,7 +202,12 @@ bool EntityManager::Update(float dt)
 	{
 		pEntity = item->data;
 
-		if (pEntity->active == false) continue;
+		if (pEntity->active == false) { 
+			
+			
+			item->data->Update(dt);
+			continue;
+		};
 		ret = item->data->Update(dt);
 	}
 
