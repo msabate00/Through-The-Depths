@@ -89,7 +89,7 @@ bool EnemyPajaro::Update(float dt)
 
 	if (!isDying) {
 
-		app->audio->PlayFx(volarPaloma);
+		
 
 		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
 			onView = true;
@@ -97,6 +97,7 @@ bool EnemyPajaro::Update(float dt)
 			
 			speed = runSpeed;
 			if (!isAttacking) {
+				app->audio->PlayFx(volarPaloma);
 				targPos.y -= 3;
 			}
 			pathfinding->CreatePath(origPos, targPos);

@@ -7,10 +7,10 @@
 	<:anonymous />
 	<map />
 	<scene>
-		<player x="81" y="1600" sceneLevel="0" />
-		<camera x="-67" y="-2826" />
+		<player x="3566" y="1600" sceneLevel="0" />
+		<camera x="-6675" y="-2817" />
 		<coinsPicked>
-			<coin x="880" y="1536" active="true" />
+			<coin x="880" y="1536" active="false" />
 			<coin x="1744" y="1472" active="true" />
 			<coin x="6192" y="1792" active="true" />
 			<coin x="6224" y="1792" active="true" />
