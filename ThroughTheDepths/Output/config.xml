@@ -30,8 +30,30 @@
 	<scene>
 		
 		<player texturepath="Assets/Textures/Player_Standar.png" speed="0.34" jumpForce="4.5" invulnerableTime="1.0">
-			<coinAudio path="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
-			
+			<ataqueArmadillo path="Assets/Audio/Fx/armadilloAtaque.wav"/>
+			<muerteArmadillo path="Assets/Audio/Fx/muerteArmadillo.wav"/>
+			<caminarArmadillo path="Assets/Audio/Fx/caminarArmadillo.wav"/>
+
+			<palomaAtaque path="Assets/Audio/Fx/palomaAtaque.wav"/>
+			<muertePaloma path="Assets/Audio/Fx/muertePaloma.wav"/>
+			<volarPaloma path="Assets/Audio/Fx/volarPaloma.wav"/>
+
+			<pasoCesped1 path="Assets/Audio/Fx/pasoCesped1.wav"/>
+			<pasoCesped2 path="Assets/Audio/Fx/pasoCesped2.wav"/>
+			<pasoCesped3 path="Assets/Audio/Fx/pasoCesped3.wav"/>
+			<pasoCesped4 path="Assets/Audio/Fx/pasoCesped4.wav"/>
+			<pasoCesped5 path="Assets/Audio/Fx/pasoCesped5.wav"/>
+			<pasoCesped6 path="Assets/Audio/Fx/pasoCesped6.wav"/>
+			<pasoCesped7 path="Assets/Audio/Fx/pasoCesped7.wav"/>
+
+			<pasoMetal path="Assets/Audio/Fx/pasoMetal.wav"/>
+			<pasoRoca path="Assets/Audio/Fx/pasoRoca.wav"/>
+			<caidaMuerte path="Assets/Audio/Fx/caidaMuerte.wav"/>
+			<recibirAtaque path="Assets/Audio/Fx/recibirAtaque.wav"/>
+			<ataqueEspada path="Assets/Audio/Fx/ataqueEspada.wav"/>
+			<saltoJugador path="Assets/Audio/Fx/saltoJugador.wav"/>
+
+			<musicaBosque path="Assets/Audio/Music/musicaBosque.ogg"/>
 		</player>
 
 
