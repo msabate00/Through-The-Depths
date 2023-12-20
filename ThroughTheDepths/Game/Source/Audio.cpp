@@ -191,3 +191,29 @@ bool Audio::StopFx(int channel)
 	Mix_HaltChannel(channel);
 	return false;
 }
+
+unsigned int Audio::LoadAudioFX(const char* name)
+{
+	pugi::xml_document configFile;
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	pugi::xml_node audioNode;
+	audioNode = configFile.child("config").child("sounds").child("fx").child(name);
+
+
+	return LoadFx(audioNode.attribute("path").as_string());
+
+	
+}
+
+bool Audio::LoadAudioMusic(const char* name, float fadeTime)
+{
+	pugi::xml_document configFile;
+	pugi::xml_parse_result parseResult = configFile.load_file("config.xml");
+	pugi::xml_node audioNode;
+	audioNode = configFile.child("config").child("sounds").child("music").child(name);
+
+
+	return PlayMusic(audioNode.attribute("path").as_string(), fadeTime);
+
+	
+}

@@ -33,6 +33,9 @@ public:
 	bool PlayFx(unsigned int fx, int channel = -1, int repeat = 0);
 	bool StopFx(int channel);
 
+	unsigned int LoadAudioFX(const char* name);
+	bool LoadAudioMusic(const char* name, float fadeTime = 2.0f);
+
 private:
 
 	_Mix_Music* music;
