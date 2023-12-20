@@ -41,6 +41,7 @@ enum class ColliderType {
 	DIE_HOLE,
 	ENEMY,
 	SAVE_STATUE,
+	VICTORY_COLLISION,
 	UNKNOWN
 	// ..
 };

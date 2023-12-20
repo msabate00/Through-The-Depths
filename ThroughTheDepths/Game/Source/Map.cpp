@@ -729,6 +729,16 @@ bool Map::LoadCollisions(std::string layerName) {
                         ret = true;
                     }
 
+
+                    //sONIDO DE VICTORIA AL FINAL
+                    if (gid == tileset->firstgid + 10) {
+                        c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        c1->ctype = ColliderType::VICTORY_COLLISION;
+                        collisionsList.Add(c1);
+                        ret = true;
+                    }
+
+
                     //Fuera del mapa
                     if (gid == tileset->firstgid + 15) {
                         c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);

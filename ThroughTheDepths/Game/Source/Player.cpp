@@ -72,23 +72,6 @@ bool Player::Start() {
 
 	pickCoinFxId = app->audio->LoadFx(parameters.child("coinAudio").attribute("path").as_string());
 
-
-
-	/*pasoCesped1 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped1.wav");
-	pasoCesped2 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped2.wav");
-	pasoCesped3 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped3.wav");
-	pasoCesped4 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped4.wav");
-	pasoCesped5 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped5.wav");
-	pasoCesped6 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped6.wav");
-	pasoCesped7 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped7.wav");
-
-	pasoMetal = app->audio->LoadFx("Assets/Audio/Fx/pasoMetal.wav");
-	pasoRoca = app->audio->LoadFx("Assets/Audio/Fx/pasoRoca.wav");
-	caidaMuerte = app->audio->LoadFx("Assets/Audio/Fx/caidaMuerte.wav");
-	recibirAtaque = app->audio->LoadFx("Assets/Audio/Fx/recibirAtaque.wav");
-	ataqueEspada = app->audio->LoadFx("Assets/Audio/Fx/ataqueEspada.wav");
-	saltoJugador = app->audio->LoadFx("Assets/Audio/Fx/saltoJugador.wav");*/
-	
 	pasoCesped1 = app->audio->LoadAudioFX("audioPasoCesped1");
 	pasoCesped2 = app->audio->LoadAudioFX("audioPasoCesped2");
 	pasoCesped3 = app->audio->LoadAudioFX("audioPasoCesped3");
@@ -104,8 +87,14 @@ bool Player::Start() {
 	ataqueEspada = app->audio->LoadAudioFX("audioAtaqueEspada");
 	saltoJugador = app->audio->LoadAudioFX("audioSaltoJugador");
 	monedaSonido = app->audio->LoadAudioFX("monedaSonido");
+
+	sonidoDeVictoria = app->audio->LoadAudioFX("victoriaSonido");
+
+
 	app->audio->LoadAudioMusic("audioMusicaBosque", 1.0f);
-	//app->audio->PlayMusic("Assets/Audio/Music/lluviaAmbiente.ogg", 1.0f);
+	
+
+
 
 	uint windowH;
 	uint windowW;
@@ -543,6 +532,7 @@ void Player::AudioController()
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	SaveStatue* statue;
+	PhysBody* enemyBody;
 
 	if (physA->ctype == ColliderType::PLAYER_FOOT) {
 		numFootContacts++;
@@ -609,7 +599,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 
 		case ColliderType::ENEMY:
-			PhysBody* enemyBody = (PhysBody*)physB->body->GetUserData();
+			enemyBody = (PhysBody*)physB->body->GetUserData();
 			if (enemyBody->listener->state == EntityState::ATTACKING) {
 				LOG("DETECTA COLISION AU");
 				
@@ -624,7 +614,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 			}
 			break;
+
+
+		case ColliderType::VICTORY_COLLISION:
+			app->audio->PlayFx(sonidoDeVictoria);
+			break;
 		}
+		
 	}
 
 

@@ -72,6 +72,8 @@ public:
 	int saltoJugador;
 	int monedaSonido;
 
+	int sonidoDeVictoria;
+
 	/*int musicaBosque;*/
 
 	Timer pasosTimer;
