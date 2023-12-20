@@ -71,14 +71,24 @@ bool EnemyPajaro::Start() {
 
 	randomGoingUpTimer = rand() % 500 + 250;
 
-	palomaAtaque = app->audio->LoadFx("Assets/Audio/Fx/palomaAtaque.wav");
-	muertePaloma = app->audio->LoadFx("Assets/Audio/Fx/muertePaloma.wav");
-	volarPaloma = app->audio->LoadFx("Assets/Audio/Fx/volarPaloma.wav");
+	palomaAtaque = app->audio->LoadAudioFX("audioPalomaAtaque");
+	muertePaloma = app->audio->LoadAudioFX("audioMuertePaloma");
+	volarPaloma = app->audio->LoadAudioFX("audioVolarPaloma");
 	return true;
 }
 
 bool EnemyPajaro::Update(float dt)
 {
+
+	if (!active) {
+		/*if (pbody->body != nullptr) {
+			pbody->body->GetWorld()->DestroyBody(pbody->body);
+			pbody->body = nullptr;
+			pbody->body->SetActive(false);
+		}*/
+		pbody->body->SetActive(false);
+		return true;
+	}
 
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;

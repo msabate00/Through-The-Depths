@@ -72,9 +72,9 @@ bool EnemyArmadillo::Start() {
 
 	RELEASE_ARRAY(navigationMap);
 
-	ataqueArmadillo = app->audio->LoadFx("Assets/Audio/Fx/armadilloAtaque.wav");
-	muerteArmadillo = app->audio->LoadFx("Assets/Audio/Fx/muerteArmadillo.wav");
-	caminarArmadillo = app->audio->LoadFx("Assets/Audio/Fx/caminarArmadillo.wav");
+	ataqueArmadillo = app->audio->LoadAudioFX("audioAtaqueArmadillo");
+	muerteArmadillo = app->audio->LoadAudioFX("audioMuerteArmadillo");
+	caminarArmadillo = app->audio->LoadAudioFX("audioCaminarArmadillo");
 
 	return true;
 }
