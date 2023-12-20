@@ -74,7 +74,7 @@ bool Player::Start() {
 
 
 
-	pasoCesped1 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped1.wav");
+	/*pasoCesped1 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped1.wav");
 	pasoCesped2 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped2.wav");
 	pasoCesped3 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped3.wav");
 	pasoCesped4 = app->audio->LoadFx("Assets/Audio/Fx/pasoCesped4.wav");
@@ -87,9 +87,24 @@ bool Player::Start() {
 	caidaMuerte = app->audio->LoadFx("Assets/Audio/Fx/caidaMuerte.wav");
 	recibirAtaque = app->audio->LoadFx("Assets/Audio/Fx/recibirAtaque.wav");
 	ataqueEspada = app->audio->LoadFx("Assets/Audio/Fx/ataqueEspada.wav");
-	saltoJugador = app->audio->LoadFx("Assets/Audio/Fx/saltoJugador.wav");
+	saltoJugador = app->audio->LoadFx("Assets/Audio/Fx/saltoJugador.wav");*/
+	
+	pasoCesped1 = app->audio->LoadAudioFX("audioPasoCesped1");
+	pasoCesped2 = app->audio->LoadAudioFX("audioPasoCesped2");
+	pasoCesped3 = app->audio->LoadAudioFX("audioPasoCesped3");
+	pasoCesped4 = app->audio->LoadAudioFX("audioPasoCesped4");
+	pasoCesped5 = app->audio->LoadAudioFX("audioPasoCesped5");
+	pasoCesped6 = app->audio->LoadAudioFX("audioPasoCesped6");
+	pasoCesped7 = app->audio->LoadAudioFX("audioPasoCesped7");
 
-	app->audio->PlayMusic("Assets/Audio/Music/musicaBosque.ogg", 1.0f);
+	pasoMetal = app->audio->LoadAudioFX("audioPasoMetal");
+	pasoRoca = app->audio->LoadAudioFX("audioPasoRoca");
+	caidaMuerte = app->audio->LoadAudioFX("audioCaidaMuerte");
+	recibirAtaque = app->audio->LoadAudioFX("audioRecibirAtaque");
+	ataqueEspada = app->audio->LoadAudioFX("audioAtaqueEspada");
+	saltoJugador = app->audio->LoadAudioFX("audioSaltoJugador");
+
+	app->audio->LoadAudioMusic("audioMusicaBosque", 1.0f);
 	//app->audio->PlayMusic("Assets/Audio/Music/lluviaAmbiente.ogg", 1.0f);
 
 	uint windowH;
