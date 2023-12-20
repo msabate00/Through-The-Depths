@@ -29,8 +29,13 @@ In this first release we can simply move around the map and move forward being c
 
 ### Debug Controls
 
- - F1 - Go to level1
+ - F1 - Go to level 1
+ - F2 - Go to level 2
  - F3 - Reset level
+
+ - F5 - Save game
+ - F6 - Load Game
+
  - F9 - Show/hide Collisions and other metas
  - F10 - Toggle godmode
  - F11 - Change frames cap
