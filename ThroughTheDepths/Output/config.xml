@@ -55,6 +55,7 @@
 			<audioSaltoJugador path="Assets/Audio/Fx/saltoJugador.wav"/>
 
 			<monedaSonido  path="Assets/Audio/Fx/monedaSonido.wav"/>
+			<victoriaSonido  path="Assets/Audio/Fx/victoriaSonido.wav"/>
 		</fx>
 		
 	</sounds>
