@@ -103,7 +103,7 @@ bool Player::Start() {
 	recibirAtaque = app->audio->LoadAudioFX("audioRecibirAtaque");
 	ataqueEspada = app->audio->LoadAudioFX("audioAtaqueEspada");
 	saltoJugador = app->audio->LoadAudioFX("audioSaltoJugador");
-
+	monedaSonido = app->audio->LoadAudioFX("monedaSonido");
 	app->audio->LoadAudioMusic("audioMusicaBosque", 1.0f);
 	//app->audio->PlayMusic("Assets/Audio/Music/lluviaAmbiente.ogg", 1.0f);
 
@@ -570,7 +570,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 
 		case ColliderType::COIN:
-			app->audio->PlayFx(pickCoinFxId);
+			app->audio->PlayFx(monedaSonido);
 			physB->listener->active = false;
 			app->entityManager->DestroyEntity(physB->listener);
 			physB->body->SetActive(false);

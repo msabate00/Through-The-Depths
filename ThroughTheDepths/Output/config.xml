@@ -53,6 +53,8 @@
 			<audioRecibirAtaque path="Assets/Audio/Fx/recibirAtaque.wav"/>
 			<audioAtaqueEspada path="Assets/Audio/Fx/ataqueEspada.wav"/>
 			<audioSaltoJugador path="Assets/Audio/Fx/saltoJugador.wav"/>
+
+			<monedaSonido  path="Assets/Audio/Fx/monedaSonido.wav"/>
 		</fx>
 		
 	</sounds>
