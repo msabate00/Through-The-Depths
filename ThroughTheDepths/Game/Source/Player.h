@@ -70,6 +70,7 @@ public:
 	int recibirAtaque;
 	int ataqueEspada;
 	int saltoJugador;
+	int monedaSonido;
 
 	/*int musicaBosque;*/
 
