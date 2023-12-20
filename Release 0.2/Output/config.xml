@@ -1,0 +1,435 @@
+<config>
+	<app>
+		<title>Game Development Testbed</title>
+		<organization>CITM</organization>
+	</app>
+
+	<renderer>
+		<vsync value="true"/>
+	</renderer>
+
+	<window>
+		<resolution width="1024" height="768" scale="2"/>
+		<fullscreen value="false"/>
+		<borderless value="false"/>
+		<resizable value="false"/>
+		<fullscreen_window value="false"/>
+	</window>
+
+	<particles>
+		<mainParticleTexture texturepath="Assets/Textures/SwordParticles.png"/>
+	</particles>
+
+
+
+	<audio>
+		<music volume="40"/>
+		<fx volume="12"/>
+	</audio>
+	<sounds>
+		<music>
+			<audioMusicaBosque path="Assets/Audio/Music/musicaBosque.ogg"/>
+		</music>
+		<fx>
+			<audioAtaqueArmadillo path="Assets/Audio/Fx/armadilloAtaque.wav"/>
+			<audioMuerteArmadillo path="Assets/Audio/Fx/muerteArmadillo.wav"/>
+			<audioCaminarArmadillo path="Assets/Audio/Fx/caminarArmadillo.wav"/>
+
+			<audioPalomaAtaque path="Assets/Audio/Fx/palomaAtaque.wav"/>
+			<audioMuertePaloma path="Assets/Audio/Fx/muertePaloma.wav"/>
+			<audioVolarPaloma path="Assets/Audio/Fx/volarPaloma.wav"/>
+
+			<audioPasoCesped1 path="Assets/Audio/Fx/pasoCesped1.wav"/>
+			<audioPasoCesped2 path="Assets/Audio/Fx/pasoCesped2.wav"/>
+			<audioPasoCesped3 path="Assets/Audio/Fx/pasoCesped3.wav"/>
+			<audioPasoCesped4 path="Assets/Audio/Fx/pasoCesped4.wav"/>
+			<audioPasoCesped5 path="Assets/Audio/Fx/pasoCesped5.wav"/>
+			<audioPasoCesped6 path="Assets/Audio/Fx/pasoCesped6.wav"/>
+			<audioPasoCesped7 path="Assets/Audio/Fx/pasoCesped7.wav"/>
+
+			<audioPasoMetal path="Assets/Audio/Fx/pasoMetal.wav"/>
+			<audioPasoRoca path="Assets/Audio/Fx/pasoRoca.wav"/>
+			<audioCaidaMuerte path="Assets/Audio/Fx/caidaMuerte.wav"/>
+			<audioRecibirAtaque path="Assets/Audio/Fx/recibirAtaque.wav"/>
+			<audioAtaqueEspada path="Assets/Audio/Fx/ataqueEspada.wav"/>
+			<audioSaltoJugador path="Assets/Audio/Fx/saltoJugador.wav"/>
+
+			<monedaSonido  path="Assets/Audio/Fx/monedaSonido.wav"/>
+			<victoriaSonido  path="Assets/Audio/Fx/victoriaSonido.wav"/>
+		</fx>
+		
+	</sounds>
+
+	<scene>
+
+		
+		<player texturepath="Assets/Textures/Player_Standar.png" speed="0.34" jumpForce="4.5" invulnerableTime="1.0">
+			
+
+			
+		</player>
+
+
+
+		<textures>
+			<chest texturepath="Assets/Maps/tilesets/Animations.png"/>
+			<coin texturepath="Assets/Maps/tilesets/Animations.png"/>
+			<plant_breakable texturepath="Assets/Maps/tilesets/Animations.png"/>
+			<plant_barrier texturepath="Assets/Maps/tilesets/Animations.png"/>
+
+
+			<fondo0Bosque texturepath="Assets/Maps/tilesets/Fondo0.png"/>
+			<fondo1Bosque texturepath="Assets/Maps/tilesets/background_1_32x32.png"/>
+			<fondo2Bosque texturepath="Assets/Maps/tilesets/background_2_32x32.png"/>
+
+			<fondo0Pueblo texturepath="Assets/Maps/tilesets2/bg0.png"/>
+			<fondo1Pueblo texturepath="Assets/Maps/tilesets2/bg1.png"/>
+			
+            
+            <saveStatue texturepath="Assets/Maps/tilesets/Animations.png"/>
+		</textures>
+		
+		
+		
+		
+		
+        
+		<!-- ENEMIES -->
+		<enemyArmadillo texturepath="Assets/Textures/Armadillo.png" walkSpeed="0.02" runSpeed="0.08" attackSpeed="0.16" tilesView="7" tilesAttack="3" attackTimerMax="5.5"/>
+        <enemyPajaro texturepath="Assets/Textures/Paloma.png" walkSpeed="0.02" runSpeed="0.08" attackSpeed="0.16" tilesView="10" tilesAttack="5" attackTimerMax="5.5"/>
+		
+		
+		
+	</scene>
+
+
+
+	<map>
+		<tilePathTexRed path="Assets/Maps/tileSelectionRed.png"/>
+		<tilePathTexBrown path="Assets/Maps/tileSelectionBrown.png"/>
+		<mapfolder path="Assets/Maps/"/>
+		<mapBosque path="Assets/Maps/Bosque.tmx" level="0"/>
+		<mapPueblo path="Assets/Maps/Pueblo.tmx" level="1"/>
+		<entorno_lluvia path="Assets/Textures/Lluvia.png"/>
+	</map>
+
+	<animations>
+		<player>
+			<idleAnim loop="true" speed="0.2">
+				<frame x="16" y="12" w="48" h="48"/>
+				<frame x="96" y="12" w="48" h="48"/>
+				<frame x="176" y="12" w="48" h="48"/>
+				<frame x="256" y="12" w="48" h="48"/>
+				<frame x="336" y="12" w="48" h="48"/>
+				<frame x="416" y="12" w="48" h="48"/>
+				<frame x="496" y="12" w="48" h="48"/>
+				<frame x="576" y="12" w="48" h="48"/>
+				<frame x="656" y="12" w="48" h="48"/>
+				<frame x="736" y="12" w="48" h="48"/>
+				<frame x="816" y="12" w="48" h="48"/>
+				<frame x="896" y="12" w="48" h="48"/>
+				<frame x="976" y="12" w="48" h="48"/>
+				<frame x="1056" y="12" w="48" h="48"/>
+				<frame x="1136" y="12" w="48" h="48"/>
+				<frame x="1216" y="12" w="48" h="48"/>
+				<frame x="1296" y="12" w="48" h="48"/>
+				<frame x="1376" y="12" w="48" h="48"/>
+			</idleAnim>
+
+			<runAnim loop="true" speed="0.5">
+				<frame x="16" y="61" w="48" h="48"/>
+				<frame x="96" y="61" w="48" h="48"/>
+				<frame x="176" y="61" w="48" h="48"/>
+				<frame x="256" y="61" w="48" h="48"/>
+				<frame x="336" y="61" w="48" h="48"/>
+				<frame x="416" y="61" w="48" h="48"/>
+				<frame x="496" y="61" w="48" h="48"/>
+				<frame x="576" y="61" w="48" h="48"/>
+				<frame x="656" y="61" w="48" h="48"/>
+				<frame x="736" y="61" w="48" h="48"/>
+				<frame x="816" y="61" w="48" h="48"/>
+				<frame x="896" y="61" w="48" h="48"/>
+				<frame x="976" y="61" w="48" h="48"/>
+				<frame x="1056" y="61" w="48" h="48"/>
+				<frame x="1136" y="61" w="48" h="48"/>
+				<frame x="1216" y="61" w="48" h="48"/>
+				<frame x="1296" y="61" w="48" h="48"/>
+				<frame x="1376" y="61" w="48" h="48"/>
+				<frame x="1456" y="61" w="48" h="48"/>
+				<frame x="1536" y="61" w="48" h="48"/>
+				<frame x="1616" y="61" w="48" h="48"/>
+				<frame x="1696" y="61" w="48" h="48"/>
+				<frame x="1776" y="61" w="48" h="48"/>
+				<frame x="1856" y="61" w="48" h="48"/>
+			</runAnim>
+
+			<jumpUpAnim loop="true" speed="0.1">
+				<frame x="16" y="159" w="48" h="48"/>
+				<frame x="96" y="159" w="48" h="48"/>
+				<frame x="176" y="159" w="48" h="48"/>
+				<frame x="256" y="159" w="48" h="48"/>
+				<frame x="336" y="159" w="48" h="48"/>
+				<frame x="416" y="159" w="48" h="48"/>
+				<frame x="496" y="159" w="48" h="48"/>
+				<frame x="576" y="159" w="48" h="48"/>
+				<frame x="656" y="159" w="48" h="48"/>
+				<frame x="736" y="159" w="48" h="48"/>
+
+			</jumpUpAnim>
+
+			<jumpDownAnim loop="true" speed="0.1">
+				<frame x="816" y="159" w="48" h="48"/>
+				<frame x="896" y="159" w="48" h="48"/>
+				<frame x="976" y="159" w="48" h="48"/>
+				<frame x="1056" y="159" w="48" h="48"/>
+				<frame x="1136" y="159" w="48" h="48"/>
+				<frame x="1216" y="159" w="48" h="48"/>
+				<frame x="1296" y="159" w="48" h="48"/>
+				<frame x="1376" y="159" w="48" h="48"/>
+				<frame x="1456" y="159" w="48" h="48"/>
+			</jumpDownAnim>
+
+			<dieAnim loop="false" speed="0.17">
+				<frame x="16" y="257" w="48" h="48"/>
+				<frame x="96" y="257" w="48" h="48"/>
+				<frame x="176" y="257" w="48" h="48"/>
+				<frame x="256" y="257" w="48" h="48"/>
+				<frame x="336" y="257" w="48" h="48"/>
+				<frame x="416" y="257" w="48" h="48"/>
+				<frame x="496" y="257" w="48" h="48"/>
+			</dieAnim>
+
+			<dmgAnim loop="false" speed="0.17">
+				<frame x="16" y="208" w="48" h="48"/>
+				<frame x="96" y="208" w="48" h="48"/>
+				<frame x="176" y="208" w="48" h="48"/>
+				<frame x="256" y="208" w="48" h="48"/>
+				<frame x="336" y="208" w="48" h="48"/>
+				<frame x="416" y="208" w="48" h="48"/>
+				<frame x="496" y="208" w="48" h="48"/>
+			</dmgAnim>
+
+            <attackAnim loop="false" speed="0.35">
+				<frame x="16" y="110" w="48" h="48"/>
+				<frame x="96" y="110" w="48" h="48"/>
+				<frame x="176" y="110" w="48" h="48"/>
+				<frame x="256" y="110" w="48" h="48"/>
+				<frame x="336" y="110" w="48" h="48"/>
+				<frame x="416" y="110" w="48" h="48"/>
+				<frame x="496" y="110" w="48" h="48"/>
+			</attackAnim>
+            
+			<attack2Anim loop="false" speed="0.35">
+				<frame x="576" y="110" w="48" h="48"/>
+				<frame x="656" y="110" w="48" h="48"/>
+				<frame x="736" y="110" w="48" h="48"/>
+				<frame x="816" y="110" w="48" h="48"/>
+				<frame x="896" y="110" w="48" h="48"/>
+				<frame x="976" y="110" w="48" h="48"/>
+				<frame x="1056" y="110" w="48" h="48"/>
+				<frame x="1136" y="110" w="48" h="48"/>
+
+			</attack2Anim>
+
+            <attack3Anim loop="false" speed="0.35">
+			    <frame x="1216" y="110" w="48" h="48"/>
+				<frame x="1296" y="110" w="48" h="48"/>
+				<frame x="1376" y="110" w="48" h="48"/>
+				<frame x="1456" y="110" w="48" h="48"/>
+				<frame x="1536" y="110" w="48" h="48"/>
+				<frame x="1616" y="110" w="48" h="48"/>
+				<frame x="1696" y="110" w="48" h="48"/>
+				<frame x="1776" y="110" w="48" h="48"/>
+				<frame x="1856" y="110" w="48" h="48"/>
+				<frame x="1936" y="110" w="48" h="48"/>
+				<frame x="2016" y="110" w="48" h="48"/>
+			</attack3Anim>
+			
+		</player>
+
+        <saveStatue>
+            <idleAnim>
+                <frame x="1" y="193" w="64" h="96"/>
+            </idleAnim>
+        
+            
+            <savedAnim loop="false" speed="0.2">   
+				<frame x="65" y="193" w="64" h="96"/>
+				<frame x="129" y="193" w="64" h="96"/>
+				<frame x="193" y="193" w="64" h="96"/>
+				<frame x="257" y="193" w="64" h="96"/>
+				<frame x="321" y="193" w="64" h="96"/>
+				<frame x="385" y="193" w="64" h="96"/>
+                <frame x="449" y="193" w="64" h="96"/>
+            </savedAnim>
+        
+        </saveStatue>
+            
+		<enemyArmadillo>
+
+			<idleAnim loop="false" speed="0.35">
+				<frame x="1" y="1" w="40" h="40"/>
+				<frame x="41" y="1" w="40" h="40"/>
+				<frame x="81" y="1" w="40" h="40"/>
+				<frame x="121" y="1" w="40" h="40"/>
+				<frame x="161" y="1" w="40" h="40"/>
+				<frame x="201" y="1" w="40" h="40"/>
+				<frame x="241" y="1" w="40" h="40"/>
+			</idleAnim>
+
+			<trackAnim loop="true" speed="0.35">
+				<frame x="1" y="41" w="40" h="40"/>
+				<frame x="41" y="41" w="40" h="40"/>
+				<frame x="81" y="41" w="40" h="40"/>
+				<frame x="121" y="41" w="40" h="40"/>
+			</trackAnim>
+
+			<runAnim loop="true" speed="0.35">
+				<frame x="1" y="81" w="40" h="40"/>
+				<frame x="41" y="81" w="40" h="40"/>
+				<frame x="81" y="81" w="40" h="40"/>
+				<frame x="121" y="81" w="40" h="40"/>
+				<frame x="161" y="81" w="40" h="40"/>
+				<frame x="201" y="81" w="40" h="40"/>
+				<frame x="241" y="81" w="40" h="40"/>
+				<frame x="281" y="81" w="40" h="40"/>
+			</runAnim>
+
+			<attackAnim loop="false" speed="0.35">
+				<frame x="1" y="121" w="40" h="40"/>
+				<frame x="41" y="121" w="40" h="40"/>
+				<frame x="81" y="121" w="40" h="40"/>
+				<frame x="121" y="121" w="40" h="40"/>
+				<frame x="161" y="121" w="40" h="40"/>
+				<frame x="201" y="121" w="40" h="40"/>
+				<frame x="241" y="121" w="40" h="40"/>
+				<frame x="281" y="121" w="40" h="40"/>
+				<frame x="321" y="121" w="40" h="40"/>
+				<frame x="361" y="121" w="40" h="40"/>
+			</attackAnim>
+
+			<attackLoopAnim loop="true" speed="0.35">
+				<frame x="1" y="161" w="40" h="40"/>
+				<frame x="41" y="161" w="40" h="40"/>
+				<frame x="81" y="161" w="40" h="40"/>
+				<frame x="121" y="161" w="40" h="40"/>
+
+			</attackLoopAnim>
+            
+            <dieAnim loop="false" speed="0.35">
+				<frame x="1" y="201" w="40" h="40"/>
+				<frame x="41" y="201" w="40" h="40"/>
+				<frame x="81" y="201" w="40" h="40"/>
+				<frame x="121" y="201" w="40" h="40"/>
+				<frame x="161" y="201" w="40" h="40"/>
+				<frame x="201" y="201" w="40" h="40"/>
+				<frame x="241" y="201" w="40" h="40"/>
+				<frame x="281" y="201" w="40" h="40"/>
+				<frame x="321" y="201" w="40" h="40"/>
+				<frame x="361" y="201" w="40" h="40"/>
+                <frame x="401" y="201" w="40" h="40"/>
+                <frame x="441" y="201" w="40" h="40"/>
+                <frame x="481" y="201" w="40" h="40"/>
+                <frame x="521" y="201" w="40" h="40"/>
+                <frame x="561" y="201" w="40" h="40"/>
+                <frame x="601" y="201" w="40" h="40"/>
+                <frame x="641" y="201" w="40" h="40"/>
+                <frame x="681" y="201" w="40" h="40"/>
+                <frame x="721" y="201" w="40" h="40"/>
+                <frame x="761" y="201" w="40" h="40"/>
+                <frame x="1" y="241" w="40" h="40"/>
+				<frame x="41" y="241" w="40" h="40"/>
+				<frame x="81" y="241" w="40" h="40"/>
+				<frame x="121" y="241" w="40" h="40"/>
+				<frame x="161" y="241" w="40" h="40"/>
+				<frame x="201" y="241" w="40" h="40"/>
+				<frame x="241" y="241" w="40" h="40"/>
+				<frame x="281" y="241" w="40" h="40"/>
+				<frame x="321" y="241" w="40" h="40"/>
+				<frame x="361" y="241" w="40" h="40"/>
+                <frame x="401" y="241" w="40" h="40"/>
+			</dieAnim>
+            
+            <stopAttackAnim loop="false" speed="0.35">
+				<frame x="1" y="281" w="40" h="40"/>
+				<frame x="41" y="281" w="40" h="40"/>
+				<frame x="81" y="281" w="40" h="40"/>
+				<frame x="121" y="281" w="40" h="40"/>
+				<frame x="161" y="281" w="40" h="40"/>
+				<frame x="201" y="281" w="40" h="40"/>
+				<frame x="241" y="281" w="40" h="40"/>
+				<frame x="281" y="281" w="40" h="40"/>
+				<frame x="321" y="281" w="40" h="40"/>
+				<frame x="361" y="281" w="40" h="40"/>
+                <frame x="401" y="281" w="40" h="40"/>
+                <frame x="441" y="281" w="40" h="40"/>
+                <frame x="481" y="281" w="40" h="40"/>
+
+			</stopAttackAnim>
+		</enemyArmadillo>
+
+        
+        <enemyPaloma>
+
+            <idleAnim loop="true" speed="0.35">
+                <frame x="1" y="1" w="64" h="64"/>
+                <frame x="65" y="1" w="64" h="64"/>
+                <frame x="129" y="1" w="64" h="64"/>
+                <frame x="193" y="1" w="64" h="64"/>
+                <frame x="257" y="1" w="64" h="64"/>
+
+                </idleAnim>
+			
+			<flyAnim loop="true" speed="0.35">
+				<frame x="1" y="193" w="64" h="64"/>
+				<frame x="65" y="193" w="64" h="64"/>
+				<frame x="129" y="193" w="64" h="64"/>
+				<frame x="193" y="193" w="64" h="64"/>
+				<frame x="257" y="193" w="64" h="64"/>
+
+			</flyAnim>
+
+            <attackAnim loop="true" speed="0.35">
+                <frame x="1" y="513" w="64" h="64"/>
+                <frame x="65" y="513" w="64" h="64"/>
+                <frame x="129" y="513" w="64" h="64"/>
+                <frame x="193" y="513" w="64" h="64"/>
+                <frame x="257" y="513" w="64" h="64"/>
+                <frame x="321" y="513" w="64" h="64"/>
+                <frame x="385" y="513" w="64" h="64"/>
+                <frame x="449" y="513" w="64" h="64"/>
+                <frame x="513" y="513" w="64" h="64"/>
+
+                </attackAnim>
+
+            <dieAnim loop="false" speed="0.35">
+                <frame x="1" y="641" w="64" h="64"/>
+                <frame x="65" y="641" w="64" h="64"/>
+                <frame x="129" y="641" w="64" h="64"/>
+                <frame x="193" y="641" w="64" h="64"/>
+                <frame x="257" y="641" w="64" h="64"/>
+                <frame x="321" y="641" w="64" h="64"/>
+                <frame x="385" y="641" w="64" h="64"/>
+                <frame x="449" y="641" w="64" h="64"/>
+                <frame x="513" y="641" w="64" h="64"/>
+
+                </dieAnim>
+
+            </enemyPaloma>
+
+		
+        <entorno>
+            <lluviaAnim loop="true" speed="0.35">
+                <frame x="1" y="1" w="1360" h="720"/>
+                <frame x="1" y="721" w="1360" h="720"/>
+                <frame x="1" y="1441" w="1360" h="720"/>
+                <frame x="1" y="2161" w="1360" h="720"/>
+                <frame x="1" y="2881" w="1360" h="720"/>
+                <frame x="1" y="3601" w="1360" h="720"/>
+                <frame x="1" y="4321" w="1360" h="720"/>
+            </lluviaAnim>
+        </entorno>
+
+	</animations>
+
+</config>

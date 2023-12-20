@@ -7,17 +7,17 @@
 	<:anonymous />
 	<map />
 	<scene>
-		<player x="3575" y="1606" sceneLevel="0" />
-		<camera x="-6574" y="-2826" />
+		<player x="6797" y="500" sceneLevel="0" />
+		<camera x="-13125" y="-589" />
 		<coinsPicked>
-			<coin x="880" y="1536" active="true" />
+			<coin x="880" y="1536" active="false" />
 			<coin x="1744" y="1472" active="true" />
 			<coin x="6192" y="1792" active="true" />
 			<coin x="6224" y="1792" active="true" />
 		</coinsPicked>
 		<enemies>
-			<enemy x="10" y="50" active="true" />
-			<enemy x="11" y="50" active="true" />
+			<enemy x="10" y="50" active="false" />
+			<enemy x="11" y="50" active="false" />
 			<enemy x="12" y="50" active="true" />
 			<enemy x="39" y="54" active="true" />
 			<enemy x="49" y="23" active="true" />
@@ -33,6 +33,25 @@
 			<enemy x="182" y="13" active="true" />
 			<enemy x="183" y="27" active="true" />
 			<enemy x="201" y="15" active="true" />
+			<enemy x="217" y="9" active="true" />
+			<enemy x="223" y="16" active="true" />
+			<enemy x="10" y="50" active="false" />
+			<enemy x="11" y="50" active="false" />
+			<enemy x="12" y="50" active="false" />
+			<enemy x="39" y="54" active="true" />
+			<enemy x="49" y="23" active="true" />
+			<enemy x="51" y="6" active="true" />
+			<enemy x="60" y="37" active="true" />
+			<enemy x="61" y="6" active="true" />
+			<enemy x="90" y="55" active="false" />
+			<enemy x="92" y="45" active="false" />
+			<enemy x="153" y="44" active="false" />
+			<enemy x="162" y="49" active="false" />
+			<enemy x="168" y="44" active="true" />
+			<enemy x="177" y="40" active="true" />
+			<enemy x="182" y="13" active="true" />
+			<enemy x="183" y="27" active="true" />
+			<enemy x="201" y="15" active="false" />
 			<enemy x="217" y="9" active="true" />
 			<enemy x="223" y="16" active="true" />
 		</enemies>
