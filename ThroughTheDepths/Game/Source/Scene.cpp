@@ -8,6 +8,7 @@
 #include "Map.h"
 #include "Chest.h"
 #include "FadeToBlack.h"
+#include "GuiManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -116,6 +117,12 @@ bool Scene::Start()
 		app->map->mapData.tileWidth,
 		app->map->mapData.tileHeight,
 		app->map->mapData.tilesets.Count());
+
+
+	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20 };
+	gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
+
+
 
 	return true;
 }
@@ -378,6 +385,13 @@ bool Scene::SaveState(pugi::xml_node node) {
 		enemyNode.append_attribute("active").set_value(app->entityManager->enemies.At(i)->data->active);
 	}
 
+
+	return true;
+}
+bool Scene::OnGuiMouseClickEvent(GuiControl* control)
+{
+	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
+	LOG("Press Gui Control: %d", control->id);
 
 	return true;
 }

@@ -84,6 +84,12 @@
     <ClCompile Include="Source\Enemy_Pajaro.cpp">
       <Filter>Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GuiManager.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiControlButton.cpp">
+      <Filter>Entities\GUI_ELEMENTS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -195,6 +201,15 @@
     <ClInclude Include="Source\Enemy_Pajaro.h">
       <Filter>Entities\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GuiManager.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControl.h">
+      <Filter>Entities\GUI_ELEMENTS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControlButton.h">
+      <Filter>Entities\GUI_ELEMENTS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -217,6 +232,9 @@
     </Filter>
     <Filter Include="Entities\Enemies">
       <UniqueIdentifier>{35b3a048-81e5-497a-ba3e-9d235b3ac098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\GUI_ELEMENTS">
+      <UniqueIdentifier>{7292a479-ff96-4854-ac73-d61be9a19bcb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

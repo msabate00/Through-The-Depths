@@ -21,6 +21,7 @@ class Map;
 class Physics;
 class Particles;
 class FadeToBlack;
+class GuiManager;
 
 class App
 {
@@ -113,6 +114,7 @@ public:
 	Physics* physics;
 	Particles* particles;
 	FadeToBlack* fadeToBlack;
+	GuiManager* guiManager;
 
 	int sceneLevel = 0;
 

@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "Player.h"
 #include "Item.h"
+#include "GuiControl.h"
+#include "GuiControlButton.h"
 
 struct SDL_Texture;
 
@@ -40,6 +42,8 @@ public:
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
+	bool OnGuiMouseClickEvent(GuiControl* control);
+
 
 	
 	SDL_Texture* img;
@@ -58,7 +62,7 @@ private:
 	int fondo1Offset = 0;
 	int fondo2Offset = 0;
 
-
+	GuiControlButton* gcButtom;
 	
 
 	
