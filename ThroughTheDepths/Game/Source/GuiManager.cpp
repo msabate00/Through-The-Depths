@@ -3,6 +3,7 @@
 #include "Textures.h"
 
 #include "GuiControlButton.h"
+#include "GuiControlImage.h"
 #include "Audio.h"
 
 GuiManager::GuiManager() :Module()
@@ -23,13 +24,36 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	GuiControl* guiControl = nullptr;
 
 	//Call the constructor according to the GuiControlType
+
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
 		guiControl = new GuiControlButton(id, bounds, text);
 		break;
+	case GuiControlType::TOGGLE:
+		break;
+	case GuiControlType::CHECKBOX:
+		break;
+	case GuiControlType::SLIDER:
+		break;
+	case GuiControlType::SLIDERBAR:
+		break;
+	case GuiControlType::COMBOBOX:
+		break;
+	case GuiControlType::DROPDOWNBOX:
+		break;
+	case GuiControlType::INPUTBOX:
+		break;
+	case GuiControlType::VALUEBOX:
+		break;
+	case GuiControlType::SPINNER:
+		break;
+	case GuiControlType::IMAGE:
+		guiControl = new GuiControlImage(id, bounds, text);
+		break;
+	default:
+		break;
 	}
-
 	//Set the observer
 	guiControl->observer = observer;
 
