@@ -5,9 +5,6 @@
 #include "Render.h"
 #include "Window.h"
 #include "Interface.h"
-#include "Map.h"
-#include "Chest.h"
-#include "FadeToBlack.h"
 #include "GuiManager.h"
 
 #include "Defs.h"
@@ -64,6 +61,7 @@ bool Interface::Start()
 {
 	
 
+	app->win->GetWindowSize(windowW, windowH);
 	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20 };
 	gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
 
@@ -81,7 +79,7 @@ bool Interface::PreUpdate()
 // Called each loop iteration
 bool Interface::Update(float dt)
 {
-	
+	LOG("AAAAAAA");
 
 	return true;
 }
