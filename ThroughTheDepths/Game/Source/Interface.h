@@ -33,6 +33,7 @@ public:
 	// Called before all Updates
 	bool PostUpdate();
 
+	bool PostLateUpdate();
 	// Called before quitting
 	bool CleanUp();
 
@@ -51,6 +52,10 @@ private:
 	uint windowW, windowH;
 
 
+	SDL_Texture* heartHolderTex;
+
+	SDL_Texture* heartTex;
+	SDL_Texture* noHeartTex;
 
 	GuiControlButton* gcButtom;
 	

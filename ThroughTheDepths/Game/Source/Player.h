@@ -91,6 +91,8 @@ public:
 
 	Animation* currentAnimation = nullptr;
 
+	int health = 5;
+
 private:
 	
 	b2Transform startTransform;

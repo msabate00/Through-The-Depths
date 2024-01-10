@@ -75,7 +75,7 @@ bool GuiControlImage::PostUpdate()
 
 		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h);
 
-		app->render->DrawTexture(texture, bounds.x, bounds.y);
+		app->render->DrawTexture(texture, bounds.x, bounds.y, 1.0f);
 
 	}
 	return false;

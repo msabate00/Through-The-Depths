@@ -93,7 +93,7 @@ bool Player::Start() {
 
 	app->audio->LoadAudioMusic("audioMusicaBosque", 1.0f);
 	
-
+	health = 5;
 
 
 	uint windowH;
@@ -594,24 +594,41 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			app->entityManager->ApagarTodosLosSave();
 
 			statue = (SaveStatue*)physB->listener;
+			health = 5;
 			statue->saved = true;
 			app->SaveRequest();
 			break;
 
 		case ColliderType::ENEMY:
-			enemyBody = (PhysBody*)physB->body->GetUserData();
-			if (enemyBody->listener->state == EntityState::ATTACKING) {
-				LOG("DETECTA COLISION AU");
-				
-				if (invulnerableTimer.ReadMSec() > invulnerableTime * 1000) {
-					LOG("RESTAR VIDA");
-					
-					app->audio->PlayFx(recibirAtaque);
-					invulnerableTimer.Start();
+			if (!app->godMode) {
+				enemyBody = (PhysBody*)physB->body->GetUserData();
+				if (enemyBody->listener->state == EntityState::ATTACKING) {
 
-					
+
+					if (invulnerableTimer.ReadMSec() > invulnerableTime * 1000) {
+						LOG("RESTAR VIDA");
+						health--;
+						app->audio->PlayFx(recibirAtaque);
+						if (health <= 0) {
+							if (!app->godMode) {
+
+								if (isDying == false)
+								{
+									app->audio->PlayFx(caidaMuerte);
+								}
+								isDying = true;
+							}
+						}
+						else {
+							invulnerableTimer.Start();
+						}
+						
+						
+
+
+					}
+
 				}
-
 			}
 			break;
 

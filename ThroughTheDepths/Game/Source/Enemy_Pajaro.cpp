@@ -324,10 +324,10 @@ bool EnemyPajaro::PostUpdate() {
 		{
 			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
 			if (isAttacking) {
-				app->render->DrawTexture(app->map->tilePathTexRed, pos.x, pos.y);
+				app->render->DrawTexture(app->map->tilePathTexRed, pos.x, pos.y, 1.0f);
 			}
 			else {
-				app->render->DrawTexture(app->map->tilePathTexBrown, pos.x, pos.y);
+				app->render->DrawTexture(app->map->tilePathTexBrown, pos.x, pos.y, 1.0f);
 			}
 		}
 	}

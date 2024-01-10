@@ -6,6 +6,7 @@
 #include "Window.h"
 #include "Interface.h"
 #include "GuiManager.h"
+#include "Scene.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -66,10 +67,12 @@ bool Interface::Start()
 	gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
 
 
-	btPos.y -= 100;
-	gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::IMAGE, 1, "Assets/UI/Free Paper UI System/1 Sprites/Content/5 Holders/1.png", btPos, this);
+	/*btPos.y -= 100;
+	gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::IMAGE, 1, "Assets/UI/Free Paper UI System/1 Sprites/Content/5 Holders/1.png", btPos, this);*/
 
-
+	heartTex = app->tex->Load("Assets/UI/Free Paper UI System/1 Sprites/Content/6 High lighter/7.png");
+	noHeartTex = app->tex->Load("Assets/UI/Free Paper UI System/1 Sprites/Content/6 High lighter/6.png");
+	heartHolderTex = app->tex->Load("Assets/UI/Free Paper UI System/1 Sprites/Content/4 Buttons/hearthHolder.png");
 
 	return true;
 }
@@ -83,7 +86,7 @@ bool Interface::PreUpdate()
 // Called each loop iteration
 bool Interface::Update(float dt)
 {
-	LOG("AAAAAAA");
+
 
 	return true;
 }
@@ -95,7 +98,55 @@ bool Interface::PostUpdate()
 
 	
 
+	app->render->DrawTexture(heartHolderTex, 2, 2, 0);
+
+	if (app->scene->getPlayer()->health >= 1) {
+		app->render->DrawTexture(heartTex, 15, 10, 0);
+	}
+	else {
+		app->render->DrawTexture(noHeartTex, 15, 10, 0);
+	}
+
+	if (app->scene->getPlayer()->health >= 2) {
+		app->render->DrawTexture(heartTex, 25, 10, 0);
+	}
+	else {
+		app->render->DrawTexture(noHeartTex, 25, 10, 0);
+	}
+
+	if (app->scene->getPlayer()->health >= 3) {
+		app->render->DrawTexture(heartTex, 35, 10, 0);
+	}
+	else {
+		app->render->DrawTexture(noHeartTex, 35, 10, 0);
+	}
+
+	if (app->scene->getPlayer()->health >= 4) {
+		app->render->DrawTexture(heartTex, 45, 10, 0);
+	}
+	else {
+		app->render->DrawTexture(noHeartTex, 45, 10, 0);
+	}
+
+	if (app->scene->getPlayer()->health >= 5) {
+		app->render->DrawTexture(heartTex, 55, 10, 0);
+	}
+	else {
+		app->render->DrawTexture(noHeartTex, 55, 10, 0);
+	}
 	
+
+	
+	
+	return ret;
+}
+
+// Called each loop iteration
+bool Interface::PostLateUpdate()
+{
+	bool ret = true;
+
+
 	return ret;
 }
 

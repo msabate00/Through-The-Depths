@@ -161,6 +161,12 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, SDL_RendererFlip fl
 	return ret;
 }
 
+bool Render::DrawTexture(SDL_Texture* texture, int x, int y, float speed) const
+{
+	DrawTexture(texture, x, y, SDL_FLIP_NONE, 0, speed, 0.0, INT_MAX, INT_MAX);
+	return false;
+}
+
 bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
 {
 	bool ret = true;

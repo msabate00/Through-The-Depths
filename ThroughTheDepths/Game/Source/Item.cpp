@@ -47,7 +47,7 @@ bool Item::Update(float dt)
 }
 
 bool Item::PostUpdate() {
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture, position.x, position.y, 1.0f);
 
 	return true;
 }
