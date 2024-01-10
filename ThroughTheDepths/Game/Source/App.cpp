@@ -10,6 +10,7 @@
 #include "Particles.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
+#include "Interface.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -40,6 +41,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	particles = new Particles();
 	fadeToBlack = new FadeToBlack();
 	guiManager = new GuiManager();
+	interface = new Interface();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -50,13 +52,16 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 
 	AddModule(map);
-	AddModule(scene);
 	
+	AddModule(scene);
+
+
 	AddModule(particles);
 	AddModule(entityManager);
 
+	AddModule(interface);
 	AddModule(guiManager);
-
+	
 	// Render last to swap buffer
 	AddModule(fadeToBlack);
 	AddModule(render);

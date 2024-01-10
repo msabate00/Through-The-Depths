@@ -22,6 +22,7 @@ class Physics;
 class Particles;
 class FadeToBlack;
 class GuiManager;
+class Interface;
 
 class App
 {
@@ -115,6 +116,7 @@ public:
 	Particles* particles;
 	FadeToBlack* fadeToBlack;
 	GuiManager* guiManager;
+	Interface* interface;
 
 	int sceneLevel = 0;
 
