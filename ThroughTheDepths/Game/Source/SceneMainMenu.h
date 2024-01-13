@@ -38,7 +38,11 @@ public:
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	void SettingsInterface();
+	void DestroySettingsInterface();
 
+	bool LoadState(pugi::xml_node node);
+	bool SaveState(pugi::xml_node node);
 	
 	SDL_Texture* img;
 	SDL_Texture* fondo1;
@@ -59,9 +63,11 @@ private:
 
 	
 	List<GuiControl*> controlsScene;
+	List<GuiControl*> controlsSettings;
 	GuiControlButton* gcButtom;
 	
-	
+	bool showSettings = false;
+	bool _showSettings = false;
 
 	SDL_Texture* hearthHolderTex;
 

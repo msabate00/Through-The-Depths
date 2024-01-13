@@ -16,7 +16,7 @@
 
 SceneMainMenu::SceneMainMenu(bool start_enabled) : Module(start_enabled)
 {
-	name.Create("SceneMainMenu");
+	name.Create("settings");
 
 }
 
@@ -78,6 +78,14 @@ bool SceneMainMenu::PreUpdate()
 bool SceneMainMenu::Update(float dt)
 {
 	
+	if (showSettings && !_showSettings) {
+
+		SettingsInterface();
+		
+	}
+
+
+
 
 	return true;
 }
@@ -128,9 +136,80 @@ bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene, true);
 			break;
 
+		case 3:
+			showSettings = true;
+			break;
+
+
+
+		case 105:
+
+			showSettings = false;
+			_showSettings = false;
+			DestroySettingsInterface();
+			break;
+
 		default:
 			break;
 	}
 
 	return true;
+}
+
+void SceneMainMenu::SettingsInterface()
+{
+	ListItem<GuiControl*>* control;
+	for (control = controlsScene.start; control != NULL; control = control->next)
+	{
+		control->data->state = GuiControlState::DISABLED;
+	}
+
+
+	//MENU AJUSTES
+
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, "Musica", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 70,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1011, "Musica", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 70,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 102, "Fx", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 40,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1021, "Fx", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 40,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 103, "Fullscreen", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 10,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1031, "Fullscreen", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 10,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 104, "Vsync", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 + 20,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1041, "Vsync", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 + 20,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "Return to main menu", SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 + 50,	120,20 }, this));
+	_showSettings = true;
+}
+
+void SceneMainMenu::DestroySettingsInterface()
+{
+	ListItem<GuiControl*>* control;
+	for (control = controlsSettings.start; control != NULL; control = control->next)
+	{
+		app->guiManager->DestroyGuiControl(control->data);
+	}
+	controlsSettings.Clear();
+
+
+	
+	for (control = controlsScene.start; control != NULL; control = control->next)
+	{
+		control->data->state = GuiControlState::NORMAL;
+	}
+
+}
+
+bool SceneMainMenu::LoadState(pugi::xml_node node)
+{
+
+	return false;
+}
+
+bool SceneMainMenu::SaveState(pugi::xml_node node)
+{
+
+	
+
+
+
+
+	return false;
 }

@@ -44,7 +44,8 @@ public:
 	void ShowPauseMenu();
 	void ShowPauseMenuSettings();
 
-
+	bool LoadState(pugi::xml_node node);
+	bool SaveState(pugi::xml_node node);
 	
 	//SDL_Texture* img;
 	//SDL_Texture* fondo1;

@@ -13,7 +13,7 @@
 
 Interface::Interface(bool start_enabled) : Module(start_enabled)
 {
-	name.Create("interface");
+	name.Create("settings");
 	
 }
 
@@ -27,29 +27,7 @@ bool Interface::Awake(pugi::xml_node& config)
 	LOG("Loading Interface");
 	bool ret = true;
 
-	//configInterface = &config;
 	
-	
-
-	// iterate all objects in the Interface
-	// Check https://pugixml.org/docs/quickstart.html#access
-	//for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
-	//{
-	//	Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-	//	item->parameters = itemNode;
-	//}
-
-	//for (pugi::xml_node chestNode = config.child("chest"); chestNode; chestNode = chestNode.next_sibling("chest"))
-	//{
-	//	Chest* chest = (Chest*)app->entityManager->CreateEntity(EntityType::CHEST);
-	//	chest->parameters = chestNode;
-	//	LOG("AAA");
-	//}
-
-	/*if (config.child("player")) {
-		player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
-		player->parameters = config.child("player");
-	}*/
 
 	
 	
@@ -183,4 +161,18 @@ void Interface::ShowPauseMenuSettings()
 {
 
 
+}
+
+
+
+bool Interface::LoadState(pugi::xml_node node)
+{
+
+	return false;
+}
+
+bool Interface::SaveState(pugi::xml_node node)
+{
+	LOG("GUARDADO INTERFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZ");
+	return false;
 }
