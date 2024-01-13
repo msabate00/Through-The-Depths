@@ -9,6 +9,7 @@
 #include "Chest.h"
 #include "FadeToBlack.h"
 #include "GuiManager.h"
+#include "Interface.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -283,8 +284,9 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+		//ret = false;
+		app->interface->pauseMenuOpened = true;
 
 	
 	return ret;

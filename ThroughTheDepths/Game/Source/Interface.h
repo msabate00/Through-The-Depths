@@ -51,6 +51,11 @@ public:
 	//SDL_Texture* fondo1;
 	//SDL_Texture* fondo2;
 	//SDL_Texture* fondo0;
+
+
+	bool pauseMenuOpened = false;
+	bool settingsOpened = false;
+
 private:
 	
 	float textPosX, textPosY = 0;
@@ -64,6 +69,12 @@ private:
 	SDL_Texture* noHeartTex;
 
 	GuiControlButton* gcButtom;
+
+	List<GuiControl*> pauseMenuButtons;
+	List<GuiControl*> pauseMenuSettingsButtons;
+	
+	bool _pauseMenuOpened = false;
+	bool _settingsOpened = false;
 	
 };
 
