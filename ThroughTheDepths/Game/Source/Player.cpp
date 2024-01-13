@@ -92,7 +92,7 @@ bool Player::Start() {
 
 
 	app->audio->LoadAudioMusic("audioMusicaBosque", 1.0f);
-	
+
 	health = 5;
 
 
@@ -264,7 +264,7 @@ void Player::Movement(float dt)
 	pbody->body->GetFixtureList()[0].SetSensor(false);
 	vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 
-	
+
 
 	if (!isAttacking) {
 		//Moverse a la izquierda
@@ -283,7 +283,7 @@ void Player::Movement(float dt)
 			state = EntityState::RUNNING;
 		}
 
-		
+
 
 		//Atraves plataformas traspasables
 		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
@@ -313,7 +313,7 @@ void Player::Movement(float dt)
 			pbody->body->SetLinearVelocity(vel);
 			pbody->body->ApplyLinearImpulse(b2Vec2(0, GRAVITY_Y * jumpForce), pbody->body->GetWorldCenter(), true);
 			canJump = false;
-			
+
 			app->audio->PlayFx(saltoJugador);
 		}
 
@@ -487,14 +487,14 @@ void Player::DebugCameraMovement(float dt)
 			app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.002f);
 		}
 	}
-	
+
 }
 
 void Player::AudioController()
 {
-	if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) && canJump==true) {
+	if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT || app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) && canJump == true) {
 
-	
+
 		if (pasosTimer.ReadMSec() > pasosTime) {
 
 			int paso = rand() % 5;
@@ -564,8 +564,19 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			physB->listener->active = false;
 			app->entityManager->DestroyEntity(physB->listener);
 			physB->body->SetActive(false);
+			break;
 
-
+		case ColliderType::FOOD:
+			if (health < 5) {
+				app->audio->PlayFx(monedaSonido);
+				physB->listener->active = false;
+				app->entityManager->DestroyEntity(physB->listener);
+				physB->body->SetActive(false);
+				health++;
+			}
+			else {
+				//Sonido no se puede pillar cominda
+			}
 			break;
 
 		case ColliderType::DIE_HOLE:
@@ -622,8 +633,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 						else {
 							invulnerableTimer.Start();
 						}
-						
-						
+
+
 
 
 					}
@@ -639,7 +650,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene);
 			break;
 		}
-		
+
 	}
 
 
@@ -675,6 +686,6 @@ void Player::SetPosition(int x, int y)
 
 	LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAA: %d %d", x, y);
 
-	pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(x),PIXEL_TO_METERS(y)), 0);
+	pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y)), 0);
 
 }

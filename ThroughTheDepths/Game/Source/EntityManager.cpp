@@ -12,6 +12,7 @@
 #include "Textures.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Food.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -50,7 +51,7 @@ bool EntityManager::Awake(pugi::xml_node& config)
 
 bool EntityManager::Start() {
 
-	bool ret = true; 
+	bool ret = true;
 
 	//Iterates over the entities and calls Start
 	ListItem<Entity*>* item;
@@ -88,7 +89,7 @@ bool EntityManager::CleanUp()
 
 Entity* EntityManager::CreateEntity(EntityType type)
 {
-	Entity* entity = nullptr; 
+	Entity* entity = nullptr;
 
 	switch (type)
 	{
@@ -104,6 +105,9 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::COIN:
 		entity = new Coin();
 		coins.Add(entity);
+		break;
+	case EntityType::FOOD:
+		entity = new Food();
 		break;
 	case EntityType::PLANT_BARRIER:
 		entity = new PlantBarrier();
@@ -130,7 +134,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 
 	entities.Add(entity);
 	entity->Awake();
-	
+
 
 	return entity;
 }
@@ -164,7 +168,7 @@ void EntityManager::DestroyAllCoinsToDestroy()
 	{
 		ListItem<iPoint>* destoyCoin;
 		for (destoyCoin = coins_to_destroyPos.start; destoyCoin != NULL; destoyCoin = destoyCoin->next) {
-			if(app->map->WorldToMap(destoyCoin->data.x, destoyCoin->data.y) == app->map->WorldToMap(item->data->position.x, item->data->position.y)) {
+			if (app->map->WorldToMap(destoyCoin->data.x, destoyCoin->data.y) == app->map->WorldToMap(item->data->position.x, item->data->position.y)) {
 				item->data->active = false;
 			}
 		}
@@ -181,7 +185,7 @@ void EntityManager::DestroyAllEnemiesToDestroy()
 		for (destroyEnemy = enemies_to_destroyPos.start; destroyEnemy != NULL; destroyEnemy = destroyEnemy->next) {
 			if (iPoint(destroyEnemy->data.x, destroyEnemy->data.y) == app->map->WorldToMap(item->data->position.x, item->data->position.y)) {
 				item->data->active = false;
-				
+
 			}
 		}
 	}
@@ -189,7 +193,7 @@ void EntityManager::DestroyAllEnemiesToDestroy()
 
 void EntityManager::AddEntity(Entity* entity)
 {
-	if ( entity != nullptr) entities.Add(entity);
+	if (entity != nullptr) entities.Add(entity);
 }
 
 bool EntityManager::Update(float dt)
@@ -202,16 +206,16 @@ bool EntityManager::Update(float dt)
 	{
 		pEntity = item->data;
 
-		if (pEntity->active == false) { 
-			
-			
+		if (pEntity->active == false) {
+
+
 			item->data->Update(dt);
 			continue;
 		};
 		ret = item->data->Update(dt);
 	}
 
-	
+
 
 	return ret;
 }
@@ -249,6 +253,6 @@ void EntityManager::ApagarTodosLosSave() {
 			((SaveStatue*)pEntity)->saved = false;
 			((SaveStatue*)pEntity)->savedAnim.Reset();
 		}
-		
+
 	}
 }

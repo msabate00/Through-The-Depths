@@ -73,7 +73,8 @@
 
 		<textures>
 			<chest texturepath="Assets/Maps/tilesets/Animations.png"/>
-			<coin texturepath="Assets/Maps/tilesets/Animations.png"/>
+			<coin  texturepath="Assets/Maps/tilesets/Animations.png"/>
+			<food  texturepath="Assets/Maps/tilesets/Animations.png"/>
 			<plant_breakable texturepath="Assets/Maps/tilesets/Animations.png"/>
 			<plant_barrier texturepath="Assets/Maps/tilesets/Animations.png"/>
 

@@ -31,6 +31,7 @@ enum class EntityType
 	ITEM,
 	CHEST_COIN,
 	COIN,
+	FOOD,
 	SAVE_STATUE,
 	PLANT_BARRIER,
 	PLANT_BREAKABLE,
@@ -107,13 +108,13 @@ public:
 	EntityType type;
 	EntityState state;
 	bool active = true;
-	pugi::xml_node parameters; 
+	pugi::xml_node parameters;
 	int id;
-	
+
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...
-	iPoint position;       
+	iPoint position;
 	iPoint originalPosition;
 	int tilesView;
 	int tilesAttack;

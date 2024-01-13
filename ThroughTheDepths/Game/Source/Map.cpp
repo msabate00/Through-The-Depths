@@ -17,6 +17,7 @@
 #include <bitset>
 #include "Chest.h"
 #include "Coin.h"
+#include "Food.h"
 #include "PlantBarrier.h"
 #include "PlantBreakable.h"
 #include "Enemy_Armadillo.h"
@@ -45,7 +46,7 @@ bool Map::Awake(pugi::xml_node& config)
     LOG("Loading Map Parser");
     bool ret = true;
 
-    mapFileName_Bosque = config.child("mapBosque").attribute("path").as_string(); 
+    mapFileName_Bosque = config.child("mapBosque").attribute("path").as_string();
     mapFileName_Pueblo = config.child("mapPueblo").attribute("path").as_string();
     mapFolder = config.child("mapfolder").attribute("path").as_string();
 
@@ -55,7 +56,7 @@ bool Map::Awake(pugi::xml_node& config)
 
     rainingTextPath = config.child("entorno_lluvia").attribute("path").as_string();
 
-    
+
     rainingAnim.LoadAnimation("entorno", "lluviaAnim");
 
     return ret;
@@ -63,8 +64,8 @@ bool Map::Awake(pugi::xml_node& config)
 
 bool Map::Start()
 {
-   
-   /* collisionsListCount = 0;*/
+
+    /* collisionsListCount = 0;*/
     switch (app->sceneLevel)
     {
     case 0:  mapFileName = mapFileName_Bosque; break;
@@ -79,15 +80,15 @@ bool Map::Start()
 
 bool Map::Update(float dt)
 {
-    
-    if(app->scene->getPlayer() != nullptr && app->scene->getPlayer()->pbody != nullptr){
+
+    if (app->scene->getPlayer() != nullptr && app->scene->getPlayer()->pbody != nullptr) {
 
         if (app->scene->getPlayer()->pbody->body->GetLinearVelocity().y < 0) {
             for (int i = 0; i < traspasedPlatformList.Count(); i++) {
                 traspasedPlatformList.At(i)->data->body->SetActive(false);
             }
-       
-        
+
+
         }
         else {
             if (!app->scene->getPlayer()->traspassingColision) {
@@ -95,7 +96,7 @@ bool Map::Update(float dt)
                     if (traspasedPlatformList.At(i)->data->body->GetPosition().y > app->scene->getPlayer()->pbody->body->GetPosition().y) {
                         traspasedPlatformList.At(i)->data->body->SetActive(true);
                     }
-                    
+
                 }
             }
         }
@@ -120,16 +121,16 @@ bool Map::PostUpdate()
             mapLayerItem->data->properties.GetProperty("Front") != NULL && !mapLayerItem->data->properties.GetProperty("Front")->value) {
 
 
-            iPoint playerPos = app->scene->getPlayer()->position;            
-            int xToTiledLeft = MAX((playerPos.x / 32)- TILES_TO_LOAD, 0);
-            int xToTiledRight = MIN((playerPos.x / 32)+ TILES_TO_LOAD, mapLayerItem->data->width);
+            iPoint playerPos = app->scene->getPlayer()->position;
+            int xToTiledLeft = MAX((playerPos.x / 32) - TILES_TO_LOAD, 0);
+            int xToTiledRight = MIN((playerPos.x / 32) + TILES_TO_LOAD, mapLayerItem->data->width);
 
             int yToTiledTop = MAX((playerPos.y / 32) - TILES_TO_LOAD, 0);
             int yToTiledDown = MIN((playerPos.y / 32) + TILES_TO_LOAD, mapLayerItem->data->height);
 
             for (int x = xToTiledLeft; x < xToTiledRight; x++)
             {
-               
+
                 for (int y = yToTiledTop; y < yToTiledDown; y++)
                 {
                     unsigned int gid = mapLayerItem->data->Get(x, y);
@@ -159,9 +160,9 @@ bool Map::PostUpdate()
                     }
 
 
-                   
+
                     SDL_SetTextureColorMod(tileset->texture, 255 * mapLayerItem->data->opacity, 255 * mapLayerItem->data->opacity, 255 * mapLayerItem->data->opacity);
-                    
+
 
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
@@ -244,7 +245,7 @@ bool Map::UpdateFrontEntities()
                         pos.y, flip,
                         &r, 1, angle);
 
-                    
+
 
                 }
             }
@@ -274,7 +275,7 @@ iPoint Map::MapToWorld(int x, int y) const
     return ret;
 }
 
-iPoint Map::WorldToMap(int x, int y) 
+iPoint Map::WorldToMap(int x, int y)
 {
     iPoint ret(0, 0);
 
@@ -330,15 +331,15 @@ bool Map::CleanUp()
 {
     LOG("Unloading map");
 
-	ListItem<TileSet*>* item;
-	item = mapData.tilesets.start;
+    ListItem<TileSet*>* item;
+    item = mapData.tilesets.start;
 
-	while (item != NULL)
-	{
-		RELEASE(item->data);
-		item = item->next;
-	}
-	mapData.tilesets.Clear();
+    while (item != NULL)
+    {
+        RELEASE(item->data);
+        item = item->next;
+    }
+    mapData.tilesets.Clear();
 
     // Remove all layers
     ListItem<MapLayer*>* layerItem;
@@ -365,7 +366,7 @@ bool Map::CleanUp()
 
 
 
-    
+
     // Remove all colisions
     ListItem<PhysBody*>* collision;
     collision = collisionsList.start;
@@ -389,13 +390,13 @@ bool Map::Load()
     pugi::xml_document mapFileXML;
     pugi::xml_parse_result result = mapFileXML.load_file(mapFileName.GetString());
 
-    if(result == NULL)
+    if (result == NULL)
     {
         LOG("Could not load map xml file %s. pugi error: %s", mapFileName, result.description());
         ret = false;
     }
 
-    if(ret == true)
+    if (ret == true)
     {
         ret = LoadMap(mapFileXML);
     }
@@ -415,7 +416,7 @@ bool Map::Load()
     }
 
 
-   
+
 
 
     if (ret == true) {
@@ -436,8 +437,8 @@ bool Map::Load()
             RELEASE_ARRAY(navigationMap);
         }
     }
-   
-  
+
+
 
 
 
@@ -445,20 +446,20 @@ bool Map::Load()
     LoadCollisionsObject();
     LoadCollisions("Colisions");
     LoadEntities("Entidades");
-    
-    if(ret == true)
+
+    if (ret == true)
     {
         LOG("Successfully parsed map XML file :%s", mapFileName.GetString());
-        LOG("width : %d height : %d",mapData.width,mapData.height);
-        LOG("tile_width : %d tile_height : %d",mapData.tileWidth, mapData.tileHeight);
-        
+        LOG("width : %d height : %d", mapData.width, mapData.height);
+        LOG("tile_width : %d tile_height : %d", mapData.tileWidth, mapData.tileHeight);
+
         LOG("Tilesets----");
 
         ListItem<TileSet*>* tileset;
         tileset = mapData.tilesets.start;
 
         while (tileset != NULL) {
-            LOG("name : %s firstgid : %d",tileset->data->name.GetString(), tileset->data->firstgid);
+            LOG("name : %s firstgid : %d", tileset->data->name.GetString(), tileset->data->firstgid);
             LOG("tile width : %d tile height : %d", tileset->data->tileWidth, tileset->data->tileHeight);
             LOG("spacing : %d margin : %d", tileset->data->spacing, tileset->data->margin);
             tileset = tileset->next;
@@ -474,7 +475,7 @@ bool Map::Load()
         }
     }
 
-    if(mapFileXML) mapFileXML.reset();
+    if (mapFileXML) mapFileXML.reset();
 
     mapLoaded = ret;
 
@@ -518,9 +519,9 @@ bool Map::LoadMap(pugi::xml_node mapFile)
     return ret;
 }
 
-bool Map::LoadTileSet(pugi::xml_node mapFile){
+bool Map::LoadTileSet(pugi::xml_node mapFile) {
 
-    bool ret = true; 
+    bool ret = true;
 
     pugi::xml_node tileset;
     for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
@@ -554,7 +555,7 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     layer->name = node.attribute("name").as_string();
     layer->width = node.attribute("width").as_int();
     layer->height = node.attribute("height").as_int();
-    
+
     if (node.attribute("opacity") != NULL) {
         layer->opacity = node.attribute("opacity").as_float();
     }
@@ -568,7 +569,7 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     else {
         layer->tint = "#FFFFFF";
     }
-   
+
 
     LoadProperties(node, layer->properties);
 
@@ -691,7 +692,7 @@ bool Map::LoadCollisions(std::string layerName) {
     while (mapLayerItem != NULL) {
 
         if (mapLayerItem->data->name.GetString() == layerName) {
-            
+
 
             for (int x = 0; x < mapLayerItem->data->width; x++)
             {
@@ -703,20 +704,20 @@ bool Map::LoadCollisions(std::string layerName) {
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
 
-                   
+
 
                     /*No borrar, original sistema de colisiones*/
                     PhysBody* c1;
                     if (gid == tileset->firstgid + 0) {
-                        c1 = app->physics->CreateRectangle(pos.x+16, pos.y+16 , 32, 32, STATIC);
+                        c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 16, 32, 32, STATIC);
                         c1->ctype = ColliderType::PLATFORM;
                         collisionsList.Add(c1);
                         ret = true;
                     }
-                   
+
 
                     if (gid == tileset->firstgid + 1) {
-                        c1 = app->physics->CreateRectangle(pos.x + 16, pos.y+2, 32, 4, STATIC);
+                        c1 = app->physics->CreateRectangle(pos.x + 16, pos.y + 2, 32, 4, STATIC);
                         c1->ctype = ColliderType::PLATFORM_TRASPASS;
                         traspasedPlatformList.Add(c1);
                         collisionsList.Add(c1);
@@ -773,7 +774,7 @@ bool Map::LoadCollisionsObject()
 
             MapObject* object = mapObjectsItem->data->objects[i];
             PhysBody* c1;
-            c1 = app->physics->CreateRectangle(object->x + object->width/2, object->y + object->height/2, object->width, object->height, STATIC);
+            c1 = app->physics->CreateRectangle(object->x + object->width / 2, object->y + object->height / 2, object->width, object->height, STATIC);
             c1->ctype = ColliderType::PLATFORM;
             collisionsList.Add(c1);
             ret = true;
@@ -818,9 +819,9 @@ bool Map::LoadEntities(std::string layerName)
 
                     //Monedas
                     if (gid == tileset->firstgid) {
-                       Coin* coin = (Coin*)app->entityManager->CreateEntity(EntityType::COIN);
-                       coin->parameters = configNode.child("scene").child("textures").child("coin");
-                       coin->position = iPoint(pos.x + 16, pos.y + 16);
+                        Coin* coin = (Coin*)app->entityManager->CreateEntity(EntityType::COIN);
+                        coin->parameters = configNode.child("scene").child("textures").child("coin");
+                        coin->position = iPoint(pos.x + 16, pos.y + 16);
                     }
 
                     //cofre con Monedas
@@ -828,7 +829,7 @@ bool Map::LoadEntities(std::string layerName)
                         Chest* chest = (Chest*)app->entityManager->CreateEntity(EntityType::CHEST_COIN);
                         chest->parameters = configNode.child("scene").child("textures").child("chest");
                         chest->position = iPoint(pos.x + 16, pos.y + 16);
-                      
+
                     }
 
                     //espina que se rompe
@@ -851,7 +852,7 @@ bool Map::LoadEntities(std::string layerName)
                         app->scene->setPlayer((Player*)app->entityManager->CreateEntity(EntityType::PLAYER));
                         app->scene->getPlayer()->parameters = configNode.child("scene").child("player");
                         app->scene->getPlayer()->position = iPoint(pos.x + 16, pos.y + 16);
-                        
+
                     }
 
                     //Enemy armadillo
@@ -868,7 +869,7 @@ bool Map::LoadEntities(std::string layerName)
 
                         SaveStatue* entity = (SaveStatue*)app->entityManager->CreateEntity(EntityType::SAVE_STATUE);
                         entity->parameters = configNode.child("scene").child("textures").child("saveStatue");
-                        entity->position = iPoint(pos.x + 16, pos.y + 16 - 32 );
+                        entity->position = iPoint(pos.x + 16, pos.y + 16 - 32);
 
                     }
 
@@ -881,6 +882,14 @@ bool Map::LoadEntities(std::string layerName)
 
                     }
 
+                    //Monedas
+                    if (gid == tileset->firstgid + 8) {
+                        Food* food = (Food*)app->entityManager->CreateEntity(EntityType::FOOD);
+                        food->parameters = configNode.child("scene").child("textures").child("food");
+                        food->position = iPoint(pos.x + 16, pos.y + 16);
+                    }
+
+
 
                 }
             }
@@ -889,7 +898,7 @@ bool Map::LoadEntities(std::string layerName)
         mapLayerItem = mapLayerItem->next;
 
     }
-   
+
 
 
 
@@ -956,7 +965,7 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer*
             TileSet* tileset = GetTilesetFromTileId(gid);
             //If the gid is a blockedGid is an area that I cannot navigate, so is set in the navigation map as 0, all the other areas can be navigated
             //!!!! make sure that you assign blockedGid according to your map
-            
+
             if (navigationLayer == navigationLayer_Floor) {
                 if (gid == tileset->firstgid + 1) navigationMap[i] = 1;
                 else navigationMap[i] = 0;
@@ -966,7 +975,7 @@ void Map::CreateNavigationMap(int& width, int& height, uchar** buffer, MapLayer*
                 else navigationMap[i] = 1;
             }
 
-           
+
         }
     }
 
@@ -990,7 +999,7 @@ Properties::Property* Properties::GetProperty(const char* name)
     Property* p = NULL;
     if (this != nullptr) {
         ListItem<Property*>* item = list.start;
-       
+
 
         while (item)
         {

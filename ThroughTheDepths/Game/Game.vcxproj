@@ -101,6 +101,7 @@
     <ClCompile Include="Source\Enemy_Pajaro.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
+    <ClCompile Include="Source\Food.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiControlImage.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="Source\Entity.h" />
     <ClInclude Include="Source\EntityManager.h" />
     <ClInclude Include="Source\FadeToBlack.h" />
+    <ClInclude Include="Source\Food.h" />
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiControlButton.h" />
     <ClInclude Include="Source\GuiControlImage.h" />

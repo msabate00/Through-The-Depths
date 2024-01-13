@@ -33,6 +33,7 @@ enum class ColliderType {
 	ITEM,
 	CHEST,
 	COIN,
+	
 	PLANT_BARRIER,
 	PLANT_BREAKABLE,
 	PLATFORM, 
@@ -42,7 +43,8 @@ enum class ColliderType {
 	ENEMY,
 	SAVE_STATUE,
 	VICTORY_COLLISION,
-	UNKNOWN
+	FOOD,
+	UNKNOWN,
 	// ..
 };
 
