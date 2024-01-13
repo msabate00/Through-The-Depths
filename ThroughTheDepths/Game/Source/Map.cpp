@@ -24,7 +24,7 @@
 #include "SaveStatue.h"
 #include "Animation.h"
 
-Map::Map() : Module(), mapLoaded(false)
+Map::Map(bool start_enabled) : Module(start_enabled), mapLoaded(false)
 {
     name.Create("map");
 }

@@ -5,6 +5,7 @@
 #include "Textures.h"
 #include "Audio.h"
 #include "Scene.h"
+#include "SceneMainMenu.h"
 #include "Map.h"
 #include "Physics.h"
 #include "Particles.h"
@@ -21,6 +22,11 @@
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {
+
+	bool startDirectlyGame = false;
+
+
+
 	Timer timer = Timer();
 	startupTime = Timer();
 	frameTime = PerfTimer();
@@ -34,14 +40,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures();
 	audio = new Audio();
 	physics = new Physics();
-	scene = new Scene();
+	scene = new Scene(startDirectlyGame);
+	sceneMainMenu = new SceneMainMenu(!startDirectlyGame);
 
-	map = new Map();
+	map = new Map(startDirectlyGame);
 	entityManager = new EntityManager();
 	particles = new Particles();
 	fadeToBlack = new FadeToBlack();
 	guiManager = new GuiManager();
-	interface = new Interface();
+	interface = new Interface(startDirectlyGame);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -54,6 +61,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	
 	AddModule(scene);
+	AddModule(sceneMainMenu);
+	
 
 
 	AddModule(particles);
@@ -138,6 +147,7 @@ bool App::Start()
 	while(item != NULL && ret == true)
 	{
 		if (!item->data->active) {
+			item = item->next;
 			continue;
 		}
 		ret = item->data->Start();

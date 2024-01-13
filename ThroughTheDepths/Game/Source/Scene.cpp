@@ -15,7 +15,7 @@
 
 Scene::Scene(bool start_enabled) : Module(start_enabled)
 {
-	name.Create("scene");
+	name.Create("scenee");
 	
 }
 

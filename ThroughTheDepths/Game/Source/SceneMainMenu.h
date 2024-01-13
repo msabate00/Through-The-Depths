@@ -36,6 +36,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	Player* getPlayer();
+	void setPlayer(Player* new_player);
+
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 
@@ -47,6 +50,7 @@ public:
 	SDL_Texture* fondo1;
 	SDL_Texture* fondo2;
 	SDL_Texture* fondo0;
+
 private:
 	
 	float textPosX, textPosY = 0;
@@ -61,6 +65,8 @@ private:
 
 	GuiControlButton* gcButtom;
 	
+
+	SDL_Texture* hearthHolderTex;
 
 	
 };
