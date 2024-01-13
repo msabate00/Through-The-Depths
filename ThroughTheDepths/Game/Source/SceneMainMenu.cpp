@@ -57,9 +57,13 @@ bool SceneMainMenu::Start()
 	gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
 
 
-	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 50, 120,20 };
-	gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "START", btPos, this);
-	controlsScene.Add(gcButtom);
+	
+	
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NEW GAME",	SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 - 70,	120,20 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUE",	SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 - 40,	120,20 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "SETTINGS",	SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 - 10,	120,20 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CREDITS",	SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 + 20,	120,20 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "EXIT",		SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 + 50,	120,20 }, this));
 
 	return true;
 }
@@ -118,6 +122,10 @@ bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
 
 		case 1:
 			app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene);
+			break;
+
+		case 2:
+			app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene, true);
 			break;
 
 		default:
