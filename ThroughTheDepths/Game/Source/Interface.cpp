@@ -238,7 +238,7 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 				app->guiManager->DestroyGuiControl(controlListItem->data);
 			}
 			pauseMenuButtons.Clear();
-
+			app->pause = false;
 
 
 			break;
@@ -254,6 +254,7 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 103:
 
+			app->pause = false;
 			app->fadeToBlack->FadeToBlackTransition(app->scene, app->sceneMainMenu);
 
 			break;

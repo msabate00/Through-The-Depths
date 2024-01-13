@@ -125,6 +125,7 @@ public:
 	int sceneLevel = 0;
 
 	bool closeApplication = false;
+	bool pause = false;
 
 private:
 

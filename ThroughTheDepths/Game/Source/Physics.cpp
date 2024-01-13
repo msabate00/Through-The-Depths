@@ -55,7 +55,13 @@ bool Physics::PreUpdate()
 
 	// Step (update) the World
 	// WARNING: WE ARE STEPPING BY CONSTANT 1/60 SECONDS!
-	world->Step(1.0f / 60.0f, 6, 2);
+	if (app->pause) {
+		//world->Step(1.0f / 60.0f, 6, 2);
+	}
+	else {
+		world->Step(1.0f / 60.0f, 6, 2);
+	}
+	
 	
 
 	// Because Box2D does not automatically broadcast collisions/contacts with sensors, 
