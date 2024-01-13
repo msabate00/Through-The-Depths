@@ -634,7 +634,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 
 		case ColliderType::VICTORY_COLLISION:
-			app->audio->PlayFx(sonidoDeVictoria);
+			//app->audio->PlayFx(sonidoDeVictoria);
+			app->sceneLevel = 1;
+			app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene);
 			break;
 		}
 		
