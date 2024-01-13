@@ -57,7 +57,10 @@ private:
 	int fondo1Offset = 0;
 	int fondo2Offset = 0;
 
+	
+	List<GuiControl*> controlsScene;
 	GuiControlButton* gcButtom;
+	
 	
 
 	SDL_Texture* hearthHolderTex;

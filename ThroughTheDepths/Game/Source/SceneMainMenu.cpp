@@ -59,7 +59,7 @@ bool SceneMainMenu::Start()
 
 	SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 50, 120,20 };
 	gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "START", btPos, this);
-
+	controlsScene.Add(gcButtom);
 
 	return true;
 }
@@ -95,7 +95,14 @@ bool SceneMainMenu::CleanUp()
 {
 	LOG("Freeing SceneMainMenu");
 	
-	app->guiManager->DestroyGuiControl(gcButtom);
+
+	ListItem<GuiControl*>* control;
+	for (control = controlsScene.start; control != NULL; control = control->next)
+	{
+		app->guiManager->DestroyGuiControl(control->data);
+	}
+
+	
 
 	return true;
 }
