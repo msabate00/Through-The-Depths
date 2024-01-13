@@ -94,12 +94,31 @@ bool GuiManager::CleanUp()
 
 	while (control != nullptr)
 	{
+		//ListItem<GuiControl*>* controlNext = control->next;
 		RELEASE(control);
+		//control = controlNext;
 	}
+	//guiControlsList.Clear();
 
 	return true;
 
-	return false;
+	
+}
+
+void GuiManager::DestroyGuiControl(GuiControl* toDestroy) {
+
+
+	ListItem<GuiControl*>* control;
+
+
+	for (control = guiControlsList.start; control != NULL; control = control->next)
+	{
+		if (control->data == toDestroy) {
+			guiControlsList.Del(control);
+			break;
+		}
+	}
+
 }
 
 

@@ -5,6 +5,7 @@
 #include "Window.h"
 #include "Map.h"
 #include "Physics.h"
+#include "Interface.h"
 
 #include "SDL/include/SDL_render.h"
 #include "Log.h"
@@ -51,6 +52,7 @@ bool FadeToBlack::Update(float dt)
 			app->map->Disable();
 			moduleToDisable->Disable();
 			app->entityManager->Disable();
+			app->interface->Disable();
 			
 			
 			/*app->physics->Disable();
@@ -61,6 +63,7 @@ bool FadeToBlack::Update(float dt)
 			app->map->Enable();
 			moduleToEnable->Enable();
 			app->entityManager->Enable();
+			app->interface->Enable();
 			if (reloadScene) {
 				app->LoadRequest();
 				reloadScene = false;
