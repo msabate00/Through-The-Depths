@@ -124,6 +124,8 @@ public:
 
 	int sceneLevel = 0;
 
+	bool closeApplication = false;
+
 private:
 
 	int argc;

@@ -76,11 +76,11 @@ bool Interface::PostUpdate()
 {
 	bool ret = true;
 
-	
-	ShowHUD();
-	
-	ShowPauseMenu();
+	if (app->scene->active) {
+		ShowHUD();
 
+		ShowPauseMenu();
+	}
 
 	
 	
@@ -100,6 +100,13 @@ bool Interface::PostLateUpdate()
 bool Interface::CleanUp()
 {
 	LOG("Freeing Interface");
+
+	ListItem<GuiControl*>* controlListItem = nullptr;
+	for (controlListItem = pauseMenuButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
+	{
+		app->guiManager->DestroyGuiControl(controlListItem->data);
+	}
+	pauseMenuButtons.Clear();
 
 	return true;
 }
@@ -251,6 +258,7 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 
 			break;
 		case 104:
+			app->closeApplication = true;
 			break;
 
 

@@ -39,6 +39,7 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 	void SettingsInterface();
+	void ShowCredits();
 	void DestroySettingsInterface();
 
 	bool LoadState(pugi::xml_node node);
@@ -65,9 +66,13 @@ private:
 	List<GuiControl*> controlsScene;
 	List<GuiControl*> controlsSettings;
 	GuiControlButton* gcButtom;
+	GuiControl* gcCloseCredits;
 	
 	bool showSettings = false;
 	bool _showSettings = false;
+
+	bool showCredits = false;
+	bool _showCredits = false;
 
 	SDL_Texture* hearthHolderTex;
 

@@ -84,7 +84,9 @@ bool SceneMainMenu::Update(float dt)
 		
 	}
 
-
+	if (showCredits) {
+		ShowCredits();
+	}
 
 
 	return true;
@@ -140,6 +142,13 @@ bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			showSettings = true;
 			break;
 
+		case 4:
+			showCredits = true;
+			break;
+		
+		case 5:
+			app->closeApplication = true;
+			break;
 
 
 		case 105:
@@ -147,6 +156,18 @@ bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			showSettings = false;
 			_showSettings = false;
 			DestroySettingsInterface();
+			break;
+
+
+		case 106:
+			showCredits = false;
+			_showCredits = false;
+			ListItem<GuiControl*>* control;
+			for (control = controlsScene.start; control != NULL; control = control->next)
+			{
+				control->data->state = GuiControlState::NORMAL;
+			}
+			app->guiManager->DestroyGuiControl(gcCloseCredits);
 			break;
 
 		default:
@@ -177,6 +198,24 @@ void SceneMainMenu::SettingsInterface()
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1041, "Vsync", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 + 20,	120,20 }, this));
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "Return to main menu", SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 + 50,	120,20 }, this));
 	_showSettings = true;
+}
+
+void SceneMainMenu::ShowCredits()
+{
+	if (showCredits && !_showCredits) {
+
+		ListItem<GuiControl*>* control;
+		for (control = controlsScene.start; control != NULL; control = control->next)
+		{
+			control->data->state = GuiControlState::DISABLED;
+		}
+
+		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 106, "Close credits", SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH  - 50,	120,20 }, this);
+		_showCredits = true;
+	}
+
+	//Mostrar imagen o lo que sea
+
 }
 
 void SceneMainMenu::DestroySettingsInterface()

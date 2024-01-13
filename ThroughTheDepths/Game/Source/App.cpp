@@ -185,7 +185,12 @@ bool App::Update()
 
 
 	FinishUpdate();
-	return ret;
+
+
+	if (!ret) return ret;
+	return !closeApplication;
+
+
 }
 
 // Load config from XML file
