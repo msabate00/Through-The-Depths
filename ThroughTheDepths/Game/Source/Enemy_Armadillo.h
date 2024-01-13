@@ -34,6 +34,10 @@ public:
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 	void OnExitCollision(PhysBody* physA, PhysBody* physB);
 
+	void Movement(float dt);
+	void Dying();
+	void AnimationState();
+
 public:
 
 	const char* texturePath;

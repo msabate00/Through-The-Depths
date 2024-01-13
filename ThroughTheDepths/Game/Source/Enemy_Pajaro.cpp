@@ -81,15 +81,11 @@ bool EnemyPajaro::Update(float dt)
 {
 
 	if (!active) {
-		/*if (pbody->body != nullptr) {
-			pbody->body->GetWorld()->DestroyBody(pbody->body);
-			pbody->body = nullptr;
-			pbody->body->SetActive(false);
-		}*/
 		pbody->body->SetActive(false);
 		return true;
 	}
 
+	//Setting position for movement
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
@@ -97,14 +93,84 @@ bool EnemyPajaro::Update(float dt)
 	playerPos = app->scene->getPlayer()->position;
 	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 
+	Movement(dt);
+	Dying();
+
+	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
+	lastPosY = position.y;
+	
+	AnimationState();
+
+	currentAnimation->Update();
+
+	return true;
+}
+
+bool EnemyPajaro::PostUpdate() {
+
+	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+
+	if (isFacingLeft) {
+		app->render->DrawTexture(texture, position.x - 4, position.y - 14, SDL_FLIP_HORIZONTAL, &rect);
+	}
+	else {
+		app->render->DrawTexture(texture, position.x - 4, position.y - 14, SDL_FLIP_NONE, &rect);
+	}
+
+	if (app->debug) {
+
+
+		for (uint i = 0; i < lastPath.Count(); ++i)
+		{
+			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
+			if (isAttacking) {
+				app->render->DrawTexture(app->map->tilePathTexRed, pos.x, pos.y, 1.0f);
+			}
+			else {
+				app->render->DrawTexture(app->map->tilePathTexBrown, pos.x, pos.y, 1.0f);
+			}
+		}
+	}
+
+
+	return true;
+}
+
+bool EnemyPajaro::CleanUp()
+{
+
+	app->physics->GetWorld()->DestroyBody(pbody->body);
+	SDL_DestroyTexture(texture);
+
+
+	return true;
+}
+
+void EnemyPajaro::OnCollision(PhysBody* physA, PhysBody* physB)
+{
+	if (physB->ctype == ColliderType::PLAYER_PROYECTILE) {
+		isDying = true;
+		app->audio->PlayFx(muertePaloma);
+	}
+}
+
+void EnemyPajaro::OnExitCollision(PhysBody* physA, PhysBody* physB)
+{
+
+}
+
+void EnemyPajaro::Movement(float dt)
+{
 	if (!isDying) {
 
-		
+
 
 		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
 			onView = true;
 			state = EntityState::RUNNING;
-			
+
 			speed = runSpeed;
 			if (!isAttacking) {
 				app->audio->PlayFx(volarPaloma, id);
@@ -125,60 +191,60 @@ bool EnemyPajaro::Update(float dt)
 			if (onView) { lastPath.Clear(); }
 			onView = false;
 			speed = walkSpeed;
-			
-			
 
-				state = EntityState::RUNNING;
-				//targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
-				//pathfinding->CreatePath(origPos, targPos);
 
-				b2Vec2 vel = b2Vec2(0, 0);
-				if (isFacingLeft) {
-					origPos.x -= 1;
-					if (pathfinding->IsWalkable(origPos)) {
-						vel.x -= speed * dt;
-					}
-					else {
-						isFacingLeft = false;
-					}
+
+			state = EntityState::RUNNING;
+			//targPos = iPoint(originalPosition.x + rand() % tilesView * 2 - tilesView, originalPosition.y);
+			//pathfinding->CreatePath(origPos, targPos);
+
+			b2Vec2 vel = b2Vec2(0, 0);
+			if (isFacingLeft) {
+				origPos.x -= 1;
+				if (pathfinding->IsWalkable(origPos)) {
+					vel.x -= speed * dt;
 				}
 				else {
-					origPos.x += 1;
-					if (pathfinding->IsWalkable(origPos)) {
-						vel.x += speed * dt;
-					}
-					else {
-						isFacingLeft = true;
-					}
+					isFacingLeft = false;
 				}
-
-				if (goingUp) {
-					origPos.y -= 1;
-					if (pathfinding->IsWalkable(origPos)) {
-						vel.y -= speed * dt;
-					}
-					else {
-						goingUp = false;
-					}
+			}
+			else {
+				origPos.x += 1;
+				if (pathfinding->IsWalkable(origPos)) {
+					vel.x += speed * dt;
 				}
 				else {
-					origPos.y += 1;
-					if (pathfinding->IsWalkable(origPos)) {
-						vel.y += speed * dt;
-					}
-					else {
-						goingUp = true;
-					}
+					isFacingLeft = true;
 				}
+			}
 
-				if (goingUpTimer.ReadMSec() + randomGoingUpTimer >= 1000) {
-					goingUp = !goingUp;
-					goingUpTimer.Start();
+			if (goingUp) {
+				origPos.y -= 1;
+				if (pathfinding->IsWalkable(origPos)) {
+					vel.y -= speed * dt;
 				}
+				else {
+					goingUp = false;
+				}
+			}
+			else {
+				origPos.y += 1;
+				if (pathfinding->IsWalkable(origPos)) {
+					vel.y += speed * dt;
+				}
+				else {
+					goingUp = true;
+				}
+			}
+
+			if (goingUpTimer.ReadMSec() + randomGoingUpTimer >= 1000) {
+				goingUp = !goingUp;
+				goingUpTimer.Start();
+			}
 
 
-				pbody->body->SetLinearVelocity(vel);
-			
+			pbody->body->SetLinearVelocity(vel);
+
 
 			/*if (lastPath.Count() <= 0) {
 
@@ -269,6 +335,10 @@ bool EnemyPajaro::Update(float dt)
 			pbody->body->SetLinearVelocity(vel);
 		}
 	}
+}
+
+void EnemyPajaro::Dying()
+{
 
 	if (isDying) {
 		pbody->body->SetActive(false);
@@ -281,80 +351,21 @@ bool EnemyPajaro::Update(float dt)
 			active = false;
 
 		}
-		
-	}
 
-	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-	lastPosY = position.y;
+	}
+}
+
+void EnemyPajaro::AnimationState()
+{
 	switch (state)
 	{
-		case EntityState::IDLE:				currentAnimation = &runAnim; break;
-			//case EntityState::STOP_ATTACKING:	currentAnimation = &stopAnim; if (stopAnim.HasFinished()) { currentAnimation = &idleAnim; } break;
-		case EntityState::RUNNING:			currentAnimation = &flyAnim; break;
-		case EntityState::ATTACKING:		currentAnimation = &attackAnim;break;
-		case EntityState::JUMPING:			currentAnimation = &runAnim; break;
-		case EntityState::FALLING:			currentAnimation = &runAnim; break;
-		case EntityState::DYING:			currentAnimation = &dieAnim; break;
-			//case EntityState::TRACK:		currentAnimation = &trackAnim; break;
-		default:							currentAnimation = &runAnim; break;
+	case EntityState::IDLE:				currentAnimation = &runAnim; break;
+	case EntityState::RUNNING:			currentAnimation = &flyAnim; break;
+	case EntityState::ATTACKING:		currentAnimation = &attackAnim;break;
+	case EntityState::JUMPING:			currentAnimation = &runAnim; break;
+	case EntityState::FALLING:			currentAnimation = &runAnim; break;
+	case EntityState::DYING:			currentAnimation = &dieAnim; break;
+
+	default:							currentAnimation = &runAnim; break;
 	}
-
-	currentAnimation->Update();
-
-	return true;
-}
-
-bool EnemyPajaro::PostUpdate() {
-
-	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
-	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-
-	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 4, position.y - 14, SDL_FLIP_HORIZONTAL, &rect);
-	}
-	else {
-		app->render->DrawTexture(texture, position.x - 4, position.y - 14, SDL_FLIP_NONE, &rect);
-	}
-
-	if (app->debug) {
-
-
-		for (uint i = 0; i < lastPath.Count(); ++i)
-		{
-			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-			if (isAttacking) {
-				app->render->DrawTexture(app->map->tilePathTexRed, pos.x, pos.y, 1.0f);
-			}
-			else {
-				app->render->DrawTexture(app->map->tilePathTexBrown, pos.x, pos.y, 1.0f);
-			}
-		}
-	}
-
-
-	return true;
-}
-
-bool EnemyPajaro::CleanUp()
-{
-
-	app->physics->GetWorld()->DestroyBody(pbody->body);
-	SDL_DestroyTexture(texture);
-
-
-	return true;
-}
-
-void EnemyPajaro::OnCollision(PhysBody* physA, PhysBody* physB)
-{
-	if (physB->ctype == ColliderType::PLAYER_PROYECTILE) {
-		isDying = true;
-		app->audio->PlayFx(muertePaloma);
-	}
-}
-
-void EnemyPajaro::OnExitCollision(PhysBody* physA, PhysBody* physB)
-{
-
 }

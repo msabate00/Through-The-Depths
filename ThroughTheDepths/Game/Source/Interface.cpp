@@ -97,6 +97,43 @@ bool Interface::PostUpdate()
 	bool ret = true;
 
 	
+	ShowHUD();
+	
+	
+
+	
+	
+	return ret;
+}
+
+// Called each loop iteration
+bool Interface::PostLateUpdate()
+{
+	bool ret = true;
+
+
+	return ret;
+}
+
+// Called before quitting
+bool Interface::CleanUp()
+{
+	LOG("Freeing Interface");
+
+	return true;
+}
+
+
+bool Interface::OnGuiMouseClickEvent(GuiControl* control)
+{
+	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
+	LOG("Press Gui Control: %d", control->id);
+
+	return true;
+}
+
+void Interface::ShowHUD()
+{
 
 	app->render->DrawTexture(heartHolderTex, 2, 2, 0);
 
@@ -134,35 +171,16 @@ bool Interface::PostUpdate()
 	else {
 		app->render->DrawTexture(noHeartTex, 55, 10, 0);
 	}
-	
-
-	
-	
-	return ret;
 }
 
-// Called each loop iteration
-bool Interface::PostLateUpdate()
+void Interface::ShowPauseMenu()
 {
-	bool ret = true;
 
 
-	return ret;
 }
 
-// Called before quitting
-bool Interface::CleanUp()
+void Interface::ShowPauseMenuSettings()
 {
-	LOG("Freeing Interface");
-
-	return true;
-}
 
 
-bool Interface::OnGuiMouseClickEvent(GuiControl* control)
-{
-	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
-	LOG("Press Gui Control: %d", control->id);
-
-	return true;
 }

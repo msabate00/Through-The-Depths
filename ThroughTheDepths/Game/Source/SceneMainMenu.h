@@ -1,5 +1,5 @@
-#ifndef __INTERFACE_H__
-#define __INTERFACE_H__
+#ifndef __MAINMENU_H__
+#define __MAINMENU_H__
 
 #include "Module.h"
 #include "Player.h"
@@ -9,14 +9,14 @@
 
 struct SDL_Texture;
 
-class Interface : public Module
+class SceneMainMenu : public Module
 {
 public:
 
-	Interface(bool start_enabled = true);
+	SceneMainMenu(bool start_enabled = true);
 
 	// Destructor
-	virtual ~Interface();
+	virtual ~SceneMainMenu();
 
 	// Called before render is available
 	bool Awake(pugi::xml_node& conf);
@@ -33,37 +33,36 @@ public:
 	// Called before all Updates
 	bool PostUpdate();
 
-	bool PostLateUpdate();
 	// Called before quitting
 	bool CleanUp();
+
+	bool LoadState(pugi::xml_node node);
+	bool SaveState(pugi::xml_node node);
 
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 
-	void ShowHUD();
-	void ShowPauseMenu();
-	void ShowPauseMenuSettings();
-
-
 	
-	//SDL_Texture* img;
-	//SDL_Texture* fondo1;
-	//SDL_Texture* fondo2;
-	//SDL_Texture* fondo0;
+	SDL_Texture* img;
+	SDL_Texture* fondo1;
+	SDL_Texture* fondo2;
+	SDL_Texture* fondo0;
 private:
 	
 	float textPosX, textPosY = 0;
 	uint texW, texH;
 	uint windowW, windowH;
+	Player* player;
 
 
-	SDL_Texture* heartHolderTex;
-
-	SDL_Texture* heartTex;
-	SDL_Texture* noHeartTex;
+	int fondo0Offset = 0;
+	int fondo1Offset = 0;
+	int fondo2Offset = 0;
 
 	GuiControlButton* gcButtom;
 	
+
+	
 };
 
-#endif // __Interface_H__
+#endif // __SceneMainMenuMAINMENUE_H__

@@ -96,6 +96,9 @@
     <ClCompile Include="Source\GuiControlImage.cpp">
       <Filter>Entities\GUI_ELEMENTS</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneMainMenu.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -221,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="Source\GuiControlImage.h">
       <Filter>Entities\GUI_ELEMENTS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneMainMenu.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

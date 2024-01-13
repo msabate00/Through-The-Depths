@@ -36,13 +36,15 @@ public:
 	unsigned int LoadAudioFX(const char* name);
 	bool LoadAudioMusic(const char* name, float fadeTime = 2.0f);
 
+	int sfvVolumne;
+	int musicVolumne;
+
 private:
 
 	_Mix_Music* music;
 	List<Mix_Chunk *>	fx;
 
-	int sfvVolumne;
-	int musicVolumne;
+	
 
 };
 
