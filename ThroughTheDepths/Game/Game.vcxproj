@@ -103,7 +103,9 @@
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\Food.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
+    <ClCompile Include="Source\GuiControlCheckBox.cpp" />
     <ClCompile Include="Source\GuiControlImage.cpp" />
+    <ClCompile Include="Source\GuiControlSlider.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\Interface.cpp" />
     <ClCompile Include="Source\Item.cpp" />
@@ -139,7 +141,9 @@
     <ClInclude Include="Source\Food.h" />
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiControlButton.h" />
+    <ClInclude Include="Source\GuiControlCheckBox.h" />
     <ClInclude Include="Source\GuiControlImage.h" />
+    <ClInclude Include="Source\GuiControlSlider.h" />
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\Interface.h" />
     <ClInclude Include="Source\Item.h" />

@@ -55,12 +55,10 @@ bool Physics::PreUpdate()
 
 	// Step (update) the World
 	// WARNING: WE ARE STEPPING BY CONSTANT 1/60 SECONDS!
-	if (app->pause) {
-		//world->Step(1.0f / 60.0f, 6, 2);
-	}
-	else {
+	if (!app->pause) {
 		world->Step(1.0f / 60.0f, 6, 2);
 	}
+	
 	
 	
 

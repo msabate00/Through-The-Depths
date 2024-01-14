@@ -99,6 +99,13 @@
     <ClCompile Include="Source\SceneMainMenu.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Food.cpp" />
+    <ClCompile Include="Source\GuiControlSlider.cpp">
+      <Filter>Entities\GUI_ELEMENTS</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GuiControlCheckBox.cpp">
+      <Filter>Entities\GUI_ELEMENTS</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -227,6 +234,13 @@
     </ClInclude>
     <ClInclude Include="Source\SceneMainMenu.h">
       <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Food.h" />
+    <ClInclude Include="Source\GuiControlSlider.h">
+      <Filter>Entities\GUI_ELEMENTS</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GuiControlCheckBox.h">
+      <Filter>Entities\GUI_ELEMENTS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
