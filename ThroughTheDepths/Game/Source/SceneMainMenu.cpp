@@ -135,7 +135,8 @@ bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 
 		case 2:
-			app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene, true);
+			//app->LoadRequest();
+			app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene, true, 60, true);
 			break;
 
 		case 3:

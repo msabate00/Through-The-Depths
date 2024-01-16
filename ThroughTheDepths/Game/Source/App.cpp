@@ -471,9 +471,9 @@ bool App::LoadFromFile() {
 
 		while (item != NULL && ret == true)
 		{
-			if (item->data->active) {
+			//if (item->data->active) {
 				ret = item->data->LoadState(saveFile.child("game_state").child(item->data->name.GetString()));
-			}
+			//}
 			item = item->next;
 		}
 

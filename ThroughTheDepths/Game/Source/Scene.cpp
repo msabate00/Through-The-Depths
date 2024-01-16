@@ -319,18 +319,23 @@ void Scene::setPlayer(Player* new_player)
 // for now load camera's x and y
 bool Scene::LoadState(pugi::xml_node node) {
 
-	if (app->sceneLevel != node.child("player").attribute("sceneLevel").as_int()) {
-		app->sceneLevel = node.child("player").attribute("sceneLevel").as_int();
-		app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene);
-	}
-	else {
+	//if (app->sceneLevel != node.child("player").attribute("sceneLevel").as_int()) {
+	//	app->sceneLevel = node.child("player").attribute("sceneLevel").as_int();
+	//	app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene); //Esto no lo hace creo
+	//}
+	//else {
+	//	app->sceneLevel = node.child("player").attribute("sceneLevel").as_int();
+	//	player->position.x = node.child("player").attribute("x").as_int() + 16;
+	//	player->position.y = node.child("player").attribute("y").as_int() + 16;
+	//	player->SetPosition(node.child("player").attribute("x").as_int(), node.child("player").attribute("y").as_int());
+	//	
+	//}
+	app->sceneLevel = node.child("player").attribute("sceneLevel").as_int();
+	if (player != nullptr) {
 		player->position.x = node.child("player").attribute("x").as_int() + 16;
 		player->position.y = node.child("player").attribute("y").as_int() + 16;
 		player->SetPosition(node.child("player").attribute("x").as_int(), node.child("player").attribute("y").as_int());
-		app->sceneLevel = node.child("player").attribute("sceneLevel").as_int();
 	}
-
-
 	app->render->camera.x = node.child("camera").attribute("x").as_int() + 16;
 	app->render->camera.y = node.child("camera").attribute("y").as_int() + 16;
 

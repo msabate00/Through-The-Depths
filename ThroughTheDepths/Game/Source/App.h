@@ -127,6 +127,9 @@ public:
 	bool closeApplication = false;
 	bool pause = false;
 
+	bool loadRequest = false;
+	bool saveRequest = false;
+
 private:
 
 	int argc;
@@ -158,8 +161,7 @@ private:
 
 	uint32 maxFrameDuration = 16;
 
-	bool loadRequest = false;
-	bool saveRequest = false;
+	
 	
 
 };

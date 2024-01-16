@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Window.h"
 #include "Map.h"
+#include "Scene.h"
 #include "Physics.h"
 #include "Interface.h"
 
@@ -45,6 +46,7 @@ bool FadeToBlack::Update(float dt)
 
 	if (currentStep == Fade_Step::TO_BLACK)
 	{
+		
 		++frameCount;
 		if (frameCount >= maxFadeFrames)
 		{
@@ -54,30 +56,39 @@ bool FadeToBlack::Update(float dt)
 			app->entityManager->Disable();
 			app->interface->Disable();
 			
-			
-			/*app->physics->Disable();
-			app->physics->Enable();*/
-			/*app->physics->CleanUp();*/
-			
-
-			app->map->Enable();
-			moduleToEnable->Enable();
-			app->entityManager->Enable();
-			app->interface->Enable();
 			if (reloadScene) {
 				app->LoadRequest();
 				reloadScene = false;
 			}
+			
+			if (!app->loadRequest) {
+				app->map->Enable();
+				moduleToEnable->Enable();
+				app->entityManager->Enable();
+				app->interface->Enable();
+				currentStep = Fade_Step::FROM_BLACK;
+				app->LoadRequest();
+			}
 
-			currentStep = Fade_Step::FROM_BLACK;
+			
 		}
+		
 	}
 	else
 	{
 		--frameCount;
 		if (frameCount <= 0)
 		{
+			
 			currentStep = Fade_Step::NONE;
+
+			
+			//if (reloadScene) {
+			//	//app->LoadRequest();
+			//	reloadScene = false;
+			//	FadeToBlackTransition(app->scene, app->scene);
+			//}
+			
 		}
 	}
 
@@ -98,12 +109,12 @@ bool FadeToBlack::PostUpdate()
 	return true;
 }
 
-bool FadeToBlack::FadeToBlackTransition(Module* moduleToDisable, Module* moduleToEnable, bool load,float frames)
+bool FadeToBlack::FadeToBlackTransition(Module* moduleToDisable, Module* moduleToEnable, bool load,float frames, bool force)
 {
 	bool ret = false;
 
 	// If we are already in a fade process, ignore this call
-	if (currentStep == Fade_Step::NONE)
+	if (currentStep == Fade_Step::NONE || force)
 	{
 		reloadScene = load;
 		currentStep = Fade_Step::TO_BLACK;
