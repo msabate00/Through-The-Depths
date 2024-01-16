@@ -37,6 +37,7 @@ enum class EntityType
 	PLANT_BREAKABLE,
 	ENEMY_ARMADILLO,
 	ENEMY_PAJARO,
+	BOSS,
 	UNKNOWN
 
 };

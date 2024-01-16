@@ -5,6 +5,7 @@
 #include "Coin.h"
 #include "PlantBreakable.h"
 #include "Enemy_Armadillo.h"
+#include "Enemy_Boss.h"
 #include "Enemy_Pajaro.h"
 #include "PlantBarrier.h"
 #include "SaveStatue.h"
@@ -124,6 +125,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::ENEMY_PAJARO:
 		entity = new EnemyPajaro();
+		enemies.Add(entity);
+		break;
+	case EntityType::BOSS:
+		entity = new EnemyBoss();
 		enemies.Add(entity);
 		break;
 	default:

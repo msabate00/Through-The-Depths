@@ -21,6 +21,7 @@
 #include "PlantBarrier.h"
 #include "PlantBreakable.h"
 #include "Enemy_Armadillo.h"
+#include "Enemy_Boss.h"
 #include "SaveStatue.h"
 #include "Animation.h"
 
@@ -882,11 +883,18 @@ bool Map::LoadEntities(std::string layerName)
 
                     }
 
-                    //Monedas
+                    //Comida
                     if (gid == tileset->firstgid + 8) {
                         Food* food = (Food*)app->entityManager->CreateEntity(EntityType::FOOD);
                         food->parameters = configNode.child("scene").child("textures").child("food");
                         food->position = iPoint(pos.x + 16, pos.y + 16);
+                    }
+
+                    //Boss
+                    if (gid == tileset->firstgid + 9) {
+                        EnemyBoss* boss = (EnemyBoss*)app->entityManager->CreateEntity(EntityType::BOSS);
+                        boss->parameters = configNode.child("scene").child("enemyBoss");
+                        boss->position = iPoint(pos.x + 16, pos.y + 16);
                     }
 
 
