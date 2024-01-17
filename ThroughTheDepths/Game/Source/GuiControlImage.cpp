@@ -14,7 +14,7 @@ GuiControlImage::GuiControlImage(uint32 id, SDL_Rect bounds, const char* path) :
 	canClick = false;
 	drawBasic = false;
 
-	texture = app->tex->Load(this->path);
+	texture = app->tex->Load("Output\Assets\UI\TittleScreen");
 }
 
 GuiControlImage::~GuiControlImage()
