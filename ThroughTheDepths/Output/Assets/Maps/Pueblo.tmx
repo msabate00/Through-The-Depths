@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="280" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="25" nextobjectid="46">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="280" height="60" tilewidth="32" tileheight="32" infinite="0" nextlayerid="25" nextobjectid="48">
  <tileset firstgid="1" name="TX Tileset Ground" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="tilesets2/TX Tileset Ground.png" width="512" height="512"/>
  </tileset>
@@ -352987,12 +352987,14 @@
    <tile/>
   </data>
  </layer>
- <objectgroup color="#ff0000" id="8" name="Colisiones" visible="0">
+ <objectgroup color="#ff0000" id="8" name="Colisiones">
   <object id="7" x="32" y="0" width="32" height="1728"/>
   <object id="11" x="27.6667" y="1696" width="1608.67" height="32"/>
   <object id="24" x="64" y="1536" width="32" height="160"/>
   <object id="25" x="1638.17" y="1664" width="307.667" height="32"/>
   <object id="26" x="1948.38" y="1696" width="999.25" height="32"/>
-  <object id="27" x="2947.82" y="1664" width="1560.36" height="32"/>
+  <object id="27" x="2947.82" y="1664" width="1468.18" height="32"/>
+  <object id="46" x="4384" y="1536" width="32" height="128"/>
+  <object id="47" x="4352" y="1440" width="32" height="96"/>
  </objectgroup>
 </map>
