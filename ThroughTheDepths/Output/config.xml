@@ -94,6 +94,7 @@
 			
             
             <saveStatue texturepath="Assets/Maps/tilesets/Animations.png"/>
+			<wallBoss texturepath="Assets/Maps/tilesets/Animations.png" />
 		</textures>
 		
 		
@@ -105,6 +106,7 @@
 		<enemyArmadillo texturepath="Assets/Textures/Armadillo.png" walkSpeed="0.02" runSpeed="0.08" attackSpeed="0.16" tilesView="7" tilesAttack="3" attackTimerMax="5.5"/>
         <enemyPajaro texturepath="Assets/Textures/Paloma.png" walkSpeed="0.02" runSpeed="0.08" attackSpeed="0.16" tilesView="10" tilesAttack="5" attackTimerMax="5.5"/>
 		<enemyBoss texturepath="Assets/Textures/Boss.png" walkSpeed="0.02" runSpeed="0.08" attackSpeed="0.16" tilesView="10" tilesAttack="5" attackTimerMax="5.5"/>
+		
 		
 		
 	</scene>
@@ -497,6 +499,23 @@
 			</dieAnim>
 
 		</enemyBoss>
+
+		<wallBoss>
+			<idleAnim loop="false" speed="1">
+				<frame x="0" y="0" w="1" h="1"/>
+			</idleAnim>
+			<appearAnim loop="false" speed="0.35">
+				<frame x="0" y="320" w="32" h="224"/>
+				<frame x="32" y="320" w="32" h="224"/>
+				<frame x="64" y="320" w="32" h="224"/>
+				<frame x="96" y="320" w="32" h="224"/>
+				<frame x="128" y="320" w="32" h="224"/>
+				<frame x="160" y="320" w="32" h="224"/>
+				<frame x="192" y="320" w="32" h="224"/>
+			</appearAnim>
+			
+			
+		</wallBoss>
 		
         <entorno>
             <lluviaAnim loop="true" speed="0.35">

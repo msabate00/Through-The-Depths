@@ -44,6 +44,7 @@ enum class ColliderType {
 	SAVE_STATUE,
 	VICTORY_COLLISION,
 	FOOD,
+	ZONA_BOSS,
 	UNKNOWN,
 	// ..
 };

@@ -300135,6 +300135,15 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1287"/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile/>
+   <tile gid="1291"/>
    <tile/>
    <tile/>
    <tile/>
@@ -300144,16 +300153,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1290"/>
    <tile/>
    <tile/>
    <tile/>
@@ -300352,7 +300352,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1290"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -302562,7 +302562,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="9" name="Colisiones" width="280" height="60" opacity="0.94">
+ <layer id="9" name="Colisions" width="280" height="60" opacity="0.94">
   <properties>
    <property name="Front" type="bool" value="false"/>
   </properties>
@@ -315273,6 +315273,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1304"/>
    <tile/>
    <tile/>
    <tile/>
@@ -315552,6 +315553,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1304"/>
    <tile/>
    <tile/>
    <tile/>
@@ -315831,6 +315833,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1304"/>
    <tile/>
    <tile/>
    <tile/>
@@ -316110,6 +316113,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1304"/>
    <tile/>
    <tile/>
    <tile/>
@@ -316389,6 +316393,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1304"/>
    <tile/>
    <tile/>
    <tile/>
@@ -316668,6 +316673,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1304"/>
    <tile/>
    <tile/>
    <tile/>
@@ -316947,13 +316953,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1304"/>
    <tile/>
    <tile/>
    <tile/>

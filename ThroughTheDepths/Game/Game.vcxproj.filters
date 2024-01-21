@@ -109,6 +109,9 @@
     <ClCompile Include="Source\Enemy_Boss.cpp">
       <Filter>Entities\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Source\wallBoss.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="Source\Enemy_Boss.h">
       <Filter>Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\wallBoss.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

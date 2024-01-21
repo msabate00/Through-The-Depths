@@ -60,6 +60,9 @@ public:
 
 	Animation* currentAnimation = nullptr;
 
+
+	bool activeBoss = false;
+
 private:
 
 	b2Transform startTransform;
@@ -67,17 +70,12 @@ private:
 
 
 
-	Animation runAnim;
-	Animation walkAnim;
 	Animation idleAnim;
-	Animation jumpUpAnim;
-	Animation jumpDownAnim;
-	Animation ghostAnim;
-	Animation dieAnim;
+	Animation runAnim;
 	Animation attackAnim;
-	Animation attackLoopAnim;
-	Animation trackAnim;
-	Animation stopAnim;
+	Animation attack2Anim;
+	Animation dmgAnim;
+	Animation dieAnim;
 
 
 	bool isDying = false;
@@ -88,9 +86,8 @@ private:
 
 	Timer cansadoTimer;
 
-	DynArray<iPoint> lastPath;
 
-	PathFinding* pathfinding;
+	
 
 
 };

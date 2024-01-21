@@ -4,6 +4,8 @@
 #include "Module.h"
 #include "Entity.h"
 #include "List.h"
+#include "wallBoss.h"
+#include "Enemy_Boss.h"
 
 
 class EntityManager : public Module
@@ -51,6 +53,9 @@ public:
 	List<iPoint> coins_to_destroyPos;
 	List<iPoint> enemies_to_destroyPos;
 	int current_id = 0;
+
+	WallBoss* wallBoss;
+	EnemyBoss* boss;
 
 };
 

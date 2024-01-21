@@ -649,6 +649,14 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			app->sceneLevel = 1;
 			app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene);
 			break;
+
+
+
+		case ColliderType::ZONA_BOSS:
+			//app->audio->PlayFx(sonidoDeVictoria);
+			app->entityManager->boss->activeBoss = true;
+			app->entityManager->wallBoss->enterZone = true;
+			break;
 		}
 
 	}

@@ -14,6 +14,8 @@
 #include "Scene.h"
 #include "Map.h"
 #include "Food.h"
+#include "wallBoss.h"
+
 
 #include "Defs.h"
 #include "Log.h"
@@ -130,6 +132,12 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::BOSS:
 		entity = new EnemyBoss();
 		enemies.Add(entity);
+		boss = (EnemyBoss*)entity;
+		break;
+	case EntityType::WALL_BOSS:
+		entity = new WallBoss();
+		enemies.Add(entity);
+		wallBoss = (WallBoss*)entity;
 		break;
 	default:
 		break;

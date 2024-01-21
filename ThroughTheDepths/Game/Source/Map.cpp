@@ -23,6 +23,7 @@
 #include "Enemy_Armadillo.h"
 #include "Enemy_Boss.h"
 #include "SaveStatue.h"
+#include "wallBoss.h"
 #include "Animation.h"
 
 Map::Map(bool start_enabled) : Module(start_enabled), mapLoaded(false)
@@ -731,6 +732,14 @@ bool Map::LoadCollisions(std::string layerName) {
                         ret = true;
                     }
 
+                    //Detectar entrado boss
+                    if (gid == tileset->firstgid + 7) {
+                        c1 = app->physics->CreateRectangleSensor(pos.x + 16, pos.y + 16, 32, 32, STATIC);
+                        c1->ctype = ColliderType::ZONA_BOSS;
+                        collisionsList.Add(c1);
+                        ret = true;
+                    }
+
 
                     //sONIDO DE VICTORIA AL FINAL
                     if (gid == tileset->firstgid + 10) {
@@ -896,6 +905,14 @@ bool Map::LoadEntities(std::string layerName)
                         boss->parameters = configNode.child("scene").child("enemyBoss");
                         boss->position = iPoint(pos.x + 16, pos.y + 16);
                     }
+
+                    //Wall Boss
+                    if (gid == tileset->firstgid + 10) {
+                        WallBoss* boss = (WallBoss*)app->entityManager->CreateEntity(EntityType::WALL_BOSS);
+                        boss->parameters = configNode.child("scene").child("textures").child("wallBoss");
+                        boss->position = iPoint(pos.x + 16, pos.y + 16);
+                    }
+
 
 
 

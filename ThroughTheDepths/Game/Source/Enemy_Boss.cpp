@@ -24,11 +24,9 @@ bool EnemyBoss::Awake() {
 	idleAnim.LoadAnimation(name.GetString(), "idleAnim");
 	runAnim.LoadAnimation(name.GetString(), "walkAnim");
 	attackAnim.LoadAnimation(name.GetString(), "attackAnim");
-	attackAnim.LoadAnimation(name.GetString(), "dmgAnim");
-	/*attackLoopAnim.LoadAnimation(name.GetString(), "attackLoopAnim");
-	trackAnim.LoadAnimation(name.GetString(), "trackAnim");*/
+	dmgAnim.LoadAnimation(name.GetString(), "dmgAnim");
 	dieAnim.LoadAnimation(name.GetString(), "dieAnim");
-	/*stopAnim.LoadAnimation(name.GetString(), "stopAttackAnim");*/
+
 
 
 	state = EntityState::IDLE;
@@ -65,17 +63,12 @@ bool EnemyBoss::Start() {
 	pbody->body->GetFixtureList()->SetFilterData(enemyFilter);
 
 
-	pathfinding = new PathFinding();
-	uchar* navigationMap = NULL;
-
-	app->map->CreateNavigationMap(app->map->mapData.width, app->map->mapData.height, &navigationMap, app->map->navigationLayer_Floor);
-	pathfinding->SetNavigationMap((uint)app->map->mapData.width, (uint)app->map->mapData.height, navigationMap);
-
-	RELEASE_ARRAY(navigationMap);
 
 	ataqueBoss = app->audio->LoadAudioFX("audioAtaqueArmadillo");
 	muerteBoss = app->audio->LoadAudioFX("audioMuerteArmadillo");
 	caminarBoss = app->audio->LoadAudioFX("audioCaminarArmadillo");
+
+	activeBoss = false;
 
 	return true;
 }
@@ -122,27 +115,11 @@ bool EnemyBoss::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 4, position.y - 64, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 110, position.y - 110, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 4, position.y - 64, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 110, position.y - 75, SDL_FLIP_NONE, &rect);
 	}
-
-	if (app->debug) {
-
-
-		for (uint i = 0; i < lastPath.Count(); ++i)
-		{
-			iPoint pos = app->map->MapToWorld(lastPath.At(i)->x, lastPath.At(i)->y);
-			if (isAttacking) {
-				app->render->DrawTexture(app->map->tilePathTexRed, pos.x, pos.y, 1.0f);
-			}
-			else {
-				app->render->DrawTexture(app->map->tilePathTexBrown, pos.x, pos.y, 1.0f);
-			}
-		}
-	}
-
 
 	return true;
 }
@@ -175,144 +152,10 @@ void EnemyBoss::OnExitCollision(PhysBody* physA, PhysBody* physB)
 
 void EnemyBoss::Movement(float dt)
 {
-	if (!cansado) {
-		if (dist(playerPos, position) < app->map->GetTileWidth() * tilesView) {
-			onView = true;
-			state = EntityState::RUNNING;
-			speed = runSpeed;
-
-			pathfinding->CreatePath(origPos, targPos);
-			lastPath = *pathfinding->GetLastPath();
-
-			if (dist(playerPos, position) < app->map->GetTileWidth() * tilesAttack) {
-				if (!isAttacking) {
-					isAttacking = true;
-					stopAnim.Reset();
-					attackTimer.Start();
-				}
-			}
-		}
-		else {
-			//lastPath.Clear();
-			if (onView) { lastPath.Clear(); }
-			onView = false;
-			speed = walkSpeed;
-
-			if (lastPath.Count() == 0) {
-				if (!idleAnim.HasFinished()) {
-					state = EntityState::IDLE;
-				}
-				else {
-
-					state = EntityState::RUNNING;
-
-					b2Vec2 vel = b2Vec2(0, 0);
-					vel.y -= GRAVITY_Y;
-					if (isFacingLeft) {
-						origPos.x -= 1;
-						if (pathfinding->IsWalkable(origPos)) {
-							vel.x -= speed * dt;
-						}
-						else {
-							isFacingLeft = false;
-						}
-					}
-					else {
-						origPos.x += 1;
-						if (pathfinding->IsWalkable(origPos)) {
-							vel.x += speed * dt;
-						}
-						else {
-							isFacingLeft = true;
-						}
-					}
-
-					pbody->body->SetLinearVelocity(vel);
-				}
-			}
-		}
-
-		if (isAttacking) {
-			speed = attackSpeed * 1.5;
-			state = EntityState::ATTACKING;
-			app->audio->PlayFx(ataqueBoss, id);
-			if (attackTimer.ReadMSec() > attackTimeMax * 1000) {
-				cansado = true;
-				cansadoTimer.Start();
-				isAttacking = false;
-
-				attackAnim.Reset();
-				attackLoopAnim.Reset();
-
-			}
-		}
-		else {
-			if (attackTimer.ReadMSec() < attackTimeMax + 2 * 1000) {
-				//Descansar
-
-				state = EntityState::IDLE;
-				speed = 0;
-			}
-		}
-
-
-		b2Vec2 vel = b2Vec2(0, 0);
-		vel.y -= GRAVITY_Y * 10;
-
-		if (lastPath.Count() > 0) {
-			iPoint* nextPathTile;
-			nextPathTile = lastPath.At(lastPath.Count() - 1);
-			//LOG("LAST PATH X: %d  ENEMY X: %d", nextPathTile->x, origPos.x);
-
-			if (!isAttacking)
-			{
-				app->audio->PlayFx(caminarBoss, id);
-			}
-
-
-			if (nextPathTile->x == origPos.x) {
-				//cansado = true;
-				//cansadoTimer.Start();
-				//isFacingLeft = false;
-
-			}
-			else if (nextPathTile->x < origPos.x) {
-				isFacingLeft = true;
-				vel.x -= speed * dt;
-			}
-			else {
-				isFacingLeft = false;
-				vel.x += speed * dt;
-			}
-
-			if (nextPathTile->x == origPos.x) {
-				lastPath.Pop(*nextPathTile);
-			}
-			pbody->body->SetLinearVelocity(vel);
-		}
-
+	if (activeBoss) {
 
 	}
-	else {
-
-		if (cansadoTimer.ReadMSec() < 2000) {
-			b2Vec2 vel = b2Vec2(0, 0);
-			vel.y -= GRAVITY_Y;
-			pbody->body->SetLinearVelocity(vel);
-			state = EntityState::STOP_ATTACKING;
-
-
-			if (idleAnim.HasFinished()) {
-				idleAnim.Reset();
-			}
-
-		}
-		else {
-			idleAnim.Reset();
-			cansado = false;
-		}
-
-	}
+	
 }
 void EnemyBoss::Dying()
 {
@@ -337,13 +180,12 @@ void EnemyBoss::AnimationState()
 	switch (state)
 	{
 	case EntityState::IDLE:				currentAnimation = &idleAnim; break;
-	case EntityState::STOP_ATTACKING:	currentAnimation = &stopAnim; if (stopAnim.HasFinished()) { currentAnimation = &idleAnim; } break;
 	case EntityState::RUNNING:			currentAnimation = &runAnim; break;
-	case EntityState::ATTACKING:		currentAnimation = &attackAnim; if (attackAnim.HasFinished()) { currentAnimation = &attackLoopAnim; }   break;
-	case EntityState::JUMPING:			currentAnimation = &idleAnim; break;
-	case EntityState::FALLING:			currentAnimation = &idleAnim; break;
+	case EntityState::ATTACKING:		currentAnimation = &attackAnim;break;
+	case EntityState::SECONDARY_ATTACK:	currentAnimation = &attack2Anim;break;
+	case EntityState::DMG:				currentAnimation = &dmgAnim; break;
 	case EntityState::DYING:			currentAnimation = &dieAnim; break;
-	case EntityState::TRACK:			currentAnimation = &trackAnim; break;
+
 	default:							currentAnimation = &idleAnim; break;
 	}
 
