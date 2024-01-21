@@ -30,6 +30,9 @@ public:
 	// After the first step, the modules should be switched
 	bool FadeToBlackTransition(Module* toDisable, Module* toEnable, bool load = false, float frames = 60, bool force = false);
 
+
+	bool newgame = false;
+
 private:
 
 	enum Fade_Step
@@ -51,6 +54,9 @@ private:
 	Module* moduleToDisable = nullptr;
 
 	bool reloadScene = false;
+
+	
+
 };
 
 #endif //__MODULEFADETOBLACK_H__

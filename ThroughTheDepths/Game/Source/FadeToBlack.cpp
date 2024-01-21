@@ -57,7 +57,9 @@ bool FadeToBlack::Update(float dt)
 			app->interface->Disable();
 			
 			if (reloadScene) {
-				app->LoadRequest();
+				if (!newgame) {
+					app->LoadRequest();
+				}
 				reloadScene = false;
 			}
 			
@@ -67,7 +69,10 @@ bool FadeToBlack::Update(float dt)
 				app->entityManager->Enable();
 				app->interface->Enable();
 				currentStep = Fade_Step::FROM_BLACK;
-				app->LoadRequest();
+				if (!newgame) {
+					app->LoadRequest();
+				}
+				
 			}
 
 			

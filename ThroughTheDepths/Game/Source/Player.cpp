@@ -603,7 +603,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 
 			app->entityManager->ApagarTodosLosSave();
-
+			app->fadeToBlack->newgame = false;
 			statue = (SaveStatue*)physB->listener;
 			health = 5;
 			statue->saved = true;
