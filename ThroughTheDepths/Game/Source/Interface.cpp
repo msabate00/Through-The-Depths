@@ -254,6 +254,15 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 		case 103:
 
+			_pauseMenuOpened = false;
+			pauseMenuOpened = false;
+
+			controlListItem = nullptr;
+			for (controlListItem = pauseMenuButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
+			{
+				app->guiManager->DestroyGuiControl(controlListItem->data);
+			}
+			pauseMenuButtons.Clear();
 			app->pause = false;
 			app->fadeToBlack->FadeToBlackTransition(app->scene, app->sceneMainMenu);
 
