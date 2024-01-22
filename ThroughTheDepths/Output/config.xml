@@ -437,7 +437,7 @@
 				<frame x="1456" y="16" w="256" h="144"/>
 			</idleAnim>
 
-			<walkAnim loop="true" speed="0.35">
+			<walkAnim loop="true" speed="0.25">
 				<frame x="16" y="176" w="256" h="144"/>
 				<frame x="304" y="176" w="256" h="144"/>
 				<frame x="592" y="176" w="256" h="144"/>
@@ -451,8 +451,22 @@
 				<frame x="2896" y="176" w="256" h="144"/>
 				<frame x="3184" y="176" w="256" h="144"/>
 			</walkAnim>
+			<runAnim loop="true" speed="0.35">
+				<frame x="16" y="176" w="256" h="144"/>
+				<frame x="304" y="176" w="256" h="144"/>
+				<frame x="592" y="176" w="256" h="144"/>
+				<frame x="880" y="176" w="256" h="144"/>
+				<frame x="1168" y="176" w="256" h="144"/>
+				<frame x="1456" y="176" w="256" h="144"/>
+				<frame x="1774" y="176" w="256" h="144"/>
+				<frame x="2032" y="176" w="256" h="144"/>
+				<frame x="2320" y="176" w="256" h="144"/>
+				<frame x="2608" y="176" w="256" h="144"/>
+				<frame x="2896" y="176" w="256" h="144"/>
+				<frame x="3184" y="176" w="256" h="144"/>
+			</runAnim>
 
-			<attackAnim loop="true" speed="0.35">
+			<attackAnim loop="false" speed="0.35">
 				<frame x="16" y="336" w="256" h="144"/>
 				<frame x="304" y="336" w="256" h="144"/>
 				<frame x="592" y="336" w="256" h="144"/>

@@ -22,7 +22,8 @@ EnemyBoss::~EnemyBoss() {}
 bool EnemyBoss::Awake() {
 
 	idleAnim.LoadAnimation(name.GetString(), "idleAnim");
-	runAnim.LoadAnimation(name.GetString(), "walkAnim");
+	walkAnim.LoadAnimation(name.GetString(), "walkAnim");
+	runAnim.LoadAnimation(name.GetString(), "runAnim");
 	attackAnim.LoadAnimation(name.GetString(), "attackAnim");
 	dmgAnim.LoadAnimation(name.GetString(), "dmgAnim");
 	dieAnim.LoadAnimation(name.GetString(), "dieAnim");
@@ -96,9 +97,6 @@ bool EnemyBoss::Update(float dt)
 
 	Dying();
 	
-
-
-
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
@@ -153,20 +151,48 @@ void EnemyBoss::OnExitCollision(PhysBody* physA, PhysBody* physB)
 void EnemyBoss::Movement(float dt)
 {
 	if (activeBoss) {
-
 		b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
-		if (playerPos.x < position.x) {
-			vel.x -= walkSpeed * dt;
-			isFacingLeft = true;
+		if (state != EntityState::ATTACKING) {
+			float actualSpeed;
+
+			if (toRunTimer.ReadSec() >= 2) {
+				actualSpeed = runSpeed;
+				state = EntityState::RUNNING;
+			}
+			else {
+				actualSpeed = walkSpeed;
+				state = EntityState::WALKAROUND;
+			}
+
+			
+			if (playerPos.x < position.x) {
+				vel.x -= actualSpeed * dt;
+				isFacingLeft = true;
+			}
+			else {
+				vel.x += actualSpeed * dt;
+				isFacingLeft = false;
+			}
+
+			if (abs(playerPos.x - position.x) <= 96) {
+				state = EntityState::ATTACKING;
+			}
 		}
 		else {
-			vel.x += walkSpeed * dt;
-			isFacingLeft = false;
+			if (attackAnim.HasFinished()) {
+				state = EntityState::WALKAROUND;
+				toRunTimer.Start();
+				attackAnim.Reset();
+			}
 		}
 
 
 		pbody->body->SetLinearVelocity(vel);
 
+	}
+	else {
+		//Boss innactivo
+		toRunTimer.Start();
 	}
 	
 }
@@ -194,6 +220,7 @@ void EnemyBoss::AnimationState()
 	{
 	case EntityState::IDLE:				currentAnimation = &idleAnim; break;
 	case EntityState::RUNNING:			currentAnimation = &runAnim; break;
+	case EntityState::WALKAROUND:		currentAnimation = &walkAnim; break;
 	case EntityState::ATTACKING:		currentAnimation = &attackAnim;break;
 	case EntityState::SECONDARY_ATTACK:	currentAnimation = &attack2Anim;break;
 	case EntityState::DMG:				currentAnimation = &dmgAnim; break;

@@ -72,6 +72,7 @@ private:
 
 	Animation idleAnim;
 	Animation runAnim;
+	Animation walkAnim;
 	Animation attackAnim;
 	Animation attack2Anim;
 	Animation dmgAnim;
@@ -86,6 +87,7 @@ private:
 
 	Timer cansadoTimer;
 
+	Timer toRunTimer;
 
 	
 
