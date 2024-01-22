@@ -428,7 +428,7 @@
 
 		<enemyBoss>
 
-			<idleAnim loop="true" speed="0.35">
+			<idleAnim loop="true" speed="0.15">
 				<frame x="16" y="16" w="256" h="144"/>
 				<frame x="304" y="16" w="256" h="144"/>
 				<frame x="592" y="16" w="256" h="144"/>

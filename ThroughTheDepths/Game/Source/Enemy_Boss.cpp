@@ -114,8 +114,8 @@ bool EnemyBoss::PostUpdate() {
 	if (currentAnimation == nullptr) { currentAnimation = &idleAnim; }
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
-	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 110, position.y - 110, SDL_FLIP_HORIZONTAL, &rect);
+	if (!isFacingLeft) {
+		app->render->DrawTexture(texture, position.x - 110, position.y - 75, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
 		app->render->DrawTexture(texture, position.x - 110, position.y - 75, SDL_FLIP_NONE, &rect);
@@ -153,6 +153,19 @@ void EnemyBoss::OnExitCollision(PhysBody* physA, PhysBody* physB)
 void EnemyBoss::Movement(float dt)
 {
 	if (activeBoss) {
+
+		b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
+		if (playerPos.x < position.x) {
+			vel.x -= walkSpeed * dt;
+			isFacingLeft = true;
+		}
+		else {
+			vel.x += walkSpeed * dt;
+			isFacingLeft = false;
+		}
+
+
+		pbody->body->SetLinearVelocity(vel);
 
 	}
 	
