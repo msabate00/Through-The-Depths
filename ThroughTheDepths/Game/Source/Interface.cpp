@@ -210,7 +210,6 @@ void Interface::ShowPauseMenu()
 
 void Interface::ShowPauseMenuSettings()
 {
-	app->render->DrawTexture(backgroundGUI, 0, 0, 20	);
 	if (settingsOpened && !_settingsOpened) {
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, "Musica", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 70,	120,20 }, this));
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1011, "Musica", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 70,	120,20 }, this));
