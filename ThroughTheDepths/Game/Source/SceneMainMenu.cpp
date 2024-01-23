@@ -39,6 +39,10 @@ bool SceneMainMenu::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool SceneMainMenu::Start()
 {
+	creditsGUI = app->tex->Load("Assets/UI/creditsGUI.png");
+	normalButton = app->tex->Load("Assets/UI/normalButton.png");
+	backgroundGUI = app->tex->Load("Assets/UI/backgroundGUI.png");
+	pressedButton = app->tex->Load("Assets/UI/pressedButton.png");
 
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	//img = app->tex->Load("Assets/Textures/test.png");
@@ -56,14 +60,11 @@ bool SceneMainMenu::Start()
 	/*SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20 };
 	gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
 
-
-	
-	
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NEW GAME",	SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 - 70,	120,20 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUE",	SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 - 40,	120,20 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "SETTINGS",	SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 - 10,	120,20 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CREDITS",	SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 + 20,	120,20 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "EXIT",		SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 + 50,	120,20 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NEW GAME",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 - 30,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUE",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 40,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "SETTINGS",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 110,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CREDITS",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 180,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "EXIT",		SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 250,	136,46 }, this));
 
 	return true;
 }
@@ -206,7 +207,6 @@ void SceneMainMenu::SettingsInterface()
 void SceneMainMenu::ShowCredits()
 {
 	if (showCredits && !_showCredits) {
-
 		ListItem<GuiControl*>* control;
 		for (control = controlsScene.start; control != NULL; control = control->next)
 		{
@@ -216,6 +216,8 @@ void SceneMainMenu::ShowCredits()
 		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 106, "Close credits", SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH  - 50,	120,20 }, this);
 		_showCredits = true;
 	}
+
+	app->render->DrawTexture(creditsGUI, 0, 0, 0);
 
 	//Mostrar imagen o lo que sea
 
