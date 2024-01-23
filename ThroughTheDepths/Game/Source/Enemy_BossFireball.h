@@ -65,6 +65,8 @@ public:
 	int health = 20;
 	int maxHealth = 20;
 
+	
+
 private:
 
 	b2Transform startTransform;

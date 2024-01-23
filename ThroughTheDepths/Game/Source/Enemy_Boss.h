@@ -56,7 +56,7 @@ public:
 	int numFootContacts = 0;
 
 
-	bool isFacingLeft = false;
+	bool isFacingLeft = true;
 	bool traspassingColision = false;
 
 
@@ -104,8 +104,9 @@ private:
 	bool setPosicionTpRandom = false;
 	bool vueltaNormal = true;
 
+	Timer testTimer;
 
-	
+	float speedFireball;
 
 
 };

@@ -18,7 +18,7 @@
 	</window>
 
 	<particles>
-		<mainParticleTexture texturepath="Assets/Textures/SwordParticles.png"/>
+		<mainParticleTexture texturepath="Assets/Textures/Particles.png"/>
 	</particles>
 
 
@@ -106,7 +106,7 @@
 		<!-- ENEMIES -->
 		<enemyArmadillo texturepath="Assets/Textures/Armadillo.png" walkSpeed="0.02" runSpeed="0.08" attackSpeed="0.16" tilesView="7" tilesAttack="3" attackTimerMax="5.5"/>
         <enemyPajaro texturepath="Assets/Textures/Paloma.png" walkSpeed="0.02" runSpeed="0.08" attackSpeed="0.16" tilesView="10" tilesAttack="5" attackTimerMax="5.5"/>
-		<enemyBoss texturepath="Assets/Textures/Boss.png" walkSpeed="0.02" runSpeed="0.08" attackSpeed="0.16" tilesView="10" tilesAttack="5" attackTimerMax="5.5"/>
+		<enemyBoss texturepath="Assets/Textures/Boss.png" fireballtexturepath="Assets/Textures/Particles.png" walkSpeed="0.02" runSpeed="0.08" attackSpeed="0.16" tilesView="10" tilesAttack="5" attackTimerMax="5.5"/>
 		
 		
 		
@@ -606,6 +606,95 @@
 			
 			
 		</wallBoss>
+
+		<enemyBossFireball>
+			<idleAnim loop="true" speed="1">
+				
+				<!-- Fila 1 -->
+				<frame x="0" y="32" w="32" h="32"/>
+				<frame x="32" y="32" w="32" h="32"/>
+				<frame x="64" y="32" w="32" h="32"/>
+				<frame x="96" y="32" w="32" h="32"/>
+				<frame x="128" y="32" w="32" h="32"/>
+				<frame x="160" y="32" w="32" h="32"/>
+				<frame x="192" y="32" w="32" h="32"/>
+				<frame x="224" y="32" w="32" h="32"/>
+
+				<!-- Fila 2 -->
+				<frame x="0" y="64" w="32" h="32"/>
+				<frame x="32" y="64" w="32" h="32"/>
+				<frame x="64" y="64" w="32" h="32"/>
+				<frame x="96" y="64" w="32" h="32"/>
+				<frame x="128" y="64" w="32" h="32"/>
+				<frame x="160" y="64" w="32" h="32"/>
+				<frame x="192" y="64" w="32" h="32"/>
+				<frame x="224" y="64" w="32" h="32"/>
+
+				<!-- Fila 3 -->
+				<frame x="0" y="96" w="32" h="32"/>
+				<frame x="32" y="96" w="32" h="32"/>
+				<frame x="64" y="96" w="32" h="32"/>
+				<frame x="96" y="96" w="32" h="32"/>
+				<frame x="128" y="96" w="32" h="32"/>
+				<frame x="160" y="96" w="32" h="32"/>
+				<frame x="192" y="96" w="32" h="32"/>
+				<frame x="224" y="96" w="32" h="32"/>
+
+				<!-- Fila 4 -->
+				<frame x="0" y="128" w="32" h="32"/>
+				<frame x="32" y="128" w="32" h="32"/>
+				<frame x="64" y="128" w="32" h="32"/>
+				<frame x="96" y="128" w="32" h="32"/>
+				<frame x="128" y="128" w="32" h="32"/>
+				<frame x="160" y="128" w="32" h="32"/>
+				<frame x="192" y="128" w="32" h="32"/>
+				<frame x="224" y="128" w="32" h="32"/>
+
+				<!-- Fila 5 -->
+				<frame x="0" y="160" w="32" h="32"/>
+				<frame x="32" y="160" w="32" h="32"/>
+				<frame x="64" y="160" w="32" h="32"/>
+				<frame x="96" y="160" w="32" h="32"/>
+				<frame x="128" y="160" w="32" h="32"/>
+				<frame x="160" y="160" w="32" h="32"/>
+				<frame x="192" y="160" w="32" h="32"/>
+				<frame x="224" y="160" w="32" h="32"/>
+
+				<!-- Fila 6 -->
+				<frame x="0" y="192" w="32" h="32"/>
+				<frame x="32" y="192" w="32" h="32"/>
+				<frame x="64" y="192" w="32" h="32"/>
+				<frame x="96" y="192" w="32" h="32"/>
+				<frame x="128" y="192" w="32" h="32"/>
+				<frame x="160" y="192" w="32" h="32"/>
+				<frame x="192" y="192" w="32" h="32"/>
+				<frame x="224" y="192" w="32" h="32"/>
+
+				<!-- Fila 7 -->
+				<frame x="0" y="224" w="32" h="32"/>
+				<frame x="32" y="224" w="32" h="32"/>
+				<frame x="64" y="224" w="32" h="32"/>
+				<frame x="96" y="224" w="32" h="32"/>
+				<frame x="128" y="224" w="32" h="32"/>
+				<frame x="160" y="224" w="32" h="32"/>
+				<frame x="192" y="224" w="32" h="32"/>
+				<frame x="224" y="224" w="32" h="32"/>
+
+				<!-- Fila 8 -->
+				<frame x="0" y="256" w="32" h="32"/>
+				<frame x="32" y="256" w="32" h="32"/>
+				<frame x="64" y="256" w="32" h="32"/>
+				<frame x="96" y="256" w="32" h="32"/>
+				<frame x="128" y="256" w="32" h="32"/>
+
+			
+
+
+
+			</idleAnim>
+			
+			
+		</enemyBossFireball>
 		
         <entorno>
             <lluviaAnim loop="true" speed="0.35">
