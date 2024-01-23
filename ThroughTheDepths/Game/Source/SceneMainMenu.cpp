@@ -40,9 +40,8 @@ bool SceneMainMenu::Awake(pugi::xml_node& config)
 bool SceneMainMenu::Start()
 {
 	creditsGUI = app->tex->Load("Assets/UI/creditsGUI.png");
-	normalButton = app->tex->Load("Assets/UI/normalButton.png");
+	
 	backgroundGUI = app->tex->Load("Assets/UI/backgroundGUI.png");
-	pressedButton = app->tex->Load("Assets/UI/pressedButton.png");
 
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	//img = app->tex->Load("Assets/Textures/test.png");

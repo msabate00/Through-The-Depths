@@ -4,6 +4,7 @@
 #include "Audio.h"
 #include "Log.h"
 #include "Window.h"
+#include "Textures.h"
 
 GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text) : GuiControl(GuiControlType::BUTTON, id)
 {
@@ -19,8 +20,15 @@ GuiControlButton::~GuiControlButton()
 
 }
 
+bool GuiControlButton::Start() {
+	SDL_Texture* normalButton = app->tex->Load("Assets/UI/normalButton");
+	SDL_Texture* pressedButton = app->tex->Load("Assets/UI/pressedButton");
+	return false;
+}
+
 bool GuiControlButton::Update(float dt)
 {
+	
 	//if (state != GuiControlState::DISABLED)
 	//{
 	//	// L15: DONE 3: Update the state of the GUiButton according to the mouse position
@@ -98,19 +106,20 @@ bool GuiControlButton::PostUpdate()
 		switch (state)
 		{
 		case GuiControlState::DISABLED:
-			app->render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
+			//app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
+			app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
 			break;
 		case GuiControlState::NORMAL:
-			
-			app->render->DrawRectangle(bounds, 0, 0, 225, 255, true, false);
-			app->render->DrawTexture(normalButton, 0, 0, 0);
+			//app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
+			app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
 			break;
 		case GuiControlState::FOCUSED:
-			app->render->DrawTexture(normalButton, bounds.x, bounds.y, 0);
-			app->render->DrawRectangle(bounds, 0, 0, 100, 255, true, false);
+			//app->audio->PlayFx(selectButton);
+			//app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
+			app->render->DrawRectangle(bounds, 0, 0, 255, 100, true, false);
 			break;
 		case GuiControlState::PRESSED:
-			app->render->DrawTexture(normalButton, bounds.x, bounds.y, 0);
+
 			app->render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
 			break;
 		}

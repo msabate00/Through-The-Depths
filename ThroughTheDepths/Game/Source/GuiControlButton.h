@@ -13,7 +13,7 @@ public:
 
 	GuiControlButton(uint32 id, SDL_Rect bounds, const char* text);
 	virtual ~GuiControlButton();
-
+	bool Start();
 	// Called each loop iteration
 	bool Update(float dt);
 	bool PostUpdate();
