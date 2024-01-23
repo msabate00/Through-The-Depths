@@ -467,7 +467,7 @@ void Player::CameraMovement(float dt)
 
 void Player::BossCameraMovement(float dt)
 {
-	LOG("Camara %d", app->render->camera.y);
+	
 	int targetPosX = -6660;
 	int targetPosY = -2630;
 	

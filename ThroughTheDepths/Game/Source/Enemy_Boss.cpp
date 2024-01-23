@@ -165,6 +165,7 @@ void EnemyBoss::Movement(float dt)
 {
 	if (activeBoss) {
 		
+		LOG("Boss x: %d", METERS_TO_PIXELS(pbody->body->GetTransform().p.x));
 		b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 
 		if (health > (maxHealth / 3) * 2) {
@@ -231,6 +232,22 @@ void EnemyBoss::Movement(float dt)
 			state = EntityState::TPIN;
 			if (teleportInAnim.HasFinished()) {
 				//Cambiar posicion
+				if (!setPosicionTpRandom) {
+					//Random 1
+					int random_number = std::rand() % 2 + 1;
+					if (random_number == 1) {
+
+						pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3385), pbody->body->GetTransform().p.y), 0);
+						isFacingLeft = false;
+					}else{
+						pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3787), pbody->body->GetTransform().p.y), 0);
+						isFacingLeft = true;
+					}
+					
+
+					setPosicionTpRandom = true;
+				}
+				
 				state = EntityState::TPOUT;
 				
 				if (teleportOutAnim.HasFinished()) {

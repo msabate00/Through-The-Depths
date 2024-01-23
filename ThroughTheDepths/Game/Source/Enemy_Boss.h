@@ -99,6 +99,8 @@ private:
 	Timer attackShootDurationTimer;
 	float attackShootDuration = 10;
 
+	bool setPosicionTpRandom = false;
+
 	
 
 
