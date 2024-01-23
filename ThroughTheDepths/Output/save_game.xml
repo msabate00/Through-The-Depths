@@ -7,18 +7,10 @@
 	<:anonymous />
 	<map />
 	<scenee>
-		<player x="3021" y="1632" sceneLevel="1" />
-		<camera x="-5667" y="-2840" />
+		<player x="3023" y="1632" sceneLevel="1" />
+		<camera x="-5654" y="-2863" />
 		<coinsPicked />
 		<enemies>
-			<enemy x="70" y="52" active="true" />
-			<enemy x="85" y="52" active="true" />
-			<enemy x="0" y="0" active="true" />
-			<enemy x="113" y="51" active="true" />
-			<enemy x="70" y="52" active="true" />
-			<enemy x="85" y="52" active="true" />
-			<enemy x="0" y="0" active="true" />
-			<enemy x="113" y="51" active="true" />
 			<enemy x="70" y="52" active="true" />
 			<enemy x="85" y="52" active="true" />
 			<enemy x="0" y="0" active="true" />

@@ -76,10 +76,14 @@ private:
 	Animation runAnim;
 	Animation walkAnim;
 	Animation attackAnim;
+	Animation attackShootStartAnim;
 	Animation attackShootAnim;
+	Animation attackShootEndAnim;
 	Animation attackJumpAnim;
 	Animation dmgAnim;
 	Animation dieAnim;
+	Animation teleportInAnim;
+	Animation teleportOutAnim;
 
 
 	bool isDying = false;
@@ -91,6 +95,9 @@ private:
 	Timer cansadoTimer;
 
 	Timer toRunTimer;
+	Timer doAttackShootTimer;
+	Timer attackShootDurationTimer;
+	float attackShootDuration = 10;
 
 	
 

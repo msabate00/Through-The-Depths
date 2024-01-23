@@ -21,7 +21,12 @@ enum class EntityState {
 	TRACK,
 	WALKAROUND,
 	DYING,
-	DMG
+	DMG,
+	TPIN,
+	TPOUT,
+	SECONDARY_ATTACK_START,
+	SECONDARY_ATTACK_STOP
+
 
 };
 

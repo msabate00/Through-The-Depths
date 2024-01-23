@@ -24,11 +24,18 @@ bool EnemyBoss::Awake() {
 	idleAnim.LoadAnimation(name.GetString(), "idleAnim");
 	walkAnim.LoadAnimation(name.GetString(), "walkAnim");
 	runAnim.LoadAnimation(name.GetString(), "runAnim");
+
 	attackAnim.LoadAnimation(name.GetString(), "attackAnim");
+	attackShootStartAnim.LoadAnimation(name.GetString(), "attackShootStart");
 	attackShootAnim.LoadAnimation(name.GetString(), "attackShootAnim");
+	attackShootEndAnim.LoadAnimation(name.GetString(), "attackShootEnd");
 	attackJumpAnim.LoadAnimation(name.GetString(), "jumpAttackAnim");
+
 	dmgAnim.LoadAnimation(name.GetString(), "dmgAnim");
 	dieAnim.LoadAnimation(name.GetString(), "dieAnim");
+
+	teleportInAnim.LoadAnimation(name.GetString(), "dieAnim");
+	teleportOutAnim.LoadAnimation(name.GetString(), "dieAnimInvert");
 
 
 
@@ -55,7 +62,9 @@ bool EnemyBoss::Start() {
 	texture = app->tex->Load(texturePath);
 	originalPosition = app->map->WorldToMap(position.x, position.y);
 
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 50, bodyType::DYNAMIC);
+	//pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 50, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + 16, position.y + 16, 80,80, bodyType::DYNAMIC);
+	pbody->body->SetFixedRotation(true);
 	pbody->ctype = ColliderType::ENEMY;
 	pbody->listener = this;
 
@@ -115,10 +124,10 @@ bool EnemyBoss::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	if (!isFacingLeft) {
-		app->render->DrawTexture(texture, position.x - 110, position.y - 75, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x - 110, position.y - 86, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x - 110, position.y - 75, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x - 110, position.y - 86, SDL_FLIP_NONE, &rect);
 	}
 
 	return true;
@@ -155,39 +164,94 @@ void EnemyBoss::OnExitCollision(PhysBody* physA, PhysBody* physB)
 void EnemyBoss::Movement(float dt)
 {
 	if (activeBoss) {
+		
 		b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
-		if (state != EntityState::ATTACKING) {
-			float actualSpeed;
 
-			if (toRunTimer.ReadSec() >= 2) {
-				actualSpeed = runSpeed;
-				state = EntityState::RUNNING;
+		if (health > (maxHealth / 3) * 2) {
+			if (state != EntityState::ATTACKING && state != EntityState::SECONDARY_ATTACK) {
+				float actualSpeed;
+
+				if (toRunTimer.ReadSec() >= 2 || health <= (maxHealth / 3) * 2) {
+					actualSpeed = runSpeed;
+					state = EntityState::RUNNING;
+				}
+				else {
+					actualSpeed = walkSpeed;
+					state = EntityState::WALKAROUND;
+				}
+
+
+				if (playerPos.x < position.x) {
+					vel.x -= actualSpeed * dt;
+					isFacingLeft = true;
+				}
+				else {
+					vel.x += actualSpeed * dt;
+					isFacingLeft = false;
+				}
+
+				if (health <= (maxHealth / 3) * 2) {
+					//eNTRA EN SEGUNDA FASE, SE HACE TP A LA DERECHA O ZIQUIERDA, Y DISPARA LOS PROYECTILES
+					if (doAttackShootTimer.ReadSec() > 1) {
+						state = EntityState::SECONDARY_ATTACK;
+					}
+				}
+				else if (health <= maxHealth / 3) {
+					//Entra en la 3ra fase, hay que esquivar los ataques del salto
+
+				}
+
+				if (abs(playerPos.x - position.x) <= 96) {
+					state = EntityState::ATTACKING;
+				}
+
+
 			}
 			else {
-				actualSpeed = walkSpeed;
-				state = EntityState::WALKAROUND;
-			}
+				if (state == EntityState::ATTACKING) {
+					if (attackAnim.HasFinished()) {
+						state = EntityState::WALKAROUND;
+						toRunTimer.Start();
+						doAttackShootTimer.Start();
+						attackAnim.Reset();
+					}
+				}
+				else if (state == EntityState::SECONDARY_ATTACK) {
+					if (attackShootAnim.HasFinished()) {
+						state = EntityState::WALKAROUND;
+						attackShootAnim.Reset();
+						doAttackShootTimer.Start();
+					}
+				}
 
-			
-			if (playerPos.x < position.x) {
-				vel.x -= actualSpeed * dt;
-				isFacingLeft = true;
 			}
-			else {
-				vel.x += actualSpeed * dt;
-				isFacingLeft = false;
-			}
+		}
+		else if (health > maxHealth / 3) {
+			//Segunda fase
+			state = EntityState::TPIN;
+			if (teleportInAnim.HasFinished()) {
+				//Cambiar posicion
+				state = EntityState::TPOUT;
+				
+				if (teleportOutAnim.HasFinished()) {
+					state = EntityState::SECONDARY_ATTACK;
 
-			if (abs(playerPos.x - position.x) <= 96) {
-				state = EntityState::ATTACKING;
+					if (attackShootDurationTimer.ReadSec() > attackShootDuration) {
+						state = EntityState::SECONDARY_ATTACK_STOP;
+
+						if (attackShootEndAnim.HasFinished()) {
+							//Andar o lo que sea
+						}
+					}
+				}
+				else {
+					attackShootDurationTimer.Start();
+				}
+				
 			}
 		}
 		else {
-			if (attackAnim.HasFinished()) {
-				state = EntityState::WALKAROUND;
-				toRunTimer.Start();
-				attackAnim.Reset();
-			}
+			//Tercera fase
 		}
 
 
@@ -226,9 +290,19 @@ void EnemyBoss::AnimationState()
 	case EntityState::RUNNING:			currentAnimation = &runAnim; break;
 	case EntityState::WALKAROUND:		currentAnimation = &walkAnim; break;
 	case EntityState::ATTACKING:		currentAnimation = &attackAnim;break;
-	case EntityState::SECONDARY_ATTACK:	currentAnimation = &attack2Anim;break;
+	case EntityState::SECONDARY_ATTACK:
+		currentAnimation = &attackShootStartAnim;    
+		if (attackShootStartAnim.HasFinished()) {
+			currentAnimation = &attackShootAnim;
+		}
+		break;
+	case EntityState::SECONDARY_ATTACK_STOP: currentAnimation = &attackShootEndAnim; break;
+	case EntityState::JUMPING:			currentAnimation = &attackJumpAnim; break;
 	case EntityState::DMG:				currentAnimation = &dmgAnim; break;
 	case EntityState::DYING:			currentAnimation = &dieAnim; break;
+
+	case EntityState::TPIN:				currentAnimation = &teleportInAnim; break;
+	case EntityState::TPOUT:			currentAnimation = &teleportOutAnim; break;
 
 	default:							currentAnimation = &idleAnim; break;
 	}
