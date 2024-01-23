@@ -130,6 +130,8 @@ public:
 	bool loadRequest = false;
 	bool saveRequest = false;
 
+	int erroresMostrados = 0;
+
 private:
 
 	int argc;

@@ -32,6 +32,7 @@ public:
 	void Movement(float dt);
 	void GodModeMovement(float dt);
 	void CameraMovement(float dt);
+	void BossCameraMovement(float dt);
 	void DebugCameraMovement(float dt);
 
 	void AudioController();
@@ -118,7 +119,7 @@ private:
 
 	bool isDying = false;
 	bool isAttacking = false;
-
+	bool isDyingandRespawning = false;
 
 	
 

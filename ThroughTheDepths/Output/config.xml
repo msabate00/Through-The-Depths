@@ -518,6 +518,31 @@
 				<frame x="6064" y="656" w="160" h="144"/>
 			</dieAnim>
 
+			<dieAnimInvert loop="false" speed="0.35">
+				<frame x="6064" y="656" w="160" h="144"/>
+				<frame x="5776" y="656" w="160" h="144"/>
+				<frame x="5488" y="656" w="160" h="144"/>
+				<frame x="5200" y="656" w="160" h="144"/>
+				<frame x="4912" y="656" w="160" h="144"/>
+				<frame x="4624" y="656" w="160" h="144"/>
+				<frame x="4336" y="656" w="160" h="144"/>
+				<frame x="4048" y="656" w="160" h="144"/>
+				<frame x="3760" y="656" w="160" h="144"/>
+				<frame x="3472" y="656" w="160" h="144"/>
+				<frame x="3184" y="656" w="256" h="144"/>
+				<frame x="2896" y="656" w="256" h="144"/>
+				<frame x="2608" y="656" w="256" h="144"/>
+				<frame x="2320" y="656" w="256" h="144"/>
+				<frame x="2032" y="656" w="256" h="144"/>
+				<frame x="1744" y="656" w="256" h="144"/>
+				<frame x="1456" y="656" w="256" h="144"/>
+				<frame x="1168" y="656" w="256" h="144"/>
+				<frame x="880" y="656" w="256" h="144"/>
+				<frame x="592" y="656" w="256" h="144"/>
+				<frame x="304" y="656" w="256" h="144"/>
+				<frame x="16" y="656" w="256" h="144"/>
+			</dieAnimInvert>
+
 			<jumpAttackAnim loop="false" speed="0.35">
 				<frame x="16" y="816" w="256" h="144"/>
 				<frame x="304" y="816" w="256" h="144"/>
@@ -539,18 +564,29 @@
 				<frame x="4912" y="816" w="160" h="144"/>
 			</jumpAttackAnim>
 
-			<longAttackAnim loop="false" speed="0.35">
+
+			<attackShootStart loop="false" speed="0.05">
 				<frame x="16" y="976" w="256" h="144"/>
 				<frame x="304" y="976" w="256" h="144"/>
 				<frame x="592" y="976" w="256" h="144"/>
 				<frame x="880" y="976" w="256" h="144"/>
+			</attackShootStart>
+
+			<attackShootAnim loop="true" speed="0.05">
 				<frame x="1168" y="976" w="256" h="144"/>
 				<frame x="1456" y="976" w="256" h="144"/>
 				<frame x="1744" y="976" w="256" h="144"/>
 				<frame x="2032" y="976" w="256" h="144"/>
 				<frame x="2320" y="976" w="256" h="144"/>
 				<frame x="2608" y="976" w="256" h="144"/>
-			</longAttackAnim>
+			</attackShootAnim>
+
+			<attackShootEnd loop="false" speed="0.05">
+				<frame x="880" y="976" w="256" h="144"/>
+				<frame x="592" y="976" w="256" h="144"/>
+				<frame x="304" y="976" w="256" h="144"/>
+				<frame x="16" y="976" w="256" h="144"/>
+			</attackShootEnd>
 
 		</enemyBoss>
 
