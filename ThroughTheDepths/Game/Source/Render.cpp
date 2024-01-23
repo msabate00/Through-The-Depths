@@ -155,8 +155,10 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, SDL_RendererFlip fl
 
 	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
 	{
-		
-		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		if (app->erroresMostrados < 10) {
+			LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+			app->erroresMostrados++;
+		}
 		ret = false;
 	}
 

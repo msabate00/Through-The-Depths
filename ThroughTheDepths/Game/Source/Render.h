@@ -53,6 +53,8 @@ public:
 	TTF_Font* font;
 
 	bool vsync;
+	int mostradoErrores;
+
 };
 
 #endif // __RENDER_H__

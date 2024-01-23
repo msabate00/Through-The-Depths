@@ -103,6 +103,8 @@ bool Player::Start() {
 	app->render->camera.x = (-position.x * app->win->GetScale() + (windowW / 2));
 	app->render->camera.y = (-position.y * app->win->GetScale() + (windowH / 2));
 
+	isDyingandRespawning = false;
+
 	pasosTimer.Start();
 
 	return true;
@@ -164,7 +166,13 @@ bool Player::Update(float dt)
 
 	//Movimiento de la camara
 	if (!app->debug) {
-		CameraMovement(dt);
+		if (app->entityManager->boss != nullptr && app->entityManager->boss->activeBoss) {
+			BossCameraMovement(dt);
+		}
+		else {
+			CameraMovement(dt);
+		}
+		
 	}
 	else {
 		DebugCameraMovement(dt);
@@ -189,9 +197,12 @@ bool Player::Update(float dt)
 		state = EntityState::DYING;
 		if (dieAnim.HasFinished()) {
 			//pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
-			app->LoadRequest();
-			isDying = false;
-			dieAnim.Reset();
+			//app->LoadRequest();
+			if (!isDyingandRespawning) {
+				app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene, true, 60, true);
+				isDyingandRespawning = true;
+			}//isDying = false;
+			//dieAnim.Reset();
 		}
 	}
 
@@ -454,6 +465,16 @@ void Player::CameraMovement(float dt)
 
 }
 
+void Player::BossCameraMovement(float dt)
+{
+	LOG("Camara %d", app->render->camera.y);
+	int targetPosX = -6660;
+	int targetPosY = -2630;
+	
+	app->render->camera.x = lerp(app->render->camera.x, targetPosX, dt * 0.005f);
+	app->render->camera.y = lerp(app->render->camera.y, targetPosY, dt * 0.005f);
+}
+
 void Player::DebugCameraMovement(float dt)
 {
 
@@ -626,8 +647,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 								if (isDying == false)
 								{
 									app->audio->PlayFx(caidaMuerte);
+									isDying = true;
+									
 								}
-								isDying = true;
+								
 							}
 						}
 						else {

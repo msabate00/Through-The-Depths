@@ -135,11 +135,13 @@ bool EnemyBoss::CleanUp()
 void EnemyBoss::OnCollision(PhysBody* physA, PhysBody* physB)
 {
 	if (physB->ctype == ColliderType::PLAYER_PROYECTILE) {
-		if (!isDying) {
+		health--;
+		if (!isDying && health<=0) {
 			app->audio->StopFx(id);
 			app->audio->PlayFx(muerteBoss, id);
+			isDying = true;
 		}
-		isDying = true;
+		
 	}
 }
 
