@@ -25,6 +25,8 @@ bool EnemyBoss::Awake() {
 	walkAnim.LoadAnimation(name.GetString(), "walkAnim");
 	runAnim.LoadAnimation(name.GetString(), "runAnim");
 	attackAnim.LoadAnimation(name.GetString(), "attackAnim");
+	attackShootAnim.LoadAnimation(name.GetString(), "attackShootAnim");
+	attackJumpAnim.LoadAnimation(name.GetString(), "jumpAttackAnim");
 	dmgAnim.LoadAnimation(name.GetString(), "dmgAnim");
 	dieAnim.LoadAnimation(name.GetString(), "dieAnim");
 

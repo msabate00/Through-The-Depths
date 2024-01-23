@@ -539,7 +539,7 @@
 				<frame x="4912" y="816" w="160" h="144"/>
 			</jumpAttackAnim>
 
-			<longAttackAnim loop="false" speed="0.35">
+			<attackShootAnim loop="false" speed="0.35">
 				<frame x="16" y="976" w="256" h="144"/>
 				<frame x="304" y="976" w="256" h="144"/>
 				<frame x="592" y="976" w="256" h="144"/>
@@ -550,7 +550,7 @@
 				<frame x="2032" y="976" w="256" h="144"/>
 				<frame x="2320" y="976" w="256" h="144"/>
 				<frame x="2608" y="976" w="256" h="144"/>
-			</longAttackAnim>
+			</attackShootAnim>
 
 		</enemyBoss>
 

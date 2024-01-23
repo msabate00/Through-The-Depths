@@ -76,7 +76,8 @@ private:
 	Animation runAnim;
 	Animation walkAnim;
 	Animation attackAnim;
-	Animation attack2Anim;
+	Animation attackShootAnim;
+	Animation attackJumpAnim;
 	Animation dmgAnim;
 	Animation dieAnim;
 
