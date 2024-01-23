@@ -1,5 +1,4 @@
 #include "EntityManager.h"
-#include "EntityManager.h"
 #include "Player.h"
 #include "Chest.h"
 #include "Coin.h"
@@ -15,6 +14,7 @@
 #include "Map.h"
 #include "Food.h"
 #include "wallBoss.h"
+#include "Enemy_BossFireball.h"
 
 
 #include "Defs.h"
@@ -134,11 +134,17 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		enemies.Add(entity);
 		boss = (EnemyBoss*)entity;
 		break;
+	case EntityType::BOSS_FIREBALL:
+		entity = new EnemyBossFireball();
+		enemies.Add(entity);
+		break;
 	case EntityType::WALL_BOSS:
 		entity = new WallBoss();
 		enemies.Add(entity);
 		wallBoss = (WallBoss*)entity;
 		break;
+
+
 	default:
 		break;
 	}

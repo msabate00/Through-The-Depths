@@ -112,6 +112,9 @@
     <ClCompile Include="Source\wallBoss.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy_BossFireball.cpp">
+      <Filter>Entities\Enemies\Particulas</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -254,6 +257,9 @@
     <ClInclude Include="Source\wallBoss.h">
       <Filter>Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Enemy_BossFireball.h">
+      <Filter>Entities\Enemies\Particulas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -279,6 +285,9 @@
     </Filter>
     <Filter Include="Entities\GUI_ELEMENTS">
       <UniqueIdentifier>{7292a479-ff96-4854-ac73-d61be9a19bcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Enemies\Particulas">
+      <UniqueIdentifier>{259b7162-e5d3-4c80-a318-0628315e66d7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
