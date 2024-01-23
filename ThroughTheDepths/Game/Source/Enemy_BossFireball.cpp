@@ -45,7 +45,7 @@ bool EnemyBossFireball::Start() {
 	//pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 50, bodyType::DYNAMIC);
 	pbody = app->physics->CreateRectangleSensor(position.x + 16, position.y + 16, 10,10, bodyType::DYNAMIC);
 	pbody->body->SetFixedRotation(true);
-	pbody->ctype = ColliderType::ENEMY;
+	pbody->ctype = ColliderType::FIREBALL_BOSS;
 	pbody->listener = this;
 
 	//Atravesar enemigos
@@ -57,19 +57,21 @@ bool EnemyBossFireball::Start() {
 
 	activeBoss = false;
 
+	
+
 	return true;
 }
 
 bool EnemyBossFireball::Update(float dt)
 {
-
-
+	
+	
 	if (!active) {
 
 		pbody->body->SetActive(false);
 		return true;
 	}
-
+	
 	//Setting position for movement
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
@@ -78,18 +80,20 @@ bool EnemyBossFireball::Update(float dt)
 	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 	targPos.x += 1;
 
-
+	
 	Movement(dt);
-
+	
 	Dying();
 	
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
+
+	
 	AnimationState();
-
+	
 	currentAnimation->Update();
-
+	
 	return true;
 }
 
@@ -99,10 +103,10 @@ bool EnemyBossFireball::PostUpdate() {
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 
 	if (isFacingLeft) {
-		app->render->DrawTexture(texture, position.x, position.y, SDL_FLIP_HORIZONTAL, &rect);
+		app->render->DrawTexture(texture, position.x + 7, position.y, SDL_FLIP_HORIZONTAL, &rect);
 	}
 	else {
-		app->render->DrawTexture(texture, position.x , position.y, SDL_FLIP_NONE, &rect);
+		app->render->DrawTexture(texture, position.x-7 , position.y, SDL_FLIP_NONE, &rect);
 	}
 
 	return true;
@@ -129,6 +133,8 @@ void EnemyBossFireball::OnCollision(PhysBody* physA, PhysBody* physB)
 		}
 		
 	}
+
+
 }
 
 void EnemyBossFireball::OnExitCollision(PhysBody* physA, PhysBody* physB)
@@ -163,7 +169,8 @@ void EnemyBossFireball::Dying()
 
 void EnemyBossFireball::AnimationState()
 {
-	switch (state)
+	currentAnimation = &idleAnim;
+	/*switch (state)
 	{
 	case EntityState::IDLE:				currentAnimation = &idleAnim; break;
 	case EntityState::RUNNING:			currentAnimation = &runAnim; break;
@@ -184,6 +191,6 @@ void EnemyBossFireball::AnimationState()
 	case EntityState::TPOUT:			currentAnimation = &teleportOutAnim; break;
 
 	default:							currentAnimation = &idleAnim; break;
-	}
+	}*/
 
 }

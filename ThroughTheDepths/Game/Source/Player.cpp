@@ -656,12 +656,34 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 						else {
 							invulnerableTimer.Start();
 						}
-
-
-
-
 					}
 
+				}
+			}
+			break;
+		case ColliderType::FIREBALL_BOSS:
+			if (!app->godMode) {
+				enemyBody = (PhysBody*)physB->body->GetUserData();
+
+				if (invulnerableTimer.ReadMSec() > invulnerableTime * 1000) {
+					LOG("RESTAR VIDA");
+					health--;
+					app->audio->PlayFx(recibirAtaque);
+					if (health <= 0) {
+						if (!app->godMode) {
+
+							if (isDying == false)
+							{
+								app->audio->PlayFx(caidaMuerte);
+								isDying = true;
+
+							}
+
+						}
+					}
+					else {
+						invulnerableTimer.Start();
+					}
 				}
 			}
 			break;

@@ -171,16 +171,7 @@ void EnemyBoss::Movement(float dt)
 	if (activeBoss) {
 		
 
-		if (testTimer.ReadSec() > 5) {
-			testTimer.Start();
-			EnemyBossFireball* fireball = (EnemyBossFireball*)app->entityManager->CreateEntity(EntityType::BOSS_FIREBALL);
-			fireball->texturePath = texturePathFireball;
-			fireball->position = iPoint(position.x, position.y);
-			
-			fireball->speed = (isFacingLeft) ? -0.20f : 0.20f;
-			fireball->isFacingLeft = isFacingLeft;
-			fireball->Start();
-		}
+		
 
 
 		LOG("Boss x: %d", METERS_TO_PIXELS(pbody->body->GetTransform().p.x));
@@ -276,6 +267,9 @@ void EnemyBoss::Movement(float dt)
 				if (teleportOutAnim.HasFinished()) {
 					state = EntityState::SECONDARY_ATTACK;
 
+
+
+
 					if (attackShootDurationTimer.ReadSec() > attackShootDuration) {
 						state = EntityState::SECONDARY_ATTACK_STOP;
 
@@ -284,9 +278,22 @@ void EnemyBoss::Movement(float dt)
 
 						}
 					}
+					else {
+						if (testTimer.ReadMSec() > 600) {
+							testTimer.Start();
+							EnemyBossFireball* fireball = (EnemyBossFireball*)app->entityManager->CreateEntity(EntityType::BOSS_FIREBALL);
+							fireball->texturePath = texturePathFireball;
+							fireball->position = iPoint(position.x, position.y + 20);
+
+							fireball->speed = (isFacingLeft) ? -0.20f : 0.20f;
+							fireball->isFacingLeft = isFacingLeft;
+							fireball->Start();
+						}
+					}
 				}
 				else {
 					attackShootDurationTimer.Start();
+					testTimer.Start();
 				}
 				
 			}

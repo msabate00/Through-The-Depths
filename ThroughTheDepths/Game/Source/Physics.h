@@ -45,6 +45,7 @@ enum class ColliderType {
 	VICTORY_COLLISION,
 	FOOD,
 	ZONA_BOSS,
+	FIREBALL_BOSS,
 	UNKNOWN,
 	// ..
 };
