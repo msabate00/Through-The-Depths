@@ -1,5 +1,5 @@
-#ifndef __ENEMY_BOSS_H__
-#define __ENEMY_BOSS_H__
+#ifndef __ENEMY_BOSSFIREBALL_H__
+#define __ENEMY_BOSSFIREBALL_H__
 
 #include "Entity.h"
 #include "Point.h"
@@ -13,13 +13,13 @@
 
 struct SDL_Texture;
 
-class EnemyBoss : public Entity
+class EnemyBossFireball : public Entity
 {
 public:
 
-	EnemyBoss();
+	EnemyBossFireball();
 
-	virtual ~EnemyBoss();
+	virtual ~EnemyBossFireball();
 
 	bool Awake();
 
@@ -41,8 +41,6 @@ public:
 public:
 
 	const char* texturePath;
-	const char* texturePathFireball;
-
 	SDL_Texture* texture = NULL;
 	PhysBody* pbody;
 
@@ -56,7 +54,7 @@ public:
 	int numFootContacts = 0;
 
 
-	bool isFacingLeft = true;
+	bool isFacingLeft = false;
 	bool traspassingColision = false;
 
 
@@ -66,6 +64,8 @@ public:
 	bool activeBoss = false;
 	int health = 20;
 	int maxHealth = 20;
+
+	
 
 private:
 
@@ -103,12 +103,9 @@ private:
 
 	bool setPosicionTpRandom = false;
 	bool vueltaNormal = true;
-
-	Timer testTimer;
-
-	float speedFireball;
+	
 
 
 };
 
-#endif // __ENEMY_BOSS_H__
+#endif // __ENEMY_BOSSFIREBALL_H__

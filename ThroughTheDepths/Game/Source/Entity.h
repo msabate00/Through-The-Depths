@@ -46,6 +46,7 @@ enum class EntityType
 	ENEMY_PAJARO,
 	BOSS,
 	WALL_BOSS,
+	BOSS_FIREBALL,
 	UNKNOWN
 
 };

@@ -54,8 +54,8 @@ public:
 	List<iPoint> enemies_to_destroyPos;
 	int current_id = 0;
 
-	WallBoss* wallBoss;
-	EnemyBoss* boss;
+	WallBoss* wallBoss = nullptr;
+	EnemyBoss* boss = nullptr;
 
 };
 

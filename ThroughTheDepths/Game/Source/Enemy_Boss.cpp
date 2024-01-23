@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Scene.h"
+#include "Enemy_BossFireball.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -51,6 +52,7 @@ bool EnemyBoss::Start() {
 
 	//initilize textures
 	texturePath = parameters.attribute("texturepath").as_string();
+	texturePathFireball = parameters.attribute("fireballtexturepath").as_string();
 
 	walkSpeed = parameters.attribute("walkSpeed").as_float();
 	runSpeed = parameters.attribute("runSpeed").as_float();
@@ -59,7 +61,7 @@ bool EnemyBoss::Start() {
 	tilesAttack = parameters.attribute("tilesAttack").as_int();
 	attackTimeMax = parameters.attribute("attackTimerMax").as_int();
 	speed = walkSpeed;
-
+	speedFireball = parameters.attribute("fireballSpeed").as_float();
 
 	texture = app->tex->Load(texturePath);
 	originalPosition = app->map->WorldToMap(position.x, position.y);
@@ -104,6 +106,7 @@ bool EnemyBoss::Update(float dt)
 	playerPos = app->scene->getPlayer()->position;
 	targPos = app->map->WorldToMap(app->scene->getPlayer()->position.x, app->scene->getPlayer()->position.y);
 	targPos.x += 1;
+	
 
 
 	Movement(dt);
@@ -167,6 +170,19 @@ void EnemyBoss::Movement(float dt)
 {
 	if (activeBoss) {
 		
+
+		if (testTimer.ReadSec() > 5) {
+			testTimer.Start();
+			EnemyBossFireball* fireball = (EnemyBossFireball*)app->entityManager->CreateEntity(EntityType::BOSS_FIREBALL);
+			fireball->texturePath = texturePathFireball;
+			fireball->position = iPoint(position.x, position.y);
+			
+			fireball->speed = (isFacingLeft) ? -0.20f : 0.20f;
+			fireball->isFacingLeft = isFacingLeft;
+			fireball->Start();
+		}
+
+
 		LOG("Boss x: %d", METERS_TO_PIXELS(pbody->body->GetTransform().p.x));
 		b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 
