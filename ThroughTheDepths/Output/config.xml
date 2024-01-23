@@ -6,6 +6,7 @@
 
 	<renderer>
 		<vsync value="true"/>
+		<mainFont fontpath="Assets/Fonts/medieval-pixel/medieval-pixel.ttf"/>
 	</renderer>
 
 	<window>

@@ -15,7 +15,7 @@
 
 Interface::Interface(bool start_enabled) : Module(start_enabled)
 {
-	name.Create("settings");
+	name.Create("interface");
 	
 }
 
@@ -54,6 +54,9 @@ bool Interface::Start()
 	noHeartTex = app->tex->Load("Assets/UI/Free Paper UI System/1 Sprites/Content/6 High lighter/6.png");
 	heartHolderTex = app->tex->Load("Assets/UI/Free Paper UI System/1 Sprites/Content/4 Buttons/hearthHolder.png");
 
+	bossBG = app->tex->Load("Assets/UI/boss_bgXL.png");
+	bossRed = app->tex->Load("Assets/UI/boss_redXL.png");
+
 	return true;
 }
 
@@ -78,6 +81,27 @@ bool Interface::PostUpdate()
 
 	if (app->scene->active) {
 		ShowHUD();
+
+
+
+
+
+		//Boss life
+		if (app->entityManager->boss != nullptr) {
+			if (app->entityManager->boss->activeBoss) {
+				
+				SDL_Rect rect = { 0,0, 512, 48 };
+				int rectW = rect.w;
+				app->render->DrawTexture(bossBG, windowW/2-(rectW/2), 50, SDL_FLIP_NONE, 0, 0, 0, INT_MAX, INT_MAX, 1);
+				rect.w = (rect.w * app->entityManager->boss->health) / app->entityManager->boss->maxHealth;
+				app->render->DrawTexture(bossRed, windowW / 2 - (rectW / 2), 50, SDL_FLIP_NONE, &rect, 0, 0, INT_MAX, INT_MAX, 1);
+			}
+		}
+
+
+
+
+
 
 		ShowPauseMenu();
 	}

@@ -68,6 +68,9 @@ private:
 	SDL_Texture* heartTex;
 	SDL_Texture* noHeartTex;
 
+	SDL_Texture* bossRed;
+	SDL_Texture* bossBG;
+
 	GuiControlButton* gcButtom;
 
 	List<GuiControl*> pauseMenuButtons;

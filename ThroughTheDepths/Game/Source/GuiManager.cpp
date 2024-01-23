@@ -52,9 +52,9 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 		break;
 	case GuiControlType::SPINNER:
 		break;
-	case GuiControlType::IMAGE:
+	/*case GuiControlType::IMAGE:
 		guiControl = new GuiControlImage(id, bounds, text);
-		break;
+		break;*/
 	default:
 		break;
 	}

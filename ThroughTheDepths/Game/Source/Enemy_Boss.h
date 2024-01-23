@@ -62,6 +62,8 @@ public:
 
 
 	bool activeBoss = false;
+	int health = 20;
+	int maxHealth = 20;
 
 private:
 
