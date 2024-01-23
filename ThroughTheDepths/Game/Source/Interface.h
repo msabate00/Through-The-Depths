@@ -71,6 +71,10 @@ private:
 	SDL_Texture* bossRed;
 	SDL_Texture* bossBG;
 
+	SDL_Texture* backgroundGUI;
+	SDL_Texture* normalButton;
+	SDL_Texture* pressedButton;
+	
 	GuiControlButton* gcButtom;
 
 	List<GuiControl*> pauseMenuButtons;

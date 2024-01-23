@@ -49,7 +49,10 @@ public:
 	SDL_Texture* fondo1;
 	SDL_Texture* fondo2;
 	SDL_Texture* fondo0;
-
+	SDL_Texture* backgroundGUI;
+	SDL_Texture* normalButton;
+	SDL_Texture* pressedButton;
+	SDL_Texture* creditsGUI;
 private:
 	
 	float textPosX, textPosY = 0;

@@ -18,6 +18,8 @@ public:
 	bool Update(float dt);
 	bool PostUpdate();
 
+	SDL_Texture* normalButton;
+	SDL_Texture* pressedButton;
 private:
 
 	int mouseX, mouseY;

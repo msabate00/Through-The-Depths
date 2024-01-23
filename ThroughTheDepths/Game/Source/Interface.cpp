@@ -57,6 +57,10 @@ bool Interface::Start()
 	bossBG = app->tex->Load("Assets/UI/boss_bgXL.png");
 	bossRed = app->tex->Load("Assets/UI/boss_redXL.png");
 
+	backgroundGUI = app->tex->Load("Assets/UI/backgroundGUI.png");
+	normalButton = app->tex->Load("Assets/UI/normalButton.png");
+	pressedButton = app->tex->Load("Assets/UI/pressedButton.png");
+
 	return true;
 }
 
@@ -181,19 +185,20 @@ void Interface::ShowHUD()
 
 void Interface::ShowPauseMenu()
 {
+	
 	if (pauseMenuOpened && !_pauseMenuOpened) {
-
 		
-		pauseMenuButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, "CONTINUE", SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 - 60,	120,20 }, this));
-		pauseMenuButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 102, "SETTINGS", SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 - 30,	120,20 }, this));
-		pauseMenuButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 103, "RETURN TO MAIN MENU", SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2,	120,20 }, this));
-		pauseMenuButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 104, "EXIT GAME", SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 + 30,	120,20 }, this));
+		
+		pauseMenuButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, "CONTINUE", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 - 30,	136,46 }, this));
+		pauseMenuButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 102, "SETTINGS", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 40,	136,46 }, this));
+		pauseMenuButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 103, "MAIN MENU", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 110,	136,46 }, this));
+		pauseMenuButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 104, "EXIT GAME", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 180,	136,46 }, this));
 	
 		_pauseMenuOpened = true;
 	}
 	if (pauseMenuOpened) {
 		//Fondo etc...
-
+		app->render->DrawTexture(backgroundGUI, 0, 0, 0);
 		ShowPauseMenuSettings();
 	}
 
@@ -205,9 +210,8 @@ void Interface::ShowPauseMenu()
 
 void Interface::ShowPauseMenuSettings()
 {
-
+	app->render->DrawTexture(backgroundGUI, 0, 0, 20	);
 	if (settingsOpened && !_settingsOpened) {
-
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, "Musica", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 70,	120,20 }, this));
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1011, "Musica", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 70,	120,20 }, this));
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 102, "Fx", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 40,	120,20 }, this));
@@ -221,7 +225,7 @@ void Interface::ShowPauseMenuSettings()
 		_settingsOpened = true;
 	}
 	if (settingsOpened) {
-		//Fondo etc...
+		app->render->DrawTexture(backgroundGUI, 0, 0, 0);
 	}
 
 }
@@ -267,7 +271,6 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 
 			break;
 		case 102:
-
 			settingsOpened = true;
 			
 			for (controlListItem = pauseMenuButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
@@ -277,7 +280,6 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 
 			break;
 		case 103:
-
 			_pauseMenuOpened = false;
 			pauseMenuOpened = false;
 
