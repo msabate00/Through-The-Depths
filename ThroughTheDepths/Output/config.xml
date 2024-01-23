@@ -229,7 +229,7 @@
 				<frame x="496" y="110" w="48" h="48"/>
 			</attackAnim>
             
-			<attack2Anim loop="false" speed="0.35">
+			<attack2Anim loop="false" speed="0.45">
 				<frame x="576" y="110" w="48" h="48"/>
 				<frame x="656" y="110" w="48" h="48"/>
 				<frame x="736" y="110" w="48" h="48"/>
@@ -467,7 +467,7 @@
 				<frame x="3184" y="176" w="256" h="144"/>
 			</runAnim>
 
-			<attackAnim loop="false" speed="0.35">
+			<attackAnim loop="false" speed="0.15">
 				<frame x="16" y="336" w="256" h="144"/>
 				<frame x="304" y="336" w="256" h="144"/>
 				<frame x="592" y="336" w="256" h="144"/>
@@ -493,7 +493,7 @@
 				<frame x="1201" y="496" w="256" h="144"/>
 			</dmgAnim>
 
-			<dieAnim loop="false" speed="0.35">
+			<dieAnim loop="false" speed="0.25">
 				<frame x="16" y="656" w="256" h="144"/>
 				<frame x="304" y="656" w="256" h="144"/>
 				<frame x="592" y="656" w="256" h="144"/>
@@ -518,7 +518,7 @@
 				<frame x="6064" y="656" w="160" h="144"/>
 			</dieAnim>
 
-			<dieAnimInvert loop="false" speed="0.35">
+			<dieAnimInvert loop="false" speed="0.25">
 				<frame x="6064" y="656" w="160" h="144"/>
 				<frame x="5776" y="656" w="160" h="144"/>
 				<frame x="5488" y="656" w="160" h="144"/>

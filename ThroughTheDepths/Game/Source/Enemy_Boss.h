@@ -100,7 +100,7 @@ private:
 	float attackShootDuration = 10;
 
 	bool setPosicionTpRandom = false;
-
+	bool vueltaNormal = true;
 	
 
 

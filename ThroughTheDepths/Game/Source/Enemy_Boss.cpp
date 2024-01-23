@@ -11,6 +11,8 @@
 #include "Timer.h"
 #include "Map.h"
 #include "../Utils.cpp"
+#include <ctime>
+#include <random>
 
 EnemyBoss::EnemyBoss() : Entity(EntityType::BOSS)
 {
@@ -234,7 +236,12 @@ void EnemyBoss::Movement(float dt)
 				//Cambiar posicion
 				if (!setPosicionTpRandom) {
 					//Random 1
-					int random_number = std::rand() % 2 + 1;
+
+					std::random_device rd;
+					std::mt19937 generator(rd());
+					std::uniform_int_distribution<int> distribution(1, 2);
+					int random_number = distribution(generator);
+
 					if (random_number == 1) {
 
 						pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3385), pbody->body->GetTransform().p.y), 0);
@@ -258,6 +265,7 @@ void EnemyBoss::Movement(float dt)
 
 						if (attackShootEndAnim.HasFinished()) {
 							//Andar o lo que sea
+
 						}
 					}
 				}
