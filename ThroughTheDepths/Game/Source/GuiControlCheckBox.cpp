@@ -3,13 +3,16 @@
 #include "App.h"
 #include "Log.h"
 #include "Window.h"
-
+#include "Textures.h"
 GuiControlCheckBox::GuiControlCheckBox(uint32 id, SDL_Rect bounds, const char* text)
     : GuiControl(GuiControlType::CHECKBOX, id), isChecked(false), text(text)
-{
+{   
+    checkBoxNormal = app->tex->Load("Output/Assets/UI/checkBoxNormal.png");
+    checkBoxUsed = app->tex->Load("Assets/UI/checkBoxUsed.png");
     this->bounds = bounds;
     canClick = true;
     drawBasic = false;
+
 }
 
 GuiControlCheckBox::~GuiControlCheckBox()
@@ -56,17 +59,20 @@ bool GuiControlCheckBox::PostUpdate()
 
 void GuiControlCheckBox::Draw()
 {
-    // Draw the checkbox background
-  
 
+    // Draw the checkbox background
+    app->render->DrawTexture(checkBoxNormal, bounds.x, bounds.y, 0);
+    
     if (isChecked)
     {
         // Draw the checkmark
+        app->render->DrawTexture(checkBoxUsed, bounds.x + 5, bounds.y + 5, 0);
         app->render->DrawLine(bounds.x + 5, bounds.y + 5, bounds.x + bounds.w - 5, bounds.y + bounds.h - 5, 0, 255, 255, 255);
         app->render->DrawLine(bounds.x + bounds.w - 5, bounds.y + 5, bounds.x + 5, bounds.y + bounds.h - 5, 0, 255, 255, 255);
     }
     else {
-        app->render->DrawRectangle(bounds, 150, 150, 150, 255, true, false);
+        app->render->DrawTexture(checkBoxNormal, bounds.x, bounds.y, 0);
+        app->render->DrawRectangle(bounds, 150, 150, 250, 255, true, false);
     }
 
     // Draw the text label

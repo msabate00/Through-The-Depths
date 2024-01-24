@@ -40,20 +40,22 @@ bool SceneMainMenu::Awake(pugi::xml_node& config)
 bool SceneMainMenu::Start()
 {
 	creditsGUI = app->tex->Load("Assets/UI/creditsGUI.png");
-	
 	backgroundGUI = app->tex->Load("Assets/UI/backgroundGUI.png");
+	settingsGUI = app->tex->Load("Assets/UI/settingsGUI.png");
 
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	//img = app->tex->Load("Assets/Textures/test.png");
 
 	//Music is commented so that you can add your own music
-	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
+	app->audio->PlayMusic("Assets/Audio/Music/menu.ogg");
 
 	//Get the size of the window
 	app->win->GetWindowSize(windowW, windowH);
 
 	//Get the size of the texture
-	app->tex->GetSize(img, texW, texH);
+	//app->tex->GetSize(creditsGUI, windowW, windowH);
+	//app->tex->GetSize(backgroundGUI, windowW, windowH);
+	//app->tex->GetSize(settingsGUI, windowW, windowH);
 
 
 	/*SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20 };
@@ -191,16 +193,18 @@ void SceneMainMenu::SettingsInterface()
 
 	//MENU AJUSTES
 
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, "Musica", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 70,	120,20 }, this));
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1011, "Musica", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 70,	120,20 }, this));
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 102, "Fx", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 40,	120,20 }, this));
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1021, "Fx", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 40,	120,20 }, this));
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 103, "Fullscreen", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 10,	120,20 }, this));
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1031, "Fullscreen", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 10,	120,20 }, this));
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 104, "Vsync", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 + 20,	120,20 }, this));
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1041, "Vsync", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 + 20,	120,20 }, this));
-	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "Return to main menu", SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 + 50,	120,20 }, this));
+	//controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 101, "Musica", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 70,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1011, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 -10,	120,20 }, this));
+	//controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 102, "Fx", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 40,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1021, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 +50,	120,20 }, this));
+	//controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 103, "Fullscreen", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 - 10,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1031, "", SDL_Rect{ (int)windowW / 2 - 160,	(int)windowH / 2 +200,	20,20 }, this));
+	//controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 104, "Vsync", SDL_Rect{ (int)windowW / 2 - 180,	(int)windowH / 2 + 20,	120,20 }, this));
+	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1041, "", SDL_Rect{ (int)windowW / 2 + 160,	(int)windowH / 2 + 200,	20,20 }, this));
+	//controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "Return to main menu", SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH / 2 + 50,	120,20 }, this));
 	_showSettings = true;
+
+	
 }
 
 void SceneMainMenu::ShowCredits()

@@ -39,6 +39,7 @@ public:
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
 	void SettingsInterface();
+	void ShowSettingsInterface();
 	void ShowCredits();
 	void DestroySettingsInterface();
 
@@ -53,6 +54,7 @@ public:
 	SDL_Texture* normalButton;
 	SDL_Texture* pressedButton;
 	SDL_Texture* creditsGUI;
+	SDL_Texture* settingsGUI;
 private:
 	
 	float textPosX, textPosY = 0;

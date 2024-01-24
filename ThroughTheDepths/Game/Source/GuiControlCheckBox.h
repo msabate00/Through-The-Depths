@@ -19,8 +19,10 @@ public:
 	bool PostUpdate();
 	void Draw();
 
+	SDL_Texture* checkBoxNormal;
+	SDL_Texture* checkBoxUsed;
 private:
-
+	
 
 	int minValue, maxValue, value;
 
