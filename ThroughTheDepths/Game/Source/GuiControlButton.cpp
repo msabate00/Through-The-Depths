@@ -17,13 +17,21 @@ GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text)
 
 GuiControlButton::~GuiControlButton()
 {
-
+	app->tex->UnLoad(normalButton);
+	app->tex->UnLoad(pressedButton);
 }
 
 bool GuiControlButton::Start() {
 	SDL_Texture* normalButton = app->tex->Load("Assets/UI/normalButton");
 	SDL_Texture* pressedButton = app->tex->Load("Assets/UI/pressedButton");
-	return false;
+
+	if (normalButton == nullptr || pressedButton == nullptr)
+	{
+		LOG("Error cargando texturas para botones");
+		return false;
+	}
+
+	return true;
 }
 
 bool GuiControlButton::Update(float dt)
@@ -106,17 +114,17 @@ bool GuiControlButton::PostUpdate()
 		switch (state)
 		{
 		case GuiControlState::DISABLED:
-			//app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
-			app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
+			app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
+			//app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
 			break;
 		case GuiControlState::NORMAL:
-			//app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
-			app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
+			app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
+			//app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
 			break;
 		case GuiControlState::FOCUSED:
 			//app->audio->PlayFx(selectButton);
-			//app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
-			app->render->DrawRectangle(bounds, 0, 0, 255, 100, true, false);
+			app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
+			//app->render->DrawRectangle(bounds, 0, 0, 255, 100, true, false);
 			break;
 		case GuiControlState::PRESSED:
 
