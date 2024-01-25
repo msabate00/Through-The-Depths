@@ -89,6 +89,8 @@ private:
 	
 	bool _pauseMenuOpened = false;
 	bool _settingsOpened = false;
+
+	Timer nivelTimer;
 	
 };
 

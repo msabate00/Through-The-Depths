@@ -65,6 +65,8 @@ bool Interface::Start()
 
 	coinTexture = app->tex->Load("Assets/UI/coin.png");
 
+	nivelTimer.Start();
+
 	return true;
 }
 
@@ -165,6 +167,15 @@ void Interface::ShowHUD()
 	}
 
 	app->render->DrawText(std::to_string(app->scene->getPlayer()->coins).c_str(), 60, 60, tamañoNumero, 23);
+
+
+	int segundos = nivelTimer.ReadSec() % 60;
+	int minutos = nivelTimer.ReadSec() / 60;
+	char tiempo[10];
+	sprintf_s(tiempo, "%02d:%02d", minutos, segundos);
+
+	app->render->DrawText(tiempo, windowW - 130, 30, 100, 35);
+
 
 	//coinTexture
 	app->render->DrawTexture(coinTexture, 10, 30, 0);
