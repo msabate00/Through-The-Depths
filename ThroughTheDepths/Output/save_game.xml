@@ -7,8 +7,8 @@
 	<:anonymous />
 	<map />
 	<scenee>
-		<player x="3024" y="1632" sceneLevel="1" />
-		<camera x="-5582" y="-2821" />
+		<player x="3022" y="1632" sceneLevel="1" />
+		<camera x="-5657" y="-2890" />
 		<coinsPicked />
 		<enemies>
 			<enemy x="70" y="52" active="true" />

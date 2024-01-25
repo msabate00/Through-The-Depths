@@ -585,6 +585,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			physB->listener->active = false;
 			app->entityManager->DestroyEntity(physB->listener);
 			physB->body->SetActive(false);
+			coins++;
 			break;
 
 		case ColliderType::FOOD:
