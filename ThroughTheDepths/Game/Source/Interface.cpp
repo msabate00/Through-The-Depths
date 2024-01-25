@@ -339,10 +339,10 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 
 			break;
 
-		case 1031:
+		case 1041:
 			//vsync = false;
 			break;
-		case 1041:
+		case 1031:
 			Fullscreen();
 			break;
 	default:
@@ -360,4 +360,14 @@ void Interface::Fullscreen() {
 		SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN_DESKTOP);  // Pantalla completa
 	}
 	app->fullscreen = !app->fullscreen;
+
+	int newWindowWidth, newWindowHeight;
+	SDL_GetWindowSize(app->win->window, &newWindowWidth, &newWindowHeight);
+
+	// Cambiar el tamaño del renderizador para que coincida con la nueva resolución
+	SDL_RenderSetLogicalSize(app->render->renderer, newWindowWidth, newWindowHeight);
+
+	//// Actualizar el tamaño de la ventana
+	//windowWidth = newWindowWidth;
+	//windowHeight = newWindowHeight;
 }
