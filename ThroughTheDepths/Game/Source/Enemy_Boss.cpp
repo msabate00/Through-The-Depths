@@ -177,7 +177,7 @@ void EnemyBoss::Movement(float dt)
 		LOG("Boss x: %d", METERS_TO_PIXELS(pbody->body->GetTransform().p.x));
 		b2Vec2 vel = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 
-		if (health > (maxHealth / 3) * 2) {
+		if (health > (maxHealth / 3) * 2 || volverAAndar) {
 			if (state != EntityState::ATTACKING && state != EntityState::SECONDARY_ATTACK) {
 				float actualSpeed;
 
@@ -203,7 +203,7 @@ void EnemyBoss::Movement(float dt)
 				if (health <= (maxHealth / 3) * 2) {
 					//eNTRA EN SEGUNDA FASE, SE HACE TP A LA DERECHA O ZIQUIERDA, Y DISPARA LOS PROYECTILES
 					if (doAttackShootTimer.ReadSec() > 1) {
-						state = EntityState::SECONDARY_ATTACK;
+						//state = EntityState::SECONDARY_ATTACK;
 					}
 				}
 				else if (health <= maxHealth / 3) {
@@ -236,7 +236,7 @@ void EnemyBoss::Movement(float dt)
 
 			}
 		}
-		else if (health > maxHealth / 3 || true) {
+		else if (health > maxHealth / 3 && !volverAAndar) {
 			//Segunda fase
 			if (faseTimer.ReadMSec() > faseTimerTime) {
 				state = EntityState::TPIN;
@@ -279,7 +279,9 @@ void EnemyBoss::Movement(float dt)
 								//Andar o lo que sea
 								LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
-
+								volverAAndar = true;
+								attackAnim.Reset();
+								state = EntityState::RUNNING;
 							}
 						}
 						else {

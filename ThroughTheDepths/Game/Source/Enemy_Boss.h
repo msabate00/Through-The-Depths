@@ -59,6 +59,7 @@ public:
 	bool isFacingLeft = true;
 	bool traspassingColision = false;
 
+	bool volverAAndar = false;
 
 	Animation* currentAnimation = nullptr;
 
