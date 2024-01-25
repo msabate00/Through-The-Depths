@@ -40,15 +40,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tex = new Textures();
 	audio = new Audio();
 	physics = new Physics();
-	scene = new Scene(startDirectlyGame);
-	sceneMainMenu = new SceneMainMenu(!startDirectlyGame);
+	scene = new Scene(false);
+	sceneMainMenu = new SceneMainMenu();
 
-	map = new Map(startDirectlyGame);
+	map = new Map(false);
 	entityManager = new EntityManager();
 	particles = new Particles();
 	fadeToBlack = new FadeToBlack();
 	guiManager = new GuiManager();
-	interface = new Interface(startDirectlyGame);
+	interface = new Interface(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
