@@ -364,21 +364,42 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 }
 
 void Interface::Fullscreen() {
-	if (app->fullscreen) {
-		SDL_SetWindowFullscreen(app->win->window, 0);  // Modo de ventana
+	//if (app->fullscreen) {
+	//	SDL_SetWindowFullscreen(app->win->window, 0);  // Modo de ventana
+	//}
+	//else {
+	//	SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN_DESKTOP);  // Pantalla completa
+	//}
+	//app->fullscreen = !app->fullscreen;
+
+	//int newWindowWidth, newWindowHeight;
+	//SDL_GetWindowSize(app->win->window, &newWindowWidth, &newWindowHeight);
+
+	//// Cambiar el tamaño del renderizador para que coincida con la nueva resolución
+	//SDL_RenderSetLogicalSize(app->render->renderer, newWindowWidth, newWindowHeight);
+
+	////// Actualizar el tamaño de la ventana
+	////windowWidth = newWindowWidth;
+	////windowHeight = newWindowHeight;
+
+
+	Uint32 fullscreenFlag = SDL_WINDOW_FULLSCREEN_DESKTOP;
+	bool isFullscreen = SDL_GetWindowFlags(app->win->window) & fullscreenFlag;
+
+	SDL_SetWindowFullscreen(app->win->window, isFullscreen ? 0 : fullscreenFlag);
+	int ww, wh;
+	SDL_GetWindowSize(app->win->window, &ww, &wh);
+
+	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 255);
+
+	if ((float)ww / wh != (float)512 / 384) {
+		// Calcular el tamaño de los bordes
+		int borderWidth = (wh * 512 / 384 - ww) / 2;
+
+		// Dibujar los bordes izquierdo y derecho
+		SDL_Rect rect1 = { 0, 0, borderWidth, wh };
+		SDL_Rect rect2 = {ww - borderWidth, 0, borderWidth, wh};
+		SDL_RenderFillRect(app->render->renderer, &rect1);
+		SDL_RenderFillRect(app->render->renderer, &rect2);
 	}
-	else {
-		SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN_DESKTOP);  // Pantalla completa
-	}
-	app->fullscreen = !app->fullscreen;
-
-	int newWindowWidth, newWindowHeight;
-	SDL_GetWindowSize(app->win->window, &newWindowWidth, &newWindowHeight);
-
-	// Cambiar el tamaño del renderizador para que coincida con la nueva resolución
-	SDL_RenderSetLogicalSize(app->render->renderer, newWindowWidth, newWindowHeight);
-
-	//// Actualizar el tamaño de la ventana
-	//windowWidth = newWindowWidth;
-	//windowHeight = newWindowHeight;
 }
