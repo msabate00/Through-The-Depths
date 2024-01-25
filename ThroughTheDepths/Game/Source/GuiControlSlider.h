@@ -19,6 +19,8 @@ public:
 	bool PostUpdate();
 	void Draw();
 
+	SDL_Texture* knob;
+	SDL_Texture* slider;
 private:
 
 
