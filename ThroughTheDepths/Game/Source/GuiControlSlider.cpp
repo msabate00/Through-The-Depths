@@ -4,6 +4,7 @@
 #include "Audio.h"
 #include "Log.h"
 #include "Window.h"
+#include "Textures.h"
 
 GuiControlSlider::GuiControlSlider(uint32 id, SDL_Rect bounds, int minValue, int maxValue, const char* text)
     : GuiControl(GuiControlType::SLIDER, id), minValue(minValue), maxValue(maxValue), value(minValue)
@@ -13,6 +14,9 @@ GuiControlSlider::GuiControlSlider(uint32 id, SDL_Rect bounds, int minValue, int
 
     canClick = true;
     drawBasic = false;
+    
+    slider = app->tex->Load("Assets/UI/slider.png");
+    knob = app->tex->Load("Assets/UI/knob.png");
 }
 
 GuiControlSlider::~GuiControlSlider()
@@ -71,15 +75,19 @@ bool GuiControlSlider::PostUpdate()
 
 void GuiControlSlider::Draw()
 {
-    app->render->DrawRectangle(bounds, 150, 150, 150, 255, true, false);
+    
+    //app->render->DrawRectangle(bounds, 150, 150, 150, 255, true, false);
+    app->render->DrawTexture(slider, bounds.x / app->win->GetScale(), bounds.y / app->win->GetScale(), 0);
 
     // Calculate the position of the slider knob based on the current value
     float normalizedValue = static_cast<float>(value - minValue) / static_cast<float>(maxValue - minValue);
     int knobX = bounds.x + static_cast<int>(normalizedValue * bounds.w);
 
     // Draw the slider knob
-    //SDL_Rect knobRect = { knobX - 5, bounds.y - 5, 10, bounds.h + 10 };
+    
+    SDL_Rect knobRect = { knobX - 5, bounds.y - 5, 10, bounds.h + 10 };
     //app->render->DrawRectangle(knobRect, 255, 255, 0, 255, true, false);
+    app->render->DrawTexture(knob, knobRect.x  / app->win->GetScale(), knobRect.y  / app->win->GetScale(), 0);
 
     // Draw the text label
     app->render->DrawText(text.GetString(), bounds.x, bounds.y - 20, bounds.w, 20);
