@@ -61,8 +61,6 @@ bool Interface::Start()
 	normalButton = app->tex->Load("Assets/UI/normalButton.png");
 	pressedButton = app->tex->Load("Assets/UI/pressedButton.png");
 
-	coinTexture = app->tex->Load("Assets/Maps/tilesets/Animations.png");
-
 	return true;
 }
 
@@ -163,7 +161,6 @@ void Interface::ShowHUD()
 	}
 
 	app->render->DrawText(std::to_string(app->scene->getPlayer()->coins).c_str(), 30, 60, tamañoNumero, 23);
-
 
 
 	if (app->scene->getPlayer()->health >= 1) {
