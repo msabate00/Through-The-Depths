@@ -78,8 +78,6 @@ private:
 	SDL_Texture* normalButton;
 	SDL_Texture* pressedButton;
 	
-	SDL_Texture* coinTexture;
-
 	GuiControlButton* gcButtom;
 
 	List<GuiControl*> pauseMenuButtons;

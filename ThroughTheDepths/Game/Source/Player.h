@@ -93,6 +93,8 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	int health = 5;
+	int coins = 0;
+
 
 private:
 	
