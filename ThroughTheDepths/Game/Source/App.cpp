@@ -437,10 +437,11 @@ const char* App::GetOrganization() const
 
 
 // Request a save data in an XML file 
-bool App::LoadRequest() {
+bool App::LoadRequest(bool loadSceneLevel) {
 
 	bool ret = true;
 	loadRequest = true;
+	loadSceneLevel = loadSceneLevel;
 	return ret;
 }
 
@@ -472,7 +473,7 @@ bool App::LoadFromFile() {
 		while (item != NULL && ret == true)
 		{
 			//if (item->data->active) {
-				ret = item->data->LoadState(saveFile.child("game_state").child(item->data->name.GetString()));
+				ret = item->data->LoadState(saveFile.child("game_state").child(item->data->name.GetString()), loadSceneLevel);
 			//}
 			item = item->next;
 		}

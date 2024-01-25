@@ -63,7 +63,7 @@ public:
 
 
 	// Request a save data in an XML file 
-	bool LoadRequest();
+	bool LoadRequest(bool loadSceneLevel = false);
 
 	// Request to load data from XML file 
 	bool SaveRequest();
@@ -129,8 +129,12 @@ public:
 
 	bool loadRequest = false;
 	bool saveRequest = false;
+	bool loadSceneLevel = false;
+
 
 	int erroresMostrados = 0;
+
+
 
 private:
 

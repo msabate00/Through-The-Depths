@@ -565,14 +565,14 @@
 			</jumpAttackAnim>
 
 
-			<attackShootStart loop="false" speed="0.05">
+			<attackShootStart loop="false" speed="0.15">
 				<frame x="16" y="976" w="256" h="144"/>
 				<frame x="304" y="976" w="256" h="144"/>
 				<frame x="592" y="976" w="256" h="144"/>
 				<frame x="880" y="976" w="256" h="144"/>
 			</attackShootStart>
 
-			<attackShootAnim loop="true" speed="0.05">
+			<attackShootAnim loop="true" speed="0.15">
 				<frame x="1168" y="976" w="256" h="144"/>
 				<frame x="1456" y="976" w="256" h="144"/>
 				<frame x="1744" y="976" w="256" h="144"/>
@@ -581,7 +581,7 @@
 				<frame x="2608" y="976" w="256" h="144"/>
 			</attackShootAnim>
 
-			<attackShootEnd loop="false" speed="0.05">
+			<attackShootEnd loop="false" speed="0.15">
 				<frame x="880" y="976" w="256" h="144"/>
 				<frame x="592" y="976" w="256" h="144"/>
 				<frame x="304" y="976" w="256" h="144"/>

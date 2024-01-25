@@ -317,7 +317,7 @@ void Scene::setPlayer(Player* new_player)
 
 // L14: TODO 6: Implement a method to load the state
 // for now load camera's x and y
-bool Scene::LoadState(pugi::xml_node node) {
+bool Scene::LoadState(pugi::xml_node node, bool loadSceneLevel) {
 
 	//if (app->sceneLevel != node.child("player").attribute("sceneLevel").as_int()) {
 	//	app->sceneLevel = node.child("player").attribute("sceneLevel").as_int();
@@ -330,7 +330,9 @@ bool Scene::LoadState(pugi::xml_node node) {
 	//	player->SetPosition(node.child("player").attribute("x").as_int(), node.child("player").attribute("y").as_int());
 	//	
 	//}
+	
 	app->sceneLevel = node.child("player").attribute("sceneLevel").as_int();
+	
 	if (player != nullptr) {
 		player->position.x = node.child("player").attribute("x").as_int() + 16;
 		player->position.y = node.child("player").attribute("y").as_int() + 16;

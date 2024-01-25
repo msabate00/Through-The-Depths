@@ -50,30 +50,24 @@ bool FadeToBlack::Update(float dt)
 		++frameCount;
 		if (frameCount >= maxFadeFrames)
 		{
+
+
 			// TODO 1: Enable / Disable the modules received when FadeToBlacks(...) gets called
 			app->map->Disable();
 			moduleToDisable->Disable();
 			app->entityManager->Disable();
 			app->interface->Disable();
-			
+
 			if (reloadScene) {
-				if (!newgame) {
-					app->LoadRequest();
-				}
-				reloadScene = false;
+				app->LoadRequest();
 			}
-			
-			if (!app->loadRequest) {
-				app->map->Enable();
-				moduleToEnable->Enable();
-				app->entityManager->Enable();
-				app->interface->Enable();
-				currentStep = Fade_Step::FROM_BLACK;
-				if (!newgame) {
-					app->LoadRequest();
-				}
-				
-			}
+			app->map->Enable();
+			moduleToEnable->Enable();
+			app->entityManager->Enable();
+			app->interface->Enable();
+
+			currentStep = Fade_Step::FROM_BLACK;
+
 
 			
 		}
@@ -114,7 +108,7 @@ bool FadeToBlack::PostUpdate()
 	return true;
 }
 
-bool FadeToBlack::FadeToBlackTransition(Module* moduleToDisable, Module* moduleToEnable, bool load,float frames, bool force)
+bool FadeToBlack::FadeToBlackTransition(Module* moduleToDisable, Module* moduleToEnable, bool load,float frames, bool force, bool loadPosition)
 {
 	bool ret = false;
 
@@ -129,6 +123,7 @@ bool FadeToBlack::FadeToBlackTransition(Module* moduleToDisable, Module* moduleT
 		// TODO 1: How do we keep track of the modules received in this function?
 		this->moduleToDisable = moduleToDisable;
 		this->moduleToEnable = moduleToEnable;
+		this->loadPosition = loadPosition;
 
 		ret = true;
 	}

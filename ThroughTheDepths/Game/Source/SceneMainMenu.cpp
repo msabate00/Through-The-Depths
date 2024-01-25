@@ -134,13 +134,14 @@ bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
 
 		case 1:
 			app->fadeToBlack->newgame = true;
+			app->sceneLevel = 0;
 			app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene);
 			break;
 
 		case 2:
-			//app->LoadRequest();
+			app->LoadRequest();
 			app->fadeToBlack->newgame = false;
-			app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene, true, 60, true);
+			app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene, true, 60, true, false);
 			break;
 
 		case 3:

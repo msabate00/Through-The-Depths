@@ -105,6 +105,9 @@ private:
 	bool vueltaNormal = true;
 
 	Timer testTimer;
+	Timer faseTimer;
+
+	int faseTimerTime = 1700;
 
 	float speedFireball;
 

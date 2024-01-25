@@ -236,67 +236,73 @@ void EnemyBoss::Movement(float dt)
 
 			}
 		}
-		else if (health > maxHealth / 3) {
+		else if (health > maxHealth / 3 || true) {
 			//Segunda fase
-			state = EntityState::TPIN;
-			if (teleportInAnim.HasFinished()) {
-				//Cambiar posicion
-				if (!setPosicionTpRandom) {
-					//Random 1
+			if (faseTimer.ReadMSec() > faseTimerTime) {
+				state = EntityState::TPIN;
+				if (teleportInAnim.HasFinished()) {
+					//Cambiar posicion
+					if (!setPosicionTpRandom) {
+						//Random 1
 
-					std::random_device rd;
-					std::mt19937 generator(rd());
-					std::uniform_int_distribution<int> distribution(1, 2);
-					int random_number = distribution(generator);
+						std::random_device rd;
+						std::mt19937 generator(rd());
+						std::uniform_int_distribution<int> distribution(1, 2);
+						int random_number = distribution(generator);
 
-					if (random_number == 1) {
+						if (random_number == 1) {
 
-						pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3385), pbody->body->GetTransform().p.y), 0);
-						isFacingLeft = false;
-					}else{
-						pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3787), pbody->body->GetTransform().p.y), 0);
-						isFacingLeft = true;
+							pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3385), pbody->body->GetTransform().p.y), 0);
+							isFacingLeft = false;
+						}
+						else {
+							pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3787), pbody->body->GetTransform().p.y), 0);
+							isFacingLeft = true;
+						}
+
+
+						setPosicionTpRandom = true;
 					}
-					
 
-					setPosicionTpRandom = true;
-				}
-				
-				state = EntityState::TPOUT;
-				
-				if (teleportOutAnim.HasFinished()) {
-					state = EntityState::SECONDARY_ATTACK;
+					state = EntityState::TPOUT;
+
+					if (teleportOutAnim.HasFinished()) {
+						state = EntityState::SECONDARY_ATTACK;
 
 
 
 
-					if (attackShootDurationTimer.ReadSec() > attackShootDuration) {
-						state = EntityState::SECONDARY_ATTACK_STOP;
+						if (attackShootDurationTimer.ReadSec() > attackShootDuration) {
+							state = EntityState::SECONDARY_ATTACK_STOP;
 
-						if (attackShootEndAnim.HasFinished()) {
-							//Andar o lo que sea
+							if (attackShootEndAnim.HasFinished()) {
+								//Andar o lo que sea
+								LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
+
+							}
+						}
+						else {
+							if (testTimer.ReadMSec() > 600) {
+								testTimer.Start();
+								EnemyBossFireball* fireball = (EnemyBossFireball*)app->entityManager->CreateEntity(EntityType::BOSS_FIREBALL);
+								fireball->texturePath = texturePathFireball;
+								fireball->position = iPoint(position.x, position.y + 20);
+
+								fireball->speed = (isFacingLeft) ? -0.20f : 0.20f;
+								fireball->isFacingLeft = isFacingLeft;
+								fireball->Start();
+							}
 						}
 					}
 					else {
-						if (testTimer.ReadMSec() > 600) {
-							testTimer.Start();
-							EnemyBossFireball* fireball = (EnemyBossFireball*)app->entityManager->CreateEntity(EntityType::BOSS_FIREBALL);
-							fireball->texturePath = texturePathFireball;
-							fireball->position = iPoint(position.x, position.y + 20);
-
-							fireball->speed = (isFacingLeft) ? -0.20f : 0.20f;
-							fireball->isFacingLeft = isFacingLeft;
-							fireball->Start();
-						}
+						attackShootDurationTimer.Start();
+						testTimer.Start();
 					}
+
 				}
-				else {
-					attackShootDurationTimer.Start();
-					testTimer.Start();
-				}
-				
 			}
+			
 		}
 		else {
 			//Tercera fase

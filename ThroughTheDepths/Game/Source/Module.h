@@ -92,7 +92,7 @@ public:
 	}
 
 	// Called when we want to load data from XML
-	virtual bool LoadState(pugi::xml_node node)
+	virtual bool LoadState(pugi::xml_node node, bool loadSceneLevel = false)
 	{
 		return true;
 	}
