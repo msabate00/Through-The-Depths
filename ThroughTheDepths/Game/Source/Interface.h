@@ -44,6 +44,8 @@ public:
 	void ShowPauseMenu();
 	void ShowPauseMenuSettings();
 
+	void Fullscreen();
+
 	bool LoadState(pugi::xml_node node);
 	bool SaveState(pugi::xml_node node);
 	
@@ -55,7 +57,7 @@ public:
 
 	bool pauseMenuOpened = false;
 	bool settingsOpened = false;
-
+	
 	
 
 

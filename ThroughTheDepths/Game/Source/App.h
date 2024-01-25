@@ -104,6 +104,8 @@ public:
 	bool debug;
 	bool godMode;
 
+	bool fullscreen = false;
+
 	// Modules
 	Window* win;
 	Input* input;

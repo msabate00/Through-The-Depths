@@ -239,7 +239,7 @@ void Interface::ShowPauseMenuSettings()
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1021, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 + 50,	120,20 }, this));
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1031, "", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH / 2 + 180,	20,20 }, this));
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1041, "", SDL_Rect{ (int)windowW / 2 + 80,	(int)windowH / 2 + 180,	20,20 }, this));
-		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "Return", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
+		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1005, "Return", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
 
 		_settingsOpened = true;
 	}
@@ -339,9 +339,25 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 
 			break;
 
+		case 1031:
+			//vsync = false;
+			break;
+		case 1041:
+			Fullscreen();
+			break;
 	default:
 		break;
 	}
 
 	return true;
+}
+
+void Interface::Fullscreen() {
+	if (app->fullscreen) {
+		SDL_SetWindowFullscreen(app->win->window, 0);  // Modo de ventana
+	}
+	else {
+		SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN_DESKTOP);  // Pantalla completa
+	}
+	app->fullscreen = !app->fullscreen;
 }
