@@ -85,7 +85,7 @@ bool SceneMainMenu::Update(float dt)
 		SettingsInterface();
 		
 	}
-
+	if (showSettings) { app->render->DrawTexture(settingsGUI, 0, 0, 0); }
 	if (showCredits) {
 		ShowCredits();
 	}
@@ -185,7 +185,7 @@ bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
 
 void SceneMainMenu::SettingsInterface()
 {
-	app->render->DrawTexture(settingsGUI, 0, 0, 0);
+	
 
 	ListItem<GuiControl*>* control;
 	for (control = controlsScene.start; control != NULL; control = control->next)
