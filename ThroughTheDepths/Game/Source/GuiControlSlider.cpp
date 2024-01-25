@@ -79,7 +79,7 @@ void GuiControlSlider::Draw()
 
     // Draw the slider knob
     //SDL_Rect knobRect = { knobX - 5, bounds.y - 5, 10, bounds.h + 10 };
-    app->render->DrawRectangle(knobRect, 255, 255, 0, 255, true, false);
+    //app->render->DrawRectangle(knobRect, 255, 255, 0, 255, true, false);
 
     // Draw the text label
     app->render->DrawText(text.GetString(), bounds.x, bounds.y - 20, bounds.w, 20);
