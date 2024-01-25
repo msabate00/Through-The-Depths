@@ -201,6 +201,8 @@ void SceneMainMenu::SettingsInterface()
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1031, "", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH / 2 +180,	20,20 }, this));
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1041, "", SDL_Rect{ (int)windowW / 2 + 80,	(int)windowH / 2 + 180,	20,20 }, this));
 	
+	gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 106, "Return", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this);
+	_showCredits = true;
 	_showSettings = true;
 
 	
@@ -215,7 +217,7 @@ void SceneMainMenu::ShowCredits()
 			control->data->state = GuiControlState::DISABLED;
 		}
 
-		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 106, "Close credits", SDL_Rect{ (int)windowW / 2 - 60,	(int)windowH  - 50,	120,20 }, this);
+		gcCloseCredits = app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 106, "Return", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH  - 150,	136,46 }, this);
 		_showCredits = true;
 	}
 
