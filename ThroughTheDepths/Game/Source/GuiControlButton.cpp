@@ -13,6 +13,10 @@ GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text)
 
 	canClick = true;
 	drawBasic = false;
+
+	normalButton = app->tex->Load("Assets/UI/normalButton.png");
+	pressedButton = app->tex->Load("Assets/UI/pressedButton.png");
+	hoverButton = app->tex->Load("Assets/UI/focusedButton.png");
 }
 
 GuiControlButton::~GuiControlButton()
@@ -22,8 +26,7 @@ GuiControlButton::~GuiControlButton()
 }
 
 bool GuiControlButton::Start() {
-	SDL_Texture* normalButton = app->tex->Load("Assets/UI/normalButton");
-	SDL_Texture* pressedButton = app->tex->Load("Assets/UI/pressedButton");
+	
 
 	if (normalButton == nullptr || pressedButton == nullptr)
 	{
@@ -114,25 +117,25 @@ bool GuiControlButton::PostUpdate()
 		switch (state)
 		{
 		case GuiControlState::DISABLED:
-			app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
+			app->render->DrawTexture(normalButton, bounds.x , bounds.y, 0);
 			//app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
 			break;
 		case GuiControlState::NORMAL:
-			app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
+			app->render->DrawTexture(normalButton, bounds.x / app->win->GetScale(), bounds.y / app->win->GetScale(),0);
 			//app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
 			break;
 		case GuiControlState::FOCUSED:
 			//app->audio->PlayFx(selectButton);
-			app->render->DrawTexture(normalButton, bounds.x, bounds.y,0);
+			app->render->DrawTexture(hoverButton, bounds.x / app->win->GetScale(), bounds.y / app->win->GetScale(),0);
 			//app->render->DrawRectangle(bounds, 0, 0, 255, 100, true, false);
 			break;
 		case GuiControlState::PRESSED:
-
-			app->render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
+			//app->render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
+			app->render->DrawTexture(pressedButton, bounds.x / app->win->GetScale(), bounds.y / app->win->GetScale(), 0);
 			break;
 		}
 
-		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h);
+		app->render->DrawText(text.GetString(), bounds.x+5, bounds.y+5, bounds.w-10, bounds.h-10);
 
 	}
 	return false;
