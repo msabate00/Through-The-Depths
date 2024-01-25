@@ -135,7 +135,7 @@ bool GuiControlButton::PostUpdate()
 			break;
 		}
 
-		app->render->DrawText(text.GetString(), bounds.x + 5, bounds.y + 5, bounds.w - 10, bounds.h - 10,{128, 116, 100});
+		app->render->DrawText(text.GetString(), bounds.x + 20, bounds.y + 10, bounds.w - 40, bounds.h - 20,{128, 116, 100});
 
 	}
 	return false;
