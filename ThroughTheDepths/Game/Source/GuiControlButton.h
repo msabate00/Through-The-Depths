@@ -20,6 +20,7 @@ public:
 
 	SDL_Texture* normalButton;
 	SDL_Texture* pressedButton;
+	SDL_Texture* hoverButton;
 private:
 
 	int mouseX, mouseY;
