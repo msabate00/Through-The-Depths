@@ -17,6 +17,9 @@ GuiControlButton::GuiControlButton(uint32 id, SDL_Rect bounds, const char* text)
 	normalButton = app->tex->Load("Assets/UI/normalButton.png");
 	pressedButton = app->tex->Load("Assets/UI/pressedButton.png");
 	hoverButton = app->tex->Load("Assets/UI/focusedButton.png");
+
+	selectButton = app->audio->LoadFx("Assets/Audio/Fx/selectButton.wav");
+	clickButton = app->audio->LoadFx("Assets/Audio/Fx/clickButton.wav");
 }
 
 GuiControlButton::~GuiControlButton()
@@ -121,16 +124,29 @@ bool GuiControlButton::PostUpdate()
 			//app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
 			break;
 		case GuiControlState::NORMAL:
+			sonido = true;
+			sonido2 = true;
 			app->render->DrawTexture(normalButton, bounds.x / app->win->GetScale(), bounds.y / app->win->GetScale(),0);
 			//app->render->DrawRectangle(bounds, 0, 0, 255, 255, true, false);
 			break;
 		case GuiControlState::FOCUSED:
-			//app->audio->PlayFx(selectButton);
+			if (sonido)
+			{
+				app->audio->PlayFx(selectButton);
+				sonido = false;
+			}
+			
 			app->render->DrawTexture(hoverButton, bounds.x / app->win->GetScale(), bounds.y / app->win->GetScale(),0);
 			//app->render->DrawRectangle(bounds, 0, 0, 255, 100, true, false);
 			break;
 		case GuiControlState::PRESSED:
 			//app->render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
+			if (sonido2)
+			{
+				app->audio->PlayFx(clickButton);
+				sonido2 = false;
+			}
+			
 			app->render->DrawTexture(pressedButton, bounds.x / app->win->GetScale(), bounds.y / app->win->GetScale(), 0);
 			break;
 		}

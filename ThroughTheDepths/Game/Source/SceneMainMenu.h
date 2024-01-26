@@ -55,6 +55,8 @@ public:
 	SDL_Texture* pressedButton;
 	SDL_Texture* creditsGUI;
 	SDL_Texture* settingsGUI;
+	SDL_Texture* backgroundSettings;
+	SDL_Texture* backgroundMenu;
 private:
 	
 	float textPosX, textPosY = 0;

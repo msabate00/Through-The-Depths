@@ -43,6 +43,9 @@ bool SceneMainMenu::Start()
 	backgroundGUI = app->tex->Load("Assets/UI/backgroundGUI.png");
 	settingsGUI = app->tex->Load("Assets/UI/settingsGUI.png");
 
+	backgroundMenu = app->tex->Load("Assets/UI/backgroundMenu.png");
+	backgroundSettings = app->tex->Load("Assets/UI/backgroundSettings.png");
+
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	//img = app->tex->Load("Assets/Textures/test.png");
 
@@ -61,11 +64,11 @@ bool SceneMainMenu::Start()
 	/*SDL_Rect btPos = { windowW / 2 - 60, windowH / 2 - 10, 120,20 };
 	gcButtom = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);*/
 
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NEW GAME",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 - 30,	136,46 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUE",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 40,	136,46 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "SETTINGS",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 110,	136,46 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CREDITS",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 180,	136,46 }, this));
-	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "EXIT",		SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 250,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "NEW GAME",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 - 30-30,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "CONTINUE",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 40 - 30,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "SETTINGS",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 110 - 30,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "CREDITS",	SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 180 - 30,	136,46 }, this));
+	controlsScene.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "EXIT",		SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH / 2 + 250 - 30,	136,46 }, this));
 
 	return true;
 }
@@ -79,7 +82,7 @@ bool SceneMainMenu::PreUpdate()
 // Called each loop iteration
 bool SceneMainMenu::Update(float dt)
 {
-	
+	app->render->DrawTexture(backgroundMenu, 0, 0, 0);
 	if (showSettings && !_showSettings) {
 
 		SettingsInterface();
@@ -125,7 +128,7 @@ bool SceneMainMenu::CleanUp()
 
 void SceneMainMenu::SettingsInterface()
 {
-	
+	app->render->DrawTexture(backgroundMenu, 0, 0, 0);
 
 	ListItem<GuiControl*>* control;
 	for (control = controlsScene.start; control != NULL; control = control->next)
