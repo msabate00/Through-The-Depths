@@ -46,6 +46,11 @@ bool SceneMainMenu::Start()
 	backgroundMenu = app->tex->Load("Assets/UI/backgroundMenu.png");
 	backgroundSettings = app->tex->Load("Assets/UI/backgroundSettings.png");
 
+	introImage = app->tex->Load("Assets/UI/tituloInicio2.png");
+	timerIntro.Start();
+
+	app->guiManager->Disable();
+
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	//img = app->tex->Load("Assets/Textures/test.png");
 
@@ -92,6 +97,17 @@ bool SceneMainMenu::Update(float dt)
 	if (showCredits) {
 		ShowCredits();
 	}
+
+
+	if (timerIntro.ReadSec() < 3) {
+		app->render->DrawTexture(introImage, 0, 0, 0);
+	}
+	else {
+		app->guiManager->Enable();
+	}
+	
+
+
 
 
 	return true;

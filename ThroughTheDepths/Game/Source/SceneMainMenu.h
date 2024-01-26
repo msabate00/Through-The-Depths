@@ -57,6 +57,9 @@ public:
 	SDL_Texture* settingsGUI;
 	SDL_Texture* backgroundSettings;
 	SDL_Texture* backgroundMenu;
+
+	SDL_Texture* introImage;
+
 private:
 	
 	float textPosX, textPosY = 0;
@@ -82,6 +85,8 @@ private:
 	bool _showCredits = false;
 
 	SDL_Texture* hearthHolderTex;
+
+	Timer timerIntro;
 
 	
 };
