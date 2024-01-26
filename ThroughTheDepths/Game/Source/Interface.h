@@ -58,7 +58,8 @@ public:
 	bool pauseMenuOpened = false;
 	bool settingsOpened = false;
 	
-	
+	bool showWinScreen = false;
+	bool showDieScreen = false;
 
 
 private:
@@ -82,6 +83,10 @@ private:
 	
 	SDL_Texture* coinTexture;
 
+
+	SDL_Texture* dieScreen;
+	SDL_Texture* winScreen;
+
 	GuiControlButton* gcButtom;
 
 	List<GuiControl*> pauseMenuButtons;
@@ -89,6 +94,8 @@ private:
 	
 	bool _pauseMenuOpened = false;
 	bool _settingsOpened = false;
+
+	
 
 	Timer nivelTimer;
 	

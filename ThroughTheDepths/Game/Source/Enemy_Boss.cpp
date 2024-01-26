@@ -11,6 +11,9 @@
 #include "Physics.h"
 #include "Timer.h"
 #include "Map.h"
+#include "Interface.h"
+#include "SceneMainMenu.h"
+#include "FadeToBlack.h"
 #include "../Utils.cpp"
 #include <ctime>
 #include <random>
@@ -313,6 +316,11 @@ void EnemyBoss::Movement(float dt)
 
 		pbody->body->SetLinearVelocity(vel);
 
+
+
+		
+
+
 	}
 	else {
 		//Boss innactivo
@@ -330,7 +338,19 @@ void EnemyBoss::Dying()
 		pbody->body->SetLinearVelocity(vel);
 		state = EntityState::DYING;
 
-		if (dieAnim.HasFinished()) {
+		
+		app->interface->showWinScreen = true;
+		if (!goToMainMenuAfterWin.started) {
+			goToMainMenuAfterWin.Start();
+		}
+		else {
+			if (goToMainMenuAfterWin.ReadSec() >= 3) {
+				app->fadeToBlack->FadeToBlackTransition(app->scene, app->sceneMainMenu);
+			}
+		}
+		
+
+		if (dieAnim.HasFinished() && goToMainMenuAfterWin.ReadSec() >= 3) {
 			active = false;
 
 		}

@@ -66,6 +66,7 @@ bool FadeToBlack::Update(float dt)
 			app->entityManager->Enable();
 			app->interface->Enable();
 
+			app->interface->showDieScreen = false;
 			currentStep = Fade_Step::FROM_BLACK;
 
 
