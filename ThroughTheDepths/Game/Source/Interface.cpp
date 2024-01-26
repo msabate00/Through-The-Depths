@@ -351,8 +351,16 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 			break;
 
 		case 1041:
-			//vsync = false;
+			if (app->render->vsync)
+			{
+				app->render->vsync = false; 
+			}
+			else
+			{
+				app->render->vsync = true;
+			}
 			break;
+
 		case 1031:
 			Fullscreen();
 			break;

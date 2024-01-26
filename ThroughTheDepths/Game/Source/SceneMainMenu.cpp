@@ -123,66 +123,6 @@ bool SceneMainMenu::CleanUp()
 	return true;
 }
 
-
-bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
-{
-	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
-	LOG("Press Gui Control: %d", control->id);
-
-	switch (control->id)
-	{
-
-		case 1:
-			app->fadeToBlack->newgame = true;
-			app->sceneLevel = 0;
-			app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene, false, 60, true);
-			break;
-
-		case 2:
-			app->LoadRequest();
-			app->fadeToBlack->newgame = false;
-			app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene, true, 60, true, false);
-			break;
-
-		case 3:
-			showSettings = true;
-			break;
-
-		case 4:
-			showCredits = true;
-			break;
-		
-		case 5:
-			app->closeApplication = true;
-			break;
-
-
-		case 105:
-
-			showSettings = false;
-			_showSettings = false;
-			DestroySettingsInterface();
-			break;
-
-
-		case 106:
-			showCredits = false;
-			_showCredits = false;
-			ListItem<GuiControl*>* control;
-			for (control = controlsScene.start; control != NULL; control = control->next)
-			{
-				control->data->state = GuiControlState::NORMAL;
-			}
-			app->guiManager->DestroyGuiControl(gcCloseCredits);
-			break;
-
-		default:
-			break;
-	}
-
-	return true;
-}
-
 void SceneMainMenu::SettingsInterface()
 {
 	
@@ -201,12 +141,81 @@ void SceneMainMenu::SettingsInterface()
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1031, "", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH / 2 +180,	20,20 }, this));
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1041, "", SDL_Rect{ (int)windowW / 2 + 80,	(int)windowH / 2 + 180,	20,20 }, this));
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "Return", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
-	_showCredits = true;
+	
 	_showSettings = true;
-
+	
 	
 }
 
+bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
+{
+	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
+	LOG("Press Gui Control: %d", control->id);
+
+	switch (control->id)
+	{
+
+	case 1:
+		app->fadeToBlack->newgame = true;
+		app->sceneLevel = 0;
+		app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene, false, 60, true);
+		break;
+
+	case 2:
+		app->LoadRequest();
+		app->fadeToBlack->newgame = false;
+		app->fadeToBlack->FadeToBlackTransition(app->sceneMainMenu, app->scene, true, 60, true, false);
+		break;
+
+	case 3:
+		showSettings = true;
+		break;
+
+	case 4:
+		showCredits = true;
+		break;
+
+	case 5:
+		app->closeApplication = true;
+		break;
+
+
+	case 105:
+
+		showSettings = false;
+		_showSettings = false;
+		DestroySettingsInterface();
+		break;
+
+
+	case 106:
+		showCredits = false;
+		_showCredits = false;
+		ListItem<GuiControl*>* control;
+		for (control = controlsScene.start; control != NULL; control = control->next)
+		{
+			control->data->state = GuiControlState::NORMAL;
+		}
+		app->guiManager->DestroyGuiControl(gcCloseCredits);
+		break;
+
+	case 1041:
+		if (app->render->vsync)
+		{
+			app->render->vsync = false;
+		}
+		else
+		{
+			app->render->vsync = true;
+		}
+		break;
+
+	default:
+		break;
+	}
+
+	return true;
+}
 void SceneMainMenu::ShowCredits()
 {
 	if (showCredits && !_showCredits) {

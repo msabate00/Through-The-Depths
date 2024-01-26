@@ -52,7 +52,7 @@ public:
 	SDL_Color background;
 	TTF_Font* font;
 
-	bool vsync;
+	bool vsync= false;
 	int mostradoErrores;
 
 };
