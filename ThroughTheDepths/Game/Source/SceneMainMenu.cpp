@@ -146,8 +146,6 @@ void SceneMainMenu::SettingsInterface()
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "Return", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
 	
 	_showSettings = true;
-	
-	
 }
 
 bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
@@ -200,6 +198,14 @@ bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
 			control->data->state = GuiControlState::NORMAL;
 		}
 		app->guiManager->DestroyGuiControl(gcCloseCredits);
+		break;
+
+	case 1011:
+		//app->audio->musicVolumne= **value del gui control slider**
+		break;
+
+	case 1021:
+		//app->audio->sfvVolumne = **value del gui control slider * *
 		break;
 
 	case 1041:
