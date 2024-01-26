@@ -268,6 +268,16 @@ void Interface::ShowPauseMenuSettings()
 		((GuiControlSlider*)(pauseMenuSettingsButtons.At(pauseMenuSettingsButtons.Count() - 1)->data))->value = app->audio->sfvVolumne;
 
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1031, "", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH / 2 + 180,	20,20 }, this));
+
+		if (app->fullscreen)
+		{
+			((GuiControlCheckBox*)(pauseMenuSettingsButtons.At(pauseMenuSettingsButtons.Count() - 1)->data))->isChecked = true;
+		}
+		else
+		{
+			((GuiControlCheckBox*)(pauseMenuSettingsButtons.At(pauseMenuSettingsButtons.Count() - 1)->data))->isChecked = false;
+		}
+
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1041, "", SDL_Rect{ (int)windowW / 2 + 80,	(int)windowH / 2 + 180,	20,20 }, this));
 
 		if (app->render->vsync)
@@ -454,13 +464,32 @@ void Interface::Fullscreen() {
 	//}
 
 	// Obtener el tamaño de la pantalla
+
+
 	SDL_DisplayMode modoPantalla;
 	SDL_GetCurrentDisplayMode(0, &modoPantalla);
 
 	// Configurar la ventana para ser pantalla completa sin bordes
-	SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
-	SDL_SetWindowBordered(app->win->window, SDL_FALSE);
+	
 
 	// Establecer el tamaño de la ventana para que coincida con el tamaño de la pantalla
-	SDL_SetWindowSize(app->win->window, modoPantalla.w, modoPantalla.h);
+
+	if (!app->fullscreen)
+	{	
+		SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
+		SDL_SetWindowBordered(app->win->window, SDL_FALSE);
+
+		SDL_SetWindowSize(app->win->window, modoPantalla.w, modoPantalla.h);
+		
+		app->fullscreen = true;
+	}
+	else
+	{
+		SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FOREIGN);
+		SDL_SetWindowBordered(app->win->window, SDL_TRUE);
+
+		SDL_SetWindowSize(app->win->window, 1024, 768);
+
+		app->fullscreen = false;
+	}
 }
