@@ -299571,6 +299571,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1288"/>
    <tile/>
    <tile/>
    <tile/>
@@ -300098,8 +300099,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1286"/>
    <tile/>
    <tile/>
    <tile/>
@@ -300345,7 +300345,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="1286"/>
    <tile/>
    <tile/>
    <tile/>
@@ -319369,7 +319369,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="12" name="Navigation_Floor" width="280" height="60" visible="0">
+ <layer id="12" name="Navigation_Floor" width="280" height="60">
   <properties>
    <property name="Draw" type="bool" value="false"/>
    <property name="Floor" type="bool" value="true"/>
@@ -333707,16 +333707,16 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="2502"/>
+   <tile gid="2502"/>
+   <tile gid="2502"/>
+   <tile gid="2502"/>
+   <tile gid="2502"/>
+   <tile gid="2502"/>
+   <tile gid="2502"/>
+   <tile gid="2502"/>
+   <tile gid="2502"/>
+   <tile gid="2502"/>
    <tile/>
    <tile/>
    <tile/>
@@ -336178,7 +336178,7 @@
    <tile/>
   </data>
  </layer>
- <layer id="13" name="Navigation_Fly" width="280" height="60" visible="0">
+ <layer id="13" name="Navigation_Fly" width="280" height="60">
   <properties>
    <property name="Draw" type="bool" value="false"/>
    <property name="Floor" type="bool" value="false"/>
