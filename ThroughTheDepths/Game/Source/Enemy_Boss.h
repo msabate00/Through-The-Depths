@@ -112,6 +112,8 @@ private:
 
 	float speedFireball;
 
+	Timer goToMainMenuAfterWin;
+
 
 };
 

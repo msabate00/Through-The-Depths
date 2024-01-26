@@ -65,6 +65,12 @@ bool Interface::Start()
 
 	coinTexture = app->tex->Load("Assets/UI/coin.png");
 
+	dieScreen = app->tex->Load("Assets/UI/dieScreen.png");
+	winScreen = app->tex->Load("Assets/UI/winScreen.png");
+
+	showWinScreen = false;
+	showDieScreen = false;
+
 	nivelTimer.Start();
 
 	return true;
@@ -116,6 +122,13 @@ bool Interface::PostUpdate()
 		ShowPauseMenu();
 	}
 
+	if (showDieScreen) {
+		app->render->DrawTexture(dieScreen, 0, 0, 0);
+	}
+
+	if (showWinScreen) {
+		app->render->DrawTexture(winScreen, 0, 0, 0);
+	}
 	
 	
 	return ret;

@@ -13,6 +13,7 @@
 #include "Particles.h"
 #include "FadeToBlack.h"
 #include "SaveStatue.h"
+#include "Interface.h"
 #include "Chest.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
@@ -195,10 +196,12 @@ bool Player::Update(float dt)
 	}
 	if (isDying) {
 		state = EntityState::DYING;
+		app->interface->showDieScreen = true;
 		if (dieAnim.HasFinished()) {
 			//pbody->body->SetTransform(b2Vec2(startTransform.p.x, startTransform.p.y), startTransform.q.GetAngle());
 			//app->LoadRequest();
 			if (!isDyingandRespawning) {
+				
 				app->fadeToBlack->FadeToBlackTransition(app->scene, app->scene, true, 60, true);
 				isDyingandRespawning = true;
 			}//isDying = false;
