@@ -21,6 +21,8 @@ public:
 
 	SDL_Texture* checkBoxNormal;
 	SDL_Texture* checkBoxUsed;
+	
+	bool isChecked;
 private:
 	
 
@@ -32,7 +34,7 @@ private:
 	bool canClick = true;
 	bool drawBasic = false;
 
-	bool isChecked;
+	
 	SString text;
 };
 
