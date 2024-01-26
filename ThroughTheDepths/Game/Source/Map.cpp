@@ -177,7 +177,7 @@ bool Map::PostUpdate()
 
     }
 
-    if (app->sceneLevel == 0) {
+    if (app->sceneLevel == 0 && app->scene->IsEnabled()) {
         currentAnimation = &rainingAnim;
         currentAnimation->Update();
         app->render->DrawTexture(rainingTex, 0, 0, SDL_FLIP_NONE, &currentAnimation->GetCurrentFrame(), 0);
