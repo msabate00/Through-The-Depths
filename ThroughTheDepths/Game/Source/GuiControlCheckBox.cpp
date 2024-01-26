@@ -4,12 +4,15 @@
 #include "Log.h"
 #include "Window.h"
 #include "Textures.h"
+#include "Audio.h"
+
 GuiControlCheckBox::GuiControlCheckBox(uint32 id, SDL_Rect bounds, const char* text)
     : GuiControl(GuiControlType::CHECKBOX, id), isChecked(false), text(text)
 {   
     checkBoxNormal = app->tex->Load("Assets/UI/checkBoxNormal.png");
     checkBoxUsed = app->tex->Load("Assets/UI/checkBoxUsed.png");
 
+    checkBox = app->audio->LoadFx("Assets/Audio/Fx/checkBox.wav");
     this->bounds = bounds;
     canClick = true;
     drawBasic = false;
@@ -49,6 +52,7 @@ bool GuiControlCheckBox::PostUpdate()
 
         if (state == GuiControlState::PRESSED)
         {
+            app->audio->PlayFx(checkBox);
             isChecked = !isChecked;
             NotifyObserver();
         }

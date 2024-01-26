@@ -13,6 +13,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include "GuiControlSlider.h"
+#include "GuiControlCheckBox.h"
 
 Interface::Interface(bool start_enabled) : Module(start_enabled)
 {
@@ -261,9 +262,23 @@ void Interface::ShowPauseMenuSettings()
 	if (settingsOpened && !_settingsOpened) {
 
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1011, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 - 10,	120,20 }, this));
+		((GuiControlSlider*)(pauseMenuSettingsButtons.At(pauseMenuSettingsButtons.Count() - 1)->data))->value = app->audio->musicVolumne;
+
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1021, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 + 50,	120,20 }, this));
+		((GuiControlSlider*)(pauseMenuSettingsButtons.At(pauseMenuSettingsButtons.Count() - 1)->data))->value = app->audio->sfvVolumne;
+
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1031, "", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH / 2 + 180,	20,20 }, this));
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1041, "", SDL_Rect{ (int)windowW / 2 + 80,	(int)windowH / 2 + 180,	20,20 }, this));
+
+		if (app->render->vsync)
+		{
+			((GuiControlCheckBox*)(pauseMenuSettingsButtons.At(pauseMenuSettingsButtons.Count() - 1)->data))->isChecked = true;
+		}
+		else
+		{
+			((GuiControlCheckBox*)(pauseMenuSettingsButtons.At(pauseMenuSettingsButtons.Count() - 1)->data))->isChecked = false;
+		}
+
 		pauseMenuSettingsButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1005, "Return", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
 
 		_settingsOpened = true;
@@ -375,6 +390,10 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 			app->audio->sfvVolumne = ((GuiControlSlider*)control)->value;
 			break;
 
+		case 1031:
+			Fullscreen();
+			break;
+
 		case 1041:
 			if (app->render->vsync)
 			{
@@ -386,9 +405,7 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 			}
 			break;
 
-		case 1031:
-			Fullscreen();
-			break;
+		
 	default:
 		break;
 	}
@@ -416,23 +433,34 @@ void Interface::Fullscreen() {
 	////windowHeight = newWindowHeight;
 
 
-	Uint32 fullscreenFlag = SDL_WINDOW_FULLSCREEN_DESKTOP;
-	bool isFullscreen = SDL_GetWindowFlags(app->win->window) & fullscreenFlag;
+	//Uint32 fullscreenFlag = SDL_WINDOW_FULLSCREEN_DESKTOP;
+	//bool isFullscreen = SDL_GetWindowFlags(app->win->window) & fullscreenFlag;
 
-	SDL_SetWindowFullscreen(app->win->window, isFullscreen ? 0 : fullscreenFlag);
-	int ww, wh;
-	SDL_GetWindowSize(app->win->window, &ww, &wh);
+	//SDL_SetWindowFullscreen(app->win->window, isFullscreen ? 0 : fullscreenFlag);
+	//int ww, wh;
+	//SDL_GetWindowSize(app->win->window, &ww, &wh);
 
-	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 255);
+	//SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 255);
 
-	if ((float)ww / wh != (float)512 / 384) {
-		// Calcular el tamaño de los bordes
-		int borderWidth = (wh * 512 / 384 - ww) / 2;
+	//if ((float)ww / wh != (float)512 / 384) {
+	//	// Calcular el tamaño de los bordes
+	//	int borderWidth = (wh * 512 / 384 - ww) / 2;
 
-		// Dibujar los bordes izquierdo y derecho
-		SDL_Rect rect1 = { 0, 0, borderWidth, wh };
-		SDL_Rect rect2 = {ww - borderWidth, 0, borderWidth, wh};
-		SDL_RenderFillRect(app->render->renderer, &rect1);
-		SDL_RenderFillRect(app->render->renderer, &rect2);
-	}
+	//	// Dibujar los bordes izquierdo y derecho
+	//	SDL_Rect rect1 = { 0, 0, borderWidth, wh };
+	//	SDL_Rect rect2 = {ww - borderWidth, 0, borderWidth, wh};
+	//	SDL_RenderFillRect(app->render->renderer, &rect1);
+	//	SDL_RenderFillRect(app->render->renderer, &rect2);
+	//}
+
+	// Obtener el tamaño de la pantalla
+	SDL_DisplayMode modoPantalla;
+	SDL_GetCurrentDisplayMode(0, &modoPantalla);
+
+	// Configurar la ventana para ser pantalla completa sin bordes
+	SDL_SetWindowFullscreen(app->win->window, SDL_WINDOW_FULLSCREEN);
+	SDL_SetWindowBordered(app->win->window, SDL_FALSE);
+
+	// Establecer el tamaño de la ventana para que coincida con el tamaño de la pantalla
+	SDL_SetWindowSize(app->win->window, modoPantalla.w, modoPantalla.h);
 }

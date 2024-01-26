@@ -22,6 +22,7 @@ public:
 	SDL_Texture* checkBoxNormal;
 	SDL_Texture* checkBoxUsed;
 	
+	uint checkBox;
 	bool isChecked;
 private:
 	
