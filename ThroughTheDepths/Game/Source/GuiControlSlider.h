@@ -21,10 +21,9 @@ public:
 
 	SDL_Texture* knob;
 	SDL_Texture* slider;
-private:
-
-
+	
 	int minValue, maxValue, value;
+private:
 
 	int mouseX, mouseY;
 	unsigned int click;

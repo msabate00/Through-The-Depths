@@ -12,6 +12,7 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include "GuiControlSlider.h"
 
 Interface::Interface(bool start_enabled) : Module(start_enabled)
 {
@@ -361,6 +362,17 @@ bool Interface::OnGuiMouseClickEvent(GuiControl* control)
 				controlListItem->data->state = GuiControlState::NORMAL;
 			}
 
+			break;
+
+		case 1011:
+			
+
+			app->audio->musicVolumne = ((GuiControlSlider*)control)->value;
+
+			break;
+
+		case 1021:
+			app->audio->sfvVolumne = ((GuiControlSlider*)control)->value;
 			break;
 
 		case 1041:

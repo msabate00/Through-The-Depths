@@ -11,8 +11,12 @@
 #include "FadeToBlack.h"
 #include "GuiManager.h"
 
+
+
 #include "Defs.h"
 #include "Log.h"
+#include "GuiControlSlider.h"
+#include "GuiControlCheckBox.h"
 
 SceneMainMenu::SceneMainMenu(bool start_enabled) : Module(start_enabled)
 {
@@ -156,7 +160,9 @@ void SceneMainMenu::SettingsInterface()
 	//MENU AJUSTES
 
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1011, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 -10,	120,20 }, this));
+	((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->musicVolumne;
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::SLIDER, 1021, "", SDL_Rect{ (int)windowW / 2 + 60,	(int)windowH / 2 +50,	120,20 }, this));
+	((GuiControlSlider*)(controlsSettings.At(controlsSettings.Count() - 1)->data))->value = app->audio->sfvVolumne;
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1031, "", SDL_Rect{ (int)windowW / 2 - 110,	(int)windowH / 2 +180,	20,20 }, this));
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::CHECKBOX, 1041, "", SDL_Rect{ (int)windowW / 2 + 80,	(int)windowH / 2 + 180,	20,20 }, this));
 	controlsSettings.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 105, "Return", SDL_Rect{ (int)windowW / 2 - 68,	(int)windowH - 150,	136,46 }, this));
@@ -208,29 +214,33 @@ bool SceneMainMenu::OnGuiMouseClickEvent(GuiControl* control)
 	case 106:
 		showCredits = false;
 		_showCredits = false;
-		ListItem<GuiControl*>* control;
-		for (control = controlsScene.start; control != NULL; control = control->next)
+		ListItem<GuiControl*>* controlA;
+		for (controlA = controlsScene.start; controlA != NULL; controlA = controlA->next)
 		{
-			control->data->state = GuiControlState::NORMAL;
+			controlA->data->state = GuiControlState::NORMAL;
 		}
 		app->guiManager->DestroyGuiControl(gcCloseCredits);
 		break;
 
 	case 1011:
-		//app->audio->musicVolumne= **value del gui control slider**
+
+		app->audio->musicVolumne = ((GuiControlSlider*)control)->value;
+		
 		break;
 
 	case 1021:
-		//app->audio->sfvVolumne = **value del gui control slider * *
+		app->audio->sfvVolumne = ((GuiControlSlider*)control)->value;
 		break;
 
 	case 1041:
 		if (app->render->vsync)
 		{
+			((GuiControlCheckBox*)control)->isChecked = false;
 			app->render->vsync = false;
 		}
 		else
 		{
+			((GuiControlCheckBox*)control)->isChecked = true;
 			app->render->vsync = true;
 		}
 		break;

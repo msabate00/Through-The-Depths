@@ -61,8 +61,9 @@ bool GuiControlSlider::PostUpdate()
             value = static_cast<int>(minValue + normalizedX * (maxValue - minValue));
 
             // Ensure the value stays within the valid range
-            value = std::min(std::max(value, minValue), maxValue);
+            //value = std::min(std::max(value, minValue), maxValue);
 
+            value = std::min(std::max(value, minValue), maxValue);
             NotifyObserver();
         }
 
