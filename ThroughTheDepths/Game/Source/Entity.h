@@ -47,6 +47,7 @@ enum class EntityType
 	BOSS,
 	WALL_BOSS,
 	BOSS_FIREBALL,
+	BOSS_ATTACK,
 	UNKNOWN
 
 };

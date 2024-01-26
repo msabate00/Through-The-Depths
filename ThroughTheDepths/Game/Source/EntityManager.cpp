@@ -15,6 +15,7 @@
 #include "Food.h"
 #include "wallBoss.h"
 #include "Enemy_BossFireball.h"
+#include "Enemy_BossAttack.h"
 
 
 #include "Defs.h"
@@ -136,6 +137,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	case EntityType::BOSS_FIREBALL:
 		entity = new EnemyBossFireball();
+		enemies.Add(entity);
+		break;
+	case EntityType::BOSS_ATTACK:
+		entity = new EnemyBossAttack();
 		enemies.Add(entity);
 		break;
 	case EntityType::WALL_BOSS:

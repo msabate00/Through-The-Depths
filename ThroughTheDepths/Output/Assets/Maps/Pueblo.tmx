@@ -299830,16 +299830,19 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1281"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1281"/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1281"/>
    <tile/>
    <tile/>
    <tile/>
@@ -300091,12 +300094,9 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1281"/>
+   <tile gid="1289"/>
+   <tile gid="1281"/>
    <tile/>
    <tile/>
    <tile gid="1286"/>
@@ -315785,7 +315785,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1288"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -316902,7 +316902,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1289"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>
@@ -317164,7 +317164,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="1286"/>
+   <tile/>
    <tile/>
    <tile/>
    <tile/>

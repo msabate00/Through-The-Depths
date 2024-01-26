@@ -6,6 +6,7 @@
 #include "Render.h"
 #include "Scene.h"
 #include "Enemy_BossFireball.h"
+#include "Enemy_BossAttack.h"
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
@@ -216,6 +217,20 @@ void EnemyBoss::Movement(float dt)
 
 				if (abs(playerPos.x - position.x) <= 96) {
 					state = EntityState::ATTACKING;
+					if (!haSpawnAtaque){
+						EnemyBossAttack* attack = (EnemyBossAttack*)app->entityManager->CreateEntity(EntityType::BOSS_ATTACK);
+						attack->texturePath = texturePathFireball;
+						if (isFacingLeft) {
+							attack->position = iPoint(position.x - 80, position.y + 30);
+						}
+						else {
+							attack->position = iPoint(position.x + 80, position.y + 30);
+						}
+						
+
+						
+						attack->Start();
+					}
 				}
 
 
@@ -239,7 +254,7 @@ void EnemyBoss::Movement(float dt)
 
 			}
 		}
-		else if (health > maxHealth / 3 && !volverAAndar) {
+		else if (health > 0 && !volverAAndar) {
 			//Segunda fase
 			if (faseTimer.ReadMSec() > faseTimerTime) {
 				state = EntityState::TPIN;

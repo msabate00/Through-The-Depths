@@ -115,6 +115,9 @@
     <ClCompile Include="Source\Enemy_BossFireball.cpp">
       <Filter>Entities\Enemies\Particulas</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Enemy_BossAttack.cpp">
+      <Filter>Entities\Enemies\Particulas</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App.h" />
@@ -258,6 +261,9 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Source\Enemy_BossFireball.h">
+      <Filter>Entities\Enemies\Particulas</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Enemy_BossAttack.h">
       <Filter>Entities\Enemies\Particulas</Filter>
     </ClInclude>
   </ItemGroup>
